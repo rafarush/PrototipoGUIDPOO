@@ -98,7 +98,7 @@ public class MainFrame extends JFrame {
 		//Define los modelos y dibuja las tablas con datos predeterminados
 		centrarCelda.setHorizontalAlignment(JLabel.CENTER);
 		//DatosAuto.definirTablaProfes(Runner.profesores);
-		DatosAuto.inicializar();
+		//DatosAuto.inicializar();
 		tableDraw();	
 		
 		
@@ -647,8 +647,8 @@ public class MainFrame extends JFrame {
 				table.addKeyListener(new KeyAdapter() {
 					@Override
 					public void keyReleased(KeyEvent e){
-						DatosAuto.inicializar();
-						//DatosAuto.definirTablaProfes(Runner.profesores);
+						//DatosAuto.inicializar();
+						DatosAuto.definirTablaProfes(Runner.profesores);
 						tableDraw();
 						JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
 					}

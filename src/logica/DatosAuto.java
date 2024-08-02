@@ -77,7 +77,7 @@ public class DatosAuto {
 		Runner.modeloProfesor.addColumn("Organismo");
 		Runner.modeloProfesor.addColumn("Dirección");
 		Runner.modeloProfesor.addColumn("Salario");
-		//agregarFilasProfes(profesores);
+		agregarFilasProfes(profesores);
 	}
 	
 	/****************************************Define los modelos de tabla***********************************************/
@@ -95,7 +95,7 @@ public class DatosAuto {
 		Runner.modeloProfesor.addColumn("Salario");
 		//Runner.modeloProfesor.addRow(convertirAObjetoProfe(Runner.profe1));
 		//Runner.modeloProfesor.addRow(new Object[]{Runner.profe1.getCi(),Runner.profe1.getNombre(),Runner.profe1.getCategoCientifica(),Runner.profe1.getCategoDocente(),Runner.profe1.getCentroLaboral(),Runner.profe1.getOrganismo(),Runner.profe1.getDirecc(),Runner.profe1.getSalario()});
-		Runner.modeloProfesor.addRow(new Object[]{"05062347564", "Manuel Castro Reyes","Máster","Profesor Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56",null});
+		//Runner.modeloProfesor.addRow(new Object[]{"05062347564", "Manuel Castro Reyes","Máster","Profesor Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56",null});
     
 		
 		//Defino modeloEstudiante de la tabla
