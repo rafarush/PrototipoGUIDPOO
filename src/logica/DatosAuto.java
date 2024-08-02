@@ -40,6 +40,9 @@ import gui.mainFrame.MainFrame;
 
 public class DatosAuto {
 	
+	
+	/*****************************Define modelo de la tabla Profesores y agrega las filas***************************************/
+	
 	/**
 	 * Convertir instancia de Profesor a un array de Objeto
 	 * @return obj
@@ -49,6 +52,7 @@ public class DatosAuto {
 				profe.getCentroLaboral(), profe.getOrganismo(), profe.getDirecc(), profe.getSalario()};	
 		return profeObj;
 	}
+	
 	/**
 	 * Imprime cada fila con los profesores
 	 * @param profesores
@@ -79,6 +83,52 @@ public class DatosAuto {
 		Runner.modeloProfesor.addColumn("Salario");
 		agregarFilasProfes(profesores);
 	}
+	
+	/*****************************Define modelo de la tabla Estudiantes y agrega las filas**************************************/
+	
+	/**
+	 * Define el modelo de columnas de la tabla Estudiantes
+	 * @param profesores
+	 */
+	public static void definirTablaEstudiantes(ArrayList<Estudiante> estudiantes){
+		Runner.modeloEstudiante = new DefaultTableModel();
+		Runner.modeloEstudiante.addColumn("CI");
+		Runner.modeloEstudiante.addColumn("Nombre");
+		Runner.modeloEstudiante.addColumn("Año");
+		Runner.modeloEstudiante.addColumn("Grupo");
+		Runner.modeloEstudiante.addColumn("Centro Laboral");
+		Runner.modeloEstudiante.addColumn("Organismo");
+		Runner.modeloEstudiante.addColumn("Dirección");
+		Runner.modeloEstudiante.addRow(new Object[]{"05032379581", "Rafael Menéndez Rodriguez","1",null,"Sucursal Comercial #5","Etecsa", "Calle 30 entre 34 y Ave. 56"});
+		Runner.modeloEstudiante.addRow(new Object[]{"08868513264", "Alejandro González Fernández","1",null,"La Mariposa","TRD","Ave. 26 entre calles A y B"});
+		agregarFilasEstudiantes(estudiantes);
+	}
+	
+	
+	/**
+	 * Imprime cada fila con los estudiantes
+	 * @param profesores
+	 */
+	public static void agregarFilasEstudiantes(ArrayList<Estudiante> estudiantes){
+		if(estudiantes.isEmpty()){
+			JOptionPane.showMessageDialog(null, "No hay registro de estudiantes. Por favor, añada.");
+		}else{
+			for(Estudiante e : estudiantes){
+				Runner.modeloEstudiante.addRow(convertirAObjetoEstudiante(e));
+			}
+		}
+	}
+	
+	/**
+	 * Convertir instancia de Estudiante a un array de Objeto
+	 * @return obj
+	 */
+	public static Object[] convertirAObjetoEstudiante(Estudiante estu){
+		Object[] estuObj = new Object[]{estu.getCi(), estu.getNombre(), estu.getAnno(), estu.getGrupo(), 
+				estu.getCentroLaboral(), estu.getOrganismo(), estu.getDirecc()};	
+		return estuObj;
+	}
+	
 	
 	/****************************************Define los modelos de tabla***********************************************/
 	public static void inicializar(){

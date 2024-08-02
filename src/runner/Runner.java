@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 import logica.DatosAuto;
+import logica.Estudiante;
 import logica.Profesor;
 
 
@@ -25,6 +26,9 @@ public class Runner {
 	public static DefaultTableModel modeloPersonalAux;
 	public static DefaultTableModel modeloPlanDeEstudio;
 	public static ArrayList<Profesor> profesores;
+	public static ArrayList<Estudiante> estudiantes;
+	//public static ArrayList<PersoAux> personalAux;
+	//public static ArrayList<Asignaturas> Asignaturas;
 	
 	
 	/**
@@ -32,6 +36,9 @@ public class Runner {
 	*/
 	public static void main(String[] args) {
 		
+		/********************Datos Prueba*****************************/
+		
+		//PROFESORES
 		Profesor profe1 = new Profesor("95868426587", "Luis Pérez Fernández","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B", 0.0f);
 		Profesor profe2 = new Profesor("05062348364", "Rafael Castro Reyes","Doctor","Profesor Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56", 0.0f);
 		Profesor profe3 = new Profesor("05022358174", "Jorge Castro Pérez","Máster","Asistente","Cujae","MINES", "Calle 25 entre 21 y Ave. 26", 0.0f);
@@ -44,6 +51,17 @@ public class Runner {
 		profesores.add(profe4);
 	
 		DatosAuto.definirTablaProfes(profesores);
+		
+		//ESTUDIANTES
+		Estudiante estu1 = new Estudiante("05032379581", "Rafael Menéndez Rodriguez","1",null,"Sucursal Comercial #5","Etecsa", "Calle 30 entre 34 y Ave. 56");
+		Estudiante estu2 = new Estudiante("08868513264", "Alejandro González Fernández","1",null,"La Mariposa","TRD","Ave. 26 entre calles A y B");
+			
+		estudiantes = new ArrayList<Estudiante>();
+		estudiantes.add(estu1);
+		estudiantes.add(estu2);
+		
+		DatosAuto.definirTablaEstudiantes(estudiantes);
+		
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
