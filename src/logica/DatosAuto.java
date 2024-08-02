@@ -19,27 +19,11 @@ import gui.*;
 import gui.mainFrame.MainFrame;
 
 
-/*
- * 
- * 
- * 
- * 
- * 
- * 
- * TERMINAR EL DISEÑO DE LA INICIALIZACION AUTOMÁTICA DE LOS DATOS CON LAS CLASES RESTANTES
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- */
-
 public class DatosAuto {
 	
+	/**
+	 * Carga los datos desde el main
+	 */
 	
 	/*****************************Define modelo de la tabla Profesores y agrega las filas***************************************/
 	
@@ -49,7 +33,12 @@ public class DatosAuto {
 	 */
 	public static Object[] convertirAObjetoProfe(Profesor profe){
 		Object[] profeObj = new Object[]{profe.getCi(), profe.getNombre(), profe.getCategoCientifica(), profe.getCategoDocente(), 
-				profe.getCentroLaboral(), profe.getOrganismo(), profe.getDirecc(), profe.getSalario()};	
+				profe.getCentroLaboral(), profe.getOrganismo(), profe.getDirecc(), profe.getSalario()};
+		
+		if (profe.getSalario()==0.0f){ //Si el salario es 0.0f es pq no se ha calculado 
+			profeObj[7] = null;
+		}
+		
 		return profeObj;
 	}
 	
@@ -88,7 +77,7 @@ public class DatosAuto {
 	
 	/**
 	 * Define el modelo de columnas de la tabla Estudiantes
-	 * @param profesores
+	 * @param estudiantes
 	 */
 	public static void definirTablaEstudiantes(ArrayList<Estudiante> estudiantes){
 		Runner.modeloEstudiante = new DefaultTableModel();
@@ -99,15 +88,13 @@ public class DatosAuto {
 		Runner.modeloEstudiante.addColumn("Centro Laboral");
 		Runner.modeloEstudiante.addColumn("Organismo");
 		Runner.modeloEstudiante.addColumn("Dirección");
-		Runner.modeloEstudiante.addRow(new Object[]{"05032379581", "Rafael Menéndez Rodriguez","1",null,"Sucursal Comercial #5","Etecsa", "Calle 30 entre 34 y Ave. 56"});
-		Runner.modeloEstudiante.addRow(new Object[]{"08868513264", "Alejandro González Fernández","1",null,"La Mariposa","TRD","Ave. 26 entre calles A y B"});
 		agregarFilasEstudiantes(estudiantes);
 	}
 	
 	
 	/**
 	 * Imprime cada fila con los estudiantes
-	 * @param profesores
+	 * @param estudiantes
 	 */
 	public static void agregarFilasEstudiantes(ArrayList<Estudiante> estudiantes){
 		if(estudiantes.isEmpty()){
@@ -130,7 +117,97 @@ public class DatosAuto {
 	}
 	
 	
+/*****************************Define modelo de la tabla PersonalAux y agrega las filas**************************************/
+	
+	/**
+	 * Define el modelo de columnas de la tabla PersonalAux
+	 * @param personalAux
+	 */
+	public static void definirTablaPersonalAux(ArrayList<PersonalAux> personalAux){
+		Runner.modeloPersonalAux = new DefaultTableModel();
+		Runner.modeloPersonalAux.addColumn("CI");
+		Runner.modeloPersonalAux.addColumn("Nombre");
+		Runner.modeloPersonalAux.addColumn("Área de Trabajo");
+		Runner.modeloPersonalAux.addColumn("Dirección");
+		Runner.modeloPersonalAux.addColumn("Salario");
+		agregarFilasPersonalAux(personalAux);
+	}
+	
+	
+	/**
+	 * Imprime cada fila con el PersonalAux
+	 * @param personalAux
+	 */
+	public static void agregarFilasPersonalAux(ArrayList<PersonalAux> personalAux){
+		if(personalAux.isEmpty()){
+			JOptionPane.showMessageDialog(null, "No hay registro de personal auxiliar. Por favor, añada.");
+		}else{
+			for(PersonalAux pe : personalAux){
+				Runner.modeloPersonalAux.addRow(convertirAObjetoPersonalAux(pe));
+			}
+		}
+	}
+	
+	/**
+	 * Convertir instancia de PersonalAux a un array de Objeto
+	 * @return obj
+	 */
+	public static Object[] convertirAObjetoPersonalAux(PersonalAux persoAux){
+		Object[] persoAuxObj = new Object[]{persoAux.getCi(), persoAux.getNombre(), persoAux.getAreaDeTrabajo(), 
+				persoAux.getDirecc(), persoAux.getSalario()};	
+		
+		if (persoAux.getSalario()==0.0f){ //Si el salario es 0.0f es pq no se ha calculado 
+			persoAuxObj[4] = null;
+		}
+		
+		return persoAuxObj;
+	}
+	
+	
+/*****************************Define modelo de la tabla PlanDeEstudio y agrega las filas**************************************/
+	
+	/**
+	 * Define el modelo de columnas de la tabla PlanDeEstudio
+	 * @param asignaturas
+	 */
+	public static void definirTablaPlanDeEstudio(ArrayList<Asignatura> asignaturas){
+		Runner.modeloPlanDeEstudio = new DefaultTableModel();
+		Runner.modeloPlanDeEstudio.addColumn("Asignatura");
+		Runner.modeloPlanDeEstudio.addColumn("Año Académico");
+		Runner.modeloPlanDeEstudio.addColumn("Semestre");
+		Runner.modeloPlanDeEstudio.addColumn("Horas Lectivas");;
+		agregarFilasPlanDeEstudio(asignaturas);
+	}
+	
+	
+	/**
+	 * Imprime cada fila con la Asignatura
+	 * @param asignaturas
+	 */
+	public static void agregarFilasPlanDeEstudio(ArrayList<Asignatura> asignaturas){
+		if(asignaturas.isEmpty()){
+			JOptionPane.showMessageDialog(null, "No hay registro de Plan de Estudio. Por favor, añada.");
+		}else{
+			for(Asignatura a : asignaturas){
+				Runner.modeloPlanDeEstudio.addRow(convertirAObjetoAsignatura(a));
+			}
+		}
+	}
+	
+	/**
+	 * Convertir instancia de Asignatura a un array de Objeto
+	 * @return obj
+	 */
+	public static Object[] convertirAObjetoAsignatura(Asignatura asignatura){
+		Object[] asignaturaObj = new Object[]{asignatura.getNombre(), asignatura.getAnno(), asignatura.getSemestre(), 
+				asignatura.getHoras()};	
+	
+		return asignaturaObj;
+	}
+	
+	
 	/****************************************Define los modelos de tabla***********************************************/
+	/*
 	public static void inicializar(){
 		
 		//Defino modeloProfesor de la tabla
@@ -182,7 +259,7 @@ public class DatosAuto {
 		Runner.modeloPlanDeEstudio.addRow(new Object[]{"Diseño y POO", "1","2", "90"});
 		Runner.modeloPlanDeEstudio.addRow(new Object[]{"Estructuras de Datos", "2","1", "40"});
 		Runner.modeloPlanDeEstudio.addRow(new Object[]{"Seguridad Nacional", "2","1", "90"});
-	}	
+	}	*/
 	/****************************************************************************************************/
 
 }

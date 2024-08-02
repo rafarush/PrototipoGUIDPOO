@@ -10,9 +10,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
-import logica.DatosAuto;
-import logica.Estudiante;
-import logica.Profesor;
+import logica.*;
 
 
 public class Runner {
@@ -27,8 +25,8 @@ public class Runner {
 	public static DefaultTableModel modeloPlanDeEstudio;
 	public static ArrayList<Profesor> profesores;
 	public static ArrayList<Estudiante> estudiantes;
-	//public static ArrayList<PersoAux> personalAux;
-	//public static ArrayList<Asignaturas> Asignaturas;
+	public static ArrayList<PersonalAux> personalAux;
+	public static ArrayList<Asignatura> asignaturas;
 	
 	
 	/**
@@ -61,6 +59,36 @@ public class Runner {
 		estudiantes.add(estu2);
 		
 		DatosAuto.definirTablaEstudiantes(estudiantes);
+		
+		
+		//Personal Auxiliar
+		PersonalAux persoAux1 = new PersonalAux("09062235147", "Federico Criado Domínguez","Laboratorio", "Calle 30 entre 34 y Ave. 56",0.0f);
+		PersonalAux persoAux2 = new PersonalAux("59868285496", "Maria Elena Gómez Pérez","Biblioteca", "Ave. 26 entre calles A y B",0.0f);
+					
+		personalAux = new ArrayList<PersonalAux>();
+		personalAux.add(persoAux1);
+		personalAux.add(persoAux2);
+							
+		DatosAuto.definirTablaPersonalAux(personalAux);
+					
+		//Asignaturas
+		Asignatura asignatura1 = new Asignatura("Matemática I", 1, 1, 50);
+		Asignatura asignatura2 = new Asignatura("Matemática II", 1, 2, 50);
+		Asignatura asignatura3 = new Asignatura("Introducción a la Programación", 1, 1, 60);
+		Asignatura asignatura4 = new Asignatura("Diseño y POO", 1, 2, 90);
+		Asignatura asignatura5 = new Asignatura("Estructuras de Datos", 2, 1, 40);
+		Asignatura asignatura6 = new Asignatura("Seguridad Nacional", 2, 1, 90);
+					
+		asignaturas = new ArrayList<Asignatura>();
+		asignaturas.add(asignatura1);
+		asignaturas.add(asignatura2);
+		asignaturas.add(asignatura3);
+		asignaturas.add(asignatura4);
+		asignaturas.add(asignatura5);
+		asignaturas.add(asignatura6);
+							
+		DatosAuto.definirTablaPlanDeEstudio(asignaturas);
+
 		
 		
 		EventQueue.invokeLater(new Runnable() {
