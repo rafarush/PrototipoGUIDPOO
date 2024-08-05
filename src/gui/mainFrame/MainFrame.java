@@ -710,7 +710,4 @@ public class MainFrame extends JFrame {
 		}
 	}
 	
-	public static JTable getTable(){	
-		return table;
-	}
 }
