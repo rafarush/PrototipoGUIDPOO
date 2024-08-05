@@ -300,7 +300,9 @@ public class MainFrame extends JFrame {
 							break;
 						case ESTUDIANTE:
 							try {
-								Runner.inputEst = new InputDialogEst();
+								//actualizar campos
+								actualizarValoresDeFila(table.getSelectedRow());
+								Runner.inputEst = new InputDialogEst(valoresDeFila);
 								Runner.inputEst.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								Runner.inputEst.setVisible(true);
 							} catch (Exception exc) {
@@ -309,6 +311,7 @@ public class MainFrame extends JFrame {
 							break;
 						case PERSOAUX:
 							try {
+								//actualizar campos
 								actualizarValoresDeFila(table.getSelectedRow());
 								Runner.inputPerAux = new InputDialogPerAux(valoresDeFila);
 								Runner.inputPerAux.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
