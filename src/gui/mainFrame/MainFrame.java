@@ -309,7 +309,8 @@ public class MainFrame extends JFrame {
 							break;
 						case PERSOAUX:
 							try {
-								Runner.inputPerAux = new InputDialogPerAux();
+								actualizarValoresDeFila(table.getSelectedRow());
+								Runner.inputPerAux = new InputDialogPerAux(valoresDeFila);
 								Runner.inputPerAux.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								Runner.inputPerAux.setVisible(true);
 							} catch (Exception exc) {
