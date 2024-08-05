@@ -6,8 +6,4 @@ public class Enums {
 		PROFESOR, ESTUDIANTE, PERSOAUX, PLANESTUDIO
 	}
 	
-	public enum Comportamiento{
-		AGREGAR,EDITAR
-	}
-	
 }

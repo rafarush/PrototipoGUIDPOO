@@ -26,9 +26,6 @@ import logica.Enums.Comportamiento;
 public class InputDialogProfe extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	/*
-	 * Terminar el array de objetos con los valores de la lista
-	 */
 	private final JPanel upperBarPanel = new JPanel();
 	private JTextField nombreTextField;
 	private JTextField ciTextField;

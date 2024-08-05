@@ -193,7 +193,13 @@ public class MainFrame extends JFrame {
 						}
 						break;	
 					case PLANESTUDIO:
-						JOptionPane.showConfirmDialog(null, "Implementar");
+						try {
+							Runner.inputAsignatura = new InputDialogAsignaturaPE();
+							Runner.inputAsignatura.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							Runner.inputAsignatura.setVisible(true);
+						} catch (Exception exc) {
+							exc.printStackTrace();
+						}
 						break;
 				}		
 			}
@@ -279,7 +285,6 @@ public class MainFrame extends JFrame {
 				if(table.getSelectedRow() == - 1){
 					JOptionPane.showMessageDialog(null, "Debe seleccionar la fila que desea modificar");
 				}else{
-					//JOptionPane.showMessageDialog(null, "Todavía no se ha implementado");
 					//Define que JDialog se activa 
 					switch(btnSeleccionado){
 						case PROFESOR:
@@ -317,7 +322,13 @@ public class MainFrame extends JFrame {
 							}
 							break;	
 						case PLANESTUDIO:
-							JOptionPane.showConfirmDialog(null, "Implementar");
+							try {
+								Runner.inputAsignatura = new InputDialogAsignaturaPE();
+								Runner.inputAsignatura.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								Runner.inputAsignatura.setVisible(true);
+							} catch (Exception exc) {
+								exc.printStackTrace();
+							}
 							break;
 					}
 				}
@@ -633,10 +644,6 @@ public class MainFrame extends JFrame {
 		});	
 		upperFrameBar.setBounds(0, 0, 914, 34);
 		mainPanel.add(upperFrameBar);
-	}
-	
-	public BotonSelec getBtnSeleccionado(){
-		return btnSeleccionado;
 	}
 	
 	private void tableDraw(){

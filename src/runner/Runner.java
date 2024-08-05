@@ -19,6 +19,7 @@ public class Runner {
 	public static InputDialogProfe inputProfe;
 	public static InputDialogEst inputEst;
 	public static InputDialogPerAux inputPerAux;
+	public static InputDialogAsignaturaPE inputAsignatura;
 	public static DefaultTableModel modeloProfesor;
 	public static DefaultTableModel modeloEstudiante;
 	public static DefaultTableModel modeloPersonalAux;

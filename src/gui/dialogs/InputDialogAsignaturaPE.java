@@ -28,19 +28,7 @@ public class InputDialogAsignaturaPE extends JDialog {
 	private JTextField nombreTextField;
 	private JTextField ciTextField;
 	private JTextField direccTextField;
-
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		try {
-			InputDialog dialog = new InputDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}*/
+	private JComboBox areaTrabajoComboBox;
 
 	/**
 	 * Create the dialog.
@@ -134,7 +122,7 @@ public class InputDialogAsignaturaPE extends JDialog {
 			lblAreaTrab.setBounds(10, 202, 166, 20);
 			mainPanel.add(lblAreaTrab);
 			
-			final JComboBox areaTrabajoComboBox = new JComboBox();
+			areaTrabajoComboBox = new JComboBox();
 			areaTrabajoComboBox.setModel(new DefaultComboBoxModel(new String[] {"Biblioteca", "Laboratorio", "Secretar\u00EDa"}));
 			areaTrabajoComboBox.setBounds(10, 233, 223, 20);
 			mainPanel.add(areaTrabajoComboBox);
