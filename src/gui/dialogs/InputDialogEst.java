@@ -1,10 +1,13 @@
 package gui.dialogs;
 
 
+import gui.mainFrame.MainFrame;
+
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
@@ -273,7 +276,7 @@ public class InputDialogEst extends JDialog {
 			mainPanel.add(lblNombre);
 			
 			ciTextField = new JTextField();
-			ciTextField.setToolTipText("Carn\u00E9 de identidad de la persona");
+			ciTextField.setToolTipText("Carn\u00E9 de identidad de la persona (NO PUEDE MODIFICARSE)");
 			ciTextField.setColumns(10);
 			ciTextField.setBounds(10, 110, 223, 20);
 			ciTextField.setEditable(false);
@@ -334,7 +337,14 @@ public class InputDialogEst extends JDialog {
 						JOptionPane.showMessageDialog(null, "Existen campos vacíos");
 					}else{
 						Runner.modeloEstudiante.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(),(String)annoComboBox.getSelectedItem(),null,centroLaboralTextField.getText(),organismoTextField.getText(), direccTextField.getText()});
-						JOptionPane.showMessageDialog(null, "Se ha añadido al estudiante con éxito");
+						/**
+						 * Elimina al profe original (PROVISIONAL)
+						 */
+						((DefaultTableModel) MainFrame.getTable().getModel()).removeRow(MainFrame.getTable().getSelectedRow());
+						((DefaultTableModel) MainFrame.getTable().getModel()).fireTableDataChanged();
+
+						JOptionPane.showMessageDialog(null, "Se ha modificado al estudiante con éxito");
+					
 						dispose();
 					}		
 				}

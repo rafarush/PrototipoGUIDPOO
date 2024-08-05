@@ -287,7 +287,7 @@ public class InputDialogProfe extends JDialog {
 			mainPanel.add(lblNombre);
 			
 			ciTextField = new JTextField();
-			ciTextField.setToolTipText("Carn\u00E9 de identidad de la persona");
+			ciTextField.setToolTipText("Carn\u00E9 de identidad de la persona (NO PUEDE MODIFICARSE)");
 			ciTextField.setColumns(10);
 			ciTextField.setBounds(10, 110, 223, 20);
 			ciTextField.setEditable(false);
