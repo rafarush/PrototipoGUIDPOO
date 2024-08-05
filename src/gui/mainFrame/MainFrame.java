@@ -339,6 +339,27 @@ public class MainFrame extends JFrame {
 		modifyBotton.setBounds(847, 122, 57, 21);
 		mainPanel.add(modifyBotton);
 		
+		
+		final JLabel lblnextPeriod = new JLabel("");
+		lblnextPeriod.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblnextPeriod.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextPeriodBottonSelected.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblnextPeriod.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextPeriodBotton.png")));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, "Implementar");
+			}
+		});
+		lblnextPeriod.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextPeriodBotton.png")));
+		lblnextPeriod.setToolTipText("Pasar al siguiente periodo");
+		lblnextPeriod.setBounds(729, 122, 101, 21);
+		mainPanel.add(lblnextPeriod);
+		
 					
 		final JPanel menuBarPanel = new JPanel();
 		mainPane.setLayer(menuBarPanel, 2);
@@ -580,6 +601,7 @@ public class MainFrame extends JFrame {
 						scrollPane.setBounds(79, 154, 1270, 560);
 						delBotton.setBounds(700, 122, 56, 21);
 						addBotton.setBounds(579, 122, 101, 21);
+						lblnextPeriod.setBounds(1100, 122, 101, 21);
 						lblFiltro.setBounds(63, 122, 61, 21);
 						filterTextField.setBounds(115, 122, 115, 20);
 						mainTitle.setBounds(270, 37, 804, 44);
@@ -589,6 +611,7 @@ public class MainFrame extends JFrame {
 					modifyBotton.setBounds(1290, 122, 63, 21);
 					delBotton.setBounds(900, 122, 56, 21);
 					addBotton.setBounds(779, 122, 101, 21);
+					lblnextPeriod.setBounds(1100, 122, 101, 21);
 					mainTitle.setBounds(470, 37, 642, 44);	
 					maximized = true;
 				}else{
@@ -612,6 +635,7 @@ public class MainFrame extends JFrame {
 					modifyBotton.setBounds(841, 122, 63, 21);
 					delBotton.setBounds(651, 122, 56, 21);
 					addBotton.setBounds(530, 122, 101, 21);
+					lblnextPeriod.setBounds(729, 122, 101, 21);
 					mainTitle.setBounds(240, 37, 642, 44);
 					maximized = false;
 				}		
@@ -646,6 +670,7 @@ public class MainFrame extends JFrame {
 		});	
 		upperFrameBar.setBounds(0, 0, 914, 34);
 		mainPanel.add(upperFrameBar);
+		
 	}
 	
 	private void tableDraw(){
