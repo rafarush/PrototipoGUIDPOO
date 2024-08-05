@@ -289,9 +289,11 @@ public class MainFrame extends JFrame {
 								Runner.inputProfe = new InputDialogProfe(valoresDeFila);
 								Runner.inputProfe.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								Runner.inputProfe.setVisible(true);
+								/**
+								 * Elimina al profe viejo (PROVISIONAL)
+								 */
 								((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());
 								((DefaultTableModel) table.getModel()).fireTableDataChanged();
-								//System.out.println("Valor en columna 1: " + table.getValueAt(selectedRow, 1));
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
@@ -697,6 +699,7 @@ public class MainFrame extends JFrame {
 				});
 				break;
 		}
+		table.getTableHeader().setReorderingAllowed(false);
 		scrollPane.setViewportView(table);
 	}
 	
