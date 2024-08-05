@@ -1,10 +1,13 @@
 package gui.dialogs;
 
 
+import gui.mainFrame.MainFrame;
+
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
@@ -13,13 +16,10 @@ import runner.Runner;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Locale.Category;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-
-import logica.Enums.Comportamiento;
 
 
 
@@ -215,7 +215,7 @@ public class InputDialogProfe extends JDialog {
 			cancelBotton.setBounds(202, 360, 63, 21);
 			mainPanel.add(cancelBotton);
 			
-			llenarTextField(valoresDeLaFila);
+			llenarTextFields(valoresDeLaFila);
 			
 			
 		}
@@ -224,7 +224,7 @@ public class InputDialogProfe extends JDialog {
 	 * Funcion para llenar los campos con los datos del profesor seleccionado
 	 * @param valoresDeLaFila
 	 */
-	private void llenarTextField(Object[] valoresDeLaFila){
+	private void llenarTextFields(Object[] valoresDeLaFila){
 		ciTextField.setText(valoresDeLaFila[0].toString());//Escribe el carne
 		nombreTextField.setText(valoresDeLaFila[1].toString());//Escribe el nombre
 		//Selecciona categoria cientifica
@@ -369,7 +369,6 @@ public class InputDialogProfe extends JDialog {
 			final JComboBox catDocComboBox = new JComboBox();
 			catDocComboBox.setModel(new DefaultComboBoxModel(new String[] {"Instructor", "Asistente", "Profesor Auxiliar", "Profesor Titular"}));
 			catDocComboBox.setBounds(289, 287, 128, 20);
-			//catDocComboBox.setSelectedItem("Instructor");
 			mainPanel.add(catDocComboBox);
 			
 			JLabel lblCentroLab = new JLabel("Centro Laboral:");

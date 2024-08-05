@@ -60,7 +60,7 @@ public class MainFrame extends JFrame {
 	private Point initialClick;
 	private BotonSelec btnSeleccionado = BotonSelec.PROFESOR;
 	DefaultTableCellRenderer centrarCelda = new DefaultTableCellRenderer();
-	private static Object[] valoresDeFila = new Object[20];
+	private static Object[] valoresDeFila = new Object[50];
 	
 	
 	
@@ -295,7 +295,7 @@ public class MainFrame extends JFrame {
 								Runner.inputProfe.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								Runner.inputProfe.setVisible(true);
 								/**
-								 * Elimina al profe viejo (PROVISIONAL)
+								 * Elimina al profe original (PROVISIONAL)
 								 */
 								((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());
 								((DefaultTableModel) table.getModel()).fireTableDataChanged();
@@ -323,9 +323,16 @@ public class MainFrame extends JFrame {
 							break;	
 						case PLANESTUDIO:
 							try {
-								Runner.inputAsignatura = new InputDialogAsignaturaPE();
+								//actualizar campos
+								actualizarValoresDeFila(table.getSelectedRow());
+								Runner.inputAsignatura = new InputDialogAsignaturaPE(valoresDeFila);
 								Runner.inputAsignatura.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								Runner.inputAsignatura.setVisible(true);
+								/**
+								 * Elimina la asignatura original (PROVISIONAL)
+								 */
+								((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());
+								((DefaultTableModel) table.getModel()).fireTableDataChanged();
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
