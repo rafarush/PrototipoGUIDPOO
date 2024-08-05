@@ -44,6 +44,7 @@ import java.util.ArrayList;
 
 import logica.DatosAuto;
 import logica.Enums.BotonSelec;
+import logica.JTableNoEdit;
 
 import javax.swing.ListSelectionModel;
 
@@ -53,7 +54,7 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
-	private static JTable table;
+	private static JTableNoEdit table;
 	private TableRowSorter<DefaultTableModel> tableSorter;
 	private JTextField filterTextField;
 	private boolean maximized = false;
@@ -650,59 +651,51 @@ public class MainFrame extends JFrame {
 	private void tableDraw(){
 		switch(btnSeleccionado){
 			case PROFESOR:
-				table = new JTable(Runner.modeloProfesor);
+				table = new JTableNoEdit(Runner.modeloProfesor);
 				table.getColumnModel().getColumn(7).setCellRenderer(centrarCelda);
 				tableSorter = new TableRowSorter<>(Runner.modeloProfesor);
 				table.setRowSorter(tableSorter);
-				table.addKeyListener(new KeyAdapter() {
-					@Override
-					public void keyReleased(KeyEvent e){
-						DatosAuto.definirTablaProfes(Runner.profesores);
-						tableDraw();
-						JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
+				table.addMouseListener(new java.awt.event.MouseAdapter() {
+					public void mouseClicked(java.awt.event.MouseEvent e) {
+						if (e.getClickCount() == 2) 
+							JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
 					}
 				});
 				break;
 			case ESTUDIANTE:
-				table = new JTable(Runner.modeloEstudiante);
+				table = new JTableNoEdit(Runner.modeloEstudiante);
 				table.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
 				table.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);
 				tableSorter = new TableRowSorter<>(Runner.modeloEstudiante);
 				table.setRowSorter(tableSorter);
-				table.addKeyListener(new KeyAdapter() {
-					@Override
-					public void keyReleased(KeyEvent e){
-						DatosAuto.definirTablaEstudiantes(Runner.estudiantes);
-						tableDraw();
-						JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
+				table.addMouseListener(new java.awt.event.MouseAdapter() {
+					public void mouseClicked(java.awt.event.MouseEvent e) {
+						if (e.getClickCount() == 2) 
+							JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
 					}
 				});
 				break;
 			case PERSOAUX:
-				table = new JTable(Runner.modeloPersonalAux);
+				table = new JTableNoEdit(Runner.modeloPersonalAux);
 				tableSorter = new TableRowSorter<>(Runner.modeloPersonalAux);
 				table.setRowSorter(tableSorter);
-				table.addKeyListener(new KeyAdapter() {
-					@Override
-					public void keyReleased(KeyEvent e){
-						DatosAuto.definirTablaPersonalAux(Runner.personalAux);;
-						tableDraw();
-						JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
+				table.addMouseListener(new java.awt.event.MouseAdapter() {
+					public void mouseClicked(java.awt.event.MouseEvent e) {
+						if (e.getClickCount() == 2) 
+							JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
 					}
 				});
 				break;	
 			case PLANESTUDIO:
-				table = new JTable(Runner.modeloPlanDeEstudio);
+				table = new JTableNoEdit(Runner.modeloPlanDeEstudio);
 				for(int i=1; i<=3;i++)
 					table.getColumnModel().getColumn(i).setCellRenderer(centrarCelda);
 				tableSorter = new TableRowSorter<>(Runner.modeloPlanDeEstudio);
 				table.setRowSorter(tableSorter);
-				table.addKeyListener(new KeyAdapter() {
-					@Override
-					public void keyReleased(KeyEvent e){
-						DatosAuto.definirTablaPlanDeEstudio(Runner.asignaturas);
-						tableDraw();
-						JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
+				table.addMouseListener(new java.awt.event.MouseAdapter() {
+					public void mouseClicked(java.awt.event.MouseEvent e) {
+						if (e.getClickCount() == 2) 
+							JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
 					}
 				});
 				break;
