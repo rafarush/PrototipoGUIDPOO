@@ -108,6 +108,7 @@ public class InputDialogProfe extends JDialog {
 			ciTextField.setToolTipText("Carn\u00E9 de identidad de la persona");
 			ciTextField.setColumns(10);
 			ciTextField.setBounds(10, 110, 223, 20);
+			ciTextField.setEditable(false);
 			mainPanel.add(ciTextField);
 
 			
@@ -183,6 +184,12 @@ public class InputDialogProfe extends JDialog {
 						Runner.modeloProfesor.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(), 
 								(String)catCienComboBox.getSelectedItem(),(String)catDocComboBox.getSelectedItem(),
 								centroLabTextField.getText(), organismoTextField.getText(), direccTextField.getText()});
+						/**
+						 * Elimina al profe original (PROVISIONAL)
+						 */
+						((DefaultTableModel) MainFrame.getTable().getModel()).removeRow(MainFrame.getTable().getSelectedRow());
+						((DefaultTableModel) MainFrame.getTable().getModel()).fireTableDataChanged();
+
 						JOptionPane.showMessageDialog(null, "Se ha modificado al profesor con éxito");
 						dispose();
 					}
@@ -216,6 +223,7 @@ public class InputDialogProfe extends JDialog {
 			mainPanel.add(cancelBotton);
 			
 			llenarTextFields(valoresDeLaFila);
+		
 			
 			
 		}
@@ -228,42 +236,14 @@ public class InputDialogProfe extends JDialog {
 		ciTextField.setText(valoresDeLaFila[0].toString());//Escribe el carne
 		nombreTextField.setText(valoresDeLaFila[1].toString());//Escribe el nombre
 		//Selecciona categoria cientifica
-		selecCatCientifica(valoresDeLaFila);
-		//Selecciona categoria docente
-		selecCatDocente(valoresDeLaFila);
+		//selecCatCientifica(valoresDeLaFila);
+		catCienComboBox.setSelectedItem(valoresDeLaFila[2].toString());
+		catDocComboBox.setSelectedItem(valoresDeLaFila[3].toString());//Selecciona categoria docente
 		centroLabTextField.setText(valoresDeLaFila[4].toString());//Escribe el centro laboral
 		organismoTextField.setText(valoresDeLaFila[5].toString());//Escribe el organismo
 		direccTextField.setText(valoresDeLaFila[6].toString());//Escribe la direccion
 	}
-	
-	private void selecCatCientifica(Object[] valoresDeLaFila){
-		if (valoresDeLaFila[2].toString().equalsIgnoreCase("Máster")){
-			catCienComboBox.setSelectedItem("Máster");
-		}else if (valoresDeLaFila[2].toString().equalsIgnoreCase("Doctor")){
-			catCienComboBox.setSelectedItem("Doctor");
-		}else{
-			catCienComboBox.setSelectedItem("Ninguna");
-		}
-	}
-	
-	private void selecCatDocente(Object[] valoresDeLaFila){
-		switch (valoresDeLaFila[3].toString()) {
-		case "Instructor":
-			catDocComboBox.setSelectedItem("Instructor");
-			break;
-		case "Asistente":
-			catDocComboBox.setSelectedItem("Asistente");
-			break;
-		case "Profesor Auxiliar":
-			catDocComboBox.setSelectedItem("Profesor Auxiliar");
-			break;
-		case "Profesor Titular":
-			catDocComboBox.setSelectedItem("Profesor Titular");
-			break;
-		default:
-			break;
-		}
-	}
+
 	
 	/**
 	 * Crea el cuadro de dialogo para agregar.

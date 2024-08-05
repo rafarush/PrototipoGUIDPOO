@@ -1,10 +1,13 @@
 package gui.dialogs;
 
 
+import gui.mainFrame.MainFrame;
+
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
@@ -147,6 +150,7 @@ public class InputDialogAsignaturaPE extends JDialog {
 						JOptionPane.showMessageDialog(null, "Debe ponerle un nombre a la Asignatura");
 					}else{
 						Runner.modeloPlanDeEstudio.addRow(new Object[]{nombreTextField.getText(), annoComboBox.getSelectedItem().toString(), semestreComboBox.getSelectedItem().toString(), spinnerHorasLectivas.getValue().toString()});
+
 						JOptionPane.showMessageDialog(null, "Se ha añadido una Asignatura al Plan de Estudio con éxito");
 						dispose();
 					}	
@@ -297,6 +301,12 @@ public class InputDialogAsignaturaPE extends JDialog {
 						JOptionPane.showMessageDialog(null, "Debe ponerle un nombre a la Asignatura");
 					}else{
 						Runner.modeloPlanDeEstudio.addRow(new Object[]{nombreTextField.getText(), annoComboBox.getSelectedItem().toString(), semestreComboBox.getSelectedItem().toString(), spinnerHorasLectivas.getValue().toString()});
+						/**
+						 * Elimina la Asignatura original (PROVISIONAL)
+						 */
+						((DefaultTableModel) MainFrame.getTable().getModel()).removeRow(MainFrame.getTable().getSelectedRow());
+						((DefaultTableModel) MainFrame.getTable().getModel()).fireTableDataChanged();
+						
 						JOptionPane.showMessageDialog(null, "Se ha modificado la Asignatura del Plan de Estudio con éxito");
 						dispose();
 					}	
@@ -336,8 +346,9 @@ public class InputDialogAsignaturaPE extends JDialog {
 	
 	private void llenarTextFields(Object[] valoresDeLaFila){
 		nombreTextField.setText(valoresDeLaFila[0].toString());//Escribe el nombre
-		annoComboBox.setSelectedItem(valoresDeLaFila[1]);//Pone el año
-		semestreComboBox.setSelectedItem(valoresDeLaFila[2]);//Pone el Semestre
+		annoComboBox.setSelectedItem(valoresDeLaFila[1].toString());//Pone el año
+		semestreComboBox.setSelectedItem(valoresDeLaFila[2].toString());//Pone el semestre
 		spinnerHorasLectivas.setValue((Integer.valueOf(valoresDeLaFila[3].toString())));//Pone la cantidad de horas
 	}
+	
 }

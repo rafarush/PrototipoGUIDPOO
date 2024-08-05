@@ -53,7 +53,7 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
-	private JTable table;
+	private static JTable table;
 	private TableRowSorter<DefaultTableModel> tableSorter;
 	private JTextField filterTextField;
 	private boolean maximized = false;
@@ -294,11 +294,6 @@ public class MainFrame extends JFrame {
 								Runner.inputProfe = new InputDialogProfe(valoresDeFila);
 								Runner.inputProfe.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								Runner.inputProfe.setVisible(true);
-								/**
-								 * Elimina al profe original (PROVISIONAL)
-								 */
-								((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());
-								((DefaultTableModel) table.getModel()).fireTableDataChanged();
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
@@ -328,11 +323,6 @@ public class MainFrame extends JFrame {
 								Runner.inputAsignatura = new InputDialogAsignaturaPE(valoresDeFila);
 								Runner.inputAsignatura.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								Runner.inputAsignatura.setVisible(true);
-								/**
-								 * Elimina la asignatura original (PROVISIONAL)
-								 */
-								((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());
-								((DefaultTableModel) table.getModel()).fireTableDataChanged();
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
@@ -721,5 +711,9 @@ public class MainFrame extends JFrame {
 		for(int i = 0; i < table.getColumnCount();i++){
 			valoresDeFila[i]= table.getValueAt(filaSelec, i);
 		}
+	}
+	
+	public static JTable getTable(){	
+		return table;
 	}
 }
