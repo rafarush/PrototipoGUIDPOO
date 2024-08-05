@@ -709,5 +709,7 @@ public class MainFrame extends JFrame {
 			valoresDeFila[i]= table.getValueAt(filaSelec, i);
 		}
 	}
-	
+	public static JTableNoEdit getTable(){
+		return table;
+	}
 }
