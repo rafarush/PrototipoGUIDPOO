@@ -206,6 +206,45 @@ public class DatosAuto {
 	}
 	
 	
+/*********************Define modelo de la tabla de Reportes para Estudiantes y agrega las filas*************************/
+	
+	/**
+	 * Define el modelo de columnas de la tabla Reportes para Estudiantes
+	 * @param asignaturas
+	 */
+	public static void definirTablaReportesEstu(ArrayList<Estudiante> estudiantesReporte){
+		Runner.modeloEstudianteReporte = new DefaultTableModel();
+		Runner.modeloEstudianteReporte.addColumn("Carné de Identidad");
+		Runner.modeloEstudianteReporte.addColumn("Nombre");
+		Runner.modeloEstudianteReporte.addColumn("Año");
+		agregarFilasReportesEstu(estudiantesReporte);
+	}
+	
+	
+	/**
+	 * Imprime cada fila con el estudiante
+	 * @param asignaturas
+	 */
+	public static void agregarFilasReportesEstu(ArrayList<Estudiante> estudiantesReporte){
+		if(estudiantesReporte.isEmpty()){
+			JOptionPane.showMessageDialog(null, "No hay registro de Estudiantes. Por favor, añada.");
+		}else{
+			for(Estudiante e : estudiantesReporte){
+				Runner.modeloEstudianteReporte.addRow(convertirAObjetoEstudiante(e));
+			}
+		}
+	}
+	
+	/**
+	 * Convertir instancia de Estudiante a un array de Objeto
+	 * @return obj
+	 */
+	public static Object[] convertirAObjetoAsignatura(Estudiante estu){
+		Object[] estudianteObj = new Object[]{estu.getCi(), estu.getNombre(), estu.getAnno()};	
+		return estudianteObj;
+	}
+	
+	
 	/****************************************Define los modelos de tabla***********************************************/
 	/*
 	public static void inicializar(){

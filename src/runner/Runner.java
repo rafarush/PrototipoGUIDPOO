@@ -24,6 +24,7 @@ public class Runner {
 	public static DefaultTableModel modeloEstudiante;
 	public static DefaultTableModel modeloPersonalAux;
 	public static DefaultTableModel modeloPlanDeEstudio;
+	public static DefaultTableModel modeloEstudianteReporte;
 	public static ArrayList<Profesor> profesores;
 	public static ArrayList<Estudiante> estudiantes;
 	public static ArrayList<PersonalAux> personalAux;
@@ -54,10 +55,12 @@ public class Runner {
 		//ESTUDIANTES
 		Estudiante estu1 = new Estudiante("05032379581", "Rafael Menéndez Rodriguez","1",null,"Sucursal Comercial #5","Etecsa", "Calle 30 entre 34 y Ave. 56");
 		Estudiante estu2 = new Estudiante("08868513264", "Alejandro González Fernández","1",null,"La Mariposa","TRD","Ave. 26 entre calles A y B");
+		Estudiante estu3 = new Estudiante("04021324587", "Jorgito", "2", null, "Las Palamas", "CTC", "Tulipan y Boyeros");
 			
 		estudiantes = new ArrayList<Estudiante>();
 		estudiantes.add(estu1);
 		estudiantes.add(estu2);
+		estudiantes.add(estu3);
 		
 		DatosAuto.definirTablaEstudiantes(estudiantes);
 		
@@ -89,6 +92,13 @@ public class Runner {
 		asignaturas.add(asignatura6);
 							
 		DatosAuto.definirTablaPlanDeEstudio(asignaturas);
+		
+		//ESTUDIANTE PARA REPORTES
+		ArrayList<Estudiante> estudiantesReporte = new ArrayList<Estudiante>();
+		estudiantesReporte.add(estu3);
+		estudiantesReporte.add(estu1);
+		
+		DatosAuto.definirTablaReportesEstu(estudiantesReporte);
 
 		/******************************************************************************************************************/
 		

@@ -47,6 +47,7 @@ import logica.Enums.BotonSelec;
 import logica.JTableNoEdit;
 
 import javax.swing.ListSelectionModel;
+import javax.swing.JButton;
 
 
 public class MainFrame extends JFrame {
@@ -566,6 +567,22 @@ public class MainFrame extends JFrame {
 		menuBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/MenuBarBotton.png")));
 		menuBarBotton.setBounds(10, 11, 46, 32);
 		menuBarPanel.add(menuBarBotton);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					Reportes dialog = new Reportes();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception exc) {
+					exc.printStackTrace();
+				}
+			}
+		});
+		btnNewButton.setBounds(70, 239, 89, 23);
+		menuBarPanel.add(btnNewButton);
 		
 		
 		final JLabel maxFrameBotton = new JLabel("");
