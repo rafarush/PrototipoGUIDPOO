@@ -34,7 +34,7 @@ public class Runner {
 	*/
 	public static void main(String[] args) {
 		
-		/********************Datos Prueba*****************************/
+		/**********************************************Datos Prueba********************************************************/
 		
 		//PROFESORES
 		Profesor profe1 = new Profesor("95868426587", "Luis Pérez Fernández","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B", 0.0f);
@@ -89,8 +89,11 @@ public class Runner {
 							
 		DatosAuto.definirTablaPlanDeEstudio(asignaturas);
 
+		/******************************************************************************************************************/
 		
-		
+		/**
+		 * Abrir la ventana principal
+		 */
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

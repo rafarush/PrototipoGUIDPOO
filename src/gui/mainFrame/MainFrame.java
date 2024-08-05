@@ -60,7 +60,7 @@ public class MainFrame extends JFrame {
 	private Point initialClick;
 	private BotonSelec btnSeleccionado = BotonSelec.PROFESOR;
 	DefaultTableCellRenderer centrarCelda = new DefaultTableCellRenderer();
-	private static Object[] valoresDeFila;
+	private static Object[] valoresDeFila = new Object[20];
 	
 	
 	
@@ -97,9 +97,7 @@ public class MainFrame extends JFrame {
 		
 		//Define los modelos y dibuja las tablas con datos predeterminados
 		centrarCelda.setHorizontalAlignment(JLabel.CENTER);
-		//DatosAuto.definirTablaProfes(Runner.profesores);
-		//DatosAuto.inicializar();
-		tableDraw();	
+		tableDraw();
 		
 		
 		JLabel frameName = new JLabel("Gestor de la Filial de Ciencias T\u00E9cnicas");
@@ -291,6 +289,8 @@ public class MainFrame extends JFrame {
 								Runner.inputProfe = new InputDialogProfe(valoresDeFila);
 								Runner.inputProfe.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								Runner.inputProfe.setVisible(true);
+								((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());
+								((DefaultTableModel) table.getModel()).fireTableDataChanged();
 								//System.out.println("Valor en columna 1: " + table.getValueAt(selectedRow, 1));
 							} catch (Exception exc) {
 								exc.printStackTrace();
@@ -701,7 +701,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	private void actualizarValoresDeFila(int filaSelec){	
-		for(int i =0; i<table.getColumnCount();i++){
+		for(int i = 0; i < table.getColumnCount();i++){
 			valoresDeFila[i]= table.getValueAt(filaSelec, i);
 		}
 	}

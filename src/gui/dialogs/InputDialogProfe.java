@@ -13,6 +13,7 @@ import runner.Runner;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Locale.Category;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -34,9 +35,8 @@ public class InputDialogProfe extends JDialog {
 	private JTextField direccTextField;
 	private JTextField organismoTextField;
 	private JTextField centroLabTextField;
-	private Comportamiento comportamiento = Comportamiento.AGREGAR;
-	//private Object[] cuadrosDeTexto = {ciTextField,nombreTextField,cat
-	
+	private JComboBox catCienComboBox;
+	private JComboBox catDocComboBox;
 
 	/**
 	 * Crea el cuadro de dialogo para editar.
@@ -101,6 +101,7 @@ public class InputDialogProfe extends JDialog {
 			nombreTextField.setBounds(10, 54, 223, 20);
 			mainPanel.add(nombreTextField);
 			
+			
 			JLabel lblNombre = new JLabel("Nombre y apellidos:");
 			lblNombre.setForeground(new Color(51, 51, 51));
 			lblNombre.setBounds(10, 29, 166, 20);
@@ -111,6 +112,7 @@ public class InputDialogProfe extends JDialog {
 			ciTextField.setColumns(10);
 			ciTextField.setBounds(10, 110, 223, 20);
 			mainPanel.add(ciTextField);
+
 			
 			JLabel lblCarneIden = new JLabel("Carn\u00E9 de Identidad:");
 			lblCarneIden.setBounds(10, 85, 166, 20);
@@ -130,8 +132,8 @@ public class InputDialogProfe extends JDialog {
 			lblCatCientifica.setBounds(289, 202, 128, 20);
 			mainPanel.add(lblCatCientifica);
 			
-			final JComboBox catCienComboBox = new JComboBox();
-			catCienComboBox.setModel(new DefaultComboBoxModel(new String[] {"Máster", "Doctor"}));
+			catCienComboBox = new JComboBox();
+			catCienComboBox.setModel(new DefaultComboBoxModel(new String[] {"Máster", "Doctor", "Ninguna"}));
 			catCienComboBox.setBounds(289, 227, 128, 20);
 			mainPanel.add(catCienComboBox);
 			
@@ -139,7 +141,7 @@ public class InputDialogProfe extends JDialog {
 			lblCatDocente.setBounds(289, 258, 128, 20);
 			mainPanel.add(lblCatDocente);
 			
-			final JComboBox catDocComboBox = new JComboBox();
+			catDocComboBox = new JComboBox();
 			catDocComboBox.setModel(new DefaultComboBoxModel(new String[] {"Instructor", "Asistente", "Profesor Auxiliar", "Profesor Titular"}));
 			catDocComboBox.setBounds(289, 287, 128, 20);
 			mainPanel.add(catDocComboBox);
@@ -184,7 +186,7 @@ public class InputDialogProfe extends JDialog {
 						Runner.modeloProfesor.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(), 
 								(String)catCienComboBox.getSelectedItem(),(String)catDocComboBox.getSelectedItem(),
 								centroLabTextField.getText(), organismoTextField.getText(), direccTextField.getText()});
-						JOptionPane.showMessageDialog(null, "Se ha añadido al profesor con éxito");
+						JOptionPane.showMessageDialog(null, "Se ha modificado al profesor con éxito");
 						dispose();
 					}
 				}
@@ -216,9 +218,53 @@ public class InputDialogProfe extends JDialog {
 			cancelBotton.setBounds(202, 360, 63, 21);
 			mainPanel.add(cancelBotton);
 			
+			llenarTextField(valoresDeLaFila);
 			
 			
-			
+		}
+	}
+	/**
+	 * Funcion para llenar los campos con los datos del profesor seleccionado
+	 * @param valoresDeLaFila
+	 */
+	private void llenarTextField(Object[] valoresDeLaFila){
+		ciTextField.setText(valoresDeLaFila[0].toString());//Escribe el carne
+		nombreTextField.setText(valoresDeLaFila[1].toString());//Escribe el nombre
+		//Selecciona categoria cientifica
+		selecCatCientifica(valoresDeLaFila);
+		//Selecciona categoria docente
+		selecCatDocente(valoresDeLaFila);
+		centroLabTextField.setText(valoresDeLaFila[4].toString());//Escribe el centro laboral
+		organismoTextField.setText(valoresDeLaFila[5].toString());//Escribe el organismo
+		direccTextField.setText(valoresDeLaFila[6].toString());//Escribe la direccion
+	}
+	
+	private void selecCatCientifica(Object[] valoresDeLaFila){
+		if (valoresDeLaFila[2].toString().equalsIgnoreCase("Máster")){
+			catCienComboBox.setSelectedItem("Máster");
+		}else if (valoresDeLaFila[2].toString().equalsIgnoreCase("Doctor")){
+			catCienComboBox.setSelectedItem("Doctor");
+		}else{
+			catCienComboBox.setSelectedItem("Ninguna");
+		}
+	}
+	
+	private void selecCatDocente(Object[] valoresDeLaFila){
+		switch (valoresDeLaFila[3].toString()) {
+		case "Instructor":
+			catDocComboBox.setSelectedItem("Instructor");
+			break;
+		case "Asistente":
+			catDocComboBox.setSelectedItem("Asistente");
+			break;
+		case "Profesor Auxiliar":
+			catDocComboBox.setSelectedItem("Profesor Auxiliar");
+			break;
+		case "Profesor Titular":
+			catDocComboBox.setSelectedItem("Profesor Titular");
+			break;
+		default:
+			break;
 		}
 	}
 	
@@ -315,7 +361,7 @@ public class InputDialogProfe extends JDialog {
 			mainPanel.add(lblCatCientifica);
 			
 			final JComboBox catCienComboBox = new JComboBox();
-			catCienComboBox.setModel(new DefaultComboBoxModel(new String[] {"Máster", "Doctor"}));
+			catCienComboBox.setModel(new DefaultComboBoxModel(new String[] {"M\u00E1ster", "Doctor", "Ninguna"}));
 			catCienComboBox.setBounds(289, 227, 128, 20);
 			mainPanel.add(catCienComboBox);
 			
