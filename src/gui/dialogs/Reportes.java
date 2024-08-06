@@ -47,24 +47,14 @@ public class Reportes extends JDialog {
 	private JComboBox reportesComboBox;
 	private JScrollPane scrollPane;
 	private static JTableNoEdit tablaReportes;
-	DefaultTableCellRenderer centrarCelda = new DefaultTableCellRenderer();
+	private DefaultTableCellRenderer centrarCelda = new DefaultTableCellRenderer();
+	private final JPanel mainPanel;
+	private final JLabel atrasBtn;
+	private static boolean recordar = true;
 
 
 	/**
-	 * Launch the application.
-	 *//*
-	public static void main(String[] args) {
-		try {
-			Reportes dialog = new Reportes();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-*/
-	/**
-	 * Create the dialog.
+	 * Crea el JDialog
 	 */
 	public Reportes() {
 		setUndecorated(true);
@@ -109,7 +99,8 @@ public class Reportes extends JDialog {
 		nameFrame.setBounds(10, 0, 254, 34);
 		upperBarPanel.add(nameFrame);
 		{
-			 JPanel mainPanel = new JPanel();
+			 mainPanel = new JPanel();
+			 mainPanel.setToolTipText("");
 				mainPanel.setBackground(Color.WHITE);
 				mainPanel.setBounds(0, 34, 617, 381);
 				getContentPane().add(mainPanel);
@@ -133,63 +124,105 @@ public class Reportes extends JDialog {
 				
 				reportesComboBox = new JComboBox();
 				reportesComboBox.setToolTipText("Desplegar lista de reportes");
-				reportesComboBox.setModel(new DefaultComboBoxModel(new String[] {null,"Estudiantes sin nota", 
+				reportesComboBox.setModel(new DefaultComboBoxModel(new String[] {"Estudiantes sin nota", 
 						"Estudiantes sin grupos", "Estudiantes graduados", "Estudiantes suspensos en 1 o 2 asignaturas", 
 						"Estudiantes con m\u00E1s de 4.5 de \u00EDndice acad\u00E9mico", 
 						"Grupo con menor cantidad de estudiantes(Dado el a\u00F1o)"}));
 				reportesComboBox.setRenderer(new ComboBoxTextInicial("Seleccione un reporte"));
-				reportesComboBox.setSelectedIndex(0);
+				reportesComboBox.setSelectedIndex(-1);
 				reportesComboBox.addActionListener(new ActionListener() {			
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						//Dibuja las tablas con datos predeterminados
 						centrarCelda.setHorizontalAlignment(JLabel.CENTER);
 						tableDraw();
+						if (!(reportesComboBox.getSelectedItem().toString().equalsIgnoreCase("Grupo con menor cantidad de estudiantes(Dado el a\u00F1o)"))){
+							mainPanel.remove(atrasBtn);
+						}else{
+							/**
+							 * Poner en pantalla el boton para ir atras
+							 */
+							mainPanel.add(atrasBtn);
+						}
 					}
 				});
 				reportesComboBox.setBounds(77, 42, 326, 20);
 				mainPanel.add(reportesComboBox);		
 				
+				atrasBtn = new JLabel("");
+				atrasBtn.setIcon(new ImageIcon(Reportes.class.getResource("/gui/utils/flechaAtras24Selected.png")));
+				atrasBtn.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						atrasBtn.setIcon(new ImageIcon(Reportes.class.getResource("/gui/utils/flechaAtras24Selected.png")));
+					}
+					@Override
+					public void mouseExited(MouseEvent e) {
+						atrasBtn.setIcon(new ImageIcon(Reportes.class.getResource("/gui/utils/flechaAtras24.png")));
+					}
+					@Override
+					public void mouseClicked(MouseEvent e){
+						if(tablaReportes.getModel().equals(Runner.modeloEstudianteReporte)&&(reportesComboBox.getSelectedItem().toString().equalsIgnoreCase("Grupo con menor cantidad de estudiantes(Dado el a\u00F1o)"))){
+							//Dibuja las tablas con datos predeterminados
+							centrarCelda.setHorizontalAlignment(JLabel.CENTER);
+							tableDraw();			
+						}else{
+							JOptionPane.showMessageDialog(null, "No existe ruta hacia atrás");
+						}
+					}
+				});
+				atrasBtn.setToolTipText("Retornar a los grupos");
+				atrasBtn.setBounds(10, 83, 24, 14);
 		}	
 		
 	}
 
 	private void tableDraw(){
-		if (reportesComboBox.getSelectedIndex()>=1 && reportesComboBox.getSelectedIndex()<=5){
+		if (reportesComboBox.getSelectedIndex()>=0 && reportesComboBox.getSelectedIndex()<=4){
 			tablaReportes = new JTableNoEdit(Runner.modeloEstudianteReporte);
 			tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
 					if (e.getClickCount() == 2) 
-						JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
+						JOptionPane.showMessageDialog(null, "No se permite modificación");
 				}
 			});
 			tablaReportes.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
 			tablaReportes.getTableHeader().setReorderingAllowed(false);
 			scrollPane.setViewportView(tablaReportes);
-		}else if(reportesComboBox.getSelectedIndex()==6){
+		}else if(reportesComboBox.getSelectedIndex()==5){
+			/*
+			if(recordar){
+				JOptionPane.showMessageDialog(null, "Puede acceder a los estudiantes de cada grupo haciendo doble click sobre el grupo deseado");
+				recordar = false;
+			}*/
 			tablaReportes = new JTableNoEdit(Runner.modeloGrupoReporte);
 			tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
-				public void mouseClicked(java.awt.event.MouseEvent e) {
-					if (e.getClickCount() == 2) 
-						DatosAuto.definirTablaReportesEstu(Runner.gruposReportes.get(tablaReportes.getSelectedRow()).getEstudiantes());
+				public void mouseClicked(java.awt.event.MouseEvent e1) {
+					int filaSelec = 0;
+					if (e1.getClickCount() == 2) {
+						filaSelec = tablaReportes.getSelectedRow();
+						/**
+						 * Actualiza la tabla con los datos de los esrudiantes del grupo clickeado
+						 */
+						DatosAuto.definirTablaReportesEstu(Runner.gruposReportes.get(filaSelec).getEstudiantes());
 						tablaReportes = new JTableNoEdit(Runner.modeloEstudianteReporte);
 						tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
-							public void mouseClicked(java.awt.event.MouseEvent e) {
-								if (e.getClickCount() == 2) 
-									JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
+							public void mouseClicked(java.awt.event.MouseEvent e2) {
+								if (e2.getClickCount() == 2) 
+									JOptionPane.showMessageDialog(null, "No se permite modificación");
 							}
 						});
 						tablaReportes.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
 						tablaReportes.getTableHeader().setReorderingAllowed(false);
 						scrollPane.setViewportView(tablaReportes);
-						}
-					});
+					}
+				}
+			});
 				tablaReportes.getColumnModel().getColumn(1).setCellRenderer(centrarCelda);
 				tablaReportes.getTableHeader().setReorderingAllowed(false);
 				scrollPane.setViewportView(tablaReportes);
-		}else{
+		}else if (reportesComboBox.getSelectedIndex()==-1){
 			JOptionPane.showMessageDialog(null, "Seleccione un reporte en el ComboBox");
 		}
 	}
-	
 }
