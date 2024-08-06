@@ -445,6 +445,39 @@ public class MainFrame extends JFrame {
 		planEstBarBotton.setBounds(5, 194, 203, 34);
 		menuBarPanel.add(planEstBarBotton);
 		
+		final JLabel reportesIco = new JLabel("");
+		reportesIco.setBounds(128, 369, 46, 39);
+		menuBarPanel.add(reportesIco);
+		reportesIco.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/marker-documents_filtered_via_10015_io_filtered_via_10015_ioCambiTam.png")));
+		
+		final JLabel reportesBarBotton = new JLabel("");
+		reportesBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ReportesBarBotton.png")));
+		reportesBarBotton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					Reportes dialog = new Reportes();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception exc) {
+					exc.printStackTrace();
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				reportesBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ReportesBarBottonSelected1.png")));
+				reportesIco.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/marker-documents_filtered_via_10015_io_46x39_via_10015_io.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				reportesBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ReportesBarBotton.png")));
+				reportesIco.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/marker-documents_filtered_via_10015_io_filtered_via_10015_ioCambiTam.png")));
+			}
+		});
+		reportesBarBotton.setBounds(15, 380, 103, 25);
+		menuBarPanel.add(reportesBarBotton);
+		
+		
 		//Actualizar iconos
 		estuBarBotton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -515,6 +548,7 @@ public class MainFrame extends JFrame {
 						estuBarBotton.setVisible(false);
 						persoAuxBarBotton.setVisible(false);
 						planEstBarBotton.setVisible(false);
+						reportesBarBotton.setVisible(false);
 					}else{
 						menuBarPanel.setBounds(0, 33, 218, 545);
 						scrollPane.setBounds(240, 154, 664, 380);
@@ -525,6 +559,7 @@ public class MainFrame extends JFrame {
 						estuBarBotton.setVisible(true);
 						persoAuxBarBotton.setVisible(true);
 						planEstBarBotton.setVisible(true);
+						reportesBarBotton.setVisible(true);
 					}
 				}else{
 					if(menuBarPanel.getWidth()==218){
@@ -539,6 +574,7 @@ public class MainFrame extends JFrame {
 						estuBarBotton.setVisible(false);
 						persoAuxBarBotton.setVisible(false);
 						planEstBarBotton.setVisible(false);
+						reportesBarBotton.setVisible(false);
 					}else{
 						menuBarPanel.setBounds(0, 33, 218, 729);
 						scrollPane.setBounds(240, 154, 1110, 560);
@@ -551,6 +587,7 @@ public class MainFrame extends JFrame {
 						estuBarBotton.setVisible(true);
 						persoAuxBarBotton.setVisible(true);
 						planEstBarBotton.setVisible(true);
+						reportesBarBotton.setVisible(true);
 					}
 				}
 				
@@ -567,22 +604,6 @@ public class MainFrame extends JFrame {
 		menuBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/MenuBarBotton.png")));
 		menuBarBotton.setBounds(10, 11, 46, 32);
 		menuBarPanel.add(menuBarBotton);
-		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				try {
-					Reportes dialog = new Reportes();
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					dialog.setVisible(true);
-				} catch (Exception exc) {
-					exc.printStackTrace();
-				}
-			}
-		});
-		btnNewButton.setBounds(70, 239, 89, 23);
-		menuBarPanel.add(btnNewButton);
 		
 		
 		final JLabel maxFrameBotton = new JLabel("");
