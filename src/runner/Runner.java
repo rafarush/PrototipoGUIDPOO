@@ -24,11 +24,14 @@ public class Runner {
 	public static DefaultTableModel modeloEstudiante;
 	public static DefaultTableModel modeloPersonalAux;
 	public static DefaultTableModel modeloPlanDeEstudio;
+	public static DefaultTableModel modeloGrupoReporte;
 	public static DefaultTableModel modeloEstudianteReporte;
 	public static ArrayList<Profesor> profesores;
 	public static ArrayList<Estudiante> estudiantes;
 	public static ArrayList<PersonalAux> personalAux;
 	public static ArrayList<Asignatura> asignaturas;
+	public static ArrayList<Estudiante> estudiantesReporte;
+	public static ArrayList<Grupo> gruposReportes;
 	
 	
 	/**
@@ -94,12 +97,24 @@ public class Runner {
 		DatosAuto.definirTablaPlanDeEstudio(asignaturas);
 		
 		//ESTUDIANTE PARA REPORTES
-		ArrayList<Estudiante> estudiantesReporte = new ArrayList<Estudiante>();
+		estudiantesReporte = new ArrayList<Estudiante>();
 		estudiantesReporte.add(estu3);
 		estudiantesReporte.add(estu1);
 		
 		DatosAuto.definirTablaReportesEstu(estudiantesReporte);
 
+		//GRUPOS PARA REPORTES
+		gruposReportes = new ArrayList<Grupo>();
+		Grupo grupo1 = new Grupo("Grupo 1", 1);
+		grupo1.addEstudiante(estu1);
+		grupo1.addEstudiante(estu2);
+		Grupo grupo2 = new Grupo("Grupo 2", 1);
+		grupo2.addEstudiante(estu3);
+		gruposReportes.add(grupo1);
+		gruposReportes.add(grupo2);
+		
+		DatosAuto.definirTablaGrupo(gruposReportes);
+		
 		/******************************************************************************************************************/
 		
 		/**

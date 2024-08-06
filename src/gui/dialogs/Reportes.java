@@ -18,8 +18,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.ListCellRenderer;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -29,10 +31,15 @@ import runner.Runner;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 
+import logica.ComboBoxTextInicial;
+import logica.DatosAuto;
+import logica.Estudiante;
+import logica.Grupo;
 import logica.JTableNoEdit;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+import java.util.ArrayList;
 
 public class Reportes extends JDialog {
 
@@ -126,10 +133,12 @@ public class Reportes extends JDialog {
 				
 				reportesComboBox = new JComboBox();
 				reportesComboBox.setToolTipText("Desplegar lista de reportes");
-				reportesComboBox.setModel(new DefaultComboBoxModel(new String[] {"Estudiantes sin nota", 
+				reportesComboBox.setModel(new DefaultComboBoxModel(new String[] {null,"Estudiantes sin nota", 
 						"Estudiantes sin grupos", "Estudiantes graduados", "Estudiantes suspensos en 1 o 2 asignaturas", 
 						"Estudiantes con m\u00E1s de 4.5 de \u00EDndice acad\u00E9mico", 
 						"Grupo con menor cantidad de estudiantes(Dado el a\u00F1o)"}));
+				reportesComboBox.setRenderer(new ComboBoxTextInicial("Seleccione un reporte"));
+				reportesComboBox.setSelectedIndex(0);
 				reportesComboBox.addActionListener(new ActionListener() {			
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -146,7 +155,7 @@ public class Reportes extends JDialog {
 	}
 
 	private void tableDraw(){
-		if (reportesComboBox.getSelectedIndex()>=0 && reportesComboBox.getSelectedIndex()<=4){
+		if (reportesComboBox.getSelectedIndex()>=1 && reportesComboBox.getSelectedIndex()<=5){
 			tablaReportes = new JTableNoEdit(Runner.modeloEstudianteReporte);
 			tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -157,8 +166,29 @@ public class Reportes extends JDialog {
 			tablaReportes.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
 			tablaReportes.getTableHeader().setReorderingAllowed(false);
 			scrollPane.setViewportView(tablaReportes);
-		}else if(reportesComboBox.getSelectedIndex()==5){
-			JOptionPane.showMessageDialog(null, "Tabla Grupo");
+		}else if(reportesComboBox.getSelectedIndex()==6){
+			tablaReportes = new JTableNoEdit(Runner.modeloGrupoReporte);
+			tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent e) {
+					if (e.getClickCount() == 2) 
+						DatosAuto.definirTablaReportesEstu(Runner.gruposReportes.get(tablaReportes.getSelectedRow()).getEstudiantes());
+						tablaReportes = new JTableNoEdit(Runner.modeloEstudianteReporte);
+						tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+							public void mouseClicked(java.awt.event.MouseEvent e) {
+								if (e.getClickCount() == 2) 
+									JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
+							}
+						});
+						tablaReportes.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
+						tablaReportes.getTableHeader().setReorderingAllowed(false);
+						scrollPane.setViewportView(tablaReportes);
+						}
+					});
+				tablaReportes.getColumnModel().getColumn(1).setCellRenderer(centrarCelda);
+				tablaReportes.getTableHeader().setReorderingAllowed(false);
+				scrollPane.setViewportView(tablaReportes);
+		}else{
+			JOptionPane.showMessageDialog(null, "Seleccione un reporte en el ComboBox");
 		}
 	}
 	

@@ -210,7 +210,7 @@ public class DatosAuto {
 	
 	/**
 	 * Define el modelo de columnas de la tabla Reportes para Estudiantes
-	 * @param asignaturas
+	 * @param estudiantes
 	 */
 	public static void definirTablaReportesEstu(ArrayList<Estudiante> estudiantesReporte){
 		Runner.modeloEstudianteReporte = new DefaultTableModel();
@@ -223,7 +223,7 @@ public class DatosAuto {
 	
 	/**
 	 * Imprime cada fila con el estudiante
-	 * @param asignaturas
+	 * @param estudiantes
 	 */
 	public static void agregarFilasReportesEstu(ArrayList<Estudiante> estudiantesReporte){
 		if(estudiantesReporte.isEmpty()){
@@ -243,6 +243,45 @@ public class DatosAuto {
 		Object[] estudianteObj = new Object[]{estu.getCi(), estu.getNombre(), estu.getAnno()};	
 		return estudianteObj;
 	}
+	
+	
+/*****************************Define modelo de la tabla PersonalAux y agrega las filas**************************************/
+	
+	/**
+	 * Define el modelo de columnas de la tabla Grupos
+	 * @param grupos
+	 */
+	public static void definirTablaGrupo(ArrayList<Grupo> grupos){
+		Runner.modeloGrupoReporte = new DefaultTableModel();
+		Runner.modeloGrupoReporte.addColumn("Nombre");
+		Runner.modeloGrupoReporte.addColumn("Año");
+		agregarFilasGrupo(grupos);
+	}
+	
+	
+	/**
+	 * Imprime cada fila con el Grupo
+	 * @param grupo
+	 */
+	public static void agregarFilasGrupo(ArrayList<Grupo> grupos){
+		if(grupos.isEmpty()){
+			JOptionPane.showMessageDialog(null, "No hay registro de grupos. Por favor, añada.");
+		}else{
+			for(Grupo g : grupos){
+				Runner.modeloGrupoReporte.addRow(convertirAObjetoGrupo(g));
+			}
+		}
+	}
+	
+	/**
+	 * Convertir instancia de Grupo a un array de Objeto
+	 * @return obj
+	 */
+	public static Object[] convertirAObjetoGrupo(Grupo grupo){
+		Object[] grupoObj = new Object[]{grupo.getNombre(), grupo.getAnno()};		
+		return grupoObj;
+	}
+	
 	
 	
 	/****************************************Define los modelos de tabla***********************************************/
