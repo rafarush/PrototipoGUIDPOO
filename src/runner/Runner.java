@@ -8,6 +8,7 @@ import java.awt.EventQueue;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,6 +18,7 @@ import logica.*;
 public class Runner {
 	
 	public static MainFrame frame;
+	public static User usuario;
 	public static InputDialogProfe inputProfe;
 	public static InputDialogEst inputEst;
 	public static InputDialogPerAux inputPerAux;
@@ -41,6 +43,8 @@ public class Runner {
 	public static void main(String[] args) {
 		
 		/**********************************************Datos Prueba********************************************************/
+		//Usuario
+		usuario = new User("Fermin", "1234");
 		
 		//PROFESORES
 		Profesor profe1 = new Profesor("95868426587", "Luis Pérez Fernández","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B", 0.0f);
@@ -116,22 +120,15 @@ public class Runner {
 		
 		DatosAuto.definirTablaGrupo(gruposReportes);
 		
+		try {
+			LoginUser login = new LoginUser();
+			login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			login.setVisible(true);
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		
 		/******************************************************************************************************************/
-		/**
-		 * Abrir la ventana principal
-		 */
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					frame = new MainFrame();
-					ImageIcon appIcono = new ImageIcon(MainFrame.class.getResource("/gui/utils/appicon.png"));
-					frame.setIconImage(appIcono.getImage());
-					frame.setVisible(true);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
 		
 		
 	}
