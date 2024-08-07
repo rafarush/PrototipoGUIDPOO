@@ -78,7 +78,7 @@ public class Reportes extends JDialog {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(JOptionPane.showConfirmDialog(null, "¿Seguro que desea cerrar la entrada de datos?\n Su progreso no se guardará", "Confirmación", 
+				if(JOptionPane.showConfirmDialog(null, "¿Seguro que desea cerrar la ventana de Reportes?\n", "Confirmación", 
 						JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION){
 					dispose();
 				}

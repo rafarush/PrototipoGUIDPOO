@@ -94,7 +94,7 @@ public class InputDialogAsignaturaPE extends JDialog {
 			mainPanel.add(panel);
 			
 			nombreTextField = new JTextField();
-			nombreTextField.setToolTipText("Nombre de la persona");
+			nombreTextField.setToolTipText("Nombre de la Asignatura");
 			nombreTextField.setColumns(10);
 			nombreTextField.setBounds(10, 54, 223, 20);
 			mainPanel.add(nombreTextField);
