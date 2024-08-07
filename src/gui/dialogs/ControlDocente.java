@@ -44,6 +44,8 @@ import logica.Enums.BotonSelec;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
+import javax.swing.border.LineBorder;
+import java.awt.Cursor;
 
 public class ControlDocente extends JDialog {
 
@@ -127,8 +129,11 @@ public class ControlDocente extends JDialog {
 				mainPanel.add(lblTabla);
 				actualizarLblNombre();
 				
-				JLabel lblDarNota = new JLabel("Dar Nota");
-				lblDarNota.addMouseListener(new MouseAdapter() {
+				final JLabel darNotaBtn = new JLabel("Dar Nota");
+				darNotaBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				darNotaBtn.setBorder(new LineBorder(new Color(5, 5, 5)));
+				darNotaBtn.setBackground(Color.LIGHT_GRAY);
+				darNotaBtn.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						int selec = tablaNotas.getSelectedRow();
@@ -145,17 +150,26 @@ public class ControlDocente extends JDialog {
 							}
 						}
 					}
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						darNotaBtn.setBorder(new LineBorder(new Color(0, 0, 0)));
+					}
+					@Override
+					public void mouseExited(MouseEvent e) {
+						darNotaBtn.setBorder(new LineBorder(new Color(5, 5, 5)));
+					}
 				});
-				lblDarNota.setForeground(Color.BLACK);
-				lblDarNota.setHorizontalAlignment(SwingConstants.CENTER);
-				lblDarNota.setBounds(413, 72, 62, 15);
-				mainPanel.add(lblDarNota);
+				darNotaBtn.setForeground(Color.BLACK);
+				darNotaBtn.setHorizontalAlignment(SwingConstants.CENTER);
+				darNotaBtn.setBounds(413, 72, 62, 20);
+				mainPanel.add(darNotaBtn);
 				
 				scrollPane = new JScrollPane();
 				scrollPane.setBounds(10, 98, 465, 272);
 				mainPanel.add(scrollPane);
 				
 				atrasBtn = new JLabel("");
+				atrasBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				atrasBtn.setIcon(new ImageIcon(ControlDocente.class.getResource("/gui/utils/flechaAtras24Selected.png")));
 				atrasBtn.addMouseListener(new MouseAdapter() {
 					@Override

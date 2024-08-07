@@ -156,7 +156,7 @@ public class LoginUser extends JDialog {
 						            protected Void doInBackground() throws Exception {
 						                for (int i = 0; i <= 100; i++) {
 						                    publish(i);
-						                    Thread.sleep(4);
+						                    Thread.sleep(7);
 						                }
 						                dispose();
 						                return null;

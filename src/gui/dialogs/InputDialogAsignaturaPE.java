@@ -23,6 +23,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import java.awt.Cursor;
 
 
 
@@ -127,13 +128,14 @@ public class InputDialogAsignaturaPE extends JDialog {
 			mainPanel.add(semestreComboBox);
 			
 			spinnerHorasLectivas = new JSpinner();
-			spinnerHorasLectivas.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+			spinnerHorasLectivas.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), new Integer(200), new Integer(1)));
 			JSpinner.DefaultEditor editor = (JSpinner.DefaultEditor) spinnerHorasLectivas.getEditor();
 			editor.getTextField().setEditable(false);
 			spinnerHorasLectivas.setBounds(10, 116, 51, 20);
 			mainPanel.add(spinnerHorasLectivas);
 			
 			final JLabel inputBotton = new JLabel("");
+			inputBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			inputBotton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseEntered(MouseEvent e) {
@@ -161,6 +163,7 @@ public class InputDialogAsignaturaPE extends JDialog {
 			mainPanel.add(inputBotton);
 			
 			final JLabel cancelBotton = new JLabel("");
+			cancelBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			cancelBotton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseEntered(MouseEvent e) {

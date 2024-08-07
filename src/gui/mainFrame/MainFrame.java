@@ -156,6 +156,7 @@ public class MainFrame extends JFrame {
 		mainPanel.add(closeFrameBotton);
 		
 		final JLabel addBotton = new JLabel("");
+		addBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		addBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/addBotton.png")));
 		addBotton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -246,6 +247,7 @@ public class MainFrame extends JFrame {
 		lblFiltro.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		final JLabel delBotton = new JLabel("");
+		delBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		delBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/delBotton.png")));
 		delBotton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -274,6 +276,7 @@ public class MainFrame extends JFrame {
 		mainPanel.add(delBotton);
 		
 		final JLabel modifyBotton = new JLabel("");
+		modifyBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		modifyBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/modifyBotton.png")));
 		modifyBotton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -346,6 +349,7 @@ public class MainFrame extends JFrame {
 		
 		
 		final JLabel lblnextPeriod = new JLabel("");
+		lblnextPeriod.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblnextPeriod.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -374,6 +378,7 @@ public class MainFrame extends JFrame {
 		menuBarPanel.setLayout(null);
 		
 		final JLabel profeBarBotton = new JLabel("");
+		profeBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		profeBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ProfesBarBottonSelected1.png")));
 		profeBarBotton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -394,6 +399,7 @@ public class MainFrame extends JFrame {
 		
 		
 		final JLabel estuBarBotton = new JLabel("");
+		estuBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		estuBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/EstudiantesBarBotton.png")));
 		estuBarBotton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -414,6 +420,7 @@ public class MainFrame extends JFrame {
 		
 		
 		final JLabel persoAuxBarBotton = new JLabel("");
+		persoAuxBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		persoAuxBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/PersoAuxBarBotton.png")));
 		persoAuxBarBotton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -432,6 +439,7 @@ public class MainFrame extends JFrame {
 		menuBarPanel.add(persoAuxBarBotton);
 		
 		final JLabel planEstBarBotton = new JLabel("");
+		planEstBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		planEstBarBotton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -455,6 +463,7 @@ public class MainFrame extends JFrame {
 		reportesIco.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/marker-documents_filtered_via_10015_io_filtered_via_10015_ioCambiTam.png")));
 		
 		final JLabel reportesBarBotton = new JLabel("");
+		reportesBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		reportesBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ReportesBarBotton.png")));
 		reportesBarBotton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -487,6 +496,7 @@ public class MainFrame extends JFrame {
 		menuBarPanel.add(otorgarNotasIcon);
 		
 		final JLabel otorgarNotasBarBotton = new JLabel("");
+		otorgarNotasBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		otorgarNotasBarBotton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -523,6 +533,7 @@ public class MainFrame extends JFrame {
 		menuBarPanel.add(planDocenteIcon);
 		
 		final JLabel planificacionDocenteBarBotton = new JLabel("");
+		planificacionDocenteBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		planificacionDocenteBarBotton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -590,6 +601,7 @@ public class MainFrame extends JFrame {
 		menuBarPanel.add(nombreUsuario);
 		
 		final JLabel sesionIconBarBotton = new JLabel("");
+		sesionIconBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		sesionIconBarBotton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {

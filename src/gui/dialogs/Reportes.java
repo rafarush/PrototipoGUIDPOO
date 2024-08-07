@@ -40,6 +40,7 @@ import logica.JTableNoEdit;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
+import java.awt.Cursor;
 
 public class Reportes extends JDialog {
 
@@ -123,6 +124,7 @@ public class Reportes extends JDialog {
 				mainPanel.add(scrollPane);
 				
 				reportesComboBox = new JComboBox();
+				reportesComboBox.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				reportesComboBox.setToolTipText("Desplegar lista de reportes");
 				reportesComboBox.setModel(new DefaultComboBoxModel(new String[] {"Estudiantes sin nota", 
 						"Estudiantes sin grupos", "Estudiantes graduados", "Estudiantes suspensos en 1 o 2 asignaturas", 
@@ -151,6 +153,7 @@ public class Reportes extends JDialog {
 				
 				atrasBtn = new JLabel("");
 				atrasBtn.setIcon(new ImageIcon(Reportes.class.getResource("/gui/utils/flechaAtras24Selected.png")));
+				atrasBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				atrasBtn.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseEntered(MouseEvent e) {

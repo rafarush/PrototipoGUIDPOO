@@ -20,6 +20,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Cursor;
 
 
 
@@ -132,6 +133,7 @@ public class InputDialogPerAux extends JDialog {
 			mainPanel.add(areaTrabajoComboBox);
 			
 			final JLabel inputBotton = new JLabel("");
+			inputBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			inputBotton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseEntered(MouseEvent e) {
@@ -158,6 +160,7 @@ public class InputDialogPerAux extends JDialog {
 			mainPanel.add(inputBotton);
 			
 			final JLabel cancelBotton = new JLabel("");
+			cancelBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			cancelBotton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseEntered(MouseEvent e) {
