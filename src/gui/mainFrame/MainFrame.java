@@ -16,8 +16,10 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -34,6 +36,7 @@ import javax.swing.table.TableRowSorter;
 import runner.Runner;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.InputMethodListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
@@ -539,6 +542,59 @@ public class MainFrame extends JFrame {
 		planificacionDocenteBarBotton.setBounds(10, 266, 146, 29);
 		menuBarPanel.add(planificacionDocenteBarBotton);
 		
+		final JPopupMenu popupMenu = new JPopupMenu();
+		JMenuItemEdit buttonItem = new JMenuItemEdit();
+        buttonItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                try {
+        			LoginUser login = new LoginUser();
+        			login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        			login.setVisible(true);
+        		} catch (Exception exc) {
+        			exc.printStackTrace();
+        		}
+            }
+        });
+        popupMenu.add(buttonItem);
+		
+		final JLabel nombreUsuario = new JLabel("");
+		nombreUsuario.setForeground(new Color(255, 255, 255));
+		nombreUsuario.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		nombreUsuario.setBounds(55, 469, 153, 15);
+		nombreUsuario.setText(Runner.usuario.getName());
+		menuBarPanel.add(nombreUsuario);
+		
+		final JLabel sesionIconBarBotton = new JLabel("");
+		sesionIconBarBotton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				sesionIconBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/userPhoto-removebg-preview_filtered_via_10015_io_46x39_via_10015_ioSelected.png")));
+				nombreUsuario.setForeground(new Color(0, 0, 0));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				sesionIconBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/userPhoto-removebg-preview_filtered_via_10015_io_46x39_via_10015_io.png")));
+				nombreUsuario.setForeground(new Color(255, 255, 255));
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				 if(e.isPopupTrigger()) {
+	                    popupMenu.show(e.getComponent(), e.getX(), e.getY());
+	             }
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				 if(e.isPopupTrigger()) {
+	                    popupMenu.show(e.getComponent(), e.getX(), e.getY());
+	             }
+			}
+		});
+		sesionIconBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/userPhoto-removebg-preview_filtered_via_10015_io_46x39_via_10015_io.png")));
+		sesionIconBarBotton.setBounds(10, 458, 46, 39);
+		menuBarPanel.add(sesionIconBarBotton);
+		
 		
 		//Actualizar iconos
 		estuBarBotton.addMouseListener(new MouseAdapter() {
@@ -593,6 +649,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
+		
 		final JLabel menuBarBotton = new JLabel("");
 		menuBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		menuBarBotton.setBounds(new Rectangle(10, 11, 46, 32));
@@ -614,6 +671,8 @@ public class MainFrame extends JFrame {
 						otorgarNotasBarBotton.setVisible(false);
 						separadorMenuBar.setVisible(false);
 						planificacionDocenteBarBotton.setVisible(false);
+						nombreUsuario.setVisible(false);
+						sesionIconBarBotton.setVisible(false);
 					}else{
 						menuBarPanel.setBounds(0, 33, 218, 545);
 						scrollPane.setBounds(240, 154, 664, 380);
@@ -628,6 +687,8 @@ public class MainFrame extends JFrame {
 						otorgarNotasBarBotton.setVisible(true);
 						separadorMenuBar.setVisible(true);
 						planificacionDocenteBarBotton.setVisible(true);
+						nombreUsuario.setVisible(true);
+						sesionIconBarBotton.setVisible(true);
 					}
 				}else{
 					if(menuBarPanel.getWidth()==218){
@@ -646,6 +707,8 @@ public class MainFrame extends JFrame {
 						otorgarNotasBarBotton.setVisible(false);
 						separadorMenuBar.setVisible(false);
 						planificacionDocenteBarBotton.setVisible(false);
+						nombreUsuario.setVisible(false);
+						sesionIconBarBotton.setVisible(false);
 					}else{
 						menuBarPanel.setBounds(0, 33, 218, 729);
 						scrollPane.setBounds(240, 154, 1110, 560);
@@ -662,6 +725,8 @@ public class MainFrame extends JFrame {
 						otorgarNotasBarBotton.setVisible(true);
 						separadorMenuBar.setVisible(true);
 						planificacionDocenteBarBotton.setVisible(true);
+						nombreUsuario.setVisible(true);
+						sesionIconBarBotton.setVisible(true);
 					}
 				}
 				
@@ -678,6 +743,7 @@ public class MainFrame extends JFrame {
 		menuBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/MenuBarBotton.png")));
 		menuBarBotton.setBounds(10, 11, 46, 32);
 		menuBarPanel.add(menuBarBotton);
+		
 		
 		
 		final JLabel maxFrameBotton = new JLabel("");
@@ -719,7 +785,9 @@ public class MainFrame extends JFrame {
 						mainTitle.setBounds(270, 37, 804, 44);
 					}else{
 						menuBarPanel.setBounds(0, 33, 218, 729);
-					}				
+					}		
+					nombreUsuario.setBounds(55, 650, 153, 15);
+					sesionIconBarBotton.setBounds(10, 638, 46, 39);
 					modifyBotton.setBounds(1290, 122, 63, 21);
 					delBotton.setBounds(900, 122, 56, 21);
 					addBotton.setBounds(779, 122, 101, 21);
@@ -744,6 +812,8 @@ public class MainFrame extends JFrame {
 					}else{
 						menuBarPanel.setBounds(0, 33, 218, 512);
 					}				
+					nombreUsuario.setBounds(55, 469, 153, 15);
+					sesionIconBarBotton.setBounds(10, 458, 46, 39);
 					modifyBotton.setBounds(841, 122, 63, 21);
 					delBotton.setBounds(651, 122, 56, 21);
 					addBotton.setBounds(530, 122, 101, 21);
