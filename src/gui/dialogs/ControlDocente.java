@@ -44,7 +44,9 @@ import logica.Enums.BotonSelec;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
+
 import javax.swing.border.LineBorder;
+
 import java.awt.Cursor;
 
 public class ControlDocente extends JDialog {
@@ -58,8 +60,9 @@ public class ControlDocente extends JDialog {
 	private final JLabel atrasBtn;
 	private JLabel lblTabla;
 	private BotonSelec btnSeleccionado = BotonSelec.PROFESOR;
-	private String asignaturaSelec;
-	private String profeSelec;
+	private static String asignaturaSelec;
+	private static String profeSelec;
+	private static int filaSelec;
 
 
 	/**
@@ -71,8 +74,6 @@ public class ControlDocente extends JDialog {
 		setBounds(100, 100, 617, 415);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
-		
-		//tablaNotas = new JTableNoEdit(defecto = new DefaultTableModel());
 		
 		final JLabel closeBotton = new JLabel("");
 		closeBotton.setIcon(new ImageIcon(InputDialogAsignaturaPE.class.getResource("/gui/utils/closeBotton.png")));
@@ -136,19 +137,37 @@ public class ControlDocente extends JDialog {
 				darNotaBtn.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						int selec = tablaNotas.getSelectedRow();
-						if(!(btnSeleccionado==BotonSelec.ESTUDIANTE) || selec == -1){
+						filaSelec = tablaNotas.getSelectedRow();
+						if(!(btnSeleccionado==BotonSelec.ESTUDIANTE) || filaSelec == -1){
 							JOptionPane.showMessageDialog(null, "Para dar nota debe tener un estudiante seleccionado");
 						}else{
+							try {
+								Runner.inputNota = new InputDialogNota();
+								Runner.inputNota.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								Runner.inputNota.setVisible(true);
+							} catch (Exception exc) {
+								exc.printStackTrace();
+							}
+						}
+							/*
 							String nota = JOptionPane.showInputDialog("Dar Nota", 5);
 							if(nota.isEmpty()){
 								JOptionPane.showMessageDialog(null, "No introdujo ningún valor");
 							}else{
+								/*
 								JOptionPane.showMessageDialog(null, "Confirmación :\nCI Estudiante: "+tablaNotas.getValueAt(selec, 0)+
 															"\nNota: "+nota+"\nAsignatura: "+asignaturaSelec+"\nCI Profesor: "+profeSelec);
-								//Mandar nota a logica...
+								//Mandar nota a logica...*//*
+								try {
+									Runner.inputNota = new InputDialogNota();
+									Runner.inputNota.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+									Runner.inputNota.setVisible(true);
+								} catch (Exception exc) {
+									exc.printStackTrace();
+								}
+								
 							}
-						}
+						}*/
 					}
 					@Override
 					public void mouseEntered(MouseEvent e) {
@@ -271,5 +290,10 @@ public class ControlDocente extends JDialog {
 			lblTabla.setText("Seleccione un Estudiante");
 			break;
 		}
+	}
+	
+	public static void mensajeConfirm(String nota){
+		JOptionPane.showMessageDialog(null, "Confirmación :\nCI Estudiante: "+tablaNotas.getValueAt(filaSelec, 0)+
+				"\nNota: "+nota+"\nAsignatura: "+asignaturaSelec+"\nCI Profesor: "+profeSelec);
 	}
 }
