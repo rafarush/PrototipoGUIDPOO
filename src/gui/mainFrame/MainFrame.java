@@ -479,7 +479,7 @@ public class MainFrame extends JFrame {
 		
 		final JLabel otorgarNotasIcon = new JLabel("");
 		otorgarNotasIcon.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/icons8-create-96_filtered_via_10015_io_filtered_via_10015_io_46x39_via_10015_io.png")));
-		otorgarNotasIcon.setBounds(167, 306, 46, 38);
+		otorgarNotasIcon.setBounds(167, 306, 46, 39);
 		menuBarPanel.add(otorgarNotasIcon);
 		
 		final JLabel otorgarNotasBarBotton = new JLabel("");
@@ -513,9 +513,31 @@ public class MainFrame extends JFrame {
 		separadorMenuBar.setBounds(0, 252, 218, 1);
 		menuBarPanel.add(separadorMenuBar);
 		
-		final JLabel lblPlanificacionDocente = new JLabel("Planificacion Docente");
-		lblPlanificacionDocente.setBounds(15, 264, 159, 39);
-		menuBarPanel.add(lblPlanificacionDocente);
+		final JLabel planDocenteIcon = new JLabel("");
+		planDocenteIcon.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/planificacionDocente_filtered.png")));
+		planDocenteIcon.setBounds(162, 264, 46, 39);
+		menuBarPanel.add(planDocenteIcon);
+		
+		final JLabel planificacionDocenteBarBotton = new JLabel("");
+		planificacionDocenteBarBotton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				planificacionDocenteBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/PlanDocenteBarBottonSelected.png")));
+				planDocenteIcon.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/planificacionDocente_filteredSelected.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				planificacionDocenteBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/PlanDocenteBarBotton.png")));
+				planDocenteIcon.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/planificacionDocente_filtered.png")));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, "Implementar");
+			}
+		});
+		planificacionDocenteBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/PlanDocenteBarBotton.png")));
+		planificacionDocenteBarBotton.setBounds(10, 266, 146, 29);
+		menuBarPanel.add(planificacionDocenteBarBotton);
 		
 		
 		//Actualizar iconos
@@ -591,7 +613,7 @@ public class MainFrame extends JFrame {
 						reportesBarBotton.setVisible(false);
 						otorgarNotasBarBotton.setVisible(false);
 						separadorMenuBar.setVisible(false);
-						lblPlanificacionDocente.setVisible(false);
+						planificacionDocenteBarBotton.setVisible(false);
 					}else{
 						menuBarPanel.setBounds(0, 33, 218, 545);
 						scrollPane.setBounds(240, 154, 664, 380);
@@ -605,7 +627,7 @@ public class MainFrame extends JFrame {
 						reportesBarBotton.setVisible(true);
 						otorgarNotasBarBotton.setVisible(true);
 						separadorMenuBar.setVisible(true);
-						lblPlanificacionDocente.setVisible(true);
+						planificacionDocenteBarBotton.setVisible(true);
 					}
 				}else{
 					if(menuBarPanel.getWidth()==218){
@@ -623,7 +645,7 @@ public class MainFrame extends JFrame {
 						reportesBarBotton.setVisible(false);
 						otorgarNotasBarBotton.setVisible(false);
 						separadorMenuBar.setVisible(false);
-						lblPlanificacionDocente.setVisible(false);
+						planificacionDocenteBarBotton.setVisible(false);
 					}else{
 						menuBarPanel.setBounds(0, 33, 218, 729);
 						scrollPane.setBounds(240, 154, 1110, 560);
@@ -639,7 +661,7 @@ public class MainFrame extends JFrame {
 						reportesBarBotton.setVisible(true);
 						otorgarNotasBarBotton.setVisible(true);
 						separadorMenuBar.setVisible(true);
-						lblPlanificacionDocente.setVisible(true);
+						planificacionDocenteBarBotton.setVisible(true);
 					}
 				}
 				
@@ -656,6 +678,7 @@ public class MainFrame extends JFrame {
 		menuBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/MenuBarBotton.png")));
 		menuBarBotton.setBounds(10, 11, 46, 32);
 		menuBarPanel.add(menuBarBotton);
+		
 		
 		final JLabel maxFrameBotton = new JLabel("");
 		maxFrameBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/maxBotton.png")));
