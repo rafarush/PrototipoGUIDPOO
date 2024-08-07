@@ -446,7 +446,7 @@ public class MainFrame extends JFrame {
 		menuBarPanel.add(planEstBarBotton);
 		
 		final JLabel reportesIco = new JLabel("");
-		reportesIco.setBounds(128, 322, 46, 39);
+		reportesIco.setBounds(123, 347, 46, 39);
 		menuBarPanel.add(reportesIco);
 		reportesIco.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/marker-documents_filtered_via_10015_io_filtered_via_10015_ioCambiTam.png")));
 		
@@ -474,12 +474,12 @@ public class MainFrame extends JFrame {
 				reportesIco.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/marker-documents_filtered_via_10015_io_filtered_via_10015_ioCambiTam.png")));
 			}
 		});
-		reportesBarBotton.setBounds(15, 333, 103, 25);
+		reportesBarBotton.setBounds(10, 358, 103, 25);
 		menuBarPanel.add(reportesBarBotton);
 		
 		final JLabel otorgarNotasIcon = new JLabel("");
 		otorgarNotasIcon.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/icons8-create-96_filtered_via_10015_io_filtered_via_10015_io_46x39_via_10015_io.png")));
-		otorgarNotasIcon.setBounds(172, 372, 46, 38);
+		otorgarNotasIcon.setBounds(167, 306, 46, 38);
 		menuBarPanel.add(otorgarNotasIcon);
 		
 		final JLabel otorgarNotasBarBotton = new JLabel("");
@@ -496,12 +496,26 @@ public class MainFrame extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(null, "Implementar");
+				try {
+					ControlDocente dialog = new ControlDocente();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception exc) {
+					exc.printStackTrace();
+				}
 			}
 		});
 		otorgarNotasBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/OtorgarNotaBarBotton.png")));
-		otorgarNotasBarBotton.setBounds(15, 376, 159, 29);
+		otorgarNotasBarBotton.setBounds(10, 310, 159, 29);
 		menuBarPanel.add(otorgarNotasBarBotton);
+		
+		final JPanel separadorMenuBar = new JPanel();
+		separadorMenuBar.setBounds(0, 252, 218, 1);
+		menuBarPanel.add(separadorMenuBar);
+		
+		final JLabel lblPlanificacionDocente = new JLabel("Planificacion Docente");
+		lblPlanificacionDocente.setBounds(15, 264, 159, 39);
+		menuBarPanel.add(lblPlanificacionDocente);
 		
 		
 		//Actualizar iconos
@@ -576,6 +590,8 @@ public class MainFrame extends JFrame {
 						planEstBarBotton.setVisible(false);
 						reportesBarBotton.setVisible(false);
 						otorgarNotasBarBotton.setVisible(false);
+						separadorMenuBar.setVisible(false);
+						lblPlanificacionDocente.setVisible(false);
 					}else{
 						menuBarPanel.setBounds(0, 33, 218, 545);
 						scrollPane.setBounds(240, 154, 664, 380);
@@ -588,6 +604,8 @@ public class MainFrame extends JFrame {
 						planEstBarBotton.setVisible(true);
 						reportesBarBotton.setVisible(true);
 						otorgarNotasBarBotton.setVisible(true);
+						separadorMenuBar.setVisible(true);
+						lblPlanificacionDocente.setVisible(true);
 					}
 				}else{
 					if(menuBarPanel.getWidth()==218){
@@ -604,6 +622,8 @@ public class MainFrame extends JFrame {
 						planEstBarBotton.setVisible(false);
 						reportesBarBotton.setVisible(false);
 						otorgarNotasBarBotton.setVisible(false);
+						separadorMenuBar.setVisible(false);
+						lblPlanificacionDocente.setVisible(false);
 					}else{
 						menuBarPanel.setBounds(0, 33, 218, 729);
 						scrollPane.setBounds(240, 154, 1110, 560);
@@ -618,6 +638,8 @@ public class MainFrame extends JFrame {
 						planEstBarBotton.setVisible(true);
 						reportesBarBotton.setVisible(true);
 						otorgarNotasBarBotton.setVisible(true);
+						separadorMenuBar.setVisible(true);
+						lblPlanificacionDocente.setVisible(true);
 					}
 				}
 				
@@ -634,7 +656,6 @@ public class MainFrame extends JFrame {
 		menuBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/MenuBarBotton.png")));
 		menuBarBotton.setBounds(10, 11, 46, 32);
 		menuBarPanel.add(menuBarBotton);
-		
 		
 		final JLabel maxFrameBotton = new JLabel("");
 		maxFrameBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/maxBotton.png")));

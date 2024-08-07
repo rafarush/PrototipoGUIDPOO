@@ -8,6 +8,7 @@ import java.awt.EventQueue;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import logica.*;
@@ -116,7 +117,6 @@ public class Runner {
 		DatosAuto.definirTablaGrupo(gruposReportes);
 		
 		/******************************************************************************************************************/
-		
 		/**
 		 * Abrir la ventana principal
 		 */
