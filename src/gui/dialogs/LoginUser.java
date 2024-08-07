@@ -19,6 +19,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.concurrent.Semaphore;
 
+import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -150,17 +151,16 @@ public class LoginUser extends JDialog {
 						}else{
 							JOptionPane.showMessageDialog(null, "Credenciales Correctas");
 							
-							 SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
+							SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
 						            @Override
 						            protected Void doInBackground() throws Exception {
 						                for (int i = 0; i <= 100; i++) {
 						                    publish(i);
-						                    Thread.sleep(10);
-						                    
+						                    Thread.sleep(4);
 						                }
-						                Thread.sleep(100);
 						                dispose();
 						                return null;
+
 						            }
 
 						            @Override
@@ -169,27 +169,25 @@ public class LoginUser extends JDialog {
 						                progressBar.setValue(lastValue);
 						            }
 						        };
-						        worker.execute();
-						        
-							//mainframe...
-						        /**
-								 * Abrir la ventana principal
-								 */
+						     worker.execute();
+						     //mainframe...
+						     /**
+						      * Abrir la ventana principal
+						      */
 						      
 								EventQueue.invokeLater(new Runnable() {
 									public void run() {
 										try {
 											Runner.frame = new MainFrame();
-											Thread.sleep(1000);
 											ImageIcon appIcono = new ImageIcon(MainFrame.class.getResource("/gui/utils/appicon.png"));
 											Runner.frame.setIconImage(appIcono.getImage());
 											Runner.frame.setVisible(true);
+											//Runner.frame.setExtendedState(JFrame.NORMAL);
 										} catch (Exception e1) {
 											e1.printStackTrace();
 										}
 									}
 								});
-								
 						}
 					}
 				}

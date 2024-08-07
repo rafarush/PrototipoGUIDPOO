@@ -19,6 +19,7 @@ public class Runner {
 	
 	public static MainFrame frame;
 	public static User usuario;
+	public static LoginUser login;
 	public static InputDialogProfe inputProfe;
 	public static InputDialogEst inputEst;
 	public static InputDialogPerAux inputPerAux;
@@ -121,7 +122,7 @@ public class Runner {
 		DatosAuto.definirTablaGrupo(gruposReportes);
 		
 		try {
-			LoginUser login = new LoginUser();
+			login = new LoginUser();
 			login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			login.setVisible(true);
 		} catch (Exception exc) {

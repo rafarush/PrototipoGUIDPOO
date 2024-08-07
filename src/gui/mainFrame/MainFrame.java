@@ -83,6 +83,7 @@ public class MainFrame extends JFrame {
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
 		
+		
 	    final JLayeredPane mainPane = new JLayeredPane();
 		mainPane.setBounds(0, 0, 914, 545);
 		contentPane.add(mainPane);
@@ -543,8 +544,10 @@ public class MainFrame extends JFrame {
 		menuBarPanel.add(planificacionDocenteBarBotton);
 		
 		final JPopupMenu popupMenu = new JPopupMenu();
-		JMenuItemEdit buttonItem = new JMenuItemEdit();
-        buttonItem.addActionListener(new ActionListener() {
+		JMenuItemEdit cerrarSesionButtonItem = new JMenuItemEdit();
+		JMenuItemEdit cambiarContraButtonItem = new JMenuItemEdit();
+		JMenuItemEdit cambiarNombreButtonItem = new JMenuItemEdit();
+		cerrarSesionButtonItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
@@ -557,7 +560,27 @@ public class MainFrame extends JFrame {
         		}
             }
         });
-        popupMenu.add(buttonItem);
+		cambiarContraButtonItem.setText("Cambiar contraseña");
+		cambiarContraButtonItem.setIcon(null);
+		cambiarContraButtonItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	String contra = "";
+            	contra = JOptionPane.showInputDialog("Escriba la nueva contraseña:");
+            	if(contra.isEmpty()){
+            		JOptionPane.showMessageDialog(null, "No se escribió nada");
+            	}else{
+            		Runner.usuario.setPassword(contra);
+            		JOptionPane.showMessageDialog(null, "Se ha cambiado la contraseña satisfactoriamente");
+            	} 	
+            }
+        });
+		cambiarNombreButtonItem.setText("Cambiar nombre de usuario");
+		cambiarNombreButtonItem.setIcon(null);
+        popupMenu.add(cerrarSesionButtonItem);
+        popupMenu.add(cambiarNombreButtonItem);
+        popupMenu.add(cambiarContraButtonItem);
+        
 		
 		final JLabel nombreUsuario = new JLabel("");
 		nombreUsuario.setForeground(new Color(255, 255, 255));
@@ -580,15 +603,15 @@ public class MainFrame extends JFrame {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				 if(e.isPopupTrigger()) {
+				// if(e.isPopupTrigger()) {
 	                    popupMenu.show(e.getComponent(), e.getX(), e.getY());
-	             }
+	             //}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				 if(e.isPopupTrigger()) {
+				 //if(e.isPopupTrigger()) {
 	                    popupMenu.show(e.getComponent(), e.getX(), e.getY());
-	             }
+	           //  }
 			}
 		});
 		sesionIconBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/userPhoto-removebg-preview_filtered_via_10015_io_46x39_via_10015_io.png")));
@@ -852,7 +875,6 @@ public class MainFrame extends JFrame {
 		});	
 		upperFrameBar.setBounds(0, 0, 914, 34);
 		mainPanel.add(upperFrameBar);
-		
 	}
 	
 	private void tableDraw(){
