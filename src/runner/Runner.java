@@ -32,7 +32,6 @@ public class Runner {
 	public static DefaultTableModel modeloGrupoReporte;
 	public static DefaultTableModel modeloEstudianteReporte;
 	public static DefaultTableModel modeloPlanDocente;
-	public static ArrayList<Profesor> profesores;
 	public static ArrayList<Estudiante> estudiantes;
 	public static ArrayList<PersonalApoyo> personalAux;
 	public static ArrayList<Asignatura> asignaturas;
@@ -51,13 +50,6 @@ public class Runner {
 		usuario = new User("Fermin", "1234");
 		
 		Fct fct = new Fct();
-		
-		//PROFESORES
-		Profesor profe1 = new Profesor("95868426587", "Luis Pérez Fernández","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B");
-		Profesor profe2 = new Profesor("05062348364", "Rafael Castro Reyes","Doctor","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
-		Profesor profe3 = new Profesor("05022358174", "Jorge Castro Pérez","Máster","Asistente","Cujae","MINES", "Calle 25 entre 21 y Ave. 26");
-		Profesor profe4 = new Profesor("05062347564", "Manuel Castro Reyes","Máster","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
-		
 	
 		// JORGITOOOOOOO ---->>>>    la creacion de los profesores por defecto
 		fct.crearPersona("95868426587", "Luis Pérez Fernández","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B");
@@ -65,14 +57,8 @@ public class Runner {
 		fct.crearPersona("05022358174", "Jorge Castro Pérez","Máster","Asistente","Cujae","MINES", "Calle 25 entre 21 y Ave. 26");
 		fct.crearPersona("05062347564", "Manuel Castro Reyes","Máster","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
 		
-		
-		profesores = new ArrayList<Profesor>();
-		profesores.add(profe1);
-		profesores.add(profe2);
-		profesores.add(profe3);
-		profesores.add(profe4);
 	
-		DatosAuto.definirTablaProfes(profesores);
+		DatosAuto.definirTablaProfes(fct.buscarProfesores());
 		
 		//ESTUDIANTES
 		Estudiante estu1 = new Estudiante("05032379581", "Rafael Menéndez Rodriguez",1,"Sucursal Comercial #5","Etecsa", "Calle 30 entre 34 y Ave. 56");
@@ -81,7 +67,7 @@ public class Runner {
 			
 		
 		// JORGITOOOOOOO ---->>>>    la creacion de los estudiantes por defecto
-		fct.crearPersona("05032379581", "Rafael Menéndez Rodriguez", 1 ,"Sucursal Comercial #5","Etecsa", "Calle 30 entre 34 y Ave. 56");
+		fct.crearPersona("05032379581", "Rafael11111 Menéndez Rodriguez", 1 ,"Sucursal Comercial #5","Etecsa", "Calle 30 entre 34 y Ave. 56");
 		fct.crearPersona("08868513264", "Alejandro González Fernández",1,"La Mariposa","TRD","Ave. 26 entre calles A y B");
 		fct.crearPersona("04021324587", "Jorgito", 2, "Las Palamas", "CTC", "Tulipan y Boyeros");
 		
@@ -93,7 +79,7 @@ public class Runner {
 		estudiantes.add(estu2);
 		estudiantes.add(estu3);
 		
-		DatosAuto.definirTablaEstudiantes(estudiantes);
+		DatosAuto.definirTablaEstudiantes(fct.buscarEstudiantes());
 		
 		
 		//Personal Auxiliar
@@ -166,10 +152,10 @@ public class Runner {
 		
 		//PLANES DOCENTES
 		planesDocentes = new ArrayList<PlanificacionDocente>();
-		PlanificacionDocente plan1 = new PlanificacionDocente(profe1,asignatura1,grupo1);
-		PlanificacionDocente plan2 = new PlanificacionDocente(profe2,asignatura2,grupo2);
-		planesDocentes.add(plan1);
-		planesDocentes.add(plan2);
+		//PlanificacionDocente plan1 = new PlanificacionDocente(profe1,asignatura1,grupo1);
+		//PlanificacionDocente plan2 = new PlanificacionDocente(profe2,asignatura2,grupo2);
+		//planesDocentes.add(plan1);
+		//planesDocentes.add(plan2);
 		
 		DatosAuto.definirTablaPlanDocente(planesDocentes);
 		
