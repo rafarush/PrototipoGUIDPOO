@@ -1,63 +1,94 @@
 package logica;
 
-public class Profesor {
+import java.util.ArrayList;
 
-	private String cI;
-	private String nombre;
-	private String categoCientifica;
-	private String categoDocente;
+public class Profesor extends Trabajador{
+
+
+	//atributos
+	private String categoriaDocente;
+	private String categoriaCientifica;
 	private String centroLaboral;
 	private String organismo;
-	private String direcc;
-	private float salario;
-	private PlanificacionDocente planDocente;
+	private String cargoConsejoDireccion;
+	private ArrayList<ControlDocente> notasAlumnos;
 	
-	public Profesor(String cI, String nombre, String categoCientifica,
-			String categoDocente, String centroLaboral, String organismo,
-			String direcc, float salario, PlanificacionDocente plaDocente) {
-		setCi(cI);
-		setNombre(nombre);
-		setCategoCientifica(categoCientifica);
-		setCategoDocente(categoDocente);
+
+	// CONSTRUCOTR para los profesores sin cargo en el consejo de direccion
+	public Profesor(String nombre, String iD, String Direccion, String categoriaDocente, String categoriaCientifica, String centroLaboral, String organismo) {
+		super(nombre, iD, Direccion);
+		// TODO Auto-generated constructor stub
+		setCategoriaDocente(categoriaDocente);
+		
+		setCategoriaCientifica(categoriaCientifica);
+		
 		setCentroLaboral(centroLaboral);
+		
 		setOrganismo(organismo);
-		setDirecc(direcc);
-		setSalario(salario);
-		setPlanDocente(plaDocente);
+		
+		this.cargoConsejoDireccion = null;
+		
+		notasAlumnos = new ArrayList<ControlDocente>();
+		
 	}
 
-	public String getCi() {
-		return cI;
+	// CONSTRUCOTR para los profesores <<CON>> cargo en el consejo de direccion
+		public Profesor(String nombre, String iD, String Direccion, String categoriaDocente, String categoriaCientifica, String centroLaboral, String organismo, String cargoConsejoDireccion) {
+			super(nombre, iD, Direccion);
+			// TODO Auto-generated constructor stub
+			setCategoriaDocente(categoriaDocente);
+			
+			setCategoriaCientifica(categoriaCientifica);
+			
+			setCentroLaboral(centroLaboral);
+			
+			setOrganismo(organismo);
+			
+			setCargoConsejoDireccion(cargoConsejoDireccion);
+			
+		}
+
+	
+
+	//sets y gets
+	public String getCategoriaDocente() {
+		return categoriaDocente;
 	}
 
-	public void setCi(String cI) {
-		this.cI = cI;
+	public void setCategoriaDocente(String categoriaDocente) {
+		
+		if(categoriaDocente.equalsIgnoreCase("Instructor"))
+			this.categoriaDocente = "Instructor";
+		else if(categoriaDocente.equalsIgnoreCase("Asistente"))
+			this.categoriaDocente = "Asistente";
+		else if(categoriaDocente.equalsIgnoreCase("Auxiliar"))
+			this.categoriaDocente = "Auxiliar";
+		else if(categoriaDocente.equalsIgnoreCase("Titular"))
+			this.categoriaDocente = "Titular";
+		else
+			throw new IllegalArgumentException("No existe esa categoria docente.");
+		
 	}
 
-	public String getNombre() {
-		return nombre;
+	
+	public String getCategoriaCientifica() {
+		return categoriaCientifica;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setCategoriaCientifica(String categoriaCientifica) {
+		
+		if(categoriaCientifica.equalsIgnoreCase("Master"))
+			this.categoriaCientifica = "Master";
+		else if(categoriaCientifica.equalsIgnoreCase("Doctor"))
+			this.categoriaCientifica = "Doctor";
+		else if(categoriaCientifica.equals(null))
+			this.categoriaCientifica = null;
+		else
+			throw new IllegalArgumentException("No existe esa categoria cientifica.");
+		
 	}
 
-	public String getCategoCientifica() {
-		return categoCientifica;
-	}
-
-	public void setCategoCientifica(String categoCientifica) {
-		this.categoCientifica = categoCientifica;
-	}
-
-	public String getCategoDocente() {
-		return categoDocente;
-	}
-
-	public void setCategoDocente(String categoDocente) {
-		this.categoDocente = categoDocente;
-	}
-
+	
 	public String getCentroLaboral() {
 		return centroLaboral;
 	}
@@ -66,38 +97,129 @@ public class Profesor {
 		this.centroLaboral = centroLaboral;
 	}
 
+	
 	public String getOrganismo() {
 		return organismo;
 	}
 
 	public void setOrganismo(String organismo) {
 		this.organismo = organismo;
+	}	
+	
+	
+	
+	public String getCargoConsejoDireccion() {
+		return cargoConsejoDireccion;
 	}
 
-	public String getDirecc() {
-		return direcc;
+	public void setCargoConsejoDireccion(String cargoConsejoDireccion) {
+		
+		if(cargoConsejoDireccion.equalsIgnoreCase("Director"))
+			this.cargoConsejoDireccion = "Director";
+		else if(cargoConsejoDireccion.equalsIgnoreCase("Subdirector Docente"))
+			this.cargoConsejoDireccion = "Subdirector Docente";
+		else if(cargoConsejoDireccion.equalsIgnoreCase("Subdirector de Investigaciones y Posgrado"))
+			this.cargoConsejoDireccion = "Subdirector  de Investigaciones y Posgrado";
+		else if(cargoConsejoDireccion.equalsIgnoreCase("Subdirector de Extension Universitaria"))
+			this.cargoConsejoDireccion = "Subdirector  de Extension Universitaria";
+		else if(cargoConsejoDireccion.equals("Jefe de Laboratorios"))
+			this.cargoConsejoDireccion = "Jefe de Laboratorios";
+		else
+			throw new IllegalArgumentException("No existe ese cargo en el Consejo de Direccion.");
+		
 	}
 
-	public void setDirecc(String direcc) {
-		this.direcc = direcc;
+	
+	public ArrayList<ControlDocente> getNotasAlumnos() {
+		return notasAlumnos;
 	}
 
-	public float getSalario() {
+	// ESTE NO VA A SER NECESARIO
+	public void setNotasAlumnos(ArrayList<ControlDocente> notasAlumnos) {
+		this.notasAlumnos = notasAlumnos;
+	}
+	
+	
+	
+	// OTROS
+	
+	//para calcular el salario en dependencia de sus categorias el base sera el del Instructor que sera de $100
+
+
+	public float calcularSalario(){
+		
+		if(categoriaDocente.equalsIgnoreCase("Asistente"))
+			salario+=200;
+		else if(categoriaDocente.equalsIgnoreCase("Auxiliar"))
+			salario+=300;
+		else if(categoriaDocente.equalsIgnoreCase("Titular"))
+			salario+=540;
+		
+		if(categoriaCientifica.equalsIgnoreCase("Master"))
+			salario+=380;
+		else if(categoriaCientifica.equalsIgnoreCase("Doctor"))
+			salario+=550;
+		
 		return salario;
 	}
-
-	public void setSalario(float salario) {
-		this.salario = salario;
+	
+	// PARA CREAR EL CONTROL DOCENTE (LAS NOTAS DE LOS ESTUDUIANTES)
+	public boolean darNota(Estudiante estudiante, Asignatura asignatura, float nota1, float nota2){
+		boolean val = false;
+		
+		if(buscarControlDocente(estudiante, asignatura)!=-1){
+			val = true;
+			notasAlumnos.get(buscarControlDocente(estudiante, asignatura)).insertarNotas(nota1, nota2);
+			estudiante.insertarNotas(estudiante, asignatura, nota1, nota2);
+		}
+		
+		return val;
 	}
-
-	public PlanificacionDocente getPlanDocente() {
-		return planDocente;
+	
+	
+	// PARA CREAR EL CONTROL DOCENTE
+	public void crearControlDocente(Grupo grupo, Asignatura asignatura){
+		
+		for(Estudiante i : grupo.getGrupoEstudiantes()){
+			ControlDocente controlDocente = new ControlDocente(i, asignatura);
+			notasAlumnos.add(controlDocente);
+			i.insertarControlDocente(controlDocente);
+		}
 	}
-
-	public void setPlanDocente(PlanificacionDocente planDocente) {
-		this.planDocente = planDocente;
+	
+	
+	// PARA BUSACR EL CONTROL DOCENTE EN UN PROFESOR DADO UN ESTUDIANTE Y UNA ASIGNATURA
+	public int buscarControlDocente(Estudiante estudiante, Asignatura asignatura){
+		boolean val = true;
+		int i = 0;
+		ControlDocente controlDocente = new ControlDocente(estudiante, asignatura);
+		
+		while(i<notasAlumnos.size() && val){
+			if(notasAlumnos.get(i).equals(controlDocente))
+				val=false;			
+			i++;
+		}
+		if(val)
+			i=0;
+		
+		return i-1;
 	}
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 }
