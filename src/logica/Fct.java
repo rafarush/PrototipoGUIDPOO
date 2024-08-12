@@ -27,11 +27,11 @@ public class Fct {
 	//crear y eliminar 
 	
 	// crear profesor
-	public boolean crearPersona(String nombre, String iD, String Direccion, String categoriaDocente, String categoriaCientifica, String centroLaboral, String organismo ){
+	public boolean crearPersona(String iD, String nombre, String categoriaDocente, String categoriaCientifica, String centroLaboral, String organismo, String direccion ){
 		
 		boolean val = false;
 		if(buscarPersona(iD)==null){
-			Profesor profesor1= new Profesor(nombre, iD, Direccion, categoriaDocente, categoriaCientifica, centroLaboral, organismo);
+			Profesor profesor1= new Profesor(iD, nombre, categoriaDocente, categoriaCientifica, centroLaboral, organismo, direccion);
 			personas.add(profesor1);
 			val = true;
 		}
@@ -43,11 +43,11 @@ public class Fct {
 	
 	
 	// crear personalApoyo
-	public boolean crearPersona(String nombre, String iD, String Direccion, String labor){
+	public boolean crearPersona( String iD, String nombre, String labor, String direccion){
 		
 		boolean val = false;
 		if(buscarPersona(iD)==null){
-			PersonalApoyo personajeApoyo1 = new PersonalApoyo(nombre, iD, Direccion, labor);
+			PersonalApoyo personajeApoyo1 = new PersonalApoyo(iD, nombre, labor, direccion);
 			personas.add(personajeApoyo1);
 			val = true;
 		}
@@ -59,11 +59,11 @@ public class Fct {
 	
 	
 	// crear Estudiante
-	public boolean crearPersona(String nombre, String iD, String Direccion, int anoAcademico, String centroLaboral, String organismo){
+	public boolean crearPersona( String iD, String nombre, int anoAcademico, String centroLaboral, String organismo, String direccion){
 		
 		boolean val = false;
 		if(buscarPersona(iD)==null){
-			Estudiante estudiante = new Estudiante(nombre, iD, Direccion, anoAcademico, centroLaboral, organismo);
+			Estudiante estudiante = new Estudiante( iD,nombre, anoAcademico, centroLaboral, organismo, direccion);
 			personas.add(estudiante);
 			val = true;
 		}

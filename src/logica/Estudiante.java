@@ -12,7 +12,7 @@ public class Estudiante extends Persona{
 	
 
 	// ONSTRUCTOR
-	public Estudiante(String nombre, String iD, String Direccion, int annoAcademico, String centroLaboral, String organismo) {
+	public Estudiante(String iD, String nombre, int annoAcademico, String centroLaboral, String organismo, String Direccion) {
 		super(nombre, iD, Direccion);
 		// TODO Auto-generated constructor stub
 		 setAnnoAcademico(annoAcademico);

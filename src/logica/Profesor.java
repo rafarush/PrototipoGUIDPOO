@@ -15,12 +15,14 @@ public class Profesor extends Trabajador{
 	
 
 	// CONSTRUCOTR para los profesores sin cargo en el consejo de direccion
-	public Profesor(String nombre, String iD, String Direccion, String categoriaDocente, String categoriaCientifica, String centroLaboral, String organismo) {
+	public Profesor( String iD, String nombre, String categoriaCientifica, String categoriaDocente, String centroLaboral, String organismo, String Direccion) {
 		super(nombre, iD, Direccion);
 		// TODO Auto-generated constructor stub
+		setCategoriaCientifica(categoriaCientifica);
+		
+		
 		setCategoriaDocente(categoriaDocente);
 		
-		setCategoriaCientifica(categoriaCientifica);
 		
 		setCentroLaboral(centroLaboral);
 		
@@ -77,8 +79,8 @@ public class Profesor extends Trabajador{
 
 	public void setCategoriaCientifica(String categoriaCientifica) {
 		
-		if(categoriaCientifica.equalsIgnoreCase("Master"))
-			this.categoriaCientifica = "Master";
+		if(categoriaCientifica.equalsIgnoreCase("Máster"))
+			this.categoriaCientifica = "Máster";
 		else if(categoriaCientifica.equalsIgnoreCase("Doctor"))
 			this.categoriaCientifica = "Doctor";
 		else if(categoriaCientifica.equals(null))
