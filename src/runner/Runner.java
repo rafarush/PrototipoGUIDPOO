@@ -31,12 +31,14 @@ public class Runner {
 	public static DefaultTableModel modeloPlanDeEstudio;
 	public static DefaultTableModel modeloGrupoReporte;
 	public static DefaultTableModel modeloEstudianteReporte;
+	public static DefaultTableModel modeloPlanDocente;
 	public static ArrayList<Profesor> profesores;
 	public static ArrayList<Estudiante> estudiantes;
 	public static ArrayList<PersonalAux> personalAux;
 	public static ArrayList<Asignatura> asignaturas;
 	public static ArrayList<Estudiante> estudiantesReporte;
 	public static ArrayList<Grupo> gruposReportes;
+	public static ArrayList<PlanificacionDocente> planesDocentes;
 	
 	
 	/**
@@ -49,10 +51,10 @@ public class Runner {
 		usuario = new User("Fermin", "1234");
 		
 		//PROFESORES
-		Profesor profe1 = new Profesor("95868426587", "Luis Pérez Fernández","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B", 0.0f);
-		Profesor profe2 = new Profesor("05062348364", "Rafael Castro Reyes","Doctor","Profesor Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56", 0.0f);
-		Profesor profe3 = new Profesor("05022358174", "Jorge Castro Pérez","Máster","Asistente","Cujae","MINES", "Calle 25 entre 21 y Ave. 26", 0.0f);
-		Profesor profe4 = new Profesor("05062347564", "Manuel Castro Reyes","Máster","Profesor Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56", 0.0f);
+		Profesor profe1 = new Profesor("95868426587", "Luis Pérez Fernández","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B", 0.0f, null);
+		Profesor profe2 = new Profesor("05062348364", "Rafael Castro Reyes","Doctor","Profesor Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56", 0.0f, null);
+		Profesor profe3 = new Profesor("05022358174", "Jorge Castro Pérez","Máster","Asistente","Cujae","MINES", "Calle 25 entre 21 y Ave. 26", 0.0f, null);
+		Profesor profe4 = new Profesor("05062347564", "Manuel Castro Reyes","Máster","Profesor Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56", 0.0f, null);
 		
 		profesores = new ArrayList<Profesor>();
 		profesores.add(profe1);
@@ -121,6 +123,15 @@ public class Runner {
 		gruposReportes.add(grupo2);
 		
 		DatosAuto.definirTablaGrupo(gruposReportes);
+		
+		//PLANES DOCENTES
+		planesDocentes = new ArrayList<PlanificacionDocente>();
+		PlanificacionDocente plan1 = new PlanificacionDocente(profe1,asignatura1,grupo1);
+		PlanificacionDocente plan2 = new PlanificacionDocente(profe2,asignatura2,grupo2);
+		planesDocentes.add(plan1);
+		planesDocentes.add(plan2);
+		
+		DatosAuto.definirTablaPlanDocente(planesDocentes);
 		
 		try {
 			login = new LoginUser();

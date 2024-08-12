@@ -245,7 +245,7 @@ public class DatosAuto {
 	}
 	
 	
-/*****************************Define modelo de la tabla PersonalAux y agrega las filas**************************************/
+/*****************************Define modelo de la tabla Grupo y agrega las filas**************************************/
 	
 	/**
 	 * Define el modelo de columnas de la tabla Grupos
@@ -280,6 +280,46 @@ public class DatosAuto {
 	public static Object[] convertirAObjetoGrupo(Grupo grupo){
 		Object[] grupoObj = new Object[]{grupo.getNombre(), grupo.getAnno()};		
 		return grupoObj;
+	}
+	
+	
+/*****************************Define modelo de la tabla Plan Docente y agrega las filas**************************************/
+	
+	/**
+	 * Define el modelo de columnas de la tabla Plan Docente
+	 * @param planesDocentes
+	 */
+	public static void definirTablaPlanDocente(ArrayList<PlanificacionDocente> planesDocentes){
+		Runner.modeloPlanDocente = new DefaultTableModel();
+		Runner.modeloPlanDocente.addColumn("Profesor");
+		Runner.modeloPlanDocente.addColumn("Estudiante");
+		Runner.modeloPlanDocente.addColumn("Grupo");
+		agregarFilasPlanesDocentes(planesDocentes);
+	}
+	
+	
+	/**
+	 * Imprime cada fila con el planDocente
+	 * @param planesDocentes
+	 */
+	public static void agregarFilasPlanesDocentes(ArrayList<PlanificacionDocente> planesDocentes){
+		if(planesDocentes.isEmpty()){
+			JOptionPane.showMessageDialog(null, "No hay registro de planificaciones docentes. Por favor, añada.");
+		}else{
+			for(PlanificacionDocente p : planesDocentes){
+				Runner.modeloGrupoReporte.addRow(convertirAObjetoPlanDocente(p));
+			}
+		}
+	}
+	
+	/**
+	 * Convertir instancia de PlanDocente a un array de Objeto
+	 * @return obj
+	 */
+	public static Object[] convertirAObjetoPlanDocente(PlanificacionDocente planDocente){
+		Object[] planDocenteObj = new Object[]{planDocente.getProfe().getNombre(),planDocente.getAsignatura().getNombre(), 
+				planDocente.getGrupo().getNombre()};		
+		return planDocenteObj;
 	}
 	
 	

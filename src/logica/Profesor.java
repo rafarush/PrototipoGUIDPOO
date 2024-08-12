@@ -10,10 +10,11 @@ public class Profesor {
 	private String organismo;
 	private String direcc;
 	private float salario;
+	private PlanificacionDocente planDocente;
 	
 	public Profesor(String cI, String nombre, String categoCientifica,
 			String categoDocente, String centroLaboral, String organismo,
-			String direcc, float salario) {
+			String direcc, float salario, PlanificacionDocente plaDocente) {
 		setCi(cI);
 		setNombre(nombre);
 		setCategoCientifica(categoCientifica);
@@ -22,6 +23,7 @@ public class Profesor {
 		setOrganismo(organismo);
 		setDirecc(direcc);
 		setSalario(salario);
+		setPlanDocente(plaDocente);
 	}
 
 	public String getCi() {
@@ -86,6 +88,14 @@ public class Profesor {
 
 	public void setSalario(float salario) {
 		this.salario = salario;
+	}
+
+	public PlanificacionDocente getPlanDocente() {
+		return planDocente;
+	}
+
+	public void setPlanDocente(PlanificacionDocente planDocente) {
+		this.planDocente = planDocente;
 	}
 	
 	
