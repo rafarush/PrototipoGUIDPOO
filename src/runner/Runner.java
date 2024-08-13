@@ -38,6 +38,7 @@ public class Runner {
 	public static ArrayList<Estudiante> estudiantesReporte;
 	public static ArrayList<Grupo> gruposReportes;
 	public static ArrayList<PlanificacionDocente> planesDocentes;
+	public static Fct fct;
 	
 	
 	/**
@@ -49,7 +50,7 @@ public class Runner {
 		//Usuario
 		usuario = new User("Fermin", "1234");
 		
-		Fct fct = new Fct();
+		fct = new Fct();
 	
 		// JORGITOOOOOOO ---->>>>    la creacion de los profesores por defecto
 		fct.crearPersona("95868426587", "Luis Pérez Fernández","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B");
@@ -157,7 +158,7 @@ public class Runner {
 		//planesDocentes.add(plan1);
 		//planesDocentes.add(plan2);
 		
-		DatosAuto.definirTablaPlanDocente(planesDocentes);
+		//DatosAuto.definirTablaPlanDocente(fct.getPeriodos().get(0).getPlanificacionesDocentes());
 		
 		try {
 			login = new LoginUser();
