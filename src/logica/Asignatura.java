@@ -1,19 +1,22 @@
 package logica;
 
 public class Asignatura {
-
+	// ATRIBUTOS
 	private String nombre;
-	private int anno;
+	private int annoAcademico;
 	private int semestre;
-	private int horas;
+	private float horasClases;
 	
-	public Asignatura(String nombre, int anno, int semestre, int horas) {
+	
+	// CONSTRUCTOR
+	public Asignatura(String nombre, int annoAcademico, int semestre, float horasClases) {
 		setNombre(nombre);
-		setAnno(anno);
+		setAnnoAcademico(annoAcademico);
 		setSemestre(semestre);
-		setHoras(horas);
-	}
-
+		setHorasClases(horasClases);
+	}	
+	
+	// GETS Y SETS
 	public String getNombre() {
 		return nombre;
 	}
@@ -22,13 +25,18 @@ public class Asignatura {
 		this.nombre = nombre;
 	}
 
-	public int getAnno() {
-		return anno;
+
+	public int getAnnoAcademico() {
+		return annoAcademico;
 	}
 
-	public void setAnno(int anno) {
-		this.anno = anno;
+	public void setAnnoAcademico(int annoAcademico) {
+		if(annoAcademico<7 && annoAcademico>0)
+			this.annoAcademico = annoAcademico;
+		else
+			throw new IllegalArgumentException("Ese anno academico no exite");
 	}
+	
 
 	public int getSemestre() {
 		return semestre;
@@ -38,13 +46,40 @@ public class Asignatura {
 		this.semestre = semestre;
 	}
 
-	public int getHoras() {
-		return horas;
+
+	public float getHorasClases() {
+		return horasClases;
 	}
 
-	public void setHoras(int horas) {
-		this.horas = horas;
+	public void setHorasClases(float horasClases) {
+		if(horasClases>0)
+			this.horasClases = horasClases;
+		else
+			throw new IllegalArgumentException("La cantidad de horas clases tiene que ser mayor que 0");
+	}
+
+	public int devolverPeriodo(){
+		int periodo;
+		
+		if(semestre==2)
+			periodo= annoAcademico+5;
+		else
+			periodo= annoAcademico-1; 
+		
+		return periodo;
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 }

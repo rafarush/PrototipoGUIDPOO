@@ -207,7 +207,7 @@ public class Reportes extends JDialog {
 						/**
 						 * Actualiza la tabla con los datos de los esrudiantes del grupo clickeado
 						 */
-						DatosAuto.definirTablaReportesEstu(Runner.gruposReportes.get(filaSelec).getEstudiantes());
+						DatosAuto.definirTablaReportesEstu(Runner.gruposReportes.get(filaSelec).getGrupoEstudiantes());
 						tablaReportes = new JTableNoEdit(Runner.modeloEstudianteReporte);
 						tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
 							public void mouseClicked(java.awt.event.MouseEvent e2) {

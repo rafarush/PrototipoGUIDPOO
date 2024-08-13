@@ -1,58 +1,43 @@
 package logica;
 
-public class Estudiante {
+import java.util.ArrayList;
+
+public class Estudiante extends Persona{
 	
-	private String cI;
-	private String nombre;
-	private String anno;
-	private String grupo;
+	//atributos
+	private int annoAcademico;
 	private String centroLaboral;
 	private String organismo;
-	private String direcc;
+	private ArrayList<ControlDocente> notas;
 	
-	public Estudiante(String cI, String nombre, String anno, String grupo,
-			String centroLaboral, String organismo, String direcc) {
+
+	// ONSTRUCTOR
+	public Estudiante(String iD, String nombre, int annoAcademico, String centroLaboral, String organismo, String Direccion) {
+		super(nombre, iD, Direccion);
+		// TODO Auto-generated constructor stub
+		 setAnnoAcademico(annoAcademico);
+		 setCentroLaboral(centroLaboral);
+		 setOrganismo(organismo);
 		
-		setCi(cI);
-		setNombre(nombre);
-		setAnno(anno);
-		setGrupo(grupo);
-		setCentroLaboral(centroLaboral);
-		setOrganismo(organismo);
-		setDirecc(direcc);
+		 notas = new ArrayList<ControlDocente>();
 	}
 
-	public String getCi() {
-		return cI;
+
+
+	//gets y sets
+
+	public int getAnnoAcademico() {
+		return annoAcademico;
 	}
 
-	public void setCi(String cI) {
-		this.cI = cI;
+	public void setAnnoAcademico(int annoAcademico) {
+		if(annoAcademico>0 && annoAcademico<7)
+			this.annoAcademico = annoAcademico;
+		else 
+			throw new IllegalArgumentException("Solo existen annos entre 1 y 6");
+		
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getAnno() {
-		return anno;
-	}
-
-	public void setAnno(String anno) {
-		this.anno = anno;
-	}
-
-	public String getGrupo() {
-		return grupo;
-	}
-
-	public void setGrupo(String grupo) {
-		this.grupo = grupo;
-	}
 
 	public String getCentroLaboral() {
 		return centroLaboral;
@@ -62,6 +47,9 @@ public class Estudiante {
 		this.centroLaboral = centroLaboral;
 	}
 
+
+
+
 	public String getOrganismo() {
 		return organismo;
 	}
@@ -70,14 +58,137 @@ public class Estudiante {
 		this.organismo = organismo;
 	}
 
-	public String getDirecc() {
-		return direcc;
+
+
+	public ArrayList<ControlDocente> getNotas() {
+		return notas;
 	}
 
-	public void setDirecc(String direcc) {
-		this.direcc = direcc;
+	public void setNotas(ArrayList<ControlDocente> notas) {
+		this.notas = notas;
 	}
 	
 	
+	// **********************************  OTROS   *********************************
 	
+	public void insertarControlDocente(ControlDocente controlDocente){
+		
+		notas.add(controlDocente);
+		
+	}
+	
+	
+	// insertar notas
+	public void insertarNotas(Estudiante estudiante, Asignatura asignatura, float nota1, float nota2){
+		notas.get(buscarControlDocente(estudiante, asignatura)).setNota1(nota1);
+		notas.get(buscarControlDocente(estudiante, asignatura)).setNota1(nota2);
+	}
+	
+	
+	// BUSCAR CONTROL DOCENTE
+	public int buscarControlDocente(Estudiante estudiante, Asignatura asignatura){
+		boolean val = true;
+		int i = 0;
+		ControlDocente controlDocente = new ControlDocente(estudiante, asignatura);
+		
+		while(i<notas.size() && val){
+			if(notas.get(i).equals(controlDocente))
+				val=false;			
+			i++;
+		}
+		if(val)
+			i=0;
+		
+		return i-1;
+	}
+	
+	
+	// DEVUELVE TRUE O FALSE SEGUN TENGA O NO TODAS LAS NOTAS
+		public boolean verificarNotas(){
+			boolean val = true;
+			int i = 0;
+			
+			while(i<notas.size() && val){
+				if(notas.get(i).getNota1()==0){
+					val= false;
+				}else{
+					if(notas.get(i).getNota1()<3 && notas.get(i).getNota2()==0)
+						val=false;
+				}
+				
+				i++;
+			}
+			
+			return val;
+		}
+	
+		
+		// DEVUELVE UN ENTERO CON LA CANTIDAD DE ASIGNATURAS SUSPENSAS
+		public ArrayList<ControlDocente> verificarNotasSuspensas(){
+			ArrayList<ControlDocente> suspensas = new ArrayList<>();
+			
+			for(ControlDocente i : notas){
+				if(i.getNota1()<3 && i.getNota2()<3)
+					suspensas.add(i);
+			}
+			
+			return suspensas;
+		}
+		
+		// PARA CALCULAR EL PROMEDIO DE LAS NOTAS 
+		public float calcularPromedio(){
+			float promedio = 0;
+			
+			for(ControlDocente c : notas){
+				float mayor;
+				if(c.getNota1() < c.getNota2())
+					mayor = c.getNota2();
+				else
+					mayor = c.getNota1();
+				
+				promedio+=mayor;
+			}
+			
+			return promedio / notas.size();
+		}
+		
+		// devuelve un booleano para saber si arrastra o no
+		
+		public boolean verificarArrastre(){
+			boolean val = false;
+			if(verificarNotasSuspensas().size()==2){
+				if(verificarNotasSuspensas().get(0).getAsignatura().getSemestre()!=verificarNotasSuspensas().get(1).getAsignatura().getSemestre() && 
+					verificarNotasSuspensas().get(0).getAsignatura().getAnnoAcademico()==annoAcademico-1 &&   verificarNotasSuspensas().get(1).getAsignatura().getAnnoAcademico()==annoAcademico-1  )
+					val = true;
+			}
+			if(verificarNotasSuspensas().size()==1 && verificarNotasSuspensas().get(0).getAsignatura().getAnnoAcademico()==annoAcademico-1)
+				val = true;
+			
+			return val;
+		}
+		
+		
+		// devuelve un booleano para saber si suspende o no
+		
+		public boolean verificarSuspenso(){
+			boolean val = false;
+			if(verificarNotasSuspensas().size()>2)
+				val=true;
+			else if(verificarNotasSuspensas().size()==2){
+				if(verificarNotasSuspensas().get(0).getAsignatura().getSemestre()==verificarNotasSuspensas().get(1).getAsignatura().getSemestre())
+					val = true;
+				}
+			else if(verificarNotasSuspensas().size()==1 && verificarNotasSuspensas().get(0).getAsignatura().getAnnoAcademico()<annoAcademico)
+				val = true;
+			
+			return val;
+		}
+		
+		
+		
+		
 }
+
+
+
+

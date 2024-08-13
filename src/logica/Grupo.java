@@ -1,37 +1,78 @@
 package logica;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Grupo {
-	private String nombre;
-	private int anno;
-	private ArrayList<Estudiante> estudiantes;
+
+	// atributos
+	private String nombreGrupo;
+	private int annoAcademico;
+	private ArrayList<Estudiante> grupoEstudiantes;
+
+	public Grupo(String nombreGrupo , int annoAcademico) {
+		setNombreGrupo(nombreGrupo);
+		setAnnosAcademico(annoAcademico);
+		this.grupoEstudiantes = new ArrayList<>();
+	}
+
 	
-	public Grupo(String nombre, int anno) {
-		setNombre(nombre);
-		setAnno(anno);
-		estudiantes = new ArrayList<Estudiante>();
+	// gets y sets
+	
+	public int getAnnosAcademico() {
+		return annoAcademico;
+	}
+
+
+	public void setAnnosAcademico(int annosAcademico) {
+		this.annoAcademico = annosAcademico;
 	}
 	
-	public String getNombre() {
-		return nombre;
+	
+	
+	public String getNombreGrupo() {
+		return nombreGrupo;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+
+
+	public void setNombreGrupo(String nombreGrupo) {
+		this.nombreGrupo = nombreGrupo;
 	}
-	public int getAnno() {
-		return anno;
+	
+	
+	public ArrayList<Estudiante> getGrupoEstudiantes() {
+		return grupoEstudiantes;
 	}
-	public void setAnno(int anno) {
-		this.anno = anno;
+	
+	
+	public void setGrupoEstudiantes(ArrayList<Estudiante> grupoEstudiantes) {
+		this.grupoEstudiantes = grupoEstudiantes;
 	}
-	public ArrayList<Estudiante> getEstudiantes() {
-		return estudiantes;
+
+
+	public void insertarAGrupoEstudiante(Estudiante estudiante) {
+		
+		grupoEstudiantes.add(estudiante);
 	}
-	public void addEstudiante(Estudiante estu){
-		estudiantes.add(estu);
+	
+	public Estudiante buscarEstudiante(String iD){
+		Estudiante estudiante = null;
+		boolean val = true;
+		int i = 0;
+		
+		while(i<grupoEstudiantes.size() && val){
+			if(grupoEstudiantes.get(i).getID().equalsIgnoreCase(iD)){
+				val=false;
+				estudiante= grupoEstudiantes.get(i);
+			}
+			
+			i++;
+		}
+		
+		return estudiante;
 	}
+	
+	
+	
 	
 	
 	

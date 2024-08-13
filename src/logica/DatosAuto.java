@@ -32,8 +32,8 @@ public class DatosAuto {
 	 * @return obj
 	 */
 	public static Object[] convertirAObjetoProfe(Profesor profe){
-		Object[] profeObj = new Object[]{profe.getCi(), profe.getNombre(), profe.getCategoCientifica(), profe.getCategoDocente(), 
-				profe.getCentroLaboral(), profe.getOrganismo(), profe.getDirecc(), profe.getSalario()};
+		Object[] profeObj = new Object[]{profe.getID(), profe.getNombre(), profe.getCategoriaCientifica(), profe.getCategoriaDocente(), 
+				profe.getCentroLaboral(), profe.getOrganismo(), profe.getDireccion(), profe.getSalario()};
 		
 		if (profe.getSalario()==0.0f){ //Si el salario es 0.0f es pq no se ha calculado 
 			profeObj[7] = null;
@@ -111,8 +111,8 @@ public class DatosAuto {
 	 * @return obj
 	 */
 	public static Object[] convertirAObjetoEstudiante(Estudiante estu){
-		Object[] estuObj = new Object[]{estu.getCi(), estu.getNombre(), estu.getAnno(), estu.getGrupo(), 
-				estu.getCentroLaboral(), estu.getOrganismo(), estu.getDirecc()};	
+		Object[] estuObj = new Object[]{estu.getID(), estu.getNombre(), estu.getAnnoAcademico(), 
+				estu.getCentroLaboral(), estu.getOrganismo(), estu.getDireccion()};	
 		return estuObj;
 	}
 	
@@ -123,7 +123,7 @@ public class DatosAuto {
 	 * Define el modelo de columnas de la tabla PersonalAux
 	 * @param personalAux
 	 */
-	public static void definirTablaPersonalAux(ArrayList<PersonalAux> personalAux){
+	public static void definirTablaPersonalAux(ArrayList<PersonalApoyo> personalAux){
 		Runner.modeloPersonalAux = new DefaultTableModel();
 		Runner.modeloPersonalAux.addColumn("CI");
 		Runner.modeloPersonalAux.addColumn("Nombre");
@@ -138,11 +138,11 @@ public class DatosAuto {
 	 * Imprime cada fila con el PersonalAux
 	 * @param personalAux
 	 */
-	public static void agregarFilasPersonalAux(ArrayList<PersonalAux> personalAux){
+	public static void agregarFilasPersonalAux(ArrayList<PersonalApoyo> personalAux){
 		if(personalAux.isEmpty()){
 			JOptionPane.showMessageDialog(null, "No hay registro de personal auxiliar. Por favor, añada.");
 		}else{
-			for(PersonalAux pe : personalAux){
+			for(PersonalApoyo pe : personalAux){
 				Runner.modeloPersonalAux.addRow(convertirAObjetoPersonalAux(pe));
 			}
 		}
@@ -152,9 +152,9 @@ public class DatosAuto {
 	 * Convertir instancia de PersonalAux a un array de Objeto
 	 * @return obj
 	 */
-	public static Object[] convertirAObjetoPersonalAux(PersonalAux persoAux){
-		Object[] persoAuxObj = new Object[]{persoAux.getCi(), persoAux.getNombre(), persoAux.getAreaDeTrabajo(), 
-				persoAux.getDirecc(), persoAux.getSalario()};	
+	public static Object[] convertirAObjetoPersonalAux(PersonalApoyo persoAux){
+		Object[] persoAuxObj = new Object[]{persoAux.getID(), persoAux.getNombre(), persoAux.getLabor(), 
+				persoAux.getDireccion(), persoAux.getSalario()};	
 		
 		if (persoAux.getSalario()==0.0f){ //Si el salario es 0.0f es pq no se ha calculado 
 			persoAuxObj[4] = null;
@@ -199,8 +199,8 @@ public class DatosAuto {
 	 * @return obj
 	 */
 	public static Object[] convertirAObjetoAsignatura(Asignatura asignatura){
-		Object[] asignaturaObj = new Object[]{asignatura.getNombre(), asignatura.getAnno(), asignatura.getSemestre(), 
-				asignatura.getHoras()};	
+		Object[] asignaturaObj = new Object[]{asignatura.getNombre(), asignatura.getAnnoAcademico(), asignatura.getSemestre(), 
+				asignatura.getHorasClases()};	
 	
 		return asignaturaObj;
 	}
@@ -240,12 +240,12 @@ public class DatosAuto {
 	 * @return obj
 	 */
 	public static Object[] convertirAObjetoAsignatura(Estudiante estu){
-		Object[] estudianteObj = new Object[]{estu.getCi(), estu.getNombre(), estu.getAnno()};	
+		Object[] estudianteObj = new Object[]{estu.getID(), estu.getNombre(), estu.getAnnoAcademico()};	
 		return estudianteObj;
 	}
 	
 	
-/*****************************Define modelo de la tabla PersonalAux y agrega las filas**************************************/
+/*****************************Define modelo de la tabla Grupo y agrega las filas**************************************/
 	
 	/**
 	 * Define el modelo de columnas de la tabla Grupos
@@ -278,8 +278,48 @@ public class DatosAuto {
 	 * @return obj
 	 */
 	public static Object[] convertirAObjetoGrupo(Grupo grupo){
-		Object[] grupoObj = new Object[]{grupo.getNombre(), grupo.getAnno()};		
+		Object[] grupoObj = new Object[]{grupo.getNombreGrupo(), grupo.getAnnosAcademico()};		
 		return grupoObj;
+	}
+	
+	
+/*****************************Define modelo de la tabla Plan Docente y agrega las filas**************************************/
+	
+	/**
+	 * Define el modelo de columnas de la tabla Plan Docente
+	 * @param planesDocentes
+	 */
+	public static void definirTablaPlanDocente(ArrayList<PlanificacionDocente> planesDocentes){
+		Runner.modeloPlanDocente = new DefaultTableModel();
+		Runner.modeloPlanDocente.addColumn("Profesor");
+		Runner.modeloPlanDocente.addColumn("Estudiante");
+		Runner.modeloPlanDocente.addColumn("Grupo");
+		agregarFilasPlanesDocentes(planesDocentes);
+	}
+	
+	
+	/**
+	 * Imprime cada fila con el planDocente
+	 * @param planesDocentes
+	 */
+	public static void agregarFilasPlanesDocentes(ArrayList<PlanificacionDocente> planesDocentes){
+		if(planesDocentes.isEmpty()){
+			JOptionPane.showMessageDialog(null, "No hay registro de planificaciones docentes. Por favor, añada.");
+		}else{
+			for(PlanificacionDocente p : planesDocentes){
+				Runner.modeloGrupoReporte.addRow(convertirAObjetoPlanDocente(p));
+			}
+		}
+	}
+	
+	/**
+	 * Convertir instancia de PlanDocente a un array de Objeto
+	 * @return obj
+	 */
+	public static Object[] convertirAObjetoPlanDocente(PlanificacionDocente planDocente){
+		Object[] planDocenteObj = new Object[]{planDocente.getProfesor().getNombre(),planDocente.getAsignatura().getNombre(), 
+				planDocente.getGrupo().getNombreGrupo()};		
+		return planDocenteObj;
 	}
 	
 	

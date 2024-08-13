@@ -547,7 +547,14 @@ public class MainFrame extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(null, "Implementar");
+				//JOptionPane.showMessageDialog(null, "Implementar");
+				try {
+					PlanDocente dialog = new PlanDocente();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception exc) {
+					exc.printStackTrace();
+				}
 			}
 		});
 		planificacionDocenteBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/PlanDocenteBarBotton.png")));
