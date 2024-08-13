@@ -84,7 +84,7 @@ public class DatosAuto {
 		Runner.modeloEstudiante.addColumn("CI");
 		Runner.modeloEstudiante.addColumn("Nombre");
 		Runner.modeloEstudiante.addColumn("Año");
-		Runner.modeloEstudiante.addColumn("Grupo");
+		//Runner.modeloEstudiante.addColumn("Grupo");
 		Runner.modeloEstudiante.addColumn("Centro Laboral");
 		Runner.modeloEstudiante.addColumn("Organismo");
 		Runner.modeloEstudiante.addColumn("Dirección");
@@ -278,7 +278,7 @@ public class DatosAuto {
 	 * @return obj
 	 */
 	public static Object[] convertirAObjetoGrupo(Grupo grupo){
-		Object[] grupoObj = new Object[]{grupo.getNombreGrupo(), grupo.getAnnosAcademico()};		
+		Object[] grupoObj = new Object[]{grupo.getNombreGrupo(), grupo.getAnnoAcademico()};		
 		return grupoObj;
 	}
 	
@@ -307,7 +307,7 @@ public class DatosAuto {
 			JOptionPane.showMessageDialog(null, "No hay registro de planificaciones docentes. Por favor, añada.");
 		}else{
 			for(PlanificacionDocente p : planesDocentes){
-				Runner.modeloGrupoReporte.addRow(convertirAObjetoPlanDocente(p));
+				Runner.modeloPlanDocente.addRow(convertirAObjetoPlanDocente(p));
 			}
 		}
 	}

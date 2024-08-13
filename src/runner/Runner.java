@@ -32,22 +32,21 @@ public class Runner {
 	public static DefaultTableModel modeloGrupoReporte;
 	public static DefaultTableModel modeloEstudianteReporte;
 	public static DefaultTableModel modeloPlanDocente;
-	public static ArrayList<Asignatura> asignaturas;
 	public static ArrayList<Estudiante> estudiantesReporte;
 	public static ArrayList<Grupo> gruposReportes;
 	public static ArrayList<PlanificacionDocente> planesDocentes;
 	
+	Fct fct;
 	
 	/**
 	* Launch the application.
 	*/
 	public static void main(String[] args) {
+		Fct fct = new Fct();
 		
 		/**********************************************Datos Prueba********************************************************/
 		//Usuario
 		usuario = new User("Fermin", "1234");
-		
-		Fct fct = new Fct();
 	
 		// JORGITOOOOOOO ---->>>>    la creacion de los profesores por defecto
 		fct.crearPersona("95868426587", "Luis Pérez Fernández","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B");
@@ -88,26 +87,45 @@ public class Runner {
 		//ESTUDIANTE PARA REPORTES
 		DatosAuto.definirTablaReportesEstu(fct.buscarEstudiantesOros());
 
-		//GRUPOS PARA REPORTES
-		gruposReportes = new ArrayList<Grupo>();
-		Grupo grupo1 = new Grupo("Grupo 1", 1);
-		grupo1.insertarAGrupoEstudiante(estu1);
-		grupo1.insertarAGrupoEstudiante(estu2);
-		Grupo grupo2 = new Grupo("Grupo 2", 1);
-		grupo2.insertarAGrupoEstudiante(estu3);
-		gruposReportes.add(grupo1);
-		gruposReportes.add(grupo2);
 		
-		DatosAuto.definirTablaGrupo(gruposReportes);
+		
+		// GRUPOS
+		fct.crearGrupo("Grupo", 1);
+		
+		
+		// AGREGAR A GRUPOS
+		fct.buscarGrupo("Grupo").insertarAGrupoEstudiante(fct.buscarUnEstudiante("05032379581"));
+		fct.buscarGrupo("Grupo").insertarAGrupoEstudiante(fct.buscarUnEstudiante("08868513264"));
+		fct.buscarGrupo("Grupo").insertarAGrupoEstudiante(fct.buscarUnEstudiante("04021324587"));
+		
+		
+		
+		
+		
+		// PRUEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+		System.out.println(fct.buscarGrupo("Grupo").getNombreGrupo());
+		System.out.println(fct.buscarUnProfesor("95868426587").getNombre());
+		System.out.println(fct.buscarUnProfesor("05062347564").getNombre());
+		
+		
+		
 		
 		//PLANES DOCENTES
-		planesDocentes = new ArrayList<PlanificacionDocente>();
-		//PlanificacionDocente plan1 = new PlanificacionDocente(profe1,asignatura1,grupo1);
-		//PlanificacionDocente plan2 = new PlanificacionDocente(profe2,asignatura2,grupo2);
-		//planesDocentes.add(plan1);
-		//planesDocentes.add(plan2);
 		
-		DatosAuto.definirTablaPlanDocente(planesDocentes);
+		fct.getPeriodos().get(0).crearPlanificacionDocente(fct.buscarUnProfesor("95868426587"),fct.getPlanEstudio().buscarAsignatura("Matemática I") , fct.buscarGrupo("Grupo"));
+		fct.getPeriodos().get(0).crearPlanificacionDocente(fct.buscarUnProfesor("05062347564"),fct.getPlanEstudio().buscarAsignatura("Introducción a la Programación") , fct.buscarGrupo("Grupo"));
+		
+		DatosAuto.definirTablaPlanDocente(fct.getPeriodos().get(0).getPlanificacionesDocentes());
+		
+		
+		//GRUPOS PARA REPORTES
+		System.out.println(fct.buscarGrupoConMenorCantidad().get(0).getAnnoAcademico());
+		System.out.println(fct.buscarGrupoConMenorCantidad().get(0).getNombreGrupo());
+		System.out.println(fct.buscarGrupoConMenorCantidad().size());
+		
+		DatosAuto.definirTablaGrupo(fct.buscarGrupoConMenorCantidad());
+				
+		System.out.println("LLEGAAAAAAA");
 		
 		try {
 			login = new LoginUser();

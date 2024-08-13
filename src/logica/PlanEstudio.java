@@ -25,6 +25,18 @@ public class PlanEstudio {
 		asignaturas.add(asignatura);
 	}
 	
+	public Asignatura buscarAsignatura(String nombreAsig){
+		Asignatura asignatura= null;
+		int i=0;
+		
+		while(i<asignaturas.size() && asignatura==null){
+			if(asignaturas.get(i).getNombre().equalsIgnoreCase(nombreAsig))
+				asignatura=asignaturas.get(i);
+			i++;
+		}
+		
+		return asignatura;
+	}
 	
 	
 

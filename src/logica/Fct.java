@@ -444,19 +444,24 @@ public class Fct {
 		return suspensos;
 	}
 	
-	// 5- PARA BUSCAR dado un año cual es el grupo con menor cantidad de estudiantes
-	public Grupo buscarGrupoConMenorCantidad(int anno){
-		Grupo grupo = null;
-		int menor = Integer.MAX_VALUE;
+	// 5- PARA BUSCAR en cada año cual es el grupo con menor cantidad de estudiantes
+	public ArrayList<Grupo> buscarGrupoConMenorCantidad(){
+		ArrayList<Grupo> gruposM = new ArrayList<>();
 		
-		for(Grupo g : grupos){
-			if(g.getAnnosAcademico()== anno && g.getGrupoEstudiantes().size() < menor){
-				grupo = g;
-				menor = g.getGrupoEstudiantes().size();
+		for(int i=1;i<7;i++){
+			int menor = Integer.MAX_VALUE;
+			Grupo grupo = null;
+			for(Grupo g : grupos){
+				if(g.getAnnoAcademico()== i && g.getGrupoEstudiantes().size() < menor){
+					grupo = g;
+					menor = g.getGrupoEstudiantes().size();
+				}
 			}
+			if(grupo!=null)
+				gruposM.add(grupo);
 		}
 		
-		return grupo;
+		return gruposM;
 	}
 	
 	

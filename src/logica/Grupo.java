@@ -11,19 +11,19 @@ public class Grupo {
 
 	public Grupo(String nombreGrupo , int annoAcademico) {
 		setNombreGrupo(nombreGrupo);
-		setAnnosAcademico(annoAcademico);
+		setAnnoAcademico(annoAcademico);
 		this.grupoEstudiantes = new ArrayList<>();
 	}
 
 	
 	// gets y sets
 	
-	public int getAnnosAcademico() {
+	public int getAnnoAcademico() {
 		return annoAcademico;
 	}
 
 
-	public void setAnnosAcademico(int annosAcademico) {
+	public void setAnnoAcademico(int annosAcademico) {
 		this.annoAcademico = annosAcademico;
 	}
 	
