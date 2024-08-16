@@ -42,24 +42,25 @@ public class Runner {
 	* Launch the application.
 	*/
 	public static void main(String[] args) {
-		Fct fct = new Fct();
 		
 		/**********************************************Datos Prueba********************************************************/
 		//Usuario
 		usuario = new User("Fermin", "1234");
+		
+		fct = new Fct();
 	
 		// JORGITOOOOOOO ---->>>>    la creacion de los profesores por defecto
-		fct.crearPersona("95868426587", "Luis Pérez Fernández","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B");
+		fct.crearPersona("95868426587", "Luis Pï¿½rez Fernï¿½ndez","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B");
 		fct.crearPersona("05062348364", "Rafael Castro Reyes","Doctor","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
-		fct.crearPersona("05022358174", "Jorge Castro Pérez","Máster","Asistente","Cujae","MINES", "Calle 25 entre 21 y Ave. 26");
-		fct.crearPersona("05062347564", "Manuel Castro Reyes","Máster","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
+		fct.crearPersona("05022358174", "Jorge Castro Pï¿½rez","Mï¿½ster","Asistente","Cujae","MINES", "Calle 25 entre 21 y Ave. 26");
+		fct.crearPersona("05062347564", "Manuel Castro Reyes","Mï¿½ster","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
 		
 		DatosAuto.definirTablaProfes(fct.buscarProfesores());
 		
 
 		// JORGITOOOOOOO ---->>>>    la creacion de los estudiantes por defecto
-		fct.crearPersona("05032379581", "Rafael11111 Menéndez Rodriguez", 1 ,"Sucursal Comercial #5","Etecsa", "Calle 30 entre 34 y Ave. 56");
-		fct.crearPersona("08868513264", "Alejandro González Fernández",1,"La Mariposa","TRD","Ave. 26 entre calles A y B");
+		fct.crearPersona("05032379581", "Rafael11111 Menï¿½ndez Rodriguez", 1 ,"Sucursal Comercial #5","Etecsa", "Calle 30 entre 34 y Ave. 56");
+		fct.crearPersona("08868513264", "Alejandro Gonzï¿½lez Fernï¿½ndez",1,"La Mariposa","TRD","Ave. 26 entre calles A y B");
 		fct.crearPersona("04021324587", "Jorgito", 2, "Las Palamas", "CTC", "Tulipan y Boyeros");
 		
 		
@@ -67,18 +68,18 @@ public class Runner {
 					
 		
 		// JORGITOOOOOOO ---->>>>    la creacion del personal de apoyo por defecto
-		fct.crearPersona("09062235147", "Federico Criado Domínguez","Laboratorio", "Calle 30 entre 34 y Ave. 56");
-		fct.crearPersona("59868285496", "Maria Elena Gómez Pérez","Biblioteca", "Ave. 26 entre calles A y B");
+		fct.crearPersona("09062235147", "Federico Criado Domï¿½nguez","Laboratorio", "Calle 30 entre 34 y Ave. 56");
+		fct.crearPersona("59868285496", "Maria Elena Gï¿½mez Pï¿½rez","Biblioteca", "Ave. 26 entre calles A y B");
 		
 							
 		DatosAuto.definirTablaPersonalAux(fct.buscarPersonalApoyo());
 		
 		
 		// JORGITOOOOOOO ---->>>>    la creacion de las asignaturas por defecto
-		fct.getPlanEstudio().crearAsignatura("Matemática I", 1, 1, 50);
-		fct.getPlanEstudio().crearAsignatura("Matemática II", 1, 2, 50);
-		fct.getPlanEstudio().crearAsignatura("Introducción a la Programación", 1, 1, 60);
-		fct.getPlanEstudio().crearAsignatura("Diseño y POO", 1, 2, 90);
+		fct.getPlanEstudio().crearAsignatura("Matemï¿½tica I", 1, 1, 50);
+		fct.getPlanEstudio().crearAsignatura("Matemï¿½tica II", 1, 2, 50);
+		fct.getPlanEstudio().crearAsignatura("Introducciï¿½n a la Programaciï¿½n", 1, 1, 60);
+		fct.getPlanEstudio().crearAsignatura("Diseï¿½o y POO", 1, 2, 90);
 		fct.getPlanEstudio().crearAsignatura("Estructuras de Datos", 2, 1, 40);
 		fct.getPlanEstudio().crearAsignatura("Seguridad Nacional", 2, 1, 90);
 		
@@ -112,8 +113,8 @@ public class Runner {
 		
 		//PLANES DOCENTES
 		
-		fct.getPeriodos().get(0).crearPlanificacionDocente(fct.buscarUnProfesor("95868426587"),fct.getPlanEstudio().buscarAsignatura("Matemática I") , fct.buscarGrupo("Grupo"));
-		fct.getPeriodos().get(0).crearPlanificacionDocente(fct.buscarUnProfesor("05062347564"),fct.getPlanEstudio().buscarAsignatura("Introducción a la Programación") , fct.buscarGrupo("Grupo"));
+		fct.getPeriodos().get(0).crearPlanificacionDocente(fct.buscarUnProfesor("95868426587"),fct.getPlanEstudio().buscarAsignatura("Matemï¿½tica I") , fct.buscarGrupo("Grupo"));
+		fct.getPeriodos().get(0).crearPlanificacionDocente(fct.buscarUnProfesor("05062347564"),fct.getPlanEstudio().buscarAsignatura("Introducciï¿½n a la Programaciï¿½n") , fct.buscarGrupo("Grupo"));
 		
 		DatosAuto.definirTablaPlanDocente(fct.getPeriodos().get(0).getPlanificacionesDocentes());
 		

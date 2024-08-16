@@ -547,7 +547,6 @@ public class MainFrame extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//JOptionPane.showMessageDialog(null, "Implementar");
 				try {
 					PlanDocente dialog = new PlanDocente();
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

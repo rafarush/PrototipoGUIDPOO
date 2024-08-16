@@ -33,11 +33,8 @@ public class DatosAuto {
 	 */
 	public static Object[] convertirAObjetoProfe(Profesor profe){
 		Object[] profeObj = new Object[]{profe.getID(), profe.getNombre(), profe.getCategoriaCientifica(), profe.getCategoriaDocente(), 
-				profe.getCentroLaboral(), profe.getOrganismo(), profe.getDireccion(), profe.getSalario()};
-		
-		if (profe.getSalario()==0.0f){ //Si el salario es 0.0f es pq no se ha calculado 
-			profeObj[7] = null;
-		}
+				profe.getCentroLaboral(), profe.getOrganismo(), profe.getDireccion(), profe.calcularSalario()};
+	
 		
 		return profeObj;
 	}
@@ -154,7 +151,7 @@ public class DatosAuto {
 	 */
 	public static Object[] convertirAObjetoPersonalAux(PersonalApoyo persoAux){
 		Object[] persoAuxObj = new Object[]{persoAux.getID(), persoAux.getNombre(), persoAux.getLabor(), 
-				persoAux.getDireccion(), persoAux.getSalario()};	
+				persoAux.getDireccion(), persoAux.calcularSalario()};	
 		
 		if (persoAux.getSalario()==0.0f){ //Si el salario es 0.0f es pq no se ha calculado 
 			persoAuxObj[4] = null;

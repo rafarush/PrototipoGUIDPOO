@@ -51,7 +51,6 @@ public class Reportes extends JDialog {
 	private DefaultTableCellRenderer centrarCelda = new DefaultTableCellRenderer();
 	private final JPanel mainPanel;
 	private final JLabel atrasBtn;
-	private static boolean recordar = true;
 
 
 	/**
