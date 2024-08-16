@@ -101,17 +101,6 @@ public class Runner {
 		fct.buscarGrupo("Grupo").insertarAGrupoEstudiante(fct.buscarUnEstudiante("04021324587"));
 		
 		
-		
-		
-		
-		// PRUEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-		System.out.println(fct.buscarGrupo("Grupo").getNombreGrupo());
-		System.out.println(fct.buscarUnProfesor("95868426587").getNombre());
-		System.out.println(fct.buscarUnProfesor("05062347564").getNombre());
-		
-		
-		
-		
 		//PLANES DOCENTES
 		
 		fct.getPeriodos().get(0).crearPlanificacionDocente(fct.buscarUnProfesor("95868426587"),fct.getPlanEstudio().buscarAsignatura("Matem�tica I") , fct.buscarGrupo("Grupo"));
@@ -120,14 +109,8 @@ public class Runner {
 		DatosAuto.definirTablaPlanDocente(fct.getPeriodos().get(0).getPlanificacionesDocentes());
 		
 		
-		//GRUPOS PARA REPORTES
-		System.out.println(fct.buscarGrupoConMenorCantidad().get(0).getAnnoAcademico());
-		System.out.println(fct.buscarGrupoConMenorCantidad().get(0).getNombreGrupo());
-		System.out.println(fct.buscarGrupoConMenorCantidad().size());
-		
 		DatosAuto.definirTablaGrupo(fct.buscarGrupoConMenorCantidad());
 				
-		System.out.println("LLEGAAAAAAA");
 		
 		try {
 			login = new LoginUser();
