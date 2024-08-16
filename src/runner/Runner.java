@@ -35,8 +35,9 @@ public class Runner {
 	public static ArrayList<Estudiante> estudiantesReporte;
 	public static ArrayList<Grupo> gruposReportes;
 	public static ArrayList<PlanificacionDocente> planesDocentes;
+	public static Fct fct;
 	
-	Fct fct;
+	//Fct fct;
 	
 	/**
 	* Launch the application.
@@ -52,8 +53,8 @@ public class Runner {
 		// JORGITOOOOOOO ---->>>>    la creacion de los profesores por defecto
 		fct.crearPersona("95868426587", "Luis Pï¿½rez Fernï¿½ndez","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B");
 		fct.crearPersona("05062348364", "Rafael Castro Reyes","Doctor","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
-		fct.crearPersona("05022358174", "Jorge Castro Pï¿½rez","Mï¿½ster","Asistente","Cujae","MINES", "Calle 25 entre 21 y Ave. 26");
-		fct.crearPersona("05062347564", "Manuel Castro Reyes","Mï¿½ster","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
+		fct.crearPersona("05022358174", "Jorge Castro Pï¿½rez","Máster","Asistente","Cujae","MINES", "Calle 25 entre 21 y Ave. 26");
+		fct.crearPersona("05062347564", "Manuel Castro Reyes","Máster","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
 		
 		DatosAuto.definirTablaProfes(fct.buscarProfesores());
 		
