@@ -208,7 +208,24 @@ public class Profesor extends Trabajador{
 	}
 	
 	
-	
+	// para modificar los atributos del profesor
+	public void modificarProfesor(String iD, String nombre, String categoriaDocente, String categoriaCientifica, String centroLaboral, String organismo, String direccion , float salario){
+		
+		setNombre(nombre);
+		
+		setSalario(salario);
+		
+		setCategoriaCientifica(categoriaCientifica);
+		
+		setCategoriaDocente(categoriaDocente);
+			
+		setCentroLaboral(centroLaboral);
+		
+		setOrganismo(organismo);
+		
+		setDireccion(direccion);
+		
+	}
 	
 	
 	

@@ -3,9 +3,9 @@ package logica;
 public abstract class Persona {
 	
 	//atributos
-	private String nombre;
-	private String iD;
-	private String direccion;
+	protected String nombre;
+	protected String iD;
+	protected String direccion;
 	
 	
 	//constructor

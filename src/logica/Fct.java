@@ -24,7 +24,28 @@ public class Fct {
 	
 	
 
-	//crear y eliminar 
+	// ELIMINAR PERSONA
+	public void eliminarPersona(String iD){
+		boolean val= true;
+		int i=0;
+		while(i<personas.size() && val){
+			if(personas.get(i).getID().equalsIgnoreCase(iD)){
+				
+				
+				
+				// lo que se va a hacer siempre aunque sea profe, estu o per.apoyo
+				personas.remove(i);
+				val=false;
+			}
+			i++;
+		}
+		
+	}
+	
+	
+	//**************************************  PROFESOR ************************************************************
+	
+	//crear , modificar y eliminar 
 	
 	// crear profesor
 	public boolean crearPersona(String iD, String nombre, String categoriaDocente, String categoriaCientifica, String centroLaboral, String organismo, String direccion ){
@@ -41,6 +62,34 @@ public class Fct {
 		return val;
 	}
 	
+	// MODIFICAR PROFESOR
+	public void modificarPersona(String iD, String nombre, String categoriaDocente, String categoriaCientifica, String centroLaboral, String organismo, String direccion, float salario ){
+		
+		buscarUnProfesor(iD).modificarProfesor(iD, nombre, categoriaDocente, categoriaCientifica, centroLaboral, organismo, direccion, salario);
+		
+		for(Periodo p : periodos){
+			for(PlanificacionDocente pd : p.getPlanificacionesDocentes()){
+				if(pd.getProfesor().getID().equalsIgnoreCase(iD)){
+					pd.getProfesor().modificarProfesor(iD, nombre, categoriaDocente, categoriaCientifica, centroLaboral, organismo, direccion, salario);
+				}
+			}
+		}
+		
+	}
+	
+	// ELIMINAR PROFESOR
+	// no creo q haga falta
+	/*public void eliminarProfesor(Profesor profesor){
+		boolean val= true;
+		int i=0;
+		while(i<personas.size() && val){
+			
+			i++;
+		}
+		
+	}*/
+	
+	//**************************************  PERSONAL DE APOYO ************************************************************
 	
 	// crear personalApoyo
 	public boolean crearPersona( String iD, String nombre, String labor, String direccion){
@@ -57,6 +106,13 @@ public class Fct {
 		return val;
 	}
 	
+	// modificar Personal de apoyo
+	public void modificarPersona(String iD, String nombre, String labor, String direccion) {
+		buscarUnPersonalApoyo(iD).modificarPersonalApoyo(iD, nombre, labor, direccion);
+	}
+	
+	
+	//**************************************  ESTUDIANTE   ************************************************************
 	
 	// crear Estudiante
 	public boolean crearPersona( String iD, String nombre, int anoAcademico, String centroLaboral, String organismo, String direccion){
@@ -72,6 +128,15 @@ public class Fct {
 		
 		return val;
 	}
+	
+	// MODIFICAR ESTUDIANTE
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

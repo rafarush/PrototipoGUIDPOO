@@ -65,6 +65,18 @@ public class PersonalApoyo extends Trabajador{
 	
 	//OTROS
 	
+	// Modificar el personal de apoyo
+	public void modificarPersonalApoyo(String iD, String nombre, String labor, String direccion){
+		
+		setNombre(nombre);
+		
+		setDireccion(direccion);
+		
+		setSalario(salario);
+		
+		setLabor(labor);
+		
+	}
 	
 	
 	
