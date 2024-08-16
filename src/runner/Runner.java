@@ -92,7 +92,7 @@ public class Runner {
 		fct.crearPersona("09062235147", "Federico Criado Domínguez","Laboratorio", "Calle 30 entre 34 y Ave. 56");
 		fct.crearPersona("59868285496", "Maria Elena Gómez Pérez","Biblioteca", "Ave. 26 entre calles A y B");
 		
-		
+		fct.getPeriodos();
 		
 		
 		
