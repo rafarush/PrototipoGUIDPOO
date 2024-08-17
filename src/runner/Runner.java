@@ -3,6 +3,9 @@ package runner;
 
 import gui.dialogs.*;
 import gui.mainFrame.MainFrame;
+import gui.utils.ModeloGrupoEdit;
+import gui.utils.ModeloPlanificacionDocenteEdit;
+import gui.utils.ModeloProfesorEdit;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
@@ -26,12 +29,14 @@ public class Runner {
 	public static InputDialogAsignaturaPE inputAsignatura;
 	public static InputDialogNota inputNota;
 	public static DefaultTableModel modeloProfesor;
+	public static ModeloProfesorEdit modeloProfesor1;
 	public static DefaultTableModel modeloEstudiante;
 	public static DefaultTableModel modeloPersonalAux;
 	public static DefaultTableModel modeloPlanDeEstudio;
 	public static DefaultTableModel modeloGrupoReporte;
+	public static ModeloGrupoEdit modeloGrupoReporte1;
 	public static DefaultTableModel modeloEstudianteReporte;
-	public static DefaultTableModel modeloPlanDocente;
+	public static ModeloPlanificacionDocenteEdit modeloPlanDocente;
 	public static ArrayList<Estudiante> estudiantesReporte;
 	public static ArrayList<Grupo> gruposReportes;
 	public static ArrayList<PlanificacionDocente> planesDocentes;
@@ -45,6 +50,7 @@ public class Runner {
 	public static void main(String[] args) {
 		
 		/**********************************************Datos Prueba********************************************************/
+		
 		//Usuario
 		usuario = new User("Fermin", "1234");
 		
@@ -57,6 +63,7 @@ public class Runner {
 		fct.crearPersona("05062347564", "Manuel Castro Reyes","Máster","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
 		
 		DatosAuto.definirTablaProfes(fct.buscarProfesores());
+		//DatosAuto.llenarFilasProfes(fct.buscarProfesores());
 		
 
 		// JORGITOOOOOOO ---->>>>    la creacion de los estudiantes por defecto
@@ -107,9 +114,11 @@ public class Runner {
 		fct.getPeriodos().get(0).crearPlanificacionDocente(fct.buscarUnProfesor("05062347564"),fct.getPlanEstudio().buscarAsignatura("Introducciï¿½n a la Programaciï¿½n") , fct.buscarGrupo("Grupo"));
 		
 		DatosAuto.definirTablaPlanDocente(fct.getPeriodos().get(0).getPlanificacionesDocentes());
+		//DatosAuto.llenarTablaPlanificacionDocente(fct.getPeriodos().get(0).getPlanificacionesDocentes());
 		
 		
 		DatosAuto.definirTablaGrupo(fct.buscarGrupoConMenorCantidad());
+		//DatosAuto.llenarFilasGrupo(fct.buscarGrupoConMenorCantidad());
 				
 		
 		try {

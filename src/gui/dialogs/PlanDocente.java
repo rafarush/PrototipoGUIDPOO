@@ -54,7 +54,7 @@ public class PlanDocente extends JDialog {
 	private final JPanel upperBarPanel = new JPanel();
 	private JComboBox asignaturasComboBox;
 	private JScrollPane scrollPane;
-	private static JTableNoEdit tablaNotas;
+	private static JTableNoEdit tabla;
 	private DefaultTableCellRenderer centrarCelda = new DefaultTableCellRenderer();
 	private final JPanel mainPanel;
 	private final JLabel atrasBtn;
@@ -139,52 +139,57 @@ public class PlanDocente extends JDialog {
 				auxBtn.setBackground(Color.LIGHT_GRAY);
 				auxBtn.addMouseListener(new MouseAdapter() {
 					@Override
-					public void mouseClicked(MouseEvent e) {
-						filaSelec = tablaNotas.getSelectedRow();
-						if(filaSelec != -1){
-							switch (btnSeleccionado) {
-							case PLANDOCENTE:
-								btnSeleccionado = BotonSelec.PROFESOR;
-								auxBtn.setText("Asignar Profesor");
-								actualizarLblNombre();
-								tableDraw();
-								break;
-							case PROFESOR:
-								btnSeleccionado = BotonSelec.PLANESTUDIO;
-								auxBtn.setText("Asignar Asignatura");
-								actualizarLblNombre();
-								tableDraw();
-								break;
-							case PLANESTUDIO:
-								btnSeleccionado = BotonSelec.GRUPO;
-								auxBtn.setText("Asignar Grupo");
-								actualizarLblNombre();
-								tableDraw();
-								break;
-							case GRUPO:
-								btnSeleccionado = BotonSelec.ESTUDIANTE;
-								auxBtn.setText("Añadir Estudiante");
-								actualizarLblNombre();
-								tableDraw();
-								break;
+				public void mouseClicked(MouseEvent e) {
+					switch (btnSeleccionado) {
+					case PLANDOCENTE:
+						btnSeleccionado = BotonSelec.PROFESOR;
+						auxBtn.setText("Asignar Profesor");
+						actualizarLblNombre();
+						tableDraw();
+						break;
+					case PROFESOR:
+						btnSeleccionado = BotonSelec.PLANESTUDIO;
+						auxBtn.setText("Asignar Asignatura");
+						profeSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
+						actualizarLblNombre();
+						tableDraw();
+						break;
+					case PLANESTUDIO:
+						btnSeleccionado = BotonSelec.GRUPO;
+						auxBtn.setText("Asignar Grupo");
+						asignaturaSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
+						actualizarLblNombre();
+						tableDraw();
+						break;
+					case GRUPO:
+						//Llamar a crear planificacion docente
+						grupoSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
+						Runner.fct.getPeriodos().get(0).crearPlanificacionDocente(Runner.fct.buscarUnProfesor(profeSelec), 
+								Runner.fct.getPlanEstudio().buscarAsignatura(asignaturaSelec),
+								Runner.fct.buscarGrupo(grupoSelec));
+						JOptionPane.showMessageDialog(null, "Planificación realizada con éxito");
+						btnSeleccionado = BotonSelec.PLANDOCENTE;
+						auxBtn.setText("Crear Planificaci\u00F3n Docente");
+						actualizarLblNombre();
+						tableDraw();
+						break;
 
-							default:
-								break;
-							}
-						}else{
-							JOptionPane.showConfirmDialog(null, "Debe seleccionar una fila");
-						}
+					default:
+						break;
+					}
 						
-					}
-					@Override
-					public void mouseEntered(MouseEvent e) {
-						auxBtn.setBorder(new LineBorder(new Color(0, 0, 0)));
-					}
-					@Override
-					public void mouseExited(MouseEvent e) {
-						auxBtn.setBorder(new LineBorder(new Color(5, 5, 5)));
-					}
-				});
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					auxBtn.setBorder(new LineBorder(new Color(0, 0, 0)));
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					auxBtn.setBorder(new LineBorder(new Color(5, 5, 5)));
+				}
+			});
 				auxBtn.setForeground(Color.BLACK);
 				auxBtn.setHorizontalAlignment(SwingConstants.CENTER);
 				auxBtn.setBounds(309, 72, 166, 20);
@@ -225,8 +230,8 @@ public class PlanDocente extends JDialog {
 							actualizarLblNombre();
 							break;
 						}
-						tablaNotas.getTableHeader().setReorderingAllowed(false);
-						scrollPane.setViewportView(tablaNotas);
+						tabla.getTableHeader().setReorderingAllowed(false);
+						scrollPane.setViewportView(tabla);
 						}
 				});
 				atrasBtn.setToolTipText("Retornar a los grupos");
@@ -261,51 +266,52 @@ public class PlanDocente extends JDialog {
 	private void tableDraw(){
 		switch(btnSeleccionado){
 			case PROFESOR:
-				tablaNotas = new JTableNoEdit(Runner.modeloProfesor);
-				tablaNotas.getColumnModel().getColumn(7).setCellRenderer(centrarCelda);
-				tablaNotas.addMouseListener(new java.awt.event.MouseAdapter() {
+				tabla = new JTableNoEdit(Runner.modeloProfesor);
+				//tabla.getColumnModel().getColumn(7).setCellRenderer(centrarCelda);
+				tabla.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 
+							JOptionPane.showConfirmDialog(null, "No se permite modificar");/*
 							btnSeleccionado = BotonSelec.PLANESTUDIO;
 							profeSelec = tablaNotas.getValueAt(tablaNotas.getSelectedRow(), 0).toString();
 							tableDraw();
 							actualizarLblNombre();
+							*/
 					}
 				});
 				break;
-			case ESTUDIANTE:
-				tablaNotas = new JTableNoEdit(Runner.modeloEstudiante);
+			case GRUPO:
+				tabla = new JTableNoEdit(Runner.modeloGrupoReporte);/*
 				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
 				tablaNotas.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);
-				tablaNotas.addMouseListener(new java.awt.event.MouseAdapter() {
+				tabla.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 
-							JOptionPane.showMessageDialog(null, "");
+							JOptionPane.showMessageDialog(null, "No se permite modificar");
 					}
-				});
+				});*/
 				break;
 			case PLANESTUDIO:
-				tablaNotas = new JTableNoEdit(Runner.modeloPlanDeEstudio);
-				for(int i=1; i<=3;i++)
-					tablaNotas.getColumnModel().getColumn(i).setCellRenderer(centrarCelda);
-				tablaNotas.addMouseListener(new java.awt.event.MouseAdapter() {
+				tabla = new JTableNoEdit(Runner.modeloPlanDeEstudio);/*
+				tabla.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 
+							JOptionPane.showConfirmDialog(null, "No se permite modificar");
 							btnSeleccionado = BotonSelec.GRUPO;
 							asignaturaSelec = tablaNotas.getValueAt(tablaNotas.getSelectedRow(), 0).toString();
 							tableDraw();
 							actualizarLblNombre();
 					}
-				});
+				});*/
 				break;
 			case PLANDOCENTE:
 				if(Integer.valueOf(semestreComboBox.getSelectedItem().toString())==1){
-					DatosAuto.definirTablaPlanDocente(Runner.fct.getPeriodos().get(annoComboBox.getSelectedIndex()).getPlanificacionesDocentes());
+					DatosAuto.llenarTablaPlanificacionDocente(Runner.fct.getPeriodos().get(annoComboBox.getSelectedIndex()).getPlanificacionesDocentes());
 				}else{
-					DatosAuto.definirTablaPlanDocente(Runner.fct.getPeriodos().get(annoComboBox.getSelectedIndex()+6).getPlanificacionesDocentes());
+					DatosAuto.llenarTablaPlanificacionDocente(Runner.fct.getPeriodos().get(annoComboBox.getSelectedIndex()+6).getPlanificacionesDocentes());
 				}
-				tablaNotas = new JTableNoEdit(Runner.modeloPlanDocente);
-				tablaNotas.addMouseListener(new java.awt.event.MouseAdapter() {
+				tabla = new JTableNoEdit(Runner.modeloPlanDocente);
+				tabla.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 
 							JOptionPane.showConfirmDialog(null, "No se permite modificar");
@@ -313,8 +319,8 @@ public class PlanDocente extends JDialog {
 				});
 				break;
 		}
-		tablaNotas.getTableHeader().setReorderingAllowed(false);
-		scrollPane.setViewportView(tablaNotas);
+		tabla.getTableHeader().setReorderingAllowed(false);
+		scrollPane.setViewportView(tabla);
 	}
 	
 	public void actualizarLblNombre(){

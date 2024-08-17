@@ -14,9 +14,15 @@ import javax.swing.table.DefaultTableModel;
 
 
 
+
+
+
 import runner.Runner;
 import gui.*;
 import gui.mainFrame.MainFrame;
+import gui.utils.ModeloGrupoEdit;
+import gui.utils.ModeloPlanificacionDocenteEdit;
+import gui.utils.ModeloProfesorEdit;
 
 
 public class DatosAuto {
@@ -58,7 +64,7 @@ public class DatosAuto {
 	 * @param profesores
 	 */
 	public static void definirTablaProfes(ArrayList<Profesor> profesores){
-		Runner.modeloProfesor = new DefaultTableModel();
+	    Runner.modeloProfesor = new DefaultTableModel();
 		Runner.modeloProfesor.addColumn("CI");
 		Runner.modeloProfesor.addColumn("Nombre");
 		Runner.modeloProfesor.addColumn("Categoría Científica");
@@ -69,6 +75,11 @@ public class DatosAuto {
 		Runner.modeloProfesor.addColumn("Salario");
 		agregarFilasProfes(profesores);
 	}
+	
+	public static void llenarFilasProfes(ArrayList<Profesor> profesores){
+		Runner.modeloProfesor1 = new ModeloProfesorEdit(profesores);
+	}
+	
 	
 	/*****************************Define modelo de la tabla Estudiantes y agrega las filas**************************************/
 	
@@ -279,6 +290,9 @@ public class DatosAuto {
 		return grupoObj;
 	}
 	
+	public static void llenarFilasGrupo(ArrayList<Grupo> grupos){
+		Runner.modeloGrupoReporte1 = new ModeloGrupoEdit(grupos);
+	}
 	
 /*****************************Define modelo de la tabla Plan Docente y agrega las filas**************************************/
 	
@@ -287,10 +301,10 @@ public class DatosAuto {
 	 * @param planesDocentes
 	 */
 	public static void definirTablaPlanDocente(ArrayList<PlanificacionDocente> planesDocentes){
-		Runner.modeloPlanDocente = new DefaultTableModel();
-		Runner.modeloPlanDocente.addColumn("Profesor");
-		Runner.modeloPlanDocente.addColumn("Estudiante");
-		Runner.modeloPlanDocente.addColumn("Grupo");
+	//	Runner.modeloPlanDocente = new DefaultTableModel();
+	//	Runner.modeloPlanDocente.addColumn("Profesor");
+	//	Runner.modeloPlanDocente.addColumn("Estudiante");
+	//	Runner.modeloPlanDocente.addColumn("Grupo");
 		agregarFilasPlanesDocentes(planesDocentes);
 	}
 	
@@ -304,7 +318,7 @@ public class DatosAuto {
 			JOptionPane.showMessageDialog(null, "No hay registro de planificaciones docentes. Por favor, añada.");
 		}else{
 			for(PlanificacionDocente p : planesDocentes){
-				Runner.modeloPlanDocente.addRow(convertirAObjetoPlanDocente(p));
+			//	Runner.modeloPlanDocente.addRow(convertirAObjetoPlanDocente(p));
 			}
 		}
 	}
@@ -319,6 +333,9 @@ public class DatosAuto {
 		return planDocenteObj;
 	}
 	
+	public static void llenarTablaPlanificacionDocente(ArrayList<PlanificacionDocente> planesDocentes){
+		Runner.modeloPlanDocente = new ModeloPlanificacionDocenteEdit(planesDocentes);
+	}
 	
 	
 	/****************************************Define los modelos de tabla***********************************************/
