@@ -1,10 +1,13 @@
 package gui.dialogs;
 
 import java.awt.BorderLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -92,7 +95,7 @@ public class PlanDocente extends JDialog {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(JOptionPane.showConfirmDialog(null, "¿Seguro que desea cerrar la entrada de notas?", "Confirmación", 
+				if(JOptionPane.showConfirmDialog(null, "¿Seguro que desea cerrar la Planificación Docente?", "Confirmación", 
 						JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION){
 					dispose();
 				}
@@ -140,44 +143,47 @@ public class PlanDocente extends JDialog {
 				auxBtn.addMouseListener(new MouseAdapter() {
 					@Override
 				public void mouseClicked(MouseEvent e) {
-					switch (btnSeleccionado) {
-					case PLANDOCENTE:
-						btnSeleccionado = BotonSelec.PROFESOR;
-						auxBtn.setText("Asignar Profesor");
-						actualizarLblNombre();
-						tableDraw();
-						break;
-					case PROFESOR:
-						btnSeleccionado = BotonSelec.PLANESTUDIO;
-						auxBtn.setText("Asignar Asignatura");
-						profeSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
-						actualizarLblNombre();
-						tableDraw();
-						break;
-					case PLANESTUDIO:
-						btnSeleccionado = BotonSelec.GRUPO;
-						auxBtn.setText("Asignar Grupo");
-						asignaturaSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
-						actualizarLblNombre();
-						tableDraw();
-						break;
-					case GRUPO:
-						//Llamar a crear planificacion docente
-						grupoSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
-						Runner.fct.getPeriodos().get(0).crearPlanificacionDocente(Runner.fct.buscarUnProfesor(profeSelec), 
-								Runner.fct.getPlanEstudio().buscarAsignatura(asignaturaSelec),
-								Runner.fct.buscarGrupo(grupoSelec));
-						JOptionPane.showMessageDialog(null, "Planificación realizada con éxito");
-						btnSeleccionado = BotonSelec.PLANDOCENTE;
-						auxBtn.setText("Crear Planificaci\u00F3n Docente");
-						actualizarLblNombre();
-						tableDraw();
-						break;
+						if (btnSeleccionado != BotonSelec.PLANDOCENTE && tabla.getSelectedRow() == -1){
+							JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
+						}else{
+							switch (btnSeleccionado) {
+							case PLANDOCENTE:
+								btnSeleccionado = BotonSelec.PROFESOR;
+								auxBtn.setText("Asignar Profesor");
+								actualizarLblNombre();
+								tableDraw();
+								break;
+							case PROFESOR:
+								btnSeleccionado = BotonSelec.PLANESTUDIO;
+								auxBtn.setText("Asignar Asignatura");
+								profeSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
+								actualizarLblNombre();
+								tableDraw();
+								break;
+							case PLANESTUDIO:
+								btnSeleccionado = BotonSelec.GRUPO;
+								auxBtn.setText("Asignar Grupo");
+								asignaturaSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
+								actualizarLblNombre();
+								tableDraw();
+								break;
+							case GRUPO:
+								//Llamar a crear planificacion docente
+								grupoSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
+								Runner.fct.getPeriodos().get(0).crearPlanificacionDocente(Runner.fct.buscarUnProfesor(profeSelec), 
+										Runner.fct.getPlanEstudio().buscarAsignatura(asignaturaSelec),
+										Runner.fct.buscarGrupo(grupoSelec));
+								JOptionPane.showMessageDialog(null, "Planificación realizada con éxito");
+								btnSeleccionado = BotonSelec.PLANDOCENTE;
+								auxBtn.setText("Crear Planificaci\u00F3n Docente");
+								actualizarLblNombre();
+								tableDraw();
+								break;
 
-					default:
-						break;
-					}
-						
+							default:
+								break;
+							}
+						}		
 				}
 
 				@Override
@@ -214,6 +220,9 @@ public class PlanDocente extends JDialog {
 					@Override
 					public void mouseClicked(MouseEvent e){
 						switch (btnSeleccionado) {
+						case PLANDOCENTE:
+							JOptionPane.showMessageDialog(null, "No existe ruta hacia atrás");
+							break;
 						case PROFESOR:
 							JOptionPane.showMessageDialog(null, "No existe ruta hacia atrás");
 							break;
@@ -223,7 +232,7 @@ public class PlanDocente extends JDialog {
 							tableDraw();
 							actualizarLblNombre();
 							break;
-						case ESTUDIANTE:
+						case GRUPO:
 							centrarCelda.setHorizontalAlignment(JLabel.CENTER);
 							btnSeleccionado = BotonSelec.PLANESTUDIO;
 							tableDraw();
@@ -239,6 +248,14 @@ public class PlanDocente extends JDialog {
 				mainPanel.add(atrasBtn);
 				
 				annoComboBox = new JComboBox();
+				annoComboBox.addItemListener(new ItemListener() {
+		            @Override
+		            public void itemStateChanged(ItemEvent e) {
+		                if (e.getStateChange() == ItemEvent.SELECTED) {
+		                	tableDraw();
+		                }
+		            }
+		        });
 				annoComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6"}));
 				annoComboBox.setBounds(69, 72, 37, 20);
 				mainPanel.add(annoComboBox);
@@ -248,6 +265,14 @@ public class PlanDocente extends JDialog {
 				mainPanel.add(lblAnno);
 				
 				semestreComboBox = new JComboBox();
+				semestreComboBox.addItemListener(new ItemListener() {
+		            @Override
+		            public void itemStateChanged(ItemEvent e) {
+		                if (e.getStateChange() == ItemEvent.SELECTED) {
+		                	tableDraw();
+		                }
+		            }
+		        });
 				semestreComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2"}));
 				semestreComboBox.setBounds(146, 72, 37, 20);
 				mainPanel.add(semestreComboBox);
@@ -267,11 +292,10 @@ public class PlanDocente extends JDialog {
 		switch(btnSeleccionado){
 			case PROFESOR:
 				tabla = new JTableNoEdit(Runner.modeloProfesor);
-				//tabla.getColumnModel().getColumn(7).setCellRenderer(centrarCelda);
 				tabla.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 
-							JOptionPane.showConfirmDialog(null, "No se permite modificar");/*
+							JOptionPane.showMessageDialog(null, "No se permite modificar");/*
 							btnSeleccionado = BotonSelec.PLANESTUDIO;
 							profeSelec = tablaNotas.getValueAt(tablaNotas.getSelectedRow(), 0).toString();
 							tableDraw();
@@ -283,38 +307,38 @@ public class PlanDocente extends JDialog {
 			case GRUPO:
 				tabla = new JTableNoEdit(Runner.modeloGrupoReporte);/*
 				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
-				tablaNotas.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);
+				tablaNotas.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);*/
 				tabla.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 
 							JOptionPane.showMessageDialog(null, "No se permite modificar");
 					}
-				});*/
+				});
 				break;
 			case PLANESTUDIO:
-				tabla = new JTableNoEdit(Runner.modeloPlanDeEstudio);/*
+				tabla = new JTableNoEdit(Runner.modeloPlanDeEstudio);
 				tabla.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 
-							JOptionPane.showConfirmDialog(null, "No se permite modificar");
-							btnSeleccionado = BotonSelec.GRUPO;
+							JOptionPane.showMessageDialog(null, "No se permite modificar");
+							/*btnSeleccionado = BotonSelec.GRUPO;
 							asignaturaSelec = tablaNotas.getValueAt(tablaNotas.getSelectedRow(), 0).toString();
 							tableDraw();
-							actualizarLblNombre();
+							actualizarLblNombre();*/
 					}
-				});*/
+				});
 				break;
 			case PLANDOCENTE:
 				if(Integer.valueOf(semestreComboBox.getSelectedItem().toString())==1){
-					DatosAuto.llenarTablaPlanificacionDocente(Runner.fct.getPeriodos().get(annoComboBox.getSelectedIndex()).getPlanificacionesDocentes());
+					DatosAuto.definirTablaPlanDocente(Runner.fct.getPeriodos().get(annoComboBox.getSelectedIndex()).getPlanificacionesDocentes());
 				}else{
-					DatosAuto.llenarTablaPlanificacionDocente(Runner.fct.getPeriodos().get(annoComboBox.getSelectedIndex()+6).getPlanificacionesDocentes());
+					DatosAuto.definirTablaPlanDocente(Runner.fct.getPeriodos().get(annoComboBox.getSelectedIndex()+6).getPlanificacionesDocentes());
 				}
 				tabla = new JTableNoEdit(Runner.modeloPlanDocente);
 				tabla.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 
-							JOptionPane.showConfirmDialog(null, "No se permite modificar");
+							JOptionPane.showMessageDialog(null, "No se permite modificar");
 					}
 				});
 				break;

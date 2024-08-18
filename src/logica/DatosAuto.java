@@ -301,10 +301,10 @@ public class DatosAuto {
 	 * @param planesDocentes
 	 */
 	public static void definirTablaPlanDocente(ArrayList<PlanificacionDocente> planesDocentes){
-	//	Runner.modeloPlanDocente = new DefaultTableModel();
-	//	Runner.modeloPlanDocente.addColumn("Profesor");
-	//	Runner.modeloPlanDocente.addColumn("Estudiante");
-	//	Runner.modeloPlanDocente.addColumn("Grupo");
+		Runner.modeloPlanDocente = new DefaultTableModel();
+		Runner.modeloPlanDocente.addColumn("Profesor");
+		Runner.modeloPlanDocente.addColumn("Estudiante");
+		Runner.modeloPlanDocente.addColumn("Grupo");
 		agregarFilasPlanesDocentes(planesDocentes);
 	}
 	
@@ -318,7 +318,7 @@ public class DatosAuto {
 			JOptionPane.showMessageDialog(null, "No hay registro de planificaciones docentes. Por favor, añada.");
 		}else{
 			for(PlanificacionDocente p : planesDocentes){
-			//	Runner.modeloPlanDocente.addRow(convertirAObjetoPlanDocente(p));
+				Runner.modeloPlanDocente.addRow(convertirAObjetoPlanDocente(p));
 			}
 		}
 	}
@@ -333,8 +333,9 @@ public class DatosAuto {
 		return planDocenteObj;
 	}
 	
+	//Para usar tabla con objetos
 	public static void llenarTablaPlanificacionDocente(ArrayList<PlanificacionDocente> planesDocentes){
-		Runner.modeloPlanDocente = new ModeloPlanificacionDocenteEdit(planesDocentes);
+		Runner.modeloPlanDocente1 = new ModeloPlanificacionDocenteEdit(planesDocentes);
 	}
 	
 	
