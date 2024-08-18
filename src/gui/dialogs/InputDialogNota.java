@@ -23,8 +23,15 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+
 import java.awt.Cursor;
+
 import javax.swing.SpinnerListModel;
+
+import logica.Asignatura;
+import logica.Estudiante;
+import logica.Grupo;
+import logica.Profesor;
 
 
 
@@ -33,8 +40,9 @@ public class InputDialogNota extends JDialog {
 	private static final long serialVersionUID = 1L;
 	
 	private final JPanel upperBarPanel = new JPanel();
-	private JSpinner spinnerNota;
-	private String nota;
+	private JSpinner spinnerNota1;
+	private String nota1;
+	private String nota2;
 
 	/**
 	 * Crear Input para agregar
@@ -45,7 +53,9 @@ public class InputDialogNota extends JDialog {
 		setBounds(100, 100, 359, 140);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
-		nota = new String();
+		
+		nota1 = new String();
+		nota2 = new String();
 		
 		
 		final JLabel closeBotton = new JLabel("");
@@ -94,16 +104,28 @@ public class InputDialogNota extends JDialog {
 			panel.setBounds(209, 0, 150, 107);
 			mainPanel.add(panel);
 			
-			JLabel lblNota = new JLabel("Nota:");
-			lblNota.setBounds(10, 11, 166, 20);
-			mainPanel.add(lblNota);
+			JLabel lblNota1 = new JLabel("Nota 1:");
+			lblNota1.setBounds(10, 11, 51, 20);
+			mainPanel.add(lblNota1);
 			
-			spinnerNota = new JSpinner();
-			spinnerNota.setModel(new SpinnerListModel(new String[] {"2", "3", "4", "5"}));
-			JSpinner.DefaultEditor editor = (JSpinner.DefaultEditor) spinnerNota.getEditor();
-			editor.getTextField().setEditable(false);
-			spinnerNota.setBounds(10, 31, 51, 20);
-			mainPanel.add(spinnerNota);
+			spinnerNota1 = new JSpinner();
+			spinnerNota1.setModel(new SpinnerListModel(new String[] {"2", "3", "4", "5"}));
+			JSpinner.DefaultEditor editor1 = (JSpinner.DefaultEditor) spinnerNota1.getEditor();
+			editor1.getTextField().setEditable(false);
+			spinnerNota1.setBounds(10, 31, 51, 20);
+			mainPanel.add(spinnerNota1);
+			
+			JLabel lblNota2 = new JLabel("Nota 2:");
+			lblNota2.setBounds(105, 11, 51, 20);
+			mainPanel.add(lblNota2);
+			
+			final JSpinner spinnerNota2 = new JSpinner();
+			spinnerNota2.setModel(new SpinnerListModel(new String[] {"2", "3", "4", "5"}));
+			JSpinner.DefaultEditor editor2 = (JSpinner.DefaultEditor) spinnerNota2.getEditor();
+			editor2.getTextField().setEditable(false);
+			spinnerNota2.setBounds(105, 31, 51, 20);
+			mainPanel.add(spinnerNota2);
+			
 			
 			final JLabel inputBotton = new JLabel("");
 			inputBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -119,10 +141,18 @@ public class InputDialogNota extends JDialog {
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					nota = spinnerNota.getModel().getValue().toString();
-					ControlDocente.mensajeConfirm(nota);
+					nota1 = spinnerNota1.getModel().getValue().toString();
+					nota2 = spinnerNota2.getModel().getValue().toString();
+					Profesor profe = (Profesor) Runner.fct.buscarPersona(ControlDocenteFrame.profeSelec);
+					Asignatura asignatura = Runner.fct.getPlanEstudio().buscarAsignatura(ControlDocenteFrame.asignaturaSelec);
+					Estudiante estudiante = Runner.fct.buscarUnEstudiante(ControlDocenteFrame.estuSelec);
+					//Grupo grupo = Runner.fct.buscarGrupo(ControlDocenteFrame.grupoSelec);
+					/*
+					 * MANDAR NOTA A LOGICA
+					 */
+					profe.darNota(estudiante, asignatura, Integer.valueOf(nota1), Integer.valueOf(nota2));
+					ControlDocenteFrame.mensajeConfirm(nota1, nota2);
 					dispose();
-					//Mandar nota a logica...
 				}
 			});
 			inputBotton.setIcon(new ImageIcon(InputDialogEst.class.getResource("/gui/utils/addBottonJDialog.png")));
@@ -155,5 +185,4 @@ public class InputDialogNota extends JDialog {
 			
 		}
 	}
-	
 }

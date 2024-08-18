@@ -511,7 +511,7 @@ public class MainFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					ControlDocente dialog = new ControlDocente();
+					ControlDocenteFrame dialog = new ControlDocenteFrame();
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				} catch (Exception exc) {

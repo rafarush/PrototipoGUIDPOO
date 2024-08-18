@@ -49,7 +49,7 @@ import javax.swing.border.LineBorder;
 
 import java.awt.Cursor;
 
-public class ControlDocente extends JDialog {
+public class ControlDocenteFrame extends JDialog {
 
 	private final JPanel upperBarPanel = new JPanel();
 	private JComboBox asignaturasComboBox;
@@ -60,15 +60,17 @@ public class ControlDocente extends JDialog {
 	private final JLabel atrasBtn;
 	private JLabel lblTabla;
 	private BotonSelec btnSeleccionado = BotonSelec.PROFESOR;
-	private static String asignaturaSelec;
-	private static String profeSelec;
+	public static String asignaturaSelec;
+	public static String profeSelec;
+	public static String grupoSelec;
+	public static String estuSelec;
 	private static int filaSelec;
 
 
 	/**
 	 * Crea el JDialog
 	 */
-	public ControlDocente() {
+	public ControlDocenteFrame() {
 		setUndecorated(true);
 		setModal(true);
 		setBounds(100, 100, 617, 415);
@@ -128,6 +130,7 @@ public class ControlDocente extends JDialog {
 				lblTabla.setForeground(new Color(51, 51, 51));
 				lblTabla.setBounds(146, 11, 166, 20);
 				mainPanel.add(lblTabla);
+				
 				actualizarLblNombre();
 				
 				final JLabel darNotaBtn = new JLabel("Dar Nota");
@@ -141,6 +144,7 @@ public class ControlDocente extends JDialog {
 						if(!(btnSeleccionado==BotonSelec.ESTUDIANTE) || filaSelec == -1){
 							JOptionPane.showMessageDialog(null, "Para dar nota debe tener un estudiante seleccionado");
 						}else{
+							estuSelec = tablaNotas.getValueAt(filaSelec, 0).toString();
 							try {
 								Runner.inputNota = new InputDialogNota();
 								Runner.inputNota.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -189,15 +193,15 @@ public class ControlDocente extends JDialog {
 				
 				atrasBtn = new JLabel("");
 				atrasBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				atrasBtn.setIcon(new ImageIcon(ControlDocente.class.getResource("/gui/utils/flechaAtras24Selected.png")));
+				atrasBtn.setIcon(new ImageIcon(ControlDocenteFrame.class.getResource("/gui/utils/flechaAtras24Selected.png")));
 				atrasBtn.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseEntered(MouseEvent e) {
-						atrasBtn.setIcon(new ImageIcon(ControlDocente.class.getResource("/gui/utils/flechaAtras24Selected.png")));
+						atrasBtn.setIcon(new ImageIcon(ControlDocenteFrame.class.getResource("/gui/utils/flechaAtras24Selected.png")));
 					}
 					@Override
 					public void mouseExited(MouseEvent e) {
-						atrasBtn.setIcon(new ImageIcon(ControlDocente.class.getResource("/gui/utils/flechaAtras24.png")));
+						atrasBtn.setIcon(new ImageIcon(ControlDocenteFrame.class.getResource("/gui/utils/flechaAtras24.png")));
 					}
 					@Override
 					public void mouseClicked(MouseEvent e){
@@ -211,9 +215,15 @@ public class ControlDocente extends JDialog {
 							tableDraw();
 							actualizarLblNombre();
 							break;
-						case ESTUDIANTE:
+						case GRUPO:
 							centrarCelda.setHorizontalAlignment(JLabel.CENTER);
 							btnSeleccionado = BotonSelec.PLANESTUDIO;
+							tableDraw();
+							actualizarLblNombre();
+							break;
+						case ESTUDIANTE:
+							centrarCelda.setHorizontalAlignment(JLabel.CENTER);
+							btnSeleccionado = BotonSelec.GRUPO;
 							tableDraw();
 							actualizarLblNombre();
 							break;
@@ -236,6 +246,7 @@ public class ControlDocente extends JDialog {
 	private void tableDraw(){
 		switch(btnSeleccionado){
 			case PROFESOR:
+				DatosAuto.definirTablaProfes(Runner.fct.buscarProfesores());
 				tablaNotas = new JTableNoEdit(Runner.modeloProfesor);
 				tablaNotas.getColumnModel().getColumn(7).setCellRenderer(centrarCelda);
 				tablaNotas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -248,7 +259,25 @@ public class ControlDocente extends JDialog {
 					}
 				});
 				break;
+			case GRUPO:
+				DatosAuto.definirTablaGrupo(Runner.fct.buscarGrupoConMenorCantidad());
+				tablaNotas = new JTableNoEdit(Runner.modeloGrupoReporte);/*
+				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
+				tablaNotas.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);*/
+				tablaNotas.addMouseListener(new java.awt.event.MouseAdapter() {
+					public void mouseClicked(java.awt.event.MouseEvent e) {
+						if (e.getClickCount() == 2) {
+							//JOptionPane.showMessageDialog(null, "No se permite modificar");
+							btnSeleccionado = BotonSelec.ESTUDIANTE;
+							grupoSelec = tablaNotas.getValueAt(tablaNotas.getSelectedRow(), 0).toString();
+							tableDraw();
+							actualizarLblNombre();
+						}
+					}
+				});
+				break;
 			case ESTUDIANTE:
+				DatosAuto.definirTablaEstudiantes(Runner.fct.buscarGrupo(grupoSelec).getGrupoEstudiantes());
 				tablaNotas = new JTableNoEdit(Runner.modeloEstudiante);
 				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
 				tablaNotas.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);
@@ -260,13 +289,19 @@ public class ControlDocente extends JDialog {
 				});
 				break;
 			case PLANESTUDIO:
+				/*
+				 * Falta metodo para saber que asignaturas da un profe
+				 */
+				/*Profesor profe = Runner.fct.buscarPersona(profeSelec);
+				ArrayList<Asignatura> asig = profe.getAsignaturas() [O algo asi]
+				DatosAuto.definirTablaPlanDeEstudio(Runner.fct.);*/
 				tablaNotas = new JTableNoEdit(Runner.modeloPlanDeEstudio);
 				for(int i=1; i<=3;i++)
 					tablaNotas.getColumnModel().getColumn(i).setCellRenderer(centrarCelda);
 				tablaNotas.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 
-							btnSeleccionado = BotonSelec.ESTUDIANTE;
+							btnSeleccionado = BotonSelec.GRUPO;
 							asignaturaSelec = tablaNotas.getValueAt(tablaNotas.getSelectedRow(), 0).toString();
 							tableDraw();
 							actualizarLblNombre();
@@ -287,13 +322,17 @@ public class ControlDocente extends JDialog {
 			lblTabla.setText("Seleccione una Asignatura");
 			break;
 		case ESTUDIANTE:
-			lblTabla.setText("Seleccione un Estudiante");
+			lblTabla.setText("Estudiantes del Grupo");
+			break;
+		case GRUPO:
+			lblTabla.setText("Seleccione un Grupo");
 			break;
 		}
 	}
 	
-	public static void mensajeConfirm(String nota){
+	public static void mensajeConfirm(String nota1, String nota2){
 		JOptionPane.showMessageDialog(null, "Confirmación :\nCI Estudiante: "+tablaNotas.getValueAt(filaSelec, 0)+
-				"\nNota: "+nota+"\nAsignatura: "+asignaturaSelec+"\nCI Profesor: "+profeSelec);
+				"\nGrupo: "+grupoSelec+
+				"\nNota1: "+nota1+"\nNota2: "+nota2+"\nAsignatura: "+asignaturaSelec+"\nCI Profesor: "+profeSelec);
 	}
 }
