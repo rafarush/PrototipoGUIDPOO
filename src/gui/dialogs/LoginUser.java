@@ -31,6 +31,8 @@ import javax.swing.SwingWorker;
 import logica.User;
 
 import javax.swing.JProgressBar;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 
 
@@ -128,6 +130,59 @@ public class LoginUser extends JDialog {
 			mainPanel.add(lblUserIcon);
 			
 			passwordField = new JPasswordField();
+			passwordField.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if (e.getKeyChar() == '\n'){
+						if (nombreTextField.getText().isEmpty() || passwordField.getPassword().toString().isEmpty()){
+							JOptionPane.showMessageDialog(null, "Existen campos vacíos");
+						}else{
+							if(!login()){
+								JOptionPane.showMessageDialog(null, "Credenciales Incorrectas");
+							}else{
+								JOptionPane.showMessageDialog(null, "Credenciales Correctas");
+								
+								SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
+							            @Override
+							            protected Void doInBackground() throws Exception {
+							                for (int i = 0; i <= 100; i++) {
+							                    publish(i);
+							                    Thread.sleep(7);
+							                }
+							                dispose();
+							                return null;
+
+							            }
+
+							            @Override
+							            protected void process(java.util.List<Integer> chunks) {
+							                int lastValue = chunks.get(chunks.size() - 1);
+							                progressBar.setValue(lastValue);
+							            }
+							        };
+							     worker.execute();
+							     //mainframe...
+							     /**
+							      * Abrir la ventana principal
+							      */
+							      
+									EventQueue.invokeLater(new Runnable() {
+										public void run() {
+											try {
+												Runner.frame = new MainFrame();
+												ImageIcon appIcono = new ImageIcon(MainFrame.class.getResource("/gui/utils/appicon.png"));
+												Runner.frame.setIconImage(appIcono.getImage());
+												Runner.frame.setVisible(true);
+											} catch (Exception e1) {
+												e1.printStackTrace();
+											}
+										}
+									});
+							}
+						}
+					}
+				}
+			});
 			passwordField.setBounds(81, 234, 223, 20);
 			mainPanel.add(passwordField);
 			
