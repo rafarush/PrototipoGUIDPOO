@@ -258,6 +258,7 @@ public class PlanDocente extends JDialog {
 		        });
 				annoComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6"}));
 				annoComboBox.setBounds(69, 72, 37, 20);
+				annoComboBox.setSelectedIndex(0);
 				mainPanel.add(annoComboBox);
 				
 				JLabel lblAnno = new JLabel("A\u00F1o:");
@@ -275,6 +276,7 @@ public class PlanDocente extends JDialog {
 		        });
 				semestreComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2"}));
 				semestreComboBox.setBounds(146, 72, 37, 20);
+				semestreComboBox.setSelectedIndex(0);
 				mainPanel.add(semestreComboBox);
 				
 				JLabel lblSemestre = new JLabel("Semestre:");
@@ -329,7 +331,7 @@ public class PlanDocente extends JDialog {
 				});
 				break;
 			case PLANDOCENTE:
-				if(Integer.valueOf(semestreComboBox.getSelectedItem().toString())==1){
+				if(Integer.valueOf(semestreComboBox.getSelectedItem().toString()) == 1){
 					DatosAuto.definirTablaPlanDocente(Runner.fct.getPeriodos().get(annoComboBox.getSelectedIndex()).getPlanificacionesDocentes());
 				}else{
 					DatosAuto.definirTablaPlanDocente(Runner.fct.getPeriodos().get(annoComboBox.getSelectedIndex()+6).getPlanificacionesDocentes());

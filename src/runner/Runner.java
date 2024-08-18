@@ -43,7 +43,6 @@ public class Runner {
 	public static ArrayList<PlanificacionDocente> planesDocentes;
 	public static Fct fct;
 	
-	//Fct fct;
 	
 	/**
 	* Launch the application.
@@ -72,6 +71,8 @@ public class Runner {
 		fct.crearPersona("05032379581", "Rafael11111 Menéndez Rodriguez", 1 ,"Sucursal Comercial #5","Etecsa", "Calle 30 entre 34 y Ave. 56");
 		fct.crearPersona("08868513264", "Alejandro González Fernández",1,"La Mariposa","TRD","Ave. 26 entre calles A y B");
 		fct.crearPersona("04021324587", "Jorgito", 2, "Las Palamas", "CTC", "Tulipan y Boyeros");
+		fct.crearPersona("04021334457", "Rafa", 6, "Las Palamas", "CTC", "Tulipan y Boyeros");
+		fct.crearPersona("90990834457", "TOYCHOLITO", 6, "Las Palamas", "CTC", "Tulipan y Boyeros");
 		
 		
 		DatosAuto.definirTablaEstudiantes(fct.buscarEstudiantes());
@@ -96,37 +97,35 @@ public class Runner {
 		DatosAuto.definirTablaPlanDeEstudio(fct.getPlanEstudio().getAsignaturas());
 		
 		//ESTUDIANTE PARA REPORTES
-		DatosAuto.definirTablaReportesEstu(fct.buscarEstudiantesOros());
+		//DatosAuto.definirTablaReportesEstu(fct.buscarEstudiantesOros());
 
 		
 		
 		// GRUPOS
-		fct.crearGrupo("Grupo", 1);
+		fct.crearGrupo("13", 1);
+		fct.crearGrupo("64", 6);
 		
 		
 		// AGREGAR A GRUPOS
-		fct.buscarGrupo("Grupo").insertarAGrupoEstudiante(fct.buscarUnEstudiante("05032379581"));
-		fct.buscarGrupo("Grupo").insertarAGrupoEstudiante(fct.buscarUnEstudiante("08868513264"));
-		fct.buscarGrupo("Grupo").insertarAGrupoEstudiante(fct.buscarUnEstudiante("04021324587"));
+		fct.buscarGrupo("13").insertarAGrupoEstudiante(fct.buscarUnEstudiante("05032379581"));
+		fct.buscarGrupo("13").insertarAGrupoEstudiante(fct.buscarUnEstudiante("08868513264"));
+		fct.buscarGrupo("13").insertarAGrupoEstudiante(fct.buscarUnEstudiante("04021324587"));
+		fct.buscarGrupo("64").insertarAGrupoEstudiante(fct.buscarUnEstudiante("04021334457"));
 		
 		
 		//PLANES DOCENTES
 		
-		fct.getPeriodos().get(0).crearPlanificacionDocente(fct.buscarUnProfesor("95868426587"),fct.getPlanEstudio().buscarAsignatura("Matemática I") , fct.buscarGrupo("Grupo"));
-		fct.getPeriodos().get(0).crearPlanificacionDocente(fct.buscarUnProfesor("05062347564"),fct.getPlanEstudio().buscarAsignatura("Introducción a la Programación") , fct.buscarGrupo("Grupo"));
+		fct.getPeriodos().get(0).crearPlanificacionDocente(fct.buscarUnProfesor("95868426587"),fct.getPlanEstudio().buscarAsignatura("Matemática I") , fct.buscarGrupo("13"));
+		fct.getPeriodos().get(0).crearPlanificacionDocente(fct.buscarUnProfesor("05062347564"),fct.getPlanEstudio().buscarAsignatura("Introducción a la Programación") , fct.buscarGrupo("13"));
 		
-		DatosAuto.definirTablaPlanDocente(fct.getPeriodos().get(0).getPlanificacionesDocentes());
+		
+	    DatosAuto.definirTablaPlanDocente(fct.getPeriodos().get(0).getPlanificacionesDocentes());
 		//DatosAuto.llenarTablaPlanificacionDocente(fct.getPeriodos().get(0).getPlanificacionesDocentes());
 		
 		
 		DatosAuto.definirTablaGrupo(fct.buscarGrupoConMenorCantidad());
 		//DatosAuto.llenarFilasGrupo(fct.buscarGrupoConMenorCantidad());
 				
-		/*ArrayList<PlanificacionDocente> pd= new ArrayList<PlanificacionDocente>();
-		pd = Runner.fct.getPeriodos().get(0).getPlanificacionesDocentes();
-		for (PlanificacionDocente planificacionDocente : pd) {
-			System.out.println(planificacionDocente);
-		}*/
 		
 		try {
 			login = new LoginUser();

@@ -92,7 +92,6 @@ public class DatosAuto {
 		Runner.modeloEstudiante.addColumn("CI");
 		Runner.modeloEstudiante.addColumn("Nombre");
 		Runner.modeloEstudiante.addColumn("Año");
-		//Runner.modeloEstudiante.addColumn("Grupo");
 		Runner.modeloEstudiante.addColumn("Centro Laboral");
 		Runner.modeloEstudiante.addColumn("Organismo");
 		Runner.modeloEstudiante.addColumn("Dirección");
@@ -164,10 +163,6 @@ public class DatosAuto {
 		Object[] persoAuxObj = new Object[]{persoAux.getID(), persoAux.getNombre(), persoAux.getLabor(), 
 				persoAux.getDireccion(), persoAux.calcularSalario()};	
 		
-		if (persoAux.getSalario()==0.0f){ //Si el salario es 0.0f es pq no se ha calculado 
-			persoAuxObj[4] = null;
-		}
-		
 		return persoAuxObj;
 	}
 	
@@ -235,7 +230,7 @@ public class DatosAuto {
 	 */
 	public static void agregarFilasReportesEstu(ArrayList<Estudiante> estudiantesReporte){
 		if(estudiantesReporte.isEmpty()){
-			JOptionPane.showMessageDialog(null, "No hay registro de Estudiantes. Por favor, añada.");
+			JOptionPane.showMessageDialog(null, "No hay registro de Estudiantes para este Reporte");
 		}else{
 			for(Estudiante e : estudiantesReporte){
 				Runner.modeloEstudianteReporte.addRow(convertirAObjetoEstudiante(e));
@@ -314,6 +309,7 @@ public class DatosAuto {
 	 * @param planesDocentes
 	 */
 	public static void agregarFilasPlanesDocentes(ArrayList<PlanificacionDocente> planesDocentes){
+		
 		if(planesDocentes.isEmpty()){
 			JOptionPane.showMessageDialog(null, "No hay registro de planificaciones docentes. Por favor, añada.");
 		}else{

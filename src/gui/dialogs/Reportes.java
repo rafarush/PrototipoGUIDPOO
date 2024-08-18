@@ -128,7 +128,7 @@ public class Reportes extends JDialog {
 				reportesComboBox.setModel(new DefaultComboBoxModel(new String[] {"Estudiantes sin nota", 
 						"Estudiantes sin grupos", "Estudiantes graduados", "Estudiantes suspensos en 1 o 2 asignaturas", 
 						"Estudiantes con m\u00E1s de 4.5 de \u00EDndice acad\u00E9mico", 
-						"Grupo con menor cantidad de estudiantes(Dado el a\u00F1o)"}));
+						"Grupo con menor cantidad de estudiantes(En cada a\u00F1o)"}));
 				reportesComboBox.setRenderer(new ComboBoxTextInicial("Seleccione un reporte"));
 				reportesComboBox.setSelectedIndex(-1);
 				reportesComboBox.addActionListener(new ActionListener() {			
@@ -178,9 +178,11 @@ public class Reportes extends JDialog {
 		}	
 		
 	}
-
+	
 	private void tableDraw(){
-		if (reportesComboBox.getSelectedIndex()>=0 && reportesComboBox.getSelectedIndex()<=4){
+		switch (reportesComboBox.getSelectedIndex()) {
+		case 0:
+			DatosAuto.definirTablaReportesEstu(Runner.fct.buscarEstudiantesSinNotas());
 			tablaReportes = new JTableNoEdit(Runner.modeloEstudianteReporte);
 			tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -191,12 +193,61 @@ public class Reportes extends JDialog {
 			tablaReportes.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
 			tablaReportes.getTableHeader().setReorderingAllowed(false);
 			scrollPane.setViewportView(tablaReportes);
-		}else if(reportesComboBox.getSelectedIndex()==5){
-			/*
-			if(recordar){
-				JOptionPane.showMessageDialog(null, "Puede acceder a los estudiantes de cada grupo haciendo doble click sobre el grupo deseado");
-				recordar = false;
-			}*/
+			break;
+		case 1:
+			DatosAuto.definirTablaReportesEstu(Runner.fct.buscarEstudiantesSinGrupo());
+			tablaReportes = new JTableNoEdit(Runner.modeloEstudianteReporte);
+			tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent e) {
+					if (e.getClickCount() == 2) 
+						JOptionPane.showMessageDialog(null, "No se permite modificación");
+				}
+			});
+			tablaReportes.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
+			tablaReportes.getTableHeader().setReorderingAllowed(false);
+			scrollPane.setViewportView(tablaReportes);
+			break;
+		case 2:
+			DatosAuto.definirTablaReportesEstu(Runner.fct.buscarEstudiantesGraduados());
+			tablaReportes = new JTableNoEdit(Runner.modeloEstudianteReporte);
+			tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent e) {
+					if (e.getClickCount() == 2) 
+						JOptionPane.showMessageDialog(null, "No se permite modificación");
+				}
+			});
+			tablaReportes.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
+			tablaReportes.getTableHeader().setReorderingAllowed(false);
+			scrollPane.setViewportView(tablaReportes);
+			break;
+		case 3:
+			DatosAuto.definirTablaReportesEstu(Runner.fct.buscarEstudiantesConArrastre());
+			tablaReportes = new JTableNoEdit(Runner.modeloEstudianteReporte);
+			tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent e) {
+					if (e.getClickCount() == 2) 
+						JOptionPane.showMessageDialog(null, "No se permite modificación");
+				}
+			});
+			tablaReportes.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
+			tablaReportes.getTableHeader().setReorderingAllowed(false);
+			scrollPane.setViewportView(tablaReportes);
+			break;
+		case 4:
+			DatosAuto.definirTablaReportesEstu(Runner.fct.buscarEstudiantesOros());
+			tablaReportes = new JTableNoEdit(Runner.modeloEstudianteReporte);
+			tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent e) {
+					if (e.getClickCount() == 2) 
+						JOptionPane.showMessageDialog(null, "No se permite modificación");
+				}
+			});
+			tablaReportes.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
+			tablaReportes.getTableHeader().setReorderingAllowed(false);
+			scrollPane.setViewportView(tablaReportes);
+			break;
+		case 5:
+			DatosAuto.definirTablaGrupo(Runner.fct.buscarGrupoConMenorCantidad());
 			tablaReportes = new JTableNoEdit(Runner.modeloGrupoReporte);
 			tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e1) {
@@ -206,7 +257,8 @@ public class Reportes extends JDialog {
 						/**
 						 * Actualiza la tabla con los datos de los esrudiantes del grupo clickeado
 						 */
-						DatosAuto.definirTablaReportesEstu(Runner.gruposReportes.get(filaSelec).getGrupoEstudiantes());
+						String nombreGrupoSelect = tablaReportes.getValueAt(filaSelec,0).toString();
+						DatosAuto.definirTablaReportesEstu(Runner.fct.buscarGrupo(nombreGrupoSelect).getGrupoEstudiantes());
 						tablaReportes = new JTableNoEdit(Runner.modeloEstudianteReporte);
 						tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
 							public void mouseClicked(java.awt.event.MouseEvent e2) {
@@ -223,8 +275,12 @@ public class Reportes extends JDialog {
 				tablaReportes.getColumnModel().getColumn(1).setCellRenderer(centrarCelda);
 				tablaReportes.getTableHeader().setReorderingAllowed(false);
 				scrollPane.setViewportView(tablaReportes);
-		}else if (reportesComboBox.getSelectedIndex()==-1){
-			JOptionPane.showMessageDialog(null, "Seleccione un reporte en el ComboBox");
+			break;
+
+		default:
+			break;
 		}
+		
 	}
+	
 }
