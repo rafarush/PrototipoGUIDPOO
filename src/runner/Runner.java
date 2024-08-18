@@ -76,7 +76,7 @@ public class Runner {
 		
 		
 		DatosAuto.definirTablaEstudiantes(fct.buscarEstudiantes());
-					
+		
 		
 		// JORGITOOOOOOO ---->>>>    la creacion del personal de apoyo por defecto
 		fct.crearPersona("09062235147", "Federico Criado Domínguez","Laboratorio", "Calle 30 entre 34 y Ave. 56");
@@ -103,6 +103,7 @@ public class Runner {
 		
 		// GRUPOS
 		fct.crearGrupo("13", 1);
+		fct.crearGrupo("14", 1);
 		fct.crearGrupo("64", 6);
 		
 		

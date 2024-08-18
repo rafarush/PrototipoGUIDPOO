@@ -260,7 +260,10 @@ public class ControlDocenteFrame extends JDialog {
 				});
 				break;
 			case GRUPO:
-				DatosAuto.definirTablaGrupo(Runner.fct.buscarGrupoConMenorCantidad());
+				/*
+				 * Falta funcion que devuelva todos los grupos
+				 */
+				DatosAuto.definirTablaGrupo(Runner.fct.getGrupos());
 				tablaNotas = new JTableNoEdit(Runner.modeloGrupoReporte);/*
 				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
 				tablaNotas.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);*/
@@ -288,8 +291,7 @@ public class ControlDocenteFrame extends JDialog {
 					}
 				});
 				break;
-			case PLANESTUDIO:
-				/*
+			case PLANESTUDIO:/*
 				 * Falta metodo para saber que asignaturas da un profe
 				 */
 				/*Profesor profe = Runner.fct.buscarPersona(profeSelec);
