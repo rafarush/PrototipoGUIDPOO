@@ -63,7 +63,10 @@ public class Runner {
 		fct.crearPersona("05022358174", "Jorge Castro Pérez","Máster","Asistente","Cujae","MINES", "Calle 25 entre 21 y Ave. 26");
 		fct.crearPersona("05062347564", "Manuel Castro Reyes","Máster","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
 		
-		DatosAuto.definirTablaProfes(fct.buscarProfesores());
+		
+		//System.out.println(((Profesor)fct.buscarPersona("95868426587")).calcularSalario());
+		
+		//DatosAuto.definirTablaProfes(fct.buscarProfesores());
 		//DatosAuto.llenarFilasProfes(fct.buscarProfesores());
 		
 

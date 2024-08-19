@@ -180,6 +180,7 @@ public class MainFrame extends JFrame {
 						} catch (Exception exc) {
 							exc.printStackTrace();
 						}
+						tableDraw();
 						break;
 					case ESTUDIANTE:
 						try {
@@ -207,6 +208,8 @@ public class MainFrame extends JFrame {
 						} catch (Exception exc) {
 							exc.printStackTrace();
 						}
+					case GRUPO:
+						JOptionPane.showMessageDialog(null, "Implementar");
 						break;
 				}		
 			}
@@ -339,6 +342,9 @@ public class MainFrame extends JFrame {
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
+							break;
+						case GRUPO:
+							JOptionPane.showMessageDialog(null, "Implementar");
 							break;
 					}
 				}
@@ -933,6 +939,7 @@ public class MainFrame extends JFrame {
 	private void tableDraw(){
 		switch(btnSeleccionado){
 			case PROFESOR:
+				DatosAuto.definirTablaProfes(Runner.fct.buscarProfesores());
 				table = new JTableNoEdit(Runner.modeloProfesor);
 				table.getColumnModel().getColumn(7).setCellRenderer(centrarCelda);
 				tableSorter = new TableRowSorter<>(Runner.modeloProfesor);

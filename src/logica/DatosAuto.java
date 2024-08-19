@@ -40,8 +40,6 @@ public class DatosAuto {
 	public static Object[] convertirAObjetoProfe(Profesor profe){
 		Object[] profeObj = new Object[]{profe.getID(), profe.getNombre(), profe.getCategoriaCientifica(), profe.getCategoriaDocente(), 
 				profe.getCentroLaboral(), profe.getOrganismo(), profe.getDireccion(), profe.calcularSalario()};
-	
-		
 		return profeObj;
 	}
 	

@@ -20,7 +20,10 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
 import java.awt.Cursor;
+
+import logica.DatosAuto;
 
 
 
@@ -139,7 +142,7 @@ public class InputDialogProfe extends JDialog {
 			mainPanel.add(lblCatDocente);
 			
 			final JComboBox catDocComboBox = new JComboBox();
-			catDocComboBox.setModel(new DefaultComboBoxModel(new String[] {"Instructor", "Asistente", "Profesor Auxiliar", "Profesor Titular"}));
+			catDocComboBox.setModel(new DefaultComboBoxModel(new String[] {"Instructor", "Asistente", "Auxiliar", "Titular"}));
 			catDocComboBox.setBounds(289, 287, 128, 20);
 			mainPanel.add(catDocComboBox);
 			
@@ -181,9 +184,13 @@ public class InputDialogProfe extends JDialog {
 					if(nombreTextField.getText().isEmpty() || ciTextField.getText().isEmpty() || direccTextField.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Existen campos vacíos");
 					}else{
-						Runner.modeloProfesor.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(), 
+						Runner.fct.crearPersona(ciTextField.getText(), nombreTextField.getText(), catCienComboBox.getSelectedItem().toString(), 
+								catDocComboBox.getSelectedItem().toString(),centroLabTextField.getText(), organismoTextField.getText(),
+								direccTextField.getText());
+						//DatosAuto.definirTablaProfes(Runner.fct.buscarProfesores());
+						/*Runner.modeloProfesor.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(), 
 								(String)catCienComboBox.getSelectedItem(),(String)catDocComboBox.getSelectedItem(),
-								centroLabTextField.getText(), organismoTextField.getText(), direccTextField.getText()});
+								centroLabTextField.getText(), organismoTextField.getText(), direccTextField.getText()});*/
 						JOptionPane.showMessageDialog(null, "Se ha añadido al profesor con éxito");
 						dispose();
 					}
