@@ -78,7 +78,7 @@ public class Runner {
 		fct.crearPersona("90990834457", "TOYCHOLITO", 6, "Las Palamas", "CTC", "Tulipan y Boyeros");
 		
 		
-		DatosAuto.definirTablaEstudiantes(fct.buscarEstudiantes());
+		//DatosAuto.definirTablaEstudiantes(fct.buscarEstudiantes());
 		
 		
 		// JORGITOOOOOOO ---->>>>    la creacion del personal de apoyo por defecto

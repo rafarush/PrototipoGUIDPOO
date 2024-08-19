@@ -190,6 +190,7 @@ public class MainFrame extends JFrame {
 						} catch (Exception exc) {
 							exc.printStackTrace();
 						}
+						tableDraw();
 						break;
 					case PERSOAUX:
 						try {
@@ -952,6 +953,7 @@ public class MainFrame extends JFrame {
 				});
 				break;
 			case ESTUDIANTE:
+				DatosAuto.definirTablaEstudiantes(Runner.fct.buscarEstudiantes());
 				table = new JTableNoEdit(Runner.modeloEstudiante);
 				table.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
 				table.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);
@@ -1001,6 +1003,9 @@ public class MainFrame extends JFrame {
 							JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
 					}
 				});
+				break;
+			default:
+					JOptionPane.showMessageDialog(null, "Debe seleccionar una categoria");
 				break;
 		}
 		table.getTableHeader().setReorderingAllowed(false);

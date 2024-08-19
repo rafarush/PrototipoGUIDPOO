@@ -166,7 +166,9 @@ public class InputDialogEst extends JDialog {
 					if(nombreTextField.getText().isEmpty() || ciTextField.getText().isEmpty() || direccTextField.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Existen campos vacíos");
 					}else{
-						Runner.modeloEstudiante.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(),(String)anyoComboBox.getSelectedItem(),null,centroLaboralTextField.getText(),organismoTextField.getText(), direccTextField.getText()});
+						Runner.fct.crearPersona(ciTextField.getText(), nombreTextField.getText(),Integer.valueOf(anyoComboBox.getSelectedItem().toString()),
+								centroLaboralTextField.getText(),organismoTextField.getText(), direccTextField.getText());
+						
 						JOptionPane.showMessageDialog(null, "Se ha añadido al estudiante con éxito");
 						dispose();
 					}		
