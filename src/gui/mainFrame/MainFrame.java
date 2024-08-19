@@ -419,6 +419,22 @@ public class MainFrame extends JFrame {
 		menuBarPanel.add(estuBarBotton);
 		
 		
+		final JLabel grupoBarBotton = new JLabel("");
+		grupoBarBotton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				grupoBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/GruposBarBottonSelected.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				grupoBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/GruposBarBotton.png")));
+			}
+		});
+		grupoBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/GruposBarBotton.png")));
+		grupoBarBotton.setBounds(10, 145, 197, 34);
+		menuBarPanel.add(grupoBarBotton);
+		
+
 		final JLabel persoAuxBarBotton = new JLabel("");
 		persoAuxBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		persoAuxBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/PersoAuxBarBotton.png")));
@@ -435,7 +451,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		persoAuxBarBotton.setToolTipText("Mostrar el personal auxiliar");
-		persoAuxBarBotton.setBounds(7, 149, 198, 34);
+		persoAuxBarBotton.setBounds(7, 184, 198, 34);
 		menuBarPanel.add(persoAuxBarBotton);
 		
 		final JLabel planEstBarBotton = new JLabel("");
@@ -454,11 +470,11 @@ public class MainFrame extends JFrame {
 		});
 		planEstBarBotton.setToolTipText("Mostrar los datos del Plan de Estudio ");
 		planEstBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/PlanDeEstudioBarBotton.png")));
-		planEstBarBotton.setBounds(5, 194, 203, 34);
+		planEstBarBotton.setBounds(5, 229, 203, 34);
 		menuBarPanel.add(planEstBarBotton);
 		
 		final JLabel reportesIco = new JLabel("");
-		reportesIco.setBounds(123, 347, 46, 39);
+		reportesIco.setBounds(123, 382, 46, 39);
 		menuBarPanel.add(reportesIco);
 		reportesIco.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/marker-documents_filtered_via_10015_io_filtered_via_10015_ioCambiTam.png")));
 		
@@ -487,12 +503,12 @@ public class MainFrame extends JFrame {
 				reportesIco.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/marker-documents_filtered_via_10015_io_filtered_via_10015_ioCambiTam.png")));
 			}
 		});
-		reportesBarBotton.setBounds(10, 358, 103, 25);
+		reportesBarBotton.setBounds(10, 393, 103, 25);
 		menuBarPanel.add(reportesBarBotton);
 		
 		final JLabel otorgarNotasIcon = new JLabel("");
 		otorgarNotasIcon.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/icons8-create-96_filtered_via_10015_io_filtered_via_10015_io_46x39_via_10015_io.png")));
-		otorgarNotasIcon.setBounds(167, 306, 46, 39);
+		otorgarNotasIcon.setBounds(167, 341, 46, 39);
 		menuBarPanel.add(otorgarNotasIcon);
 		
 		final JLabel otorgarNotasBarBotton = new JLabel("");
@@ -520,16 +536,16 @@ public class MainFrame extends JFrame {
 			}
 		});
 		otorgarNotasBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/OtorgarNotaBarBotton.png")));
-		otorgarNotasBarBotton.setBounds(10, 310, 159, 29);
+		otorgarNotasBarBotton.setBounds(10, 345, 159, 29);
 		menuBarPanel.add(otorgarNotasBarBotton);
 		
 		final JPanel separadorMenuBar = new JPanel();
-		separadorMenuBar.setBounds(0, 252, 218, 1);
+		separadorMenuBar.setBounds(0, 287, 218, 1);
 		menuBarPanel.add(separadorMenuBar);
 		
 		final JLabel planDocenteIcon = new JLabel("");
 		planDocenteIcon.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/planificacionDocente_filtered.png")));
-		planDocenteIcon.setBounds(162, 264, 46, 39);
+		planDocenteIcon.setBounds(162, 299, 46, 39);
 		menuBarPanel.add(planDocenteIcon);
 		
 		final JLabel planificacionDocenteBarBotton = new JLabel("");
@@ -557,7 +573,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		planificacionDocenteBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/PlanDocenteBarBotton.png")));
-		planificacionDocenteBarBotton.setBounds(10, 266, 146, 29);
+		planificacionDocenteBarBotton.setBounds(10, 301, 146, 29);
 		menuBarPanel.add(planificacionDocenteBarBotton);
 		
 		final JPopupMenu popupMenu = new JPopupMenu();
@@ -637,7 +653,7 @@ public class MainFrame extends JFrame {
 		menuBarPanel.add(sesionIconBarBotton);
 		
 		
-		//Actualizar iconos
+		//Actualizar iconos y la tabla
 		estuBarBotton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if(!(btnSeleccionado == BotonSelec.ESTUDIANTE)){
@@ -650,12 +666,26 @@ public class MainFrame extends JFrame {
 				}		
 			}
 		});
+		grupoBarBotton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if(!(btnSeleccionado == BotonSelec.GRUPO)){
+					grupoBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/GruposBarBottonSelected.png")));
+					estuBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/EstudiantesBarBotton.png")));
+					persoAuxBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/PersoAuxBarBotton.png")));
+					profeBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ProfesBarBotton1.png")));
+					planEstBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/PlanDeEstudioBarBotton.png")));
+					btnSeleccionado = BotonSelec.GRUPO;
+					tableDraw();
+				}		
+			}
+		});
 		profeBarBotton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(!(btnSeleccionado == BotonSelec.PROFESOR)){
 					profeBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ProfesBarBottonSelected1.png")));
 					estuBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/EstudiantesBarBotton.png")));
+					grupoBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/GruposBarBotton.png")));
 					persoAuxBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/PersoAuxBarBotton.png")));
 					planEstBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/PlanDeEstudioBarBotton.png")));
 					btnSeleccionado = BotonSelec.PROFESOR;
@@ -669,6 +699,7 @@ public class MainFrame extends JFrame {
 				if(!(btnSeleccionado == BotonSelec.PERSOAUX)){
 					persoAuxBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/PersoAuxBarBottonSelected.png")));
 					estuBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/EstudiantesBarBotton.png")));
+					grupoBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/GruposBarBotton.png")));
 					profeBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ProfesBarBotton1.png")));
 					planEstBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/PlanDeEstudioBarBotton.png")));
 					btnSeleccionado = BotonSelec.PERSOAUX;
@@ -683,6 +714,7 @@ public class MainFrame extends JFrame {
 					planEstBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/PlanDeEstudioBarBottonSelected.png")));
 					persoAuxBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/PersoAuxBarBotton.png")));
 					estuBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/EstudiantesBarBotton.png")));
+					grupoBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/GruposBarBotton.png")));
 					profeBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ProfesBarBotton1.png")));
 					btnSeleccionado = BotonSelec.PLANESTUDIO;
 					tableDraw();
@@ -706,6 +738,7 @@ public class MainFrame extends JFrame {
 						mainTitle.setBounds(78, 37, 804, 44);
 						profeBarBotton.setVisible(false);
 						estuBarBotton.setVisible(false);
+						grupoBarBotton.setVisible(false);
 						persoAuxBarBotton.setVisible(false);
 						planEstBarBotton.setVisible(false);
 						reportesBarBotton.setVisible(false);
@@ -722,6 +755,7 @@ public class MainFrame extends JFrame {
 						mainTitle.setBounds(233, 37, 649, 44);
 						profeBarBotton.setVisible(true);
 						estuBarBotton.setVisible(true);
+						grupoBarBotton.setVisible(true);
 						persoAuxBarBotton.setVisible(true);
 						planEstBarBotton.setVisible(true);
 						reportesBarBotton.setVisible(true);
@@ -742,6 +776,7 @@ public class MainFrame extends JFrame {
 						mainTitle.setBounds(270, 37, 804, 44);
 						profeBarBotton.setVisible(false);
 						estuBarBotton.setVisible(false);
+						grupoBarBotton.setVisible(false);
 						persoAuxBarBotton.setVisible(false);
 						planEstBarBotton.setVisible(false);
 						reportesBarBotton.setVisible(false);
@@ -760,6 +795,7 @@ public class MainFrame extends JFrame {
 						mainTitle.setBounds(470, 37, 642, 44);	
 						profeBarBotton.setVisible(true);
 						estuBarBotton.setVisible(true);
+						grupoBarBotton.setVisible(true);
 						persoAuxBarBotton.setVisible(true);
 						planEstBarBotton.setVisible(true);
 						reportesBarBotton.setVisible(true);
@@ -784,7 +820,6 @@ public class MainFrame extends JFrame {
 		menuBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/MenuBarBotton.png")));
 		menuBarBotton.setBounds(10, 11, 46, 32);
 		menuBarPanel.add(menuBarBotton);
-		
 		
 		
 		final JLabel maxFrameBotton = new JLabel("");
@@ -938,6 +973,20 @@ public class MainFrame extends JFrame {
 				for(int i=1; i<=3;i++)
 					table.getColumnModel().getColumn(i).setCellRenderer(centrarCelda);
 				tableSorter = new TableRowSorter<>(Runner.modeloPlanDeEstudio);
+				table.setRowSorter(tableSorter);
+				table.addMouseListener(new java.awt.event.MouseAdapter() {
+					public void mouseClicked(java.awt.event.MouseEvent e) {
+						if (e.getClickCount() == 2) 
+							JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
+					}
+				});
+				break;
+			case GRUPO:
+				DatosAuto.definirTablaGrupo(Runner.fct.buscarGrupoConMenorCantidad());
+				table = new JTableNoEdit(Runner.modeloGrupoReporte);
+				/*for(int i=1; i<=3;i++)
+					table.getColumnModel().getColumn(i).setCellRenderer(centrarCelda);*/
+				tableSorter = new TableRowSorter<>(Runner.modeloGrupoReporte);
 				table.setRowSorter(tableSorter);
 				table.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
