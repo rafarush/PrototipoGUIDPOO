@@ -184,6 +184,18 @@ public class Estudiante extends Persona{
 			return val;
 		}
 		
+		// modificar Estudiantes
+		public void modificarEstudiante(String iD, String nombre, int anoAcademico, String centroLaboral, String organismo, String direccion) {
+			
+			setNombre(nombre);
+			
+			setCentroLaboral(centroLaboral);
+			
+			setOrganismo(organismo);
+			
+			setDireccion(direccion);
+		}
+		
 }
 
 

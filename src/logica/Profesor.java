@@ -83,8 +83,8 @@ public class Profesor extends Trabajador{
 			this.categoriaCientifica = "Máster";
 		else if(categoriaCientifica.equalsIgnoreCase("Doctor"))
 			this.categoriaCientifica = "Doctor";
-		else if(categoriaCientifica.equals(null))
-			this.categoriaCientifica = null;
+		else if(categoriaCientifica.equals("Ninguno"))
+			this.categoriaCientifica = "Ninguno";
 		else
 			throw new IllegalArgumentException("No existe esa categoria cientifica.");
 		
@@ -149,20 +149,21 @@ public class Profesor extends Trabajador{
 
 
 	public float calcularSalario(){
+		float salarioTotal = 0;
 		
 		if(categoriaDocente.equalsIgnoreCase("Asistente"))
-			salario+=200;
+			salarioTotal=salario+200;
 		else if(categoriaDocente.equalsIgnoreCase("Auxiliar"))
-			salario+=300;
+			salarioTotal=salario+300;
 		else if(categoriaDocente.equalsIgnoreCase("Titular"))
-			salario+=540;
+			salarioTotal=salario+540;
 		
 		if(categoriaCientifica.equalsIgnoreCase("Master"))
-			salario+=380;
+			salarioTotal=salario+380;
 		else if(categoriaCientifica.equalsIgnoreCase("Doctor"))
-			salario+=550;
+			salarioTotal=salario+550;
 		
-		return salario;
+		return salarioTotal;
 	}
 	
 	// PARA CREAR EL CONTROL DOCENTE (LAS NOTAS DE LOS ESTUDUIANTES)
@@ -209,11 +210,9 @@ public class Profesor extends Trabajador{
 	
 	
 	// para modificar los atributos del profesor
-	public void modificarProfesor(String iD, String nombre, String categoriaDocente, String categoriaCientifica, String centroLaboral, String organismo, String direccion , float salario){
+	public void modificarProfesor(String iD, String nombre, String categoriaDocente, String categoriaCientifica, String centroLaboral, String organismo, String direccion ){
 		
 		setNombre(nombre);
-		
-		setSalario(salario);
 		
 		setCategoriaCientifica(categoriaCientifica);
 		

@@ -10,21 +10,24 @@ public class PlanEstudio {
 		asignaturas = new ArrayList<>();
 	}
 
+	
+	// gets y sets
 	public ArrayList<Asignatura> getAsignaturas() {
 		return asignaturas;
 	}
 
 	
-	// No habra un set d asignaturas si no un crear asignaturas
-	/*public void setAsignaturas(ArrayList<Asignatura> asignaturas) {
+	public void setAsignaturas(ArrayList<Asignatura> asignaturas) {
 		this.asignaturas = asignaturas;
-	}*/
+	}
 	
+	//crear asignatura
 	public void crearAsignatura(String nombre, int annoAcademico, int semestre, float horasClases){
 		Asignatura asignatura = new Asignatura(nombre, annoAcademico, semestre, horasClases);
 		asignaturas.add(asignatura);
 	}
 	
+	// busca la Asignatura
 	public Asignatura buscarAsignatura(String nombreAsig){
 		Asignatura asignatura= null;
 		int i=0;

@@ -30,7 +30,8 @@ public class Fct {
 		int i=0;
 		while(i<personas.size() && val){
 			if(personas.get(i).getID().equalsIgnoreCase(iD)){
-				
+				if(buscarPersona(iD) instanceof Estudiante)
+					eliminarEstudiante(iD);
 				
 				
 				// lo que se va a hacer siempre aunque sea profe, estu o per.apoyo
@@ -63,31 +64,26 @@ public class Fct {
 	}
 	
 	// MODIFICAR PROFESOR
-	public void modificarPersona(String iD, String nombre, String categoriaDocente, String categoriaCientifica, String centroLaboral, String organismo, String direccion, float salario ){
+	public void modificarPersona(String iD, String nombre, String categoriaDocente, String categoriaCientifica, String centroLaboral, String organismo, String direccion){
 		
-		buscarUnProfesor(iD).modificarProfesor(iD, nombre, categoriaDocente, categoriaCientifica, centroLaboral, organismo, direccion, salario);
+		buscarUnProfesor(iD).modificarProfesor(iD, nombre, categoriaDocente, categoriaCientifica, centroLaboral, organismo, direccion);
 		
 		for(Periodo p : periodos){
 			for(PlanificacionDocente pd : p.getPlanificacionesDocentes()){
 				if(pd.getProfesor().getID().equalsIgnoreCase(iD)){
-					pd.getProfesor().modificarProfesor(iD, nombre, categoriaDocente, categoriaCientifica, centroLaboral, organismo, direccion, salario);
+					pd.getProfesor().modificarProfesor(iD, nombre, categoriaDocente, categoriaCientifica, centroLaboral, organismo, direccion);
 				}
 			}
 		}
 		
 	}
 	
-	// ELIMINAR PROFESOR
-	// no creo q haga falta
-	/*public void eliminarProfesor(Profesor profesor){
-		boolean val= true;
-		int i=0;
-		while(i<personas.size() && val){
-			
-			i++;
+	// cambiar salario base del profesor
+	public void cambiarSalarioBaseProfe(float salarioBase){
+		for(Profesor p : buscarProfesores()){
+			p.setSalario(salarioBase);
 		}
-		
-	}*/
+	}
 	
 	//**************************************  PERSONAL DE APOYO ************************************************************
 	
@@ -111,6 +107,12 @@ public class Fct {
 		buscarUnPersonalApoyo(iD).modificarPersonalApoyo(iD, nombre, labor, direccion);
 	}
 	
+	// cambiar salario base del personal de apoyo
+		public void cambiarSalarioBasePersonalA(float salarioBase){
+			for(PersonalApoyo pA : buscarPersonalApoyo()){
+				pA.setSalario(salarioBase);
+			}
+		}
 	
 	//**************************************  ESTUDIANTE   ************************************************************
 	
@@ -130,9 +132,55 @@ public class Fct {
 	}
 	
 	// MODIFICAR ESTUDIANTE
+	public void modificarPersona(String iD, String nombre, int anoAcademico, String centroLaboral, String organismo, String direccion) {
+		buscarUnEstudiante(iD).modificarEstudiante(iD, nombre, anoAcademico, centroLaboral, organismo, direccion);
+		
+		for(int i=0;i<periodos.size();i++){
+			if(buscarUnEstudiante(iD).getAnnoAcademico()==1){
+				if(i==0 || i==6){
+					for(PlanificacionDocente pD : periodos.get(i).getPlanificacionesDocentes()){
+						if(pD.getGrupo().buscarEstudiante(iD).getID().equalsIgnoreCase(iD)){
+							pD.getGrupo().buscarEstudiante(iD).modificarEstudiante(iD, nombre, anoAcademico, centroLaboral, organismo, direccion);
+						}
+					}
+				}
+			}else{
+				if(i==buscarUnEstudiante(iD).getAnnoAcademico()-1 || i==buscarUnEstudiante(iD).getAnnoAcademico()-2 || i==buscarUnEstudiante(iD).getAnnoAcademico()+6 || i==buscarUnEstudiante(iD).getAnnoAcademico()+5){
+					for(PlanificacionDocente pD : periodos.get(i).getPlanificacionesDocentes()){
+						if(pD.getGrupo().buscarEstudiante(iD).getID().equalsIgnoreCase(iD)){
+							pD.getGrupo().buscarEstudiante(iD).modificarEstudiante(iD, nombre, anoAcademico, centroLaboral, organismo, direccion);
+						}
+					}
+				}
+			}
+		}
+	}
 	
-	
-	
+	// ELIMINAR ESTUDIANTE
+	public void eliminarEstudiante(String iD) {
+		ArrayList<Estudiante> estudianteArr = new ArrayList<>();
+		estudianteArr.add(buscarUnEstudiante(iD));
+		
+		for(int i=0;i<periodos.size();i++){
+			if(buscarUnEstudiante(iD).getAnnoAcademico()==1){
+				if(i==0 || i==6){
+					for(PlanificacionDocente pD : periodos.get(i).getPlanificacionesDocentes()){
+						if(pD.getGrupo().buscarEstudiante(iD).getID().equalsIgnoreCase(iD)){
+							pD.getGrupo().getGrupoEstudiantes().removeAll(estudianteArr);
+						}
+					}
+				}
+			}else{
+				if(i==buscarUnEstudiante(iD).getAnnoAcademico()-1 || i==buscarUnEstudiante(iD).getAnnoAcademico()-2 || i==buscarUnEstudiante(iD).getAnnoAcademico()+6 || i==buscarUnEstudiante(iD).getAnnoAcademico()+5){
+					for(PlanificacionDocente pD : periodos.get(i).getPlanificacionesDocentes()){
+						if(pD.getGrupo().buscarEstudiante(iD).getID().equalsIgnoreCase(iD)){
+							pD.getGrupo().getGrupoEstudiantes().removeAll(estudianteArr);
+						}
+					}
+				}
+			}
+		}
+	}
 	
 	
 	
@@ -572,12 +620,78 @@ public class Fct {
 		
 		return sinGrupo;
 	}
+	//**************************************** fin reportes ******************************************************************
 	
 	
 	
 	
+	//para inicializar los datos automaticos
+	public void datosAutomaticos(){
+		
+		// JORGITOOOOOOO ---->>>>    la creacion de los profesores por defecto
+		crearPersona("95868426587", "Luis Pérez Fernández","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B");
+		crearPersona("05062348364", "Rafael Castro Reyes","Doctor","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
+		crearPersona("05022358174", "Jorge Castro Pérez","Máster","Asistente","Cujae","MINES", "Calle 25 entre 21 y Ave. 26");
+		crearPersona("05062347564", "Manuel Castro Reyes","Máster","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
+				
+		// JORGITOOOOOOO ---->>>>    la creacion de los estudiantes por defecto
+		crearPersona("05032379581", "Rafael Menéndez Rodríguez", 1 ,"Sucursal Comercial #5","Etecsa", "Calle 30 entre 34 y Ave. 56");
+		crearPersona("08868513264", "Alejandro González Fernández",1,"La Mariposa","TRD","Ave. 26 entre calles A y B");
+		crearPersona("04021324587", "Jorgito", 2, "Las Palamas", "CTC", "Tulipan y Boyeros");
+			
+		// JORGITOOOOOOO ---->>>>    la creacion del personal de apoyo por defecto
+		crearPersona("09062235147", "Federico Criado Domínguez","Laboratorio", "Calle 30 entre 34 y Ave. 56");
+		crearPersona("59868285496", "Maria Elena Gómez Pérez","Biblioteca", "Ave. 26 entre calles A y B");
+		
+		// JORGITOOOOOOO ---->>>>    la creacion de las asignaturas por defecto
+		getPlanEstudio().crearAsignatura("Matemática I", 1, 1, 50);
+		getPlanEstudio().crearAsignatura("Matemática II", 1, 2, 50);
+		getPlanEstudio().crearAsignatura("Introducción a la Programación", 1, 1, 60);
+		getPlanEstudio().crearAsignatura("Diseño y POO", 1, 2, 90);
+		getPlanEstudio().crearAsignatura("Estructuras de Datos", 2, 1, 40);
+		getPlanEstudio().crearAsignatura("Seguridad Nacional", 2, 1, 90);
+		
+		// GRUPOS
+		crearGrupo("Grupo", 1);
+		
+		// AGREGAR A GRUPOS
+		buscarGrupo("Grupo").insertarAGrupoEstudiante(buscarUnEstudiante("05032379581"));
+		buscarGrupo("Grupo").insertarAGrupoEstudiante(buscarUnEstudiante("08868513264"));
+		buscarGrupo("Grupo").insertarAGrupoEstudiante(buscarUnEstudiante("04021324587"));
+		
+		//PLANES DOCENTES
+		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("95868426587"),getPlanEstudio().buscarAsignatura("Matemática I") , buscarGrupo("Grupo"));
+		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("05062347564"),getPlanEstudio().buscarAsignatura("Introducción a la Programación") , buscarGrupo("Grupo"));
+				
+	}
 	
+	// Para que entrando un profesor te devuelva las asignaturas que da
+	public ArrayList<Asignatura> buscarAsignaturasPorProfe(String id){
+		ArrayList<Asignatura> asignaturas = new ArrayList<>();
+		
+		for(Periodo p : periodos){
+			for(PlanificacionDocente pD : p.getPlanificacionesDocentes()){
+				if(pD.getProfesor().getID().equalsIgnoreCase(id))
+					asignaturas.add(pD.getAsignatura());
+			}
+		}
+		
+		return asignaturas;
+	}
 	
+	// Para que entrando una asignatura te devuelva los grupos que la dan
+	public ArrayList<Grupo> buscarGruposPorAsignatura(String nombreAsig){
+		ArrayList<Grupo> grupos = new ArrayList<>();
+		
+		for(Periodo p : periodos){
+			for(PlanificacionDocente pD : p.getPlanificacionesDocentes()){
+				if(pD.getAsignatura().getNombre().equalsIgnoreCase(nombreAsig))
+					grupos.add(pD.getGrupo());
+			}
+		}
+		
+		return grupos;
+	}
 	
 	
 	
