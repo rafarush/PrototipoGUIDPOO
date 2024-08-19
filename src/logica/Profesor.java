@@ -84,7 +84,7 @@ public class Profesor extends Trabajador{
 		else if(categoriaCientifica.equalsIgnoreCase("Doctor"))
 			this.categoriaCientifica = "Doctor";
 		else if(categoriaCientifica.equals("Ninguno"))
-			this.categoriaCientifica = "Ninguno";
+			this.categoriaCientifica = "Ninguna";
 		else
 			throw new IllegalArgumentException("No existe esa categoria cientifica.");
 		

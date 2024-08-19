@@ -19,14 +19,15 @@ public class Periodo {
 
 		
 		// NO CREO QUE HAGA FALTA EL SET YA Q HABRA UN CREAR A PLANIFICACION DOCENTE 
-		/*public void setPlanificacionesDocentes(
+		public void setPlanificacionesDocentes(
 				ArrayList<PlanificacionDocente> planificacionesDocentes) {
 			this.planificacionesDocentes = planificacionesDocentes;
-		}*/
+		}
 		
 		public void crearPlanificacionDocente(Profesor profesor, Asignatura asignatura, Grupo grupo){
 			PlanificacionDocente planificacionDocente =  new PlanificacionDocente(profesor, asignatura, grupo);
 			planificacionesDocentes.add(planificacionDocente);
+			profesor.crearControlDocente(grupo, asignatura);
 		}
 
 }

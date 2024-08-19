@@ -635,9 +635,11 @@ public class Fct {
 		crearPersona("05062347564", "Manuel Castro Reyes","Máster","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
 				
 		// JORGITOOOOOOO ---->>>>    la creacion de los estudiantes por defecto
-		crearPersona("05032379581", "Rafael Menéndez Rodríguez", 1 ,"Sucursal Comercial #5","Etecsa", "Calle 30 entre 34 y Ave. 56");
+		crearPersona("05032379581", "Rafael Menéndez Rodriguez", 1 ,"Sucursal Comercial #5","Etecsa", "Calle 30 entre 34 y Ave. 56");
 		crearPersona("08868513264", "Alejandro González Fernández",1,"La Mariposa","TRD","Ave. 26 entre calles A y B");
 		crearPersona("04021324587", "Jorgito", 2, "Las Palamas", "CTC", "Tulipan y Boyeros");
+		crearPersona("04021334457", "Rafa", 6, "Las Palamas", "CTC", "Tulipan y Boyeros");
+		crearPersona("90990834457", "TOYCHOLITO", 6, "Las Palamas", "CTC", "Tulipan y Boyeros");
 			
 		// JORGITOOOOOOO ---->>>>    la creacion del personal de apoyo por defecto
 		crearPersona("09062235147", "Federico Criado Domínguez","Laboratorio", "Calle 30 entre 34 y Ave. 56");
@@ -652,16 +654,19 @@ public class Fct {
 		getPlanEstudio().crearAsignatura("Seguridad Nacional", 2, 1, 90);
 		
 		// GRUPOS
-		crearGrupo("Grupo", 1);
+		crearGrupo("Grupo 1.1", 1);
+		crearGrupo("Grupo 1.2", 1);
+		crearGrupo("Grupo 6.1", 6);
 		
 		// AGREGAR A GRUPOS
-		buscarGrupo("Grupo").insertarAGrupoEstudiante(buscarUnEstudiante("05032379581"));
-		buscarGrupo("Grupo").insertarAGrupoEstudiante(buscarUnEstudiante("08868513264"));
-		buscarGrupo("Grupo").insertarAGrupoEstudiante(buscarUnEstudiante("04021324587"));
+		buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(buscarUnEstudiante("05032379581"));
+		buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(buscarUnEstudiante("08868513264"));
+		buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(buscarUnEstudiante("04021324587"));
+		buscarGrupo("Grupo 6.1").insertarAGrupoEstudiante(buscarUnEstudiante("04021334457"));
 		
 		//PLANES DOCENTES
-		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("95868426587"),getPlanEstudio().buscarAsignatura("Matemática I") , buscarGrupo("Grupo"));
-		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("05062347564"),getPlanEstudio().buscarAsignatura("Introducción a la Programación") , buscarGrupo("Grupo"));
+		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("95868426587"),getPlanEstudio().buscarAsignatura("Matemática I") , buscarGrupo("Grupo 1.1"));
+		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("05062347564"),getPlanEstudio().buscarAsignatura("Introducción a la Programación") , buscarGrupo("Grupo 6.1"));
 				
 	}
 	
