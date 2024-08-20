@@ -991,7 +991,7 @@ public class MainFrame extends JFrame {
 				});
 				break;
 			case GRUPO:
-				DatosAuto.definirTablaGrupo(Runner.fct.buscarGrupoConMenorCantidad());
+				DatosAuto.definirTablaGrupo(Runner.fct.getGrupos());
 				table = new JTableNoEdit(Runner.modeloGrupoReporte);
 				/*for(int i=1; i<=3;i++)
 					table.getColumnModel().getColumn(i).setCellRenderer(centrarCelda);*/
