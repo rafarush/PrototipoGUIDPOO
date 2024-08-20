@@ -698,7 +698,23 @@ public class Fct {
 		return grupos;
 	}
 	
-	
+	// para verificar que un grupo especifico no ternga creado ningun pan docente
+	public boolean verificarGrupoPD(Grupo grupo){
+		boolean val= false;
+		int i = 0;
+		
+		while(i< periodos.size() && !val){
+			int e = 0;
+			while(e<periodos.get(i).getPlanificacionesDocentes().size() && !val){
+				if(periodos.get(i).getPlanificacionesDocentes().get(e).getGrupo().getNombreGrupo().equalsIgnoreCase(grupo.getNombreGrupo()))
+					val=true;
+				e++;
+			}
+			i++;
+		}
+		
+		return val;
+	}
 	
 	
 	
