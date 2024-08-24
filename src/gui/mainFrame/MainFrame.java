@@ -53,6 +53,7 @@ import logica.Profesor;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
+import java.awt.Dimension;
 
 
 public class MainFrame extends JFrame {
@@ -75,10 +76,11 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
+		setSize(new Dimension(914, 618));
 		setTitle("Gestor de la FCT");
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 914, 545);
+		setBounds(100, 100, 914, 605);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -87,20 +89,20 @@ public class MainFrame extends JFrame {
 		
 		
 	    final JLayeredPane mainPane = new JLayeredPane();
-		mainPane.setBounds(0, 0, 914, 545);
+		mainPane.setBounds(0, 0, 914, 618);
 		contentPane.add(mainPane);
 		
 		final JPanel mainPanel = new JPanel();
 		mainPanel.setBackground(Color.WHITE);
 		mainPane.setLayer(mainPanel, 1);
-		mainPanel.setBounds(0, 0, 914, 545);
+		mainPanel.setBounds(0, 0, 914, 618);
 		mainPane.add(mainPanel);
 		mainPanel.setLayout(null);
 		
 		//Dibuja el ScrollPane
 		scrollPane = new JScrollPane();
 		scrollPane.setBackground(Color.WHITE);
-		scrollPane.setBounds(240, 154, 664, 380);
+		scrollPane.setBounds(240, 154, 664, 437);
 		mainPanel.add(scrollPane);
 		
 		//Define los modelos y dibuja las tablas con datos predeterminados
@@ -406,7 +408,7 @@ public class MainFrame extends JFrame {
 		final JPanel menuBarPanel = new JPanel();
 		mainPane.setLayer(menuBarPanel, 2);
 		menuBarPanel.setBackground(new Color(0, 204, 255));
-		menuBarPanel.setBounds(0, 33, 218, 512);
+		menuBarPanel.setBounds(0, 33, 218, 618);
 		mainPane.add(menuBarPanel);
 		menuBarPanel.setLayout(null);
 		
@@ -507,7 +509,7 @@ public class MainFrame extends JFrame {
 		menuBarPanel.add(planEstBarBotton);
 		
 		final JLabel reportesIco = new JLabel("");
-		reportesIco.setBounds(123, 382, 46, 39);
+		reportesIco.setBounds(123, 411, 46, 39);
 		menuBarPanel.add(reportesIco);
 		reportesIco.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/marker-documents_filtered_via_10015_io_filtered_via_10015_ioCambiTam.png")));
 		
@@ -536,12 +538,12 @@ public class MainFrame extends JFrame {
 				reportesIco.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/marker-documents_filtered_via_10015_io_filtered_via_10015_ioCambiTam.png")));
 			}
 		});
-		reportesBarBotton.setBounds(10, 393, 103, 25);
+		reportesBarBotton.setBounds(10, 422, 103, 25);
 		menuBarPanel.add(reportesBarBotton);
 		
 		final JLabel otorgarNotasIcon = new JLabel("");
 		otorgarNotasIcon.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/icons8-create-96_filtered_via_10015_io_filtered_via_10015_io_46x39_via_10015_io.png")));
-		otorgarNotasIcon.setBounds(167, 341, 46, 39);
+		otorgarNotasIcon.setBounds(167, 370, 46, 39);
 		menuBarPanel.add(otorgarNotasIcon);
 		
 		final JLabel otorgarNotasBarBotton = new JLabel("");
@@ -569,16 +571,16 @@ public class MainFrame extends JFrame {
 			}
 		});
 		otorgarNotasBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/OtorgarNotaBarBotton.png")));
-		otorgarNotasBarBotton.setBounds(10, 345, 159, 29);
+		otorgarNotasBarBotton.setBounds(10, 374, 159, 29);
 		menuBarPanel.add(otorgarNotasBarBotton);
 		
 		final JPanel separadorMenuBar = new JPanel();
-		separadorMenuBar.setBounds(0, 287, 218, 1);
+		separadorMenuBar.setBounds(0, 316, 218, 1);
 		menuBarPanel.add(separadorMenuBar);
 		
 		final JLabel planDocenteIcon = new JLabel("");
 		planDocenteIcon.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/planificacionDocente_filtered.png")));
-		planDocenteIcon.setBounds(162, 299, 46, 39);
+		planDocenteIcon.setBounds(162, 328, 46, 39);
 		menuBarPanel.add(planDocenteIcon);
 		
 		final JLabel planificacionDocenteBarBotton = new JLabel("");
@@ -606,7 +608,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		planificacionDocenteBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/PlanDocenteBarBotton.png")));
-		planificacionDocenteBarBotton.setBounds(10, 301, 146, 29);
+		planificacionDocenteBarBotton.setBounds(10, 330, 146, 29);
 		menuBarPanel.add(planificacionDocenteBarBotton);
 		
 		final JPopupMenu popupMenu = new JPopupMenu();
@@ -651,7 +653,7 @@ public class MainFrame extends JFrame {
 		final JLabel nombreUsuario = new JLabel("");
 		nombreUsuario.setForeground(new Color(255, 255, 255));
 		nombreUsuario.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		nombreUsuario.setBounds(55, 469, 153, 15);
+		nombreUsuario.setBounds(55, 534, 153, 15);
 		nombreUsuario.setText(Runner.usuario.getName());
 		menuBarPanel.add(nombreUsuario);
 		
@@ -682,7 +684,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		sesionIconBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/userPhoto-removebg-preview_filtered_via_10015_io_46x39_via_10015_io.png")));
-		sesionIconBarBotton.setBounds(10, 458, 46, 39);
+		sesionIconBarBotton.setBounds(10, 523, 46, 39);
 		menuBarPanel.add(sesionIconBarBotton);
 		
 		
@@ -756,6 +758,35 @@ public class MainFrame extends JFrame {
 		});
 		
 		
+		final JLabel controlSalarialBarIcon = new JLabel("");
+		controlSalarialBarIcon.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/icoControlSalarial.png")));
+		controlSalarialBarIcon.setToolTipText("Cambiar salario base de los tranajadores");
+		controlSalarialBarIcon.setBounds(172, 451, 46, 39);
+		menuBarPanel.add(controlSalarialBarIcon);
+		
+		final JLabel controlSalarialBarBotton = new JLabel("");
+		controlSalarialBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		controlSalarialBarBotton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				controlSalarialBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ControlSalarialSelected.png")));
+				controlSalarialBarIcon.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/icoControlSalarialSelected.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				controlSalarialBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ControlSalarial.png")));
+				controlSalarialBarIcon.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/icoControlSalarial.png")));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		controlSalarialBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ControlSalarial.png")));
+		controlSalarialBarBotton.setToolTipText("Cambiar salario base de los tranajadores");
+		controlSalarialBarBotton.setBounds(10, 465, 171, 25);
+		menuBarPanel.add(controlSalarialBarBotton);
+		
+		
 		final JLabel menuBarBotton = new JLabel("");
 		menuBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		menuBarBotton.setBounds(new Rectangle(10, 11, 46, 32));
@@ -764,7 +795,7 @@ public class MainFrame extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if(!maximized){
 					if(menuBarPanel.getWidth()==218){
-						menuBarPanel.setBounds(0, 33, 63, 545);
+						menuBarPanel.setBounds(0, 33, 63, 618);
 						scrollPane.setBounds(79, 154, 825, 380);
 						lblFiltro.setBounds(36, 122, 115, 20);
 						filterTextField.setBounds(115, 122, 115, 20);
@@ -776,12 +807,14 @@ public class MainFrame extends JFrame {
 						planEstBarBotton.setVisible(false);
 						reportesBarBotton.setVisible(false);
 						otorgarNotasBarBotton.setVisible(false);
+						controlSalarialBarBotton.setVisible(false);
+						controlSalarialBarIcon.setVisible(false);
 						separadorMenuBar.setVisible(false);
 						planificacionDocenteBarBotton.setVisible(false);
 						nombreUsuario.setVisible(false);
 						sesionIconBarBotton.setVisible(false);
 					}else{
-						menuBarPanel.setBounds(0, 33, 218, 545);
+						menuBarPanel.setBounds(0, 33, 218, 618);
 						scrollPane.setBounds(240, 154, 664, 380);
 						lblFiltro.setBounds(230, 122, 50, 21);
 						filterTextField.setBounds(277, 123, 115, 20);
@@ -793,6 +826,8 @@ public class MainFrame extends JFrame {
 						planEstBarBotton.setVisible(true);
 						reportesBarBotton.setVisible(true);
 						otorgarNotasBarBotton.setVisible(true);
+						controlSalarialBarBotton.setVisible(true);
+						controlSalarialBarIcon.setVisible(true);
 						separadorMenuBar.setVisible(true);
 						planificacionDocenteBarBotton.setVisible(true);
 						nombreUsuario.setVisible(true);
@@ -814,6 +849,8 @@ public class MainFrame extends JFrame {
 						planEstBarBotton.setVisible(false);
 						reportesBarBotton.setVisible(false);
 						otorgarNotasBarBotton.setVisible(false);
+						controlSalarialBarBotton.setVisible(false);
+						controlSalarialBarIcon.setVisible(false);
 						separadorMenuBar.setVisible(false);
 						planificacionDocenteBarBotton.setVisible(false);
 						nombreUsuario.setVisible(false);
@@ -833,6 +870,8 @@ public class MainFrame extends JFrame {
 						planEstBarBotton.setVisible(true);
 						reportesBarBotton.setVisible(true);
 						otorgarNotasBarBotton.setVisible(true);
+						controlSalarialBarBotton.setVisible(true);
+						controlSalarialBarIcon.setVisible(true);
 						separadorMenuBar.setVisible(true);
 						planificacionDocenteBarBotton.setVisible(true);
 						nombreUsuario.setVisible(true);
@@ -904,25 +943,25 @@ public class MainFrame extends JFrame {
 					mainTitle.setBounds(470, 37, 642, 44);	
 					maximized = true;
 				}else{
-					mainPane.setBounds(0, 0, 914, 545);
-					mainPanel.setBounds(0, 0, 914, 545);
-					contentPane.setBounds(100, 100, 914, 545);
-					setBounds(100, 100, 914, 545);
+					mainPane.setBounds(0, 0, 914, 618);
+					mainPanel.setBounds(0, 0, 914, 618);
+					contentPane.setBounds(100, 100, 914, 618);
+					setBounds(100, 100, 914, 618);
 					scrollPane.setBounds(240, 154, 664, 380);
 					closeFrameBotton.setBounds(877, 0, 27, 34);
 					maxFrameBotton.setBounds(846, 0, 27, 34);
 					miniFrameBotton.setBounds(820, 0, 27, 34);
 					if(menuBarPanel.getWidth()==63){
-						menuBarPanel.setBounds(0, 33, 63, 512);
+						menuBarPanel.setBounds(0, 33, 63, 618);
 						scrollPane.setBounds(79, 154, 825, 380);
 						lblFiltro.setBounds(65, 122, 61, 21);
 						filterTextField.setBounds(117, 122, 115, 20);
 						mainTitle.setBounds(78, 37, 804, 44);
 					}else{
-						menuBarPanel.setBounds(0, 33, 218, 512);
+						menuBarPanel.setBounds(0, 33, 218, 618);
 					}				
-					nombreUsuario.setBounds(55, 469, 153, 15);
-					sesionIconBarBotton.setBounds(10, 458, 46, 39);
+					nombreUsuario.setBounds(55, 550, 153, 15);
+					sesionIconBarBotton.setBounds(10, 534, 46, 39);
 					modifyBotton.setBounds(841, 122, 63, 21);
 					delBotton.setBounds(651, 122, 56, 21);
 					addBotton.setBounds(530, 122, 101, 21);
