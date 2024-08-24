@@ -25,6 +25,7 @@ public class Runner {
 	public static LoginUser login;
 	public static InputDialogProfe inputProfe;
 	public static InputDialogEst inputEst;
+	public static InputDialogGrupo inputGrupo;
 	public static InputDialogPerAux inputPerAux;
 	public static InputDialogAsignaturaPE inputAsignatura;
 	public static InputDialogNota inputNota;

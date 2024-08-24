@@ -212,7 +212,13 @@ public class MainFrame extends JFrame {
 							exc.printStackTrace();
 						}
 					case GRUPO:
-						JOptionPane.showMessageDialog(null, "Implementar");
+						try {
+							Runner.inputGrupo = new InputDialogGrupo();
+							Runner.inputGrupo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							Runner.inputGrupo.setVisible(true);
+						} catch (Exception exc) {
+							exc.printStackTrace();
+						}
 						break;
 				}		
 			}
