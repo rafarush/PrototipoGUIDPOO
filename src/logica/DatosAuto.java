@@ -256,6 +256,7 @@ public class DatosAuto {
 		Runner.modeloGrupoReporte = new DefaultTableModel();
 		Runner.modeloGrupoReporte.addColumn("Nombre");
 		Runner.modeloGrupoReporte.addColumn("Año");
+		Runner.modeloGrupoReporte.addColumn("Matrícula");
 		agregarFilasGrupo(grupos);
 	}
 	
@@ -279,13 +280,10 @@ public class DatosAuto {
 	 * @return obj
 	 */
 	public static Object[] convertirAObjetoGrupo(Grupo grupo){
-		Object[] grupoObj = new Object[]{grupo.getNombreGrupo(), grupo.getAnnoAcademico()};		
+		Object[] grupoObj = new Object[]{grupo.getNombreGrupo(), grupo.getAnnoAcademico(), grupo.getGrupoEstudiantes().size()};		
 		return grupoObj;
 	}
 	
-	public static void llenarFilasGrupo(ArrayList<Grupo> grupos){
-		Runner.modeloGrupoReporte1 = new ModeloGrupoEdit(grupos);
-	}
 	
 /*****************************Define modelo de la tabla Plan Docente y agrega las filas**************************************/
 	

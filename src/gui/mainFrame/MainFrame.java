@@ -1007,8 +1007,8 @@ public class MainFrame extends JFrame {
 			case GRUPO:
 				DatosAuto.definirTablaGrupo(Runner.fct.getGrupos());
 				table = new JTableNoEdit(Runner.modeloGrupoReporte);
-				/*for(int i=1; i<=3;i++)
-					table.getColumnModel().getColumn(i).setCellRenderer(centrarCelda);*/
+				table.getColumnModel().getColumn(1).setCellRenderer(centrarCelda);
+				table.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
 				tableSorter = new TableRowSorter<>(Runner.modeloGrupoReporte);
 				table.setRowSorter(tableSorter);
 				table.addMouseListener(new java.awt.event.MouseAdapter() {
