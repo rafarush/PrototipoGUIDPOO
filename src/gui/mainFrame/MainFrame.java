@@ -275,9 +275,7 @@ public class MainFrame extends JFrame {
 						if (btnSeleccionado != BotonSelec.GRUPO && btnSeleccionado != BotonSelec.PLANESTUDIO){
 							//Falta revisar si el profe esta en alguna planificacion docente
 							//Profesor profe = (Profesor) Runner.fct.buscarPersona(table.getValueAt(table.getSelectedRow(), 0).toString());
-							System.out.println(table.getValueAt(table.getSelectedRow(), 0).toString());
 							Runner.fct.eliminarPersona(table.getValueAt(table.getSelectedRow(), 0).toString());
-							System.out.println(Runner.fct.buscarPersonalApoyo().size());
 							tableDraw();
 						}else if(btnSeleccionado == BotonSelec.GRUPO){
 							//Falta revisar si el grupo esta en alguna planificacion docente
@@ -984,6 +982,7 @@ public class MainFrame extends JFrame {
 				});
 				break;
 			case PERSOAUX:
+				DatosAuto.definirTablaPersonalAux(Runner.fct.buscarPersonalApoyo());
 				table = new JTableNoEdit(Runner.modeloPersonalAux);
 				tableSorter = new TableRowSorter<>(Runner.modeloPersonalAux);
 				table.setRowSorter(tableSorter);
@@ -995,6 +994,7 @@ public class MainFrame extends JFrame {
 				});
 				break;	
 			case PLANESTUDIO:
+				DatosAuto.definirTablaPlanDeEstudio(Runner.fct.getPlanEstudio().getAsignaturas());
 				table = new JTableNoEdit(Runner.modeloPlanDeEstudio);
 				for(int i=1; i<=3;i++)
 					table.getColumnModel().getColumn(i).setCellRenderer(centrarCelda);

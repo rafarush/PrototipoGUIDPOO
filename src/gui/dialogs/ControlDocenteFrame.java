@@ -260,9 +260,6 @@ public class ControlDocenteFrame extends JDialog {
 				});
 				break;
 			case GRUPO:
-				/*
-				 * Falta funcion que devuelva todos los grupos
-				 */
 				DatosAuto.definirTablaGrupo(Runner.fct.getGrupos());
 				tablaNotas = new JTableNoEdit(Runner.modeloGrupoReporte);/*
 				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
