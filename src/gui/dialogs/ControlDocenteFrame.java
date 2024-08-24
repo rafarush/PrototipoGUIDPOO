@@ -261,13 +261,12 @@ public class ControlDocenteFrame extends JDialog {
 				break;
 			case GRUPO:
 				DatosAuto.definirTablaGrupo(Runner.fct.getGrupos());
-				tablaNotas = new JTableNoEdit(Runner.modeloGrupoReporte);/*
+				tablaNotas = new JTableNoEdit(Runner.modeloGrupoReporte);
+				tablaNotas.getColumnModel().getColumn(1).setCellRenderer(centrarCelda);
 				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
-				tablaNotas.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);*/
 				tablaNotas.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) {
-							//JOptionPane.showMessageDialog(null, "No se permite modificar");
 							btnSeleccionado = BotonSelec.ESTUDIANTE;
 							grupoSelec = tablaNotas.getValueAt(tablaNotas.getSelectedRow(), 0).toString();
 							tableDraw();
@@ -277,10 +276,9 @@ public class ControlDocenteFrame extends JDialog {
 				});
 				break;
 			case ESTUDIANTE:
-				DatosAuto.definirTablaEstudiantes(Runner.fct.buscarGrupo(grupoSelec).getGrupoEstudiantes());
+				DatosAuto.definirTablaEstudiantesCorto(Runner.fct.buscarGrupo(grupoSelec).getGrupoEstudiantes());
 				tablaNotas = new JTableNoEdit(Runner.modeloEstudiante);
 				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
-				tablaNotas.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);
 				tablaNotas.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 

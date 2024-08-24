@@ -31,6 +31,7 @@ public class Runner {
 	public static DefaultTableModel modeloProfesor;
 	public static ModeloProfesorEdit modeloProfesor1;
 	public static DefaultTableModel modeloEstudiante;
+	public static DefaultTableModel modeloEstudianteCorto;
 	public static DefaultTableModel modeloPersonalAux;
 	public static DefaultTableModel modeloPlanDeEstudio;
 	public static DefaultTableModel modeloGrupoReporte;
@@ -58,7 +59,7 @@ public class Runner {
 		fct = new Fct();
 		
 		fct.datosAutomaticos();
-	
+		
 		// JORGITOOOOOOO ---->>>>    la creacion de los profesores por defecto
 		/*fct.crearPersona("95868426587", "Luis Pérez Fernández","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B");
 		fct.crearPersona("05062348364", "Rafael Castro Reyes","Doctor","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
