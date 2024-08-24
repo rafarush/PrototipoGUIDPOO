@@ -28,6 +28,7 @@ public class Runner {
 	public static InputDialogPerAux inputPerAux;
 	public static InputDialogAsignaturaPE inputAsignatura;
 	public static InputDialogNota inputNota;
+	public static InputDialogEstuDelGrupo inputDialogEstuDelGrupo;
 	public static DefaultTableModel modeloProfesor;
 	public static ModeloProfesorEdit modeloProfesor1;
 	public static DefaultTableModel modeloEstudiante;
@@ -127,8 +128,8 @@ public class Runner {
 		
 	    DatosAuto.definirTablaPlanDocente(fct.getPeriodos().get(0).getPlanificacionesDocentes());
 		//DatosAuto.llenarTablaPlanificacionDocente(fct.getPeriodos().get(0).getPlanificacionesDocentes());
-		
-		
+
+	    
 		try {
 			login = new LoginUser();
 			login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

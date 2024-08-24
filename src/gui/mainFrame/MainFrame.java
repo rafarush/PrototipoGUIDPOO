@@ -1014,7 +1014,14 @@ public class MainFrame extends JFrame {
 				table.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 
-							JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
+							//JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
+							try {
+								Runner.inputDialogEstuDelGrupo = new InputDialogEstuDelGrupo(table.getValueAt(table.getSelectedRow(), 0).toString());
+								Runner.inputDialogEstuDelGrupo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								Runner.inputDialogEstuDelGrupo.setVisible(true);
+							} catch (Exception exc) {
+								exc.printStackTrace();
+							}
 					}
 				});
 				break;
