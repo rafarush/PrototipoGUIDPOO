@@ -20,7 +20,10 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
 import java.awt.Cursor;
+
+import logica.Estudiante;
 
 
 
@@ -215,7 +218,7 @@ public class InputDialogEst extends JDialog {
 	/**
 	 * Crea frame para agregar
 	 */
-	public InputDialogEst(Object[] valoresDeLaFila) {
+	public InputDialogEst(final Estudiante estudiante) {
 		setUndecorated(true);
 		setModal(true);
 		setBounds(100, 100, 646, 442);
@@ -341,12 +344,18 @@ public class InputDialogEst extends JDialog {
 					if(nombreTextField.getText().isEmpty() || ciTextField.getText().isEmpty() || direccTextField.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Existen campos vacíos");
 					}else{
-						Runner.modeloEstudiante.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(),(String)annoComboBox.getSelectedItem(),null,centroLaboralTextField.getText(),organismoTextField.getText(), direccTextField.getText()});
+						
+						estudiante.modificarEstudiante(ciTextField.getText(), nombreTextField.getText(), Integer.valueOf(annoComboBox.getSelectedItem().toString()),
+								centroLaboralTextField.getText(), organismoTextField.getText(), direccTextField.getText());
+						
+						/*Runner.modeloEstudiante.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(),(String)annoComboBox.getSelectedItem(),null,
+						 * centroLaboralTextField.getText(),organismoTextField.getText(), direccTextField.getText()});
+						 */
 						/**
 						 * Elimina al profe original (PROVISIONAL)
-						 */
+						 *//*
 						((DefaultTableModel) MainFrame.getTable().getModel()).removeRow(MainFrame.getTable().getSelectedRow());
-						((DefaultTableModel) MainFrame.getTable().getModel()).fireTableDataChanged();
+						((DefaultTableModel) MainFrame.getTable().getModel()).fireTableDataChanged();*/
 
 						JOptionPane.showMessageDialog(null, "Se ha modificado al estudiante con éxito");
 					
@@ -387,17 +396,17 @@ public class InputDialogEst extends JDialog {
 			centroLaboralTextField.setBounds(10, 227, 223, 20);
 			mainPanel.add(centroLaboralTextField);
 			
-			llenarTextFields(valoresDeLaFila);
+			llenarTextFields(estudiante);
 		}
 	}
 	
-	private void llenarTextFields(Object[] valoresDeLaFila){
-		ciTextField.setText(valoresDeLaFila[0].toString());//Escribe carne
-		nombreTextField.setText(valoresDeLaFila[1].toString());//Escribe nombre
-		annoComboBox.setSelectedItem(valoresDeLaFila[2].toString());//Selecciona año
-		centroLaboralTextField.setText(valoresDeLaFila[4].toString());//Escribe centro Laboral
-		organismoTextField.setText(valoresDeLaFila[5].toString());//Escribe organismo
-		direccTextField.setText(valoresDeLaFila[6].toString());//Escribe direccion
+	private void llenarTextFields(Estudiante estudiante){
+		ciTextField.setText(estudiante.getID());//Escribe carne
+		nombreTextField.setText(estudiante.getNombre());//Escribe nombre
+		annoComboBox.setSelectedItem(estudiante.getAnnoAcademico());//Selecciona año
+		centroLaboralTextField.setText(estudiante.getCentroLaboral());//Escribe centro Laboral
+		organismoTextField.setText(estudiante.getOrganismo());//Escribe organismo
+		direccTextField.setText(estudiante.getDireccion());//Escribe direccion
 	}
 	
 }

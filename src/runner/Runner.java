@@ -104,8 +104,6 @@ public class Runner {
 		
 		//ESTUDIANTE PARA REPORTES
 		//DatosAuto.definirTablaReportesEstu(fct.buscarEstudiantesOros());
-
-		
 		
 		// GRUPOS
 		/*fct.crearGrupo("13", 1);
@@ -128,10 +126,6 @@ public class Runner {
 		
 	    DatosAuto.definirTablaPlanDocente(fct.getPeriodos().get(0).getPlanificacionesDocentes());
 		//DatosAuto.llenarTablaPlanificacionDocente(fct.getPeriodos().get(0).getPlanificacionesDocentes());
-		
-		
-		DatosAuto.definirTablaGrupo(fct.buscarGrupoConMenorCantidad());
-		//DatosAuto.llenarFilasGrupo(fct.buscarGrupoConMenorCantidad());
 		
 		
 		try {

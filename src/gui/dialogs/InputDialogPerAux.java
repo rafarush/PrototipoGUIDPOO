@@ -20,7 +20,10 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
 import java.awt.Cursor;
+
+import logica.PersonalApoyo;
 
 
 
@@ -188,7 +191,7 @@ public class InputDialogPerAux extends JDialog {
 	/**
 	 * Crea el frame para modificar
 	 */
-	public InputDialogPerAux(Object[] valoresDeLaFila) {
+	public InputDialogPerAux(final PersonalApoyo persoAp) {
 		setUndecorated(true);
 		setModal(true);
 		setBounds(100, 100, 538, 360);
@@ -298,14 +301,17 @@ public class InputDialogPerAux extends JDialog {
 					if(nombreTextField.getText().isEmpty() || ciTextField.getText().isEmpty() || direccTextField.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Existen campos vacíos");
 					}else{
+						persoAp.modificarPersonalApoyo(ciTextField.getText(), nombreTextField.getText(), areaTrabajoComboBox.getSelectedItem().toString(),
+								direccTextField.getText());
+						/*
 						Runner.modeloPersonalAux.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(), (String)areaTrabajoComboBox.getSelectedItem(), direccTextField.getText()});
 						/**
 						 * Elimina la Asignatura original (PROVISIONAL)
-						 */
+						 *//*
 						((DefaultTableModel) MainFrame.getTable().getModel()).removeRow(MainFrame.getTable().getSelectedRow());
-						((DefaultTableModel) MainFrame.getTable().getModel()).fireTableDataChanged();
+						((DefaultTableModel) MainFrame.getTable().getModel()).fireTableDataChanged();*/
 						
-						JOptionPane.showMessageDialog(null, "Se ha añadido al miembro del personal auxiliar con éxito");
+						JOptionPane.showMessageDialog(null, "Se ha modificado al miembro del personal auxiliar con éxito");
 						dispose();
 					}	
 				}
@@ -337,15 +343,17 @@ public class InputDialogPerAux extends JDialog {
 			cancelBotton.setIcon(new ImageIcon(InputDialogPerAux.class.getResource("/gui/utils/cancelBotton.png")));
 			cancelBotton.setBounds(136, 269, 63, 21);
 			mainPanel.add(cancelBotton);
-			llenarTextFields(valoresDeLaFila);
+			
+			
+			llenarTextFields(persoAp);
 		}
 	}
 	
-	private void llenarTextFields(Object[] valoresDeLaFila){
-		ciTextField.setText(valoresDeLaFila[0].toString());//Escribe el carne
-		nombreTextField.setText(valoresDeLaFila[1].toString());//Escribe el nombre
-		areaTrabajoComboBox.setSelectedItem(valoresDeLaFila[2].toString());//Selecciona el area de trabajo
-		direccTextField.setText(valoresDeLaFila[3].toString());//Escribe el nombre
+	private void llenarTextFields(PersonalApoyo persoAp){
+		ciTextField.setText(persoAp.getID());//Escribe el carne
+		nombreTextField.setText(persoAp.getNombre());//Escribe el nombre
+		areaTrabajoComboBox.setSelectedItem(persoAp.getLabor());//Selecciona el area de trabajo
+		direccTextField.setText(persoAp.getDireccion());//Escribe el nombre
 	}
 	
 }

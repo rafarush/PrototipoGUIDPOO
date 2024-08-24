@@ -328,25 +328,23 @@ public class MainFrame extends JFrame {
 							break;
 						case ESTUDIANTE:
 							try {
-								//actualizar campos
-								actualizarValoresDeFila(table.getSelectedRow());
-								Runner.inputEst = new InputDialogEst(valoresDeFila);
+								Runner.inputEst = new InputDialogEst(Runner.fct.buscarUnEstudiante(table.getValueAt(filaSelec, 0).toString()));
 								Runner.inputEst.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								Runner.inputEst.setVisible(true);
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
+							tableDraw();
 							break;
 						case PERSOAUX:
 							try {
-								//actualizar campos
-								actualizarValoresDeFila(table.getSelectedRow());
-								Runner.inputPerAux = new InputDialogPerAux(valoresDeFila);
+								Runner.inputPerAux = new InputDialogPerAux(Runner.fct.buscarUnPersonalApoyo(table.getValueAt(filaSelec, 0).toString()));
 								Runner.inputPerAux.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								Runner.inputPerAux.setVisible(true);
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
+							tableDraw();
 							break;	
 						case PLANESTUDIO:
 							try {
@@ -971,7 +969,6 @@ public class MainFrame extends JFrame {
 				DatosAuto.definirTablaEstudiantes(Runner.fct.buscarEstudiantes());
 				table = new JTableNoEdit(Runner.modeloEstudiante);
 				table.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
-				table.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);
 				tableSorter = new TableRowSorter<>(Runner.modeloEstudiante);
 				table.setRowSorter(tableSorter);
 				table.addMouseListener(new java.awt.event.MouseAdapter() {
