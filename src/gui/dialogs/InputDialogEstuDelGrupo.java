@@ -40,9 +40,11 @@ public class InputDialogEstuDelGrupo extends JDialog {
 	private final JPanel upperBarPanel = new JPanel();
 	private static JTableNoEdit table;
 	private JScrollPane scrollPane;
+	private JLabel lblEncabezado;
+	private boolean agregar = false;
 
 
-	public InputDialogEstuDelGrupo(String nombreGrupo) {
+	public InputDialogEstuDelGrupo(final String nombreGrupo) {
 		setUndecorated(true);
 		setModal(true);
 		setBounds(100, 100, 560, 429);
@@ -100,12 +102,10 @@ public class InputDialogEstuDelGrupo extends JDialog {
 			scrollPane.setBounds(10, 42, 393, 263);
 			mainPanel.add(scrollPane);
 			
-			tableDraw(nombreGrupo);
-			
-			JLabel lblNombre = new JLabel("Estudiantes del Grupo:");
-			lblNombre.setForeground(new Color(51, 51, 51));
-			lblNombre.setBounds(138, 11, 158, 20);
-			mainPanel.add(lblNombre);
+			lblEncabezado = new JLabel("Estudiantes del Grupo:");
+			lblEncabezado.setForeground(new Color(51, 51, 51));
+			lblEncabezado.setBounds(126, 11, 223, 20);
+			mainPanel.add(lblEncabezado);
 			
 			final JLabel inputBotton = new JLabel("");
 			inputBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -121,8 +121,23 @@ public class InputDialogEstuDelGrupo extends JDialog {
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					
-					dispose();
+					if(!agregar){
+						agregar = true;
+						tableDraw(nombreGrupo);
+					}else{
+						if(table.getSelectedRow()!=-1){
+							String estId = table.getValueAt(table.getSelectedRow(), 0).toString();
+							Runner.fct.buscarGrupo(nombreGrupo).insertarAGrupoEstudiante(Runner.fct.buscarUnEstudiante(estId));
+							JOptionPane.showMessageDialog(null, "               CONFIRMACIÓN:\nSe añadió a "
+									+Runner.fct.buscarUnEstudiante(estId).getNombre()
+									+" al "+Runner.fct.buscarGrupo(nombreGrupo).getNombreGrupo());
+							agregar = false;
+							tableDraw(nombreGrupo);
+							Runner.frame.tableDraw();
+						}else{
+							JOptionPane.showMessageDialog(null, "Debe seleccionar el estudiante que desea agregar");
+						}	
+					}
 				}
 			});
 			inputBotton.setIcon(new ImageIcon(InputDialogEst.class.getResource("/gui/utils/addBottonJDialog.png")));
@@ -146,7 +161,7 @@ public class InputDialogEstuDelGrupo extends JDialog {
 					if(table.getSelectedRow() == -1){
 						JOptionPane.showMessageDialog(null, "Debe seleccionar la fila que desea eliminar");
 					}else{
-						JOptionPane.showMessageDialog(null, "Funcion de sacar un estudiante del grupo");
+						JOptionPane.showMessageDialog(null, "Función de sacar un estudiante del grupo");
 					}
 				}
 			});
@@ -154,19 +169,45 @@ public class InputDialogEstuDelGrupo extends JDialog {
 			delBotton.setBounds(211, 345, 63, 21);
 			mainPanel.add(delBotton);
 			
+			tableDraw(nombreGrupo);
 		}
 	}
 	
 	private void tableDraw(String nombreGrupo){
-		DatosAuto.definirTablaEstudiantesCorto(Runner.fct.buscarGrupo(nombreGrupo).getGrupoEstudiantes());
-		table = new JTableNoEdit(Runner.modeloEstudiante);
-		table.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent e) {
-				if (e.getClickCount() == 2) 
-					JOptionPane.showMessageDialog(null, "No se permite modificación");
-			}
-		});
-		table.getTableHeader().setReorderingAllowed(false);
-		scrollPane.setViewportView(table);
+		if (!agregar){
+			DatosAuto.definirTablaEstudiantesCorto(Runner.fct.buscarGrupo(nombreGrupo).getGrupoEstudiantes());
+			table = new JTableNoEdit(Runner.modeloEstudiante);
+			table.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent e) {
+					if (e.getClickCount() == 2) {
+						JOptionPane.showMessageDialog(null, "No se permite modificación");
+					}
+				}
+			});
+			table.getTableHeader().setReorderingAllowed(false);
+			scrollPane.setViewportView(table);
+			actualizarNombreEncabezado();
+		}else{
+			DatosAuto.definirTablaEstudiantesCorto(Runner.fct.buscarEstudiantesSinGrupo());
+			table = new JTableNoEdit(Runner.modeloEstudiante);
+			table.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent e) {
+					if (e.getClickCount() == 2) 
+						JOptionPane.showMessageDialog(null, "No se permite modificación");
+				}
+			});
+			table.getTableHeader().setReorderingAllowed(false);
+			scrollPane.setViewportView(table);
+			actualizarNombreEncabezado();
+		}
+		
+	}
+	
+	private void actualizarNombreEncabezado(){
+		if(!agregar){
+			lblEncabezado.setText("Estudiantes del Grupo:");
+		}else{
+			lblEncabezado.setText("Seleccione y añada al Estudiante:");
+		}
 	}
 }
