@@ -779,12 +779,34 @@ public class MainFrame extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, "Implementar");
 			}
 		});
 		controlSalarialBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ControlSalarial.png")));
 		controlSalarialBarBotton.setToolTipText("Cambiar salario base de los tranajadores");
 		controlSalarialBarBotton.setBounds(10, 465, 171, 25);
 		menuBarPanel.add(controlSalarialBarBotton);
+		
+		
+		final JLabel consejoDireccBarBotton = new JLabel("");
+		consejoDireccBarBotton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, "Implementar");
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				consejoDireccBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ConsejoDireccBarBottonSelected.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				consejoDireccBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ConsejoDireccBarBotton.png")));
+			}
+		});
+		consejoDireccBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ConsejoDireccBarBotton.png")));
+		consejoDireccBarBotton.setToolTipText("Mostrar los datos del Plan de Estudio ");
+		consejoDireccBarBotton.setBounds(10, 271, 203, 34);
+		menuBarPanel.add(consejoDireccBarBotton);
 		
 		
 		final JLabel menuBarBotton = new JLabel("");
@@ -809,6 +831,7 @@ public class MainFrame extends JFrame {
 						otorgarNotasBarBotton.setVisible(false);
 						controlSalarialBarBotton.setVisible(false);
 						controlSalarialBarIcon.setVisible(false);
+						consejoDireccBarBotton.setVisible(false);
 						separadorMenuBar.setVisible(false);
 						planificacionDocenteBarBotton.setVisible(false);
 						nombreUsuario.setVisible(false);
@@ -828,6 +851,7 @@ public class MainFrame extends JFrame {
 						otorgarNotasBarBotton.setVisible(true);
 						controlSalarialBarBotton.setVisible(true);
 						controlSalarialBarIcon.setVisible(true);
+						consejoDireccBarBotton.setVisible(true);
 						separadorMenuBar.setVisible(true);
 						planificacionDocenteBarBotton.setVisible(true);
 						nombreUsuario.setVisible(true);
@@ -851,6 +875,7 @@ public class MainFrame extends JFrame {
 						otorgarNotasBarBotton.setVisible(false);
 						controlSalarialBarBotton.setVisible(false);
 						controlSalarialBarIcon.setVisible(false);
+						consejoDireccBarBotton.setVisible(false);
 						separadorMenuBar.setVisible(false);
 						planificacionDocenteBarBotton.setVisible(false);
 						nombreUsuario.setVisible(false);
@@ -872,6 +897,7 @@ public class MainFrame extends JFrame {
 						otorgarNotasBarBotton.setVisible(true);
 						controlSalarialBarBotton.setVisible(true);
 						controlSalarialBarIcon.setVisible(true);
+						consejoDireccBarBotton.setVisible(true);
 						separadorMenuBar.setVisible(true);
 						planificacionDocenteBarBotton.setVisible(true);
 						nombreUsuario.setVisible(true);
