@@ -311,6 +311,7 @@ public class InputDialogEst extends JDialog {
 			annoComboBox = new JComboBox();
 			annoComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6"}));
 			annoComboBox.setBounds(10, 337, 80, 20);
+			annoComboBox.setEnabled(false);
 			mainPanel.add(annoComboBox);
 			
 			JLabel lblCentroLaboral = new JLabel("Centro Laboral:");
