@@ -24,6 +24,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Cursor;
 
 import logica.DatosAuto;
+import logica.Profesor;
 
 
 
@@ -230,7 +231,7 @@ public class InputDialogProfe extends JDialog {
 	/**
 	 * Crea el cuadro de dialogo para editar.
 	 */
-	public InputDialogProfe(Object[] valoresDeLaFila) {
+	public InputDialogProfe(final Profesor profe) {
 		setResizable(false);
 		setUndecorated(true);
 		setModal(true);
@@ -332,7 +333,7 @@ public class InputDialogProfe extends JDialog {
 			mainPanel.add(lblCatDocente);
 			
 			catDocComboBox = new JComboBox();
-			catDocComboBox.setModel(new DefaultComboBoxModel(new String[] {"Instructor", "Asistente", "Profesor Auxiliar", "Profesor Titular"}));
+			catDocComboBox.setModel(new DefaultComboBoxModel(new String[] {"Instructor", "Asistente", "Auxiliar", "Titular"}));
 			catDocComboBox.setBounds(289, 287, 128, 20);
 			mainPanel.add(catDocComboBox);
 			
@@ -373,14 +374,17 @@ public class InputDialogProfe extends JDialog {
 					if(nombreTextField.getText().isEmpty() || ciTextField.getText().isEmpty() || direccTextField.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Existen campos vacíos");
 					}else{
+						profe.modificarProfesor(ciTextField.getText(), nombreTextField.getText(), catDocComboBox.getSelectedItem().toString(), 
+								catCienComboBox.getSelectedItem().toString(),centroLabTextField.getText(), organismoTextField.getText(), direccTextField.getText());
+						/*
 						Runner.modeloProfesor.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(), 
 								(String)catCienComboBox.getSelectedItem(),(String)catDocComboBox.getSelectedItem(),
-								centroLabTextField.getText(), organismoTextField.getText(), direccTextField.getText()});
+								centroLabTextField.getText(), organismoTextField.getText(), direccTextField.getText()});*/
 						/**
 						 * Elimina al profe original (PROVISIONAL)
-						 */
+						 *//*
 						((DefaultTableModel) MainFrame.getTable().getModel()).removeRow(MainFrame.getTable().getSelectedRow());
-						((DefaultTableModel) MainFrame.getTable().getModel()).fireTableDataChanged();
+						((DefaultTableModel) MainFrame.getTable().getModel()).fireTableDataChanged();*/
 
 						JOptionPane.showMessageDialog(null, "Se ha modificado al profesor con éxito");
 						dispose();
@@ -414,7 +418,7 @@ public class InputDialogProfe extends JDialog {
 			cancelBotton.setBounds(202, 360, 63, 21);
 			mainPanel.add(cancelBotton);
 			
-			llenarTextFields(valoresDeLaFila);
+			llenarTextFields(profe);
 		
 			
 			
@@ -424,16 +428,14 @@ public class InputDialogProfe extends JDialog {
 	 * Funcion para llenar los campos con los datos del profesor seleccionado
 	 * @param valoresDeLaFila
 	 */
-	private void llenarTextFields(Object[] valoresDeLaFila){
-		ciTextField.setText(valoresDeLaFila[0].toString());//Escribe el carne
-		nombreTextField.setText(valoresDeLaFila[1].toString());//Escribe el nombre
-		//Selecciona categoria cientifica
-		//selecCatCientifica(valoresDeLaFila);
-		catCienComboBox.setSelectedItem(valoresDeLaFila[2].toString());
-		catDocComboBox.setSelectedItem(valoresDeLaFila[3].toString());//Selecciona categoria docente
-		centroLabTextField.setText(valoresDeLaFila[4].toString());//Escribe el centro laboral
-		organismoTextField.setText(valoresDeLaFila[5].toString());//Escribe el organismo
-		direccTextField.setText(valoresDeLaFila[6].toString());//Escribe la direccion
+	private void llenarTextFields(Profesor profe){
+		ciTextField.setText(profe.getID());//Escribe el carne
+		nombreTextField.setText(profe.getNombre());//Escribe el nombre
+		catCienComboBox.setSelectedItem(profe.getCategoriaCientifica());//Selecciona categoria cientifica
+		catDocComboBox.setSelectedItem(profe.getCategoriaDocente());//Selecciona categoria docente
+		centroLabTextField.setText(profe.getCentroLaboral());//Escribe el centro laboral
+		organismoTextField.setText(profe.getOrganismo());//Escribe el organismo
+		direccTextField.setText(profe.getDireccion());//Escribe la direccion
 	}
 
 	

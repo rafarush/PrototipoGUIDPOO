@@ -47,7 +47,9 @@ import java.util.ArrayList;
 
 import logica.DatosAuto;
 import logica.Enums.BotonSelec;
+import logica.Grupo;
 import logica.JTableNoEdit;
+import logica.Profesor;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
@@ -270,8 +272,23 @@ public class MainFrame extends JFrame {
 				}else{
 					if(JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esa fila?\n No se podrá recuperar", "Confirmación", 
 					JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION){
-						((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());
-						((DefaultTableModel) table.getModel()).fireTableDataChanged();
+						if (btnSeleccionado != BotonSelec.GRUPO && btnSeleccionado != BotonSelec.PLANESTUDIO){
+							//Falta revisar si el profe esta en alguna planificacion docente
+							//Profesor profe = (Profesor) Runner.fct.buscarPersona(table.getValueAt(table.getSelectedRow(), 0).toString());
+							System.out.println(table.getValueAt(table.getSelectedRow(), 0).toString());
+							Runner.fct.eliminarPersona(table.getValueAt(table.getSelectedRow(), 0).toString());
+							System.out.println(Runner.fct.buscarPersonalApoyo().size());
+							tableDraw();
+						}else if(btnSeleccionado == BotonSelec.GRUPO){
+							//Falta revisar si el grupo esta en alguna planificacion docente
+							JOptionPane.showMessageDialog(null, "Todavia no se implementa para Grupos");
+						}else if(btnSeleccionado == BotonSelec.PLANESTUDIO){
+							//Falta revisar si la asignatura esta en alguna planificacion docente
+							JOptionPane.showMessageDialog(null, "Todavia no se implementa para Asignaturas");
+						}
+							
+						/*((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());
+						((DefaultTableModel) table.getModel()).fireTableDataChanged();*/
 					}
 				}
 			}
@@ -298,18 +315,18 @@ public class MainFrame extends JFrame {
 				if(table.getSelectedRow() == - 1){
 					JOptionPane.showMessageDialog(null, "Debe seleccionar la fila que desea modificar");
 				}else{
+					int filaSelec = table.getSelectedRow();
 					//Define que JDialog se activa 
 					switch(btnSeleccionado){
 						case PROFESOR:
 							try {
-								//actualizar campos
-								actualizarValoresDeFila(table.getSelectedRow());
-								Runner.inputProfe = new InputDialogProfe(valoresDeFila);
+								Runner.inputProfe = new InputDialogProfe(Runner.fct.buscarUnProfesor(table.getValueAt(filaSelec, 0).toString()));
 								Runner.inputProfe.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								Runner.inputProfe.setVisible(true);
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
+							tableDraw();
 							break;
 						case ESTUDIANTE:
 							try {

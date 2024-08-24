@@ -132,7 +132,8 @@ public class Runner {
 		
 		DatosAuto.definirTablaGrupo(fct.buscarGrupoConMenorCantidad());
 		//DatosAuto.llenarFilasGrupo(fct.buscarGrupoConMenorCantidad());
-				
+		
+		
 		try {
 			login = new LoginUser();
 			login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
