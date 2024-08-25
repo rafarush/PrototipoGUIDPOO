@@ -420,15 +420,15 @@ public class Fct {
 	public ArrayList<String> buscarCargosCDFaltantes(){
 		ArrayList<String> cargos = new ArrayList<>();
 		
-		if(buscarDirector()!=null)
+		if(buscarDirector()==null)
 			cargos.add("Director");
-		else if(buscarSubdirectorDocente() !=null)
+		else if(buscarSubdirectorDocente() ==null)
 			cargos.add("Subdirector Docente");
-		else if(buscarSubdirectorInvPos() !=null)
+		else if(buscarSubdirectorInvPos() ==null)
 			cargos.add("Subdirector de Investigaciones y Posgrado");
-		else if(buscarSubdirectorExtendUni() !=null)
+		else if(buscarSubdirectorExtendUni() ==null)
 			cargos.add("Subdirector de Extensión Universitaria");
-		else if(buscarJefeLaboratorios() !=null)
+		else if(buscarJefeLaboratorios() ==null)
 			cargos.add("Jefe de Laboratorios");
 		
 		return cargos;
