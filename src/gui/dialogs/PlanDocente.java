@@ -62,7 +62,7 @@ public class PlanDocente extends JDialog {
 	private final JPanel mainPanel;
 	private final JLabel atrasBtn;
 	private JLabel lblTabla;
-	private BotonSelec btnSeleccionado = BotonSelec.PLANDOCENTE;
+	private BotonSelec btnSeleccionado = BotonSelec.PLAN_DOCENTE;
 	private static String asignaturaSelec;
 	private static String profeSelec;
 	private static String grupoSelec;
@@ -143,24 +143,24 @@ public class PlanDocente extends JDialog {
 				auxBtn.addMouseListener(new MouseAdapter() {
 					@Override
 				public void mouseClicked(MouseEvent e) {
-						if (btnSeleccionado != BotonSelec.PLANDOCENTE && tabla.getSelectedRow() == -1){
+						if (btnSeleccionado != BotonSelec.PLAN_DOCENTE && tabla.getSelectedRow() == -1){
 							JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
 						}else{
 							switch (btnSeleccionado) {
-							case PLANDOCENTE:
+							case PLAN_DOCENTE:
 								btnSeleccionado = BotonSelec.PROFESOR;
 								auxBtn.setText("Asignar Profesor");
 								actualizarLblNombre();
 								tableDraw();
 								break;
 							case PROFESOR:
-								btnSeleccionado = BotonSelec.PLANESTUDIO;
+								btnSeleccionado = BotonSelec.PLAN_ESTUDIO;
 								auxBtn.setText("Asignar Asignatura");
 								profeSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
 								actualizarLblNombre();
 								tableDraw();
 								break;
-							case PLANESTUDIO:
+							case PLAN_ESTUDIO:
 								btnSeleccionado = BotonSelec.GRUPO;
 								auxBtn.setText("Asignar Grupo");
 								asignaturaSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
@@ -174,7 +174,7 @@ public class PlanDocente extends JDialog {
 										Runner.fct.getPlanEstudio().buscarAsignatura(asignaturaSelec),
 										Runner.fct.buscarGrupo(grupoSelec));
 								JOptionPane.showMessageDialog(null, "Planificación realizada con éxito");
-								btnSeleccionado = BotonSelec.PLANDOCENTE;
+								btnSeleccionado = BotonSelec.PLAN_DOCENTE;
 								auxBtn.setText("Crear Planificaci\u00F3n Docente");
 								actualizarLblNombre();
 								tableDraw();
@@ -220,13 +220,13 @@ public class PlanDocente extends JDialog {
 					@Override
 					public void mouseClicked(MouseEvent e){
 						switch (btnSeleccionado) {
-						case PLANDOCENTE:
+						case PLAN_DOCENTE:
 							JOptionPane.showMessageDialog(null, "No existe ruta hacia atrás");
 							break;
 						case PROFESOR:
 							JOptionPane.showMessageDialog(null, "No existe ruta hacia atrás");
 							break;
-						case PLANESTUDIO:
+						case PLAN_ESTUDIO:
 							centrarCelda.setHorizontalAlignment(JLabel.CENTER);
 							btnSeleccionado = BotonSelec.PROFESOR;
 							tableDraw();
@@ -234,7 +234,7 @@ public class PlanDocente extends JDialog {
 							break;
 						case GRUPO:
 							centrarCelda.setHorizontalAlignment(JLabel.CENTER);
-							btnSeleccionado = BotonSelec.PLANESTUDIO;
+							btnSeleccionado = BotonSelec.PLAN_ESTUDIO;
 							tableDraw();
 							actualizarLblNombre();
 							break;
@@ -317,7 +317,7 @@ public class PlanDocente extends JDialog {
 					}
 				});
 				break;
-			case PLANESTUDIO:
+			case PLAN_ESTUDIO:
 				tabla = new JTableNoEdit(Runner.modeloPlanDeEstudio);
 				tabla.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -330,7 +330,7 @@ public class PlanDocente extends JDialog {
 					}
 				});
 				break;
-			case PLANDOCENTE:
+			case PLAN_DOCENTE:
 				if(Integer.valueOf(semestreComboBox.getSelectedItem().toString()) == 1){
 					DatosAuto.definirTablaPlanDocente(Runner.fct.getPeriodos().get(annoComboBox.getSelectedIndex()).getPlanificacionesDocentes());
 				}else{
@@ -354,7 +354,7 @@ public class PlanDocente extends JDialog {
 		case PROFESOR:
 			lblTabla.setText("Seleccione un Profesor");
 			break;
-		case PLANESTUDIO:
+		case PLAN_ESTUDIO:
 			lblTabla.setText("Seleccione una Asignatura");
 			break;
 		case ESTUDIANTE:
@@ -362,7 +362,7 @@ public class PlanDocente extends JDialog {
 		case GRUPO:
 			lblTabla.setText("Seleccione un Grupo");
 			break;
-		case PLANDOCENTE:
+		case PLAN_DOCENTE:
 			lblTabla.setText("Planes Docentes");
 			break;
 		}

@@ -209,7 +209,7 @@ public class ControlDocenteFrame extends JDialog {
 						case PROFESOR:
 							JOptionPane.showMessageDialog(null, "No existe ruta hacia atrás");
 							break;
-						case PLANESTUDIO:
+						case PLAN_ESTUDIO:
 							centrarCelda.setHorizontalAlignment(JLabel.CENTER);
 							btnSeleccionado = BotonSelec.PROFESOR;
 							tableDraw();
@@ -217,7 +217,7 @@ public class ControlDocenteFrame extends JDialog {
 							break;
 						case GRUPO:
 							centrarCelda.setHorizontalAlignment(JLabel.CENTER);
-							btnSeleccionado = BotonSelec.PLANESTUDIO;
+							btnSeleccionado = BotonSelec.PLAN_ESTUDIO;
 							tableDraw();
 							actualizarLblNombre();
 							break;
@@ -252,7 +252,7 @@ public class ControlDocenteFrame extends JDialog {
 				tablaNotas.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 
-							btnSeleccionado = BotonSelec.PLANESTUDIO;
+							btnSeleccionado = BotonSelec.PLAN_ESTUDIO;
 							profeSelec = tablaNotas.getValueAt(tablaNotas.getSelectedRow(), 0).toString();
 							tableDraw();
 							actualizarLblNombre();
@@ -286,7 +286,7 @@ public class ControlDocenteFrame extends JDialog {
 					}
 				});
 				break;
-			case PLANESTUDIO:/*
+			case PLAN_ESTUDIO:/*
 				 * Falta metodo para saber que asignaturas da un profe
 				 */
 				/*Profesor profe = Runner.fct.buscarPersona(profeSelec);
@@ -315,7 +315,7 @@ public class ControlDocenteFrame extends JDialog {
 		case PROFESOR:
 			lblTabla.setText("Seleccione un Profesor");
 			break;
-		case PLANESTUDIO:
+		case PLAN_ESTUDIO:
 			lblTabla.setText("Seleccione una Asignatura");
 			break;
 		case ESTUDIANTE:

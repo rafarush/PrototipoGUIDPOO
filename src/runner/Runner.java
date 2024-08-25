@@ -66,8 +66,13 @@ public class Runner {
 		/*fct.crearPersona("95868426587", "Luis Pérez Fernández","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B");
 		fct.crearPersona("05062348364", "Rafael Castro Reyes","Doctor","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
 		fct.crearPersona("05022358174", "Jorge Castro Pérez","Máster","Asistente","Cujae","MINES", "Calle 25 entre 21 y Ave. 26");
-		fct.crearPersona("05062347564", "Manuel Castro Reyes","Máster","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
 		*/
+		fct.crearPersona("05064807564", "Manuel Consejo","Máster","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
+		Profesor profe = (Profesor) fct.buscarPersona("05064807564");
+		profe.setCargoConsejoDireccion("Director");
+		System.out.println(profe.getCargoConsejoDireccion());
+		ArrayList<Profesor>  ps = fct.buscarConsejoDireccion();
+		System.out.println(ps.size());
 		
 		//System.out.println(((Profesor)fct.buscarPersona("95868426587")).calcularSalario());
 		
