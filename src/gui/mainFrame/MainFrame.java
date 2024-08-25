@@ -223,7 +223,13 @@ public class MainFrame extends JFrame {
 						}
 						break;
 					case CONSEJO_DIRECC:
-						JOptionPane.showMessageDialog(null, "Implementar");
+						try {
+							Runner.inputProfeAConsejo = new InputDialogProfeAConsejo();
+							Runner.inputProfeAConsejo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							Runner.inputProfeAConsejo.setVisible(true);
+						} catch (Exception exc) {
+							exc.printStackTrace();
+						}
 						break;
 				}		
 			}
@@ -283,7 +289,7 @@ public class MainFrame extends JFrame {
 				}else{
 					if(JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esa fila?\n No se podrá recuperar", "Confirmación", 
 					JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION){
-						if (btnSeleccionado != BotonSelec.GRUPO && btnSeleccionado != BotonSelec.PLAN_ESTUDIO){
+						if (btnSeleccionado != BotonSelec.GRUPO && btnSeleccionado != BotonSelec.PLAN_ESTUDIO && btnSeleccionado != BotonSelec.CONSEJO_DIRECC){
 							//Falta revisar si el profe esta en alguna planificacion docente
 							//Profesor profe = (Profesor) Runner.fct.buscarPersona(table.getValueAt(table.getSelectedRow(), 0).toString());
 							Runner.fct.eliminarPersona(table.getValueAt(table.getSelectedRow(), 0).toString());
@@ -294,6 +300,9 @@ public class MainFrame extends JFrame {
 						}else if(btnSeleccionado == BotonSelec.PLAN_ESTUDIO){
 							//Falta revisar si la asignatura esta en alguna planificacion docente
 							JOptionPane.showMessageDialog(null, "Todavia no se implementa para Asignaturas");
+						}else if(btnSeleccionado == BotonSelec.CONSEJO_DIRECC){
+							//Falta revisar si la asignatura esta en alguna planificacion docente
+							JOptionPane.showMessageDialog(null, "Todavia no se implementa para Consejo de Dirección");
 						}
 							
 						/*((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());

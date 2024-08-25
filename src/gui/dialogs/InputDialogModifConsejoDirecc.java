@@ -98,7 +98,7 @@ public class InputDialogModifConsejoDirecc extends JDialog {
 			nombreTextField = new JTextField();
 			nombreTextField.setToolTipText("Nombre de la persona");
 			nombreTextField.setColumns(10);
-			nombreTextField.setBounds(10, 54, 223, 20);
+			nombreTextField.setBounds(10, 54, 269, 20);
 			nombreTextField.setEditable(false);
 			mainPanel.add(nombreTextField);
 			
@@ -110,7 +110,7 @@ public class InputDialogModifConsejoDirecc extends JDialog {
 			ciTextField = new JTextField();
 			ciTextField.setToolTipText("Carn\u00E9 de identidad de la persona");
 			ciTextField.setColumns(10);
-			ciTextField.setBounds(10, 110, 223, 20);
+			ciTextField.setBounds(10, 110, 269, 20);
 			ciTextField.setEditable(false);
 			mainPanel.add(ciTextField);
 			
@@ -119,13 +119,13 @@ public class InputDialogModifConsejoDirecc extends JDialog {
 			mainPanel.add(lblCarneIden);
 			
 			JLabel lblCargo = new JLabel("Cargo en el Consejo de Direcci\u00F3n:");
-			lblCargo.setBounds(10, 141, 166, 20);
+			lblCargo.setBounds(10, 141, 189, 20);
 			mainPanel.add(lblCargo);
 			
 			cargoComboBox = new JComboBox();
 			cargoComboBox.setToolTipText("Cargo del profesor en el Consejo de Direcci\u00F3n");
 			cargoComboBox.setModel(new DefaultComboBoxModel(new String[] {"Director", "Subdirector Docente", "Subdirector de Investigaciones y Posgrado", "Subdirector de Extensi\u00F3n Universitaria", "Jefe de Laboratorios"}));
-			cargoComboBox.setBounds(10, 167, 223, 20);
+			cargoComboBox.setBounds(10, 167, 269, 20);
 			mainPanel.add(cargoComboBox);
 			
 			final JLabel inputBotton = new JLabel("");
@@ -143,7 +143,7 @@ public class InputDialogModifConsejoDirecc extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					profe.setCargoConsejoDireccion(cargoComboBox.getSelectedItem().toString());
-					JOptionPane.showMessageDialog(null, "Se ha modificado al miembro del Consejo de Dirección con éxito");
+					JOptionPane.showMessageDialog(null, "Se ha asignado el cargo en el Consejo de Dirección con éxito");
 					Runner.frame.tableDraw();
 					dispose();
 				}

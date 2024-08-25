@@ -31,6 +31,7 @@ public class Runner {
 	public static InputDialogNota inputNota;
 	public static InputDialogModifConsejoDirecc inputModConDir;
 	public static InputDialogEstuDelGrupo inputDialogEstuDelGrupo;
+	public static InputDialogProfeAConsejo inputProfeAConsejo;
 	public static DefaultTableModel modeloProfesor;
 	public static DefaultTableModel modeloProfesorConsejo;
 	public static DefaultTableModel modeloEstudiante;
@@ -71,6 +72,7 @@ public class Runner {
 		fct.crearPersona("05064807564", "Manuel Cuadrado Aldiva","Máster","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
 		Profesor profe = (Profesor) fct.buscarPersona("05064807564");
 		profe.setCargoConsejoDireccion("Director");
+	
 		
 		//System.out.println(((Profesor)fct.buscarPersona("95868426587")).calcularSalario());
 		
