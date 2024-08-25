@@ -937,9 +937,10 @@ public class Fct {
 		buscarGrupo("Grupo 6.1").insertarAGrupoEstudiante(buscarUnEstudiante("04021334457"));
 		
 		//PLANES DOCENTES
+		
 		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("95868426587"),getPlanEstudio().buscarAsignatura("Matemática I") , buscarGrupo("Grupo 1.1"));
-		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("05062347564"),getPlanEstudio().buscarAsignatura("Introducción a la Programación") , buscarGrupo("Grupo 6.1"));
-				
+		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("05062348364"),getPlanEstudio().buscarAsignatura("Introducción a la Programación") , buscarGrupo("Grupo 6.1"));
+		
 	}
 	
 	

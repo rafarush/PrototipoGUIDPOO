@@ -27,7 +27,7 @@ public class Periodo {
 		public boolean crearPlanificacionDocente(Profesor profesor, Asignatura asignatura, Grupo grupo){
 			boolean val = false;
 			PlanificacionDocente planificacionDocente =  new PlanificacionDocente(profesor, asignatura, grupo);
-			if(verificarPlanificacionDocente(planificacionDocente)){
+			if(!verificarPlanificacionDocente(planificacionDocente)){
 				planificacionesDocentes.add(planificacionDocente);
 				profesor.crearControlDocente(grupo, asignatura);
 				val = true;
