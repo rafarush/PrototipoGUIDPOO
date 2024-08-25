@@ -222,6 +222,9 @@ public class MainFrame extends JFrame {
 							exc.printStackTrace();
 						}
 						break;
+					case CONSEJO_DIRECC:
+						JOptionPane.showMessageDialog(null, "Implementar");
+						break;
 				}		
 			}
 		});
@@ -371,6 +374,15 @@ public class MainFrame extends JFrame {
 								Runner.inputDialogEstuDelGrupo = new InputDialogEstuDelGrupo(table.getValueAt(table.getSelectedRow(), 0).toString());
 								Runner.inputDialogEstuDelGrupo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								Runner.inputDialogEstuDelGrupo.setVisible(true);
+							} catch (Exception exc) {
+								exc.printStackTrace();
+							}
+							break;
+						case CONSEJO_DIRECC:
+							try {
+								Runner.inputModConDir = new InputDialogModifConsejoDirecc(Runner.fct.buscarUnProfesor(table.getValueAt(table.getSelectedRow(), 0).toString()));
+								Runner.inputModConDir.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								Runner.inputModConDir.setVisible(true);
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
@@ -1111,9 +1123,9 @@ public class MainFrame extends JFrame {
 				});
 				break;
 			case CONSEJO_DIRECC:
-				DatosAuto.definirTablaProfes(Runner.fct.buscarConsejoDireccion());
-				table = new JTableNoEdit(Runner.modeloProfesor);
-				tableSorter = new TableRowSorter<>(Runner.modeloProfesor);
+				DatosAuto.definirTablaProfesConsejo(Runner.fct.buscarConsejoDireccion());
+				table = new JTableNoEdit(Runner.modeloProfesorConsejo);
+				tableSorter = new TableRowSorter<>(Runner.modeloProfesorConsejo);
 				table.setRowSorter(tableSorter);
 				table.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {

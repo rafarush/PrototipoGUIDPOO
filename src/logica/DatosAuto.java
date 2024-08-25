@@ -74,9 +74,47 @@ public class DatosAuto {
 		agregarFilasProfes(profesores);
 	}
 	
-	public static void llenarFilasProfes(ArrayList<Profesor> profesores){
-		Runner.modeloProfesor1 = new ModeloProfesorEdit(profesores);
+	
+/***************Define modelo de la tabla Profesores Consejo Direcc y agrega las filas************************/
+	
+	/**
+	 * Convertir instancia de Profesor a un array de Objeto
+	 * @return obj
+	 */
+	public static Object[] convertirAObjetoProfeConsejo(Profesor profe){
+		Object[] profeObj = new Object[]{profe.getID(), profe.getNombre(), profe.getCategoriaCientifica(), profe.getCategoriaDocente(), 
+				profe.getCargoConsejoDireccion()};
+		return profeObj;
 	}
+	
+	/**
+	 * Imprime cada fila con los profesores
+	 * @param profesores
+	 */
+	public static void agregarFilasProfesConsejo(ArrayList<Profesor> profesores){
+		if(profesores.isEmpty()){
+			JOptionPane.showMessageDialog(null, "No hay registro de profesores. Por favor, añada.");
+		}else{
+			for(Profesor p : profesores){
+				Runner.modeloProfesorConsejo.addRow(convertirAObjetoProfeConsejo(p));
+			}
+		}
+	}
+	
+	/**
+	 * Define el modelo de columnas de la tabla profesor
+	 * @param profesores
+	 */
+	public static void definirTablaProfesConsejo(ArrayList<Profesor> profesores){
+	    Runner.modeloProfesorConsejo = new DefaultTableModel();
+		Runner.modeloProfesorConsejo.addColumn("CI");
+		Runner.modeloProfesorConsejo.addColumn("Nombre");
+		Runner.modeloProfesorConsejo.addColumn("Categoría Científica");
+		Runner.modeloProfesorConsejo.addColumn("Categoría Docente");
+		Runner.modeloProfesorConsejo.addColumn("Cargo");
+		agregarFilasProfesConsejo(profesores);
+	}
+	
 	
 	
 	/***********************Define modelo de la tabla Estudiantes y agrega las filas**************************/
