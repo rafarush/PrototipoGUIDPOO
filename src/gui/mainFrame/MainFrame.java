@@ -635,6 +635,8 @@ public class MainFrame extends JFrame {
 		planificacionDocenteBarBotton.setBounds(10, 330, 146, 29);
 		menuBarPanel.add(planificacionDocenteBarBotton);
 		
+		
+		//PopupMenu para CAMBIO DE CREDENCIALES Y CERRAR SESION
 		final JPopupMenu popupMenu = new JPopupMenu();
 		JMenuItemEdit cerrarSesionButtonItem = new JMenuItemEdit();
 		JMenuItemEdit cambiarContraButtonItem = new JMenuItemEdit();
@@ -669,6 +671,7 @@ public class MainFrame extends JFrame {
         });
 		cambiarNombreButtonItem.setText("Cambiar nombre de usuario");
 		cambiarNombreButtonItem.setIcon(null);
+		
         popupMenu.add(cerrarSesionButtonItem);
         popupMenu.add(cambiarNombreButtonItem);
         popupMenu.add(cambiarContraButtonItem);
@@ -698,13 +701,13 @@ public class MainFrame extends JFrame {
 			public void mousePressed(MouseEvent e) {
 				// if(e.isPopupTrigger()) {
 	                    popupMenu.show(e.getComponent(), e.getX(), e.getY());
-	             //}
+	            // }
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				 //if(e.isPopupTrigger()) {
+				// if(e.isPopupTrigger()) {
 	                    popupMenu.show(e.getComponent(), e.getX(), e.getY());
-	           //  }
+	             //}
 			}
 		});
 		sesionIconBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/userPhoto-removebg-preview_filtered_via_10015_io_46x39_via_10015_io.png")));
