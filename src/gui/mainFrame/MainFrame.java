@@ -259,20 +259,7 @@ public class MainFrame extends JFrame {
 					}
 				}		
 			}
-		});/*
-		filterTextField.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				String aux = filterTextField.getText();
-				if(aux.trim().length()==0){
-					tableSorter.setRowFilter(null);
-					table.setRowSorter(tableSorter);
-				}else{
-					tableSorter.setRowFilter(RowFilter.regexFilter("(?i)"+aux));
-					table.setRowSorter(tableSorter);
-				}
-			}
-		});	*/
+		});
 		filterTextField.setToolTipText("Escriba criterio de filtrado");
 		filterTextField.setBounds(277, 123, 115, 20);
 		mainPanel.add(filterTextField);
@@ -868,6 +855,33 @@ public class MainFrame extends JFrame {
 		menuBarPanel.add(controlSalarialBarBotton);
 		
 		
+		final JLabel filtroBtn = new JLabel("");
+		filtroBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				filtroBtn.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/filterBottonSelected.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				filtroBtn.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/filterBotton.png")));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String aux = filterTextField.getText();
+				if(aux.trim().length()==0){
+					tableSorter.setRowFilter(null);
+					table.setRowSorter(tableSorter);
+				}else{
+					tableSorter.setRowFilter(RowFilter.regexFilter("(?i)"+aux));
+					table.setRowSorter(tableSorter);
+				}
+			}
+		});
+		filtroBtn.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/filterBotton.png")));
+		filtroBtn.setBounds(397, 122, 61, 21);
+		mainPanel.add(filtroBtn);
+		
+		
 		final JLabel menuBarBotton = new JLabel("");
 		menuBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		menuBarBotton.setBounds(new Rectangle(10, 11, 46, 32));
@@ -877,9 +891,10 @@ public class MainFrame extends JFrame {
 				if(!maximized){
 					if(menuBarPanel.getWidth()==218){
 						menuBarPanel.setBounds(0, 33, 63, 618);
-						scrollPane.setBounds(79, 154, 825, 380);
+						scrollPane.setBounds(79, 154, 825, 437);
 						lblFiltro.setBounds(36, 122, 115, 20);
 						filterTextField.setBounds(115, 122, 115, 20);
+						filtroBtn.setBounds(235, 122, 61, 21);
 						mainTitle.setBounds(78, 37, 804, 44);
 						profeBarBotton.setVisible(false);
 						estuBarBotton.setVisible(false);
@@ -897,9 +912,10 @@ public class MainFrame extends JFrame {
 						sesionIconBarBotton.setVisible(false);
 					}else{
 						menuBarPanel.setBounds(0, 33, 218, 618);
-						scrollPane.setBounds(240, 154, 664, 380);
+						scrollPane.setBounds(240, 154, 664, 437);
 						lblFiltro.setBounds(230, 122, 50, 21);
 						filterTextField.setBounds(277, 123, 115, 20);
+						filtroBtn.setBounds(402, 122, 61, 21);
 						mainTitle.setBounds(233, 37, 649, 44);
 						profeBarBotton.setVisible(true);
 						estuBarBotton.setVisible(true);
@@ -924,6 +940,7 @@ public class MainFrame extends JFrame {
 						addBotton.setBounds(579, 122, 101, 21);
 						lblFiltro.setBounds(64, 122, 61, 21);
 						filterTextField.setBounds(117, 122, 115, 20);
+						filtroBtn.setBounds(237, 122, 61, 21);
 						mainTitle.setBounds(270, 37, 804, 44);
 						profeBarBotton.setVisible(false);
 						estuBarBotton.setVisible(false);
@@ -946,6 +963,7 @@ public class MainFrame extends JFrame {
 						addBotton.setBounds(779, 122, 101, 21);
 						lblFiltro.setBounds(225, 122, 61, 21);
 						filterTextField.setBounds(275, 123, 141, 20);
+						filtroBtn.setBounds(421, 122, 61, 21);
 						mainTitle.setBounds(470, 37, 642, 44);	
 						profeBarBotton.setVisible(true);
 						estuBarBotton.setVisible(true);
@@ -1032,7 +1050,7 @@ public class MainFrame extends JFrame {
 					mainPanel.setBounds(0, 0, 914, 618);
 					contentPane.setBounds(100, 100, 914, 618);
 					setBounds(100, 100, 914, 618);
-					scrollPane.setBounds(240, 154, 664, 380);
+					scrollPane.setBounds(240, 154, 664, 450);
 					closeFrameBotton.setBounds(877, 0, 27, 34);
 					maxFrameBotton.setBounds(846, 0, 27, 34);
 					miniFrameBotton.setBounds(820, 0, 27, 34);
@@ -1045,7 +1063,7 @@ public class MainFrame extends JFrame {
 					}else{
 						menuBarPanel.setBounds(0, 33, 218, 618);
 					}				
-					nombreUsuario.setBounds(55, 550, 153, 15);
+					nombreUsuario.setBounds(55, 546, 153, 15);
 					sesionIconBarBotton.setBounds(10, 534, 46, 39);
 					modifyBotton.setBounds(841, 122, 63, 21);
 					delBotton.setBounds(651, 122, 56, 21);
@@ -1086,31 +1104,7 @@ public class MainFrame extends JFrame {
 		upperFrameBar.setBounds(0, 0, 914, 34);
 		mainPanel.add(upperFrameBar);
 		
-		final JLabel filtroBtn = new JLabel("");
-		filtroBtn.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				filtroBtn.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/filterBottonSelected.png")));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				filtroBtn.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/filterBotton.png")));
-			}
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				String aux = filterTextField.getText();
-				if(aux.trim().length()==0){
-					tableSorter.setRowFilter(null);
-					table.setRowSorter(tableSorter);
-				}else{
-					tableSorter.setRowFilter(RowFilter.regexFilter("(?i)"+aux));
-					table.setRowSorter(tableSorter);
-				}
-			}
-		});
-		filtroBtn.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/filterBotton.png")));
-		filtroBtn.setBounds(402, 122, 61, 21);
-		mainPanel.add(filtroBtn);
+		
 	}
 	
 	public void tableDraw(){
