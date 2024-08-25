@@ -53,6 +53,7 @@ import logica.Profesor;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
+
 import java.awt.Dimension;
 
 
@@ -246,6 +247,21 @@ public class MainFrame extends JFrame {
 		filterTextField = new JTextField();
 		filterTextField.addKeyListener(new KeyAdapter() {
 			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyChar()=='\n'){
+					String aux = filterTextField.getText();
+					if(aux.trim().length()==0){
+						tableSorter.setRowFilter(null);
+						table.setRowSorter(tableSorter);
+					}else{
+						tableSorter.setRowFilter(RowFilter.regexFilter("(?i)"+aux));
+						table.setRowSorter(tableSorter);
+					}
+				}		
+			}
+		});/*
+		filterTextField.addKeyListener(new KeyAdapter() {
+			@Override
 			public void keyTyped(KeyEvent e) {
 				String aux = filterTextField.getText();
 				if(aux.trim().length()==0){
@@ -256,7 +272,7 @@ public class MainFrame extends JFrame {
 					table.setRowSorter(tableSorter);
 				}
 			}
-		});	
+		});	*/
 		filterTextField.setToolTipText("Escriba criterio de filtrado");
 		filterTextField.setBounds(277, 123, 115, 20);
 		mainPanel.add(filterTextField);
@@ -835,6 +851,16 @@ public class MainFrame extends JFrame {
 				controlSalarialBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ControlSalarial.png")));
 				controlSalarialBarIcon.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/icoControlSalarial.png")));
 			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					InputDialogControlSalarial inputSalario = new InputDialogControlSalarial();
+					inputSalario.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					inputSalario.setVisible(true);
+				} catch (Exception exc) {
+					exc.printStackTrace();
+				}
+			}
 		});
 		controlSalarialBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ControlSalarial.png")));
 		controlSalarialBarBotton.setToolTipText("Cambiar salario base de los tranajadores");
@@ -1059,6 +1085,32 @@ public class MainFrame extends JFrame {
 		});	
 		upperFrameBar.setBounds(0, 0, 914, 34);
 		mainPanel.add(upperFrameBar);
+		
+		final JLabel filtroBtn = new JLabel("");
+		filtroBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				filtroBtn.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/filterBottonSelected.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				filtroBtn.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/filterBotton.png")));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String aux = filterTextField.getText();
+				if(aux.trim().length()==0){
+					tableSorter.setRowFilter(null);
+					table.setRowSorter(tableSorter);
+				}else{
+					tableSorter.setRowFilter(RowFilter.regexFilter("(?i)"+aux));
+					table.setRowSorter(tableSorter);
+				}
+			}
+		});
+		filtroBtn.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/filterBotton.png")));
+		filtroBtn.setBounds(402, 122, 61, 21);
+		mainPanel.add(filtroBtn);
 	}
 	
 	public void tableDraw(){
