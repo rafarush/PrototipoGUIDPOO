@@ -83,7 +83,7 @@ public class Profesor extends Trabajador{
 			this.categoriaCientifica = "Máster";
 		else if(categoriaCientifica.equalsIgnoreCase("Doctor"))
 			this.categoriaCientifica = "Doctor";
-		else if(categoriaCientifica.equals("Ninguno"))
+		else if(categoriaCientifica.equals("Ninguna"))
 			this.categoriaCientifica = "Ninguna";
 		else
 			throw new IllegalArgumentException("No existe esa categoria cientifica.");
@@ -122,7 +122,7 @@ public class Profesor extends Trabajador{
 			this.cargoConsejoDireccion = "Subdirector Docente";
 		else if(cargoConsejoDireccion.equalsIgnoreCase("Subdirector de Investigaciones y Posgrado"))
 			this.cargoConsejoDireccion = "Subdirector  de Investigaciones y Posgrado";
-		else if(cargoConsejoDireccion.equalsIgnoreCase("Subdirector de Extension Universitaria"))
+		else if(cargoConsejoDireccion.equalsIgnoreCase("Subdirector de Extensión Universitaria"))
 			this.cargoConsejoDireccion = "Subdirector  de Extension Universitaria";
 		else if(cargoConsejoDireccion.equals("Jefe de Laboratorios"))
 			this.cargoConsejoDireccion = "Jefe de Laboratorios";
@@ -226,6 +226,16 @@ public class Profesor extends Trabajador{
 		
 	}
 	
+	// PARA DAR CARGO EN EL CONSEJO DE DIRECCON
+	public void  agregarCargoConsejoDireccion( String cargo){
+		setCargoConsejoDireccion(cargo);
+	}
+	
+	
+	// para eliminarlo del consejo de direccion
+	public void eliminarCargo(){
+		setCargoConsejoDireccion(null);
+	}
 	
 	
 	

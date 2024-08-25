@@ -1,6 +1,6 @@
 package logica;
 
-public abstract class Trabajador extends Persona{
+public abstract class Trabajador extends Persona {
 
 	protected float salario;
 	
@@ -21,8 +21,6 @@ public abstract class Trabajador extends Persona{
 			throw new IllegalArgumentException("El salario no puede ser menor que cero.");
 		
 	}
-	
-	abstract float calcularSalario();
 
 	
 }

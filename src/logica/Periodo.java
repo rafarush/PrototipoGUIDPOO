@@ -24,10 +24,25 @@ public class Periodo {
 			this.planificacionesDocentes = planificacionesDocentes;
 		}
 		
-		public void crearPlanificacionDocente(Profesor profesor, Asignatura asignatura, Grupo grupo){
+		public boolean crearPlanificacionDocente(Profesor profesor, Asignatura asignatura, Grupo grupo){
+			boolean val = false;
 			PlanificacionDocente planificacionDocente =  new PlanificacionDocente(profesor, asignatura, grupo);
-			planificacionesDocentes.add(planificacionDocente);
-			profesor.crearControlDocente(grupo, asignatura);
+			if(verificarPlanificacionDocente(planificacionDocente)){
+				planificacionesDocentes.add(planificacionDocente);
+				profesor.crearControlDocente(grupo, asignatura);
+				val = true;
+			}
+			
+			return val;
 		}
 
+		// PARA VERIFICAR SI UNA PLANFICACION DOCENTE YA ESTA CREADA
+		public boolean verificarPlanificacionDocente(PlanificacionDocente planificacionDocente) {
+			boolean val = false;
+			
+			if(planificacionesDocentes.contains(planificacionDocente))
+				val = true;
+			
+			return val;
+		}
 }

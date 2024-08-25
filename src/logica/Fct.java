@@ -158,23 +158,21 @@ public class Fct {
 	
 	// ELIMINAR ESTUDIANTE
 	public void eliminarEstudiante(String iD) {
-		ArrayList<Estudiante> estudianteArr = new ArrayList<>();
-		estudianteArr.add(buscarUnEstudiante(iD));
 		
 		for(int i=0;i<periodos.size();i++){
 			if(buscarUnEstudiante(iD).getAnnoAcademico()==1){
 				if(i==0 || i==6){
 					for(PlanificacionDocente pD : periodos.get(i).getPlanificacionesDocentes()){
-						if(pD.getGrupo().buscarEstudiante(iD).getID().equalsIgnoreCase(iD)){
-							pD.getGrupo().getGrupoEstudiantes().removeAll(estudianteArr);
+						if(pD.getGrupo().buscarEstudiante(iD)!=null){
+							pD.getGrupo().getGrupoEstudiantes().remove(buscarUnEstudiante(iD));
 						}
 					}
 				}
 			}else{
 				if(i==buscarUnEstudiante(iD).getAnnoAcademico()-1 || i==buscarUnEstudiante(iD).getAnnoAcademico()-2 || i==buscarUnEstudiante(iD).getAnnoAcademico()+6 || i==buscarUnEstudiante(iD).getAnnoAcademico()+5){
 					for(PlanificacionDocente pD : periodos.get(i).getPlanificacionesDocentes()){
-						if(pD.getGrupo().buscarEstudiante(iD).getID().equalsIgnoreCase(iD)){
-							pD.getGrupo().getGrupoEstudiantes().removeAll(estudianteArr);
+						if(pD.getGrupo().buscarEstudiante(iD)!=null){
+							pD.getGrupo().getGrupoEstudiantes().remove(buscarUnEstudiante(iD));
 						}
 					}
 				}
@@ -182,6 +180,15 @@ public class Fct {
 		}
 	}
 	
+	
+	// PARA ELIMINAR UN ESTUDIANTE DE UN GRUPO
+	public boolean eliminarEstudianteDeGrupo( Estudiante estudiante, Grupo grupo){
+		boolean val = false;
+		if(verificarGrupoPD(grupo))
+			val = grupo.getGrupoEstudiantes().remove(estudiante);
+		
+		return val;
+	}
 	
 	
 	
@@ -286,6 +293,24 @@ public class Fct {
 		return listaProfesores;
 	}
 	
+	
+	// PARA BUSCAR DADO UN PROFESOR SI ESTE ESTA EN ALGUNA PLANIFICACION DOCENTE
+	public boolean verificarProfeEnPlanDoc(String iD){
+		int i=0;
+		boolean val = false;
+		while(i<periodos.size() && !val){
+			int e = 0;
+			while(e<periodos.get(i).getPlanificacionesDocentes().size() && !val){
+				if(periodos.get(i).getPlanificacionesDocentes().get(e).getProfesor().getID().equalsIgnoreCase(iD))
+					val = true;
+				e++;
+			}
+			i++;
+		}
+		
+		return val;
+	}
+	
 	// PARA BUSCAR PERSONAL DE APOYO
 	public ArrayList<PersonalApoyo> buscarPersonalApoyo(){
 		
@@ -344,10 +369,154 @@ public class Fct {
 		return consejoDireccion;
 	}
 	
+	// PARA BUSCAR A LOS PROFESORES QUE NO ESTAN EN EL CONSEJO DE DIRECCION
+	public ArrayList<Profesor> buscarProfesSinCargo(){
+		ArrayList<Profesor> profesSinCargo = new ArrayList<>();
+		for(Profesor p : buscarProfesores()){
+			if(p.getCargoConsejoDireccion()==null)
+				profesSinCargo.add(p);
+		}
+		
+		return profesSinCargo;
+	}
 	
 	// AGREGAR A CONSEJO DE DIRECCION
-	public void agregarCargoConsejoDireccion(Persona persona, String cargo){
-		((Profesor)persona).setCargoConsejoDireccion(cargo);
+	public boolean agregarCargoConsejoDireccion(Profesor profesor, String cargo){
+		boolean val = false;
+		
+		if(cargo.equalsIgnoreCase("Director") && buscarDirector()==null ){
+			profesor.agregarCargoConsejoDireccion(cargo);
+			val = true;
+		}else if(cargo.equalsIgnoreCase("Subdirector Docente")&& buscarSubdirectorDocente()==null ){
+			profesor.agregarCargoConsejoDireccion(cargo);
+			val = true;
+		}else if(cargo.equalsIgnoreCase("Subdirector de Investigaciones y Posgrado")&& buscarSubdirectorInvPos()==null ){
+			profesor.agregarCargoConsejoDireccion(cargo);
+			val = true;
+		}else if(cargo.equalsIgnoreCase("Subdirector de Extensión Universitaria")&& buscarSubdirectorExtendUni()==null ){
+			profesor.agregarCargoConsejoDireccion(cargo);
+			val = true;
+		}else if(cargo.equalsIgnoreCase("Jefe de Laboratorios")&& buscarJefeLaboratorios()==null ){
+			profesor.agregarCargoConsejoDireccion(cargo);
+			val = true;
+		}
+		
+		return val;
+	}
+	
+	// PARA ELIMINAR A UN PROFESOR DEL CONSEJO DE DIRECCION
+	public boolean eliminarDelCD(Profesor profesor){
+		boolean val = false;
+		
+		if(profesor.getCargoConsejoDireccion()!=null){
+			profesor.eliminarCargo();
+			val = true;
+		}
+		
+		return val;
+	}
+	
+	// para buscar los cargos que faltan
+	public ArrayList<String> buscarCargosCDFaltantes(){
+		ArrayList<String> cargos = new ArrayList<>();
+		
+		if(buscarDirector()!=null)
+			cargos.add("Director");
+		else if(buscarSubdirectorDocente() !=null)
+			cargos.add("Subdirector Docente");
+		else if(buscarSubdirectorInvPos() !=null)
+			cargos.add("Subdirector de Investigaciones y Posgrado");
+		else if(buscarSubdirectorExtendUni() !=null)
+			cargos.add("Subdirector de Extensión Universitaria");
+		else if(buscarJefeLaboratorios() !=null)
+			cargos.add("Jefe de Laboratorios");
+		
+		return cargos;
+	}
+	
+	// BUSCAR DIRECTOR
+	public Profesor buscarDirector() {
+		Profesor profesor = null;
+		boolean val = true;
+		int i = 0;
+		
+		while(i<buscarConsejoDireccion().size() && val){
+			if(buscarConsejoDireccion().get(i).getCargoConsejoDireccion().equalsIgnoreCase("Director")){
+				profesor = buscarConsejoDireccion().get(i);
+				val = false;
+			}
+			i++;
+		}
+		
+		return profesor;
+	}
+	
+	// BUSCAR SUBDIRECTOR DOCENTE
+	public Profesor buscarSubdirectorDocente() {
+		Profesor profesor = null;
+		boolean val = true;
+		int i = 0;
+		
+		while(i<buscarConsejoDireccion().size() && val){
+			if(buscarConsejoDireccion().get(i).getCargoConsejoDireccion().equalsIgnoreCase("Subdirector Docente")){
+				profesor = buscarConsejoDireccion().get(i);
+				val = false;
+			}
+			i++;
+		}
+		
+		return profesor;
+	}
+	
+	// BUSCAR Subdirector de Investigaciones y Posgrado
+	public Profesor buscarSubdirectorInvPos() {
+		Profesor profesor = null;
+		boolean val = true;
+		int i = 0;
+		
+		while(i<buscarConsejoDireccion().size() && val){
+			if(buscarConsejoDireccion().get(i).getCargoConsejoDireccion().equalsIgnoreCase("Subdirector de Investigaciones y Posgrado")){
+				profesor = buscarConsejoDireccion().get(i);
+				val = false;
+			}
+			i++;
+		}
+		
+		return profesor;
+	}
+	
+	// BUSCAR Subdirector de Extensión Universitaria
+	public Profesor buscarSubdirectorExtendUni() {
+		Profesor profesor = null;
+		boolean val = true;
+		int i = 0;
+		
+		while(i<buscarConsejoDireccion().size() && val){
+			if(buscarConsejoDireccion().get(i).getCargoConsejoDireccion().equalsIgnoreCase("Subdirector de Extensión Universitaria")){
+				profesor = buscarConsejoDireccion().get(i);
+				val = false;
+			}
+			i++;
+		}
+		
+		return profesor;
+	}
+	
+	// BUSCAR Jefe de Laboratorios
+	public Profesor buscarJefeLaboratorios() {
+		Profesor profesor = null;
+		boolean val = true;
+		int i = 0;
+		
+		while(i<buscarConsejoDireccion().size() && val){
+			if(buscarConsejoDireccion().get(i).getCargoConsejoDireccion().equalsIgnoreCase("Jefe de Laboratorios")){
+				profesor = buscarConsejoDireccion().get(i);
+				val = false;
+			}
+			i++;
+		}
+		
+		return profesor;
 	}
 	
 	
@@ -623,6 +792,87 @@ public class Fct {
 	//**************************************** fin reportes ******************************************************************
 	
 	
+	// PARA ELIMINAR UNA ASIGNATURA
+	public boolean eliminarAsignatura(Asignatura asignatura){
+		boolean eliminada = false;
+		boolean val = verificarAsignaturaPD(asignatura);
+		
+		if(!val)
+			eliminada = planEstudio.eliminarAsignatura(asignatura);
+		
+		
+		return eliminada;
+	}
+	
+	// MODIFICAR ASIGNATURA
+	public boolean modificarAsignatura(String nombre, int annoAcademico, int semestre, float horasClases) {
+		boolean modificada=false;
+		boolean val = verificarAsignaturaPD(planEstudio.buscarAsignatura(nombre));
+		
+		if(!val){
+			planEstudio.buscarAsignatura(nombre).modificarAsignatura(annoAcademico, semestre, horasClases);
+			modificada = true;
+		}
+		
+		return modificada;
+	}
+	
+	
+	// PARA VERIFICAR SI UNA ASIGNATURA ESTA EN ALGUNA PLANIFICACION DOCENTE
+	public boolean verificarAsignaturaPD(Asignatura asignatura){
+		
+        boolean val = false;
+		
+		int periodo = asignatura.getAnnoAcademico()-1;
+		if(asignatura.getSemestre()==2)
+			periodo+=6;
+		
+		int e = 0;
+		while(e<periodos.get(periodo).getPlanificacionesDocentes().size() && !val){
+			if(periodos.get(periodo).getPlanificacionesDocentes().get(e).getAsignatura().equals(asignatura))
+				val=true;
+			e++;
+		}
+		
+		return val;
+	}
+	
+	
+	
+	
+	
+	//PARA ELIMINAR UN GRUPO
+	public boolean eliminarGrupo(Grupo grupo){
+		boolean eliminada = false;
+		boolean val = verificarGrupoPD(grupo);
+		
+		if(val)
+			eliminada = grupos.remove(grupo);
+		
+		return eliminada;
+	}
+	
+	
+	// PARA VERIFICAR SI UN GRUPO ESTA EN ALGUNA PLANIFICACION DOCENTE
+	public boolean verificarGrupoPD(Grupo grupo){
+		boolean val = false;
+		int i = 0;
+		
+		while(i<periodos.size() && !val){
+			if(i==grupo.getAnnoAcademico()-1 || i==grupo.getAnnoAcademico()+5){
+				int e = 0;
+				while(i<periodos.get(i).getPlanificacionesDocentes().size() && !val){
+					if(periodos.get(i).getPlanificacionesDocentes().get(e).getAsignatura().equals(grupo))
+						val=true;
+					e++;
+				}
+			}
+			i++;
+		}
+		
+		return val;
+	}
+	
 	
 	
 	//para inicializar los datos automaticos
@@ -630,16 +880,38 @@ public class Fct {
 		
 		// JORGITOOOOOOO ---->>>>    la creacion de los profesores por defecto
 		crearPersona("95868426587", "Luis Pérez Fernández","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B");
-		crearPersona("05062348364", "Rafael Castro Reyes","Doctor","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
-		crearPersona("05022358174", "Jorge Castro Pérez","Máster","Asistente","Cujae","MINES", "Calle 25 entre 21 y Ave. 26");
-		crearPersona("05062347564", "Manuel Castro Reyes","Máster","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
-				
+		crearPersona("05062348364", "Rafael Castro Reyes","Doctor","Titular","Cujae","MINED", "Calle 30 entre 34 y Ave. 56");
+		crearPersona("05022358174", "Jorge Castro Pérez","Máster","Asistente","Cujae","MINED", "Calle 25 entre 21 y Ave. 26");
+		crearPersona("05062347564", "Manuel Castro Reyes","Máster","Titular","Cujae","MINED", "Calle 30 entre 34 y Ave. 56");
+		
+		// los nuevos
+		
+		
+		
+		//***************************************   ESTUDIANTES   ********************************************************
+		
 		// JORGITOOOOOOO ---->>>>    la creacion de los estudiantes por defecto
 		crearPersona("05032379581", "Rafael Menéndez Rodriguez", 1 ,"Sucursal Comercial #5","Etecsa", "Calle 30 entre 34 y Ave. 56");
 		crearPersona("08868513264", "Alejandro González Fernández",1,"La Mariposa","TRD","Ave. 26 entre calles A y B");
 		crearPersona("04021324587", "Jorgito", 2, "Las Palamas", "CTC", "Tulipan y Boyeros");
 		crearPersona("04021334457", "Rafa", 6, "Las Palamas", "CTC", "Tulipan y Boyeros");
 		crearPersona("90990834457", "TOYCHOLITO", 6, "Las Palamas", "CTC", "Tulipan y Boyeros");
+		
+		// JORGITOOOOOOO ---->>>>    la creacion de los profesores por defecto
+		//1ro
+		//2do
+		//3ro
+		//4ro
+		//5to
+		//6to
+		
+		
+		
+		
+		
+		
+		
+		
 			
 		// JORGITOOOOOOO ---->>>>    la creacion del personal de apoyo por defecto
 		crearPersona("09062235147", "Federico Criado Domínguez","Laboratorio", "Calle 30 entre 34 y Ave. 56");
@@ -670,6 +942,134 @@ public class Fct {
 				
 	}
 	
+	
+	// para GENERAR LOS TODOSSSSSS LOS DATOS AUTOMATICOS
+	public void generarDatosAutomaticos() {
+		
+		// PROFESORES
+		// 1ro
+		crearPersona("84012345678", "Juan Carlos Pérez Gómez", "Doctor", "Titular", "Cujae", "MINED", "Calle 1 entre 2 y 4");
+		crearPersona("83023456789", "José Antonio Rodríguez Sánchez", "Máster", "Instructor", "CineSoft", "PCC", "Calle 2 entre 1 y 3");
+		crearPersona("82034567890", "Luis Miguel Hernández Ruiz", "Ninguno", "Asistente", "ETECSA", "MINED", "Calle 3 entre 2 y 4");
+		crearPersona("80056789012", "María Fernanda López Martínez", "Doctor", "Titular", "CIME", "FMC", "Calle 4 entre 5 y 7");
+			
+		//2do
+		crearPersona("80056789012", "Francisco Javier Sánchez Morales", "Doctor", "Titular", "CIME", "PCC", "Calle 5 entre 6 y 8");
+		crearPersona("79067890123", "Alejandro David Romero Vargas", "Máster", "Instructor", "Cujae", "MINED", "Calle 6 entre 3 y 5");
+		crearPersona("79067890123", "Ana Isabel García Fernández", "Ninguno", "Asistente", "CineSoft", "FMC", "Calle 7 entre 8 y 10");
+		crearPersona("77089012345", "Manuel Jesús Ramos Herrera", "Máster", "Auxiliar", "ETECSA", "MINED", "Calle 8 entre 1 y 3");
+			
+		//3ro
+		crearPersona("76090123456", "Ricardo Andrés Vega Paredes", "Doctor", "Titular", "CineSoft", "MINED", "Calle 9 entre 4 y 6");
+		crearPersona("75001234567", "Sergio Daniel Cruz Aguilar", "Máster", "Instructor", "Cujae", "MINED", "Calle 10 entre 3 y 5");
+		crearPersona("84012345678", "Laura Patricia Díaz Ramírez", "Ninguno", "Asistente", "CIME", "FMC", "Calle 11 entre 2 y 4");
+		crearPersona("73023456789", "Miguel Ángel Torres Martínez", "Ninguno", "Auxiliar", "ETECSA", "PCC", "Calle 12 entre 11 y 13");
+				
+		//4to
+		crearPersona("83023456789", "Marta Elena Jiménez Castro", "Doctor", "Titular", "CineSoft", "FMC", "Calle 13 entre 4 y 6");
+		crearPersona("71045678901", "Rafael Eduardo Díaz Ramírez", "Máster", "Instructor", "CIME", "PCC", "Calle 14 entre 9 y 11");
+		crearPersona("70056789012", "Fernando José García Fernández", "Ninguno", "Asistente", "Cujae", "MINED", "Calle 15 entre 22 y 24");
+		crearPersona("69067890123", "Andrés Felipe Martínez López", "Doctor", "Titular", "ETECSA", "MINED", "Calle 16 entre 15 y 17");
+				
+		// 5to
+		crearPersona("82034567890", "Sofía Valentina Torres Mendoza", "Doctor", "Titular", "CIME", "FMC", "Calle 17 entre 16 y 18");
+		crearPersona("67089012345", "Javier Alejandro González Torres", "Máster", "Instructor", "ETECSA", "MINED", "Calle 18 entre 7 y 9");
+		crearPersona("66090123456", "Daniel Enrique Sánchez Morales", "Ninguno", "Asistente", "Cujae", "MINED", "Calle 19 entre 10 y 12");
+		crearPersona("65001234567", "Roberto Carlos Jiménez Castro", "Máster", "Auxiliar", "CineSoft", "PCC", "Calle 20 entre 13 y 15");
+				
+		//6to
+		crearPersona("81045678901", "Adrián David Romero Vargas", "Doctor", "Titular", "CineSoft", "MINED", "Calle 21 entre 12 y 14");
+		crearPersona("78078901234", "Mario Alberto Ortiz Navarro", "Máster", "Instructor", "ETECSA", "PCC", "Calle 22 entre 11 y 13");
+		crearPersona("81045678901", "Paula Andrea Castillo Rojas", "Ninguno", "Asistente", "CIME", "FMC", "Calle 23 entre 6 y 8");
+		crearPersona("74012345678", "Carlos Alberto Fernández López", "Ninguno", "Auxiliar", "Cujae", "MINED", "Calle 24 entre 21 y 23");
+		
+		// ESTUDIANTES
+		/*
+		//1ro
+		//Grupo 1.1
+		crearPersona("03012345678", "Juan Carlos Pérez Gómez", "1", "", "", "");
+		crearPersona("04023456789", "José Antonio Rodríguez Sánchez", "1", "", "", "");
+		crearPersona("05034567890", "Luis Miguel Hernández Ruiz", "1", "", "", "");
+		crearPersona("04045678901", "María Fernanda López Martínez", "1", "", "", "");
+		
+		
+		//Grupo 1.2
+		crearPersona("03045678901", "Pedro Javier González Torres", "1", "", "", "");
+		crearPersona("04056789012", "Francisco Javier Sánchez Morales", "1", "", "", "");
+		crearPersona("05056789012", "Ana Isabel García Fernández", "1", "", "", "");
+		crearPersona("04067890123", "Laura Patricia Díaz Ramírez", "1", "", "", "");
+		
+		
+		//2do
+		//Grupo 2.1
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		
+		//Grupo 2.2
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		
+		//3ro
+		//Grupo 3.1
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		
+		//Grupo 3.2
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		
+		//4ro
+		//Grupo 4.1
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		
+		//Grupo 4.2
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		
+		//5to
+		//Grupo 5.1
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		
+		//Grupo 5.2
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		
+		//6to
+		//Grupo 6.1
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		
+		//Grupo 6.2
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		crearPersona("", "", "", "", "", "");
+		
+		*/
+		
+		
+	}
+	
 	// Para que entrando un profesor te devuelva las asignaturas que da
 	public ArrayList<Asignatura> buscarAsignaturasPorProfe(String id){
 		ArrayList<Asignatura> asignaturas = new ArrayList<>();
@@ -698,23 +1098,8 @@ public class Fct {
 		return grupos;
 	}
 	
-	// para verificar que un grupo especifico no ternga creado ningun pan docente
-	public boolean verificarGrupoPD(Grupo grupo){
-		boolean val= false;
-		int i = 0;
-		
-		while(i< periodos.size() && !val){
-			int e = 0;
-			while(e<periodos.get(i).getPlanificacionesDocentes().size() && !val){
-				if(periodos.get(i).getPlanificacionesDocentes().get(e).getGrupo().getNombreGrupo().equalsIgnoreCase(grupo.getNombreGrupo()))
-					val=true;
-				e++;
-			}
-			i++;
-		}
-		
-		return val;
-	}
+	
+	
 	
 	
 	

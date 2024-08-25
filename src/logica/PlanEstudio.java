@@ -41,6 +41,14 @@ public class PlanEstudio {
 		return asignatura;
 	}
 	
-	
+	// para eliminar la asignatura
+	public boolean eliminarAsignatura(Asignatura asignatura){
+		ArrayList<Asignatura> asignaturaArr = new ArrayList<>();
+		asignaturaArr.add(asignatura);
+		
+		boolean val =asignaturas.remove(asignatura);
+		
+		return val;
+	}
 
 }

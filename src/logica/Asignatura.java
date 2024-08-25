@@ -69,8 +69,15 @@ public class Asignatura {
 		return periodo;
 	}
 	
-	
-	
+	// PARA MODIFICAR LA ASIGNATURA
+	public void modificarAsignatura( int annoAcademico, int semestre, float horasClases) {
+		
+		setAnnoAcademico(annoAcademico);
+		
+		setSemestre(semestre);
+		
+		setHorasClases(horasClases);
+	}
 	
 	
 	

@@ -54,11 +54,7 @@ public class PersonalApoyo extends Trabajador{
 
 
 
-
-
-	@Override
-	float calcularSalario() {
-		// TODO Auto-generated method stub
+	public float calcularSalario() {
 		return salario;
 	}
 	
