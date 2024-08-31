@@ -97,7 +97,7 @@ public class Runner {
 		fct.crearPersona("59868285496", "Maria Elena Gómez Pérez","Biblioteca", "Ave. 26 entre calles A y B");
 		*/
 							
-		DatosAuto.definirTablaPersonalAux(fct.buscarPersonalApoyo());
+		//DatosAuto.definirTablaPersonalAux(fct.buscarPersonalApoyo());
 		
 		
 		// JORGITOOOOOOO ---->>>>    la creacion de las asignaturas por defecto
@@ -108,7 +108,7 @@ public class Runner {
 		fct.getPlanEstudio().crearAsignatura("Estructuras de Datos", 2, 1, 40);
 		fct.getPlanEstudio().crearAsignatura("Seguridad Nacional", 2, 1, 90);
 		*/
-		DatosAuto.definirTablaPlanDeEstudio(fct.getPlanEstudio().getAsignaturas());
+		//DatosAuto.definirTablaPlanDeEstudio(fct.getPlanEstudio().getAsignaturas());
 		
 		//ESTUDIANTE PARA REPORTES
 		//DatosAuto.definirTablaReportesEstu(fct.buscarEstudiantesOros());

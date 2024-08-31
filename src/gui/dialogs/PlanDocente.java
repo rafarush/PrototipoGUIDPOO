@@ -170,9 +170,18 @@ public class PlanDocente extends JDialog {
 							case GRUPO:
 								//Llamar a crear planificacion docente
 								grupoSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
-								Runner.fct.getPeriodos().get(0).crearPlanificacionDocente(Runner.fct.buscarUnProfesor(profeSelec), 
+								if(semestreComboBox.getSelectedItem().toString().equalsIgnoreCase("1")){
+									Runner.fct.getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())-1).crearPlanificacionDocente(Runner.fct.buscarUnProfesor(profeSelec), 
+											Runner.fct.getPlanEstudio().buscarAsignatura(asignaturaSelec),
+											Runner.fct.buscarGrupo(grupoSelec));
+								}else{
+									Runner.fct.getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())+5).crearPlanificacionDocente(Runner.fct.buscarUnProfesor(profeSelec), 
+											Runner.fct.getPlanEstudio().buscarAsignatura(asignaturaSelec),
+											Runner.fct.buscarGrupo(grupoSelec));
+								}
+								/*Runner.fct.getPeriodos().get(0).crearPlanificacionDocente(Runner.fct.buscarUnProfesor(profeSelec), 
 										Runner.fct.getPlanEstudio().buscarAsignatura(asignaturaSelec),
-										Runner.fct.buscarGrupo(grupoSelec));
+										Runner.fct.buscarGrupo(grupoSelec));*/
 								JOptionPane.showMessageDialog(null, "Planificación realizada con éxito");
 								btnSeleccionado = BotonSelec.PLAN_DOCENTE;
 								auxBtn.setText("Crear Planificaci\u00F3n Docente");
@@ -293,6 +302,8 @@ public class PlanDocente extends JDialog {
 	private void tableDraw(){
 		switch(btnSeleccionado){
 			case PROFESOR:
+				semestreComboBox.setEnabled(false);
+				annoComboBox.setEnabled(false);
 				DatosAuto.definirTablaProfes(Runner.fct.buscarProfesores());
 				tabla = new JTableNoEdit(Runner.modeloProfesor);
 				tabla.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -320,6 +331,7 @@ public class PlanDocente extends JDialog {
 				});
 				break;
 			case PLAN_ESTUDIO:
+				DatosAuto.definirTablaPlanDeEstudio(Runner.fct.getPlanEstudio().getAsignaturas());
 				tabla = new JTableNoEdit(Runner.modeloPlanDeEstudio);
 				tabla.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -333,6 +345,8 @@ public class PlanDocente extends JDialog {
 				});
 				break;
 			case PLAN_DOCENTE:
+				semestreComboBox.setEnabled(true);
+				annoComboBox.setEnabled(true);
 				if(semestreComboBox.getSelectedItem().toString().equalsIgnoreCase("1")){
 					DatosAuto.definirTablaPlanDocente(Runner.fct.getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())-1).getPlanificacionesDocentes());
 				}else{
