@@ -132,9 +132,19 @@ public class Runner {
 		fct.getPeriodos().get(0).crearPlanificacionDocente(fct.buscarUnProfesor("05062347564"),fct.getPlanEstudio().buscarAsignatura("Introducción a la Programación") , fct.buscarGrupo("13"));
 		*/
 		
-	    DatosAuto.definirTablaPlanDocente(fct.getPeriodos().get(0).getPlanificacionesDocentes());
+	    //DatosAuto.definirTablaPlanDocente(fct.getPeriodos().get(0).getPlanificacionesDocentes());
 		//DatosAuto.llenarTablaPlanificacionDocente(fct.getPeriodos().get(0).getPlanificacionesDocentes());
-
+	    
+	    
+	    fct.getPlanEstudio().crearAsignatura("Matemática III", 2, 1, 50);
+	    fct.getPlanEstudio().crearAsignatura("IA", 2, 2, 50);
+	    
+	    fct.crearGrupo("Grupo 2.2", 2);
+	    fct.crearGrupo("Grupo 2.1", 2);
+	    
+	    fct.getPeriodos().get(1).crearPlanificacionDocente(fct.buscarUnProfesor("95868426587"),fct.getPlanEstudio().buscarAsignatura("Matemática III") , fct.buscarGrupo("Grupo 2.1"));
+	    fct.getPeriodos().get(7).crearPlanificacionDocente(fct.buscarUnProfesor("95868426587"),fct.getPlanEstudio().buscarAsignatura("IA") , fct.buscarGrupo("Grupo 2.2"));
+	    
 	    
 		try {
 			login = new LoginUser();

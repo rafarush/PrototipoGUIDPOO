@@ -371,7 +371,7 @@ public class DatosAuto {
 	public static void definirTablaPlanDocente(ArrayList<PlanificacionDocente> planesDocentes){
 		Runner.modeloPlanDocente = new DefaultTableModel();
 		Runner.modeloPlanDocente.addColumn("Profesor");
-		Runner.modeloPlanDocente.addColumn("Estudiante");
+		Runner.modeloPlanDocente.addColumn("Asignatura");
 		Runner.modeloPlanDocente.addColumn("Grupo");
 		agregarFilasPlanesDocentes(planesDocentes);
 	}

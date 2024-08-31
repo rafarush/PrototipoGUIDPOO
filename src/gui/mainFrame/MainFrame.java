@@ -70,6 +70,7 @@ public class MainFrame extends JFrame {
 	private BotonSelec btnSeleccionado = BotonSelec.PROFESOR;
 	DefaultTableCellRenderer centrarCelda = new DefaultTableCellRenderer();
 	private static Object[] valoresDeFila = new Object[50];
+	private static int periodo = 0;
 	
 	
 	
@@ -420,7 +421,35 @@ public class MainFrame extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(null, "Implementar");
+				//JOptionPane.showMessageDialog(null, "Implementar");
+				switch (periodo) {
+				case 0:
+					if (Runner.fct.pasarPeriodo()){
+						JOptionPane.showMessageDialog(null, "Inicio de semestre 1");
+						periodo = 1;
+					}else{
+						JOptionPane.showMessageDialog(null, "No se puede pasar");
+					}
+					break;
+				case 1:
+					if (Runner.fct.pasarPeriodo()){
+						JOptionPane.showMessageDialog(null, "Inicio de semestre 2");
+						periodo = 2;
+					}else{
+						JOptionPane.showMessageDialog(null, "No se puede pasar");
+					}
+					break;
+				case 2:
+					if (Runner.fct.pasarAnno()){
+						JOptionPane.showMessageDialog(null, "Se pudo pasar de año (Inicio de preparación de semestre)");
+						periodo = 0;
+					}else{
+						JOptionPane.showMessageDialog(null, "Se pudo pasar de año");
+					}
+					break;
+				default:
+					break;
+				}
 			}
 		});
 		lblnextPeriod.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextPeriodBotton.png")));

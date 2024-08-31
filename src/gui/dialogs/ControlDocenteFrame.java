@@ -260,7 +260,8 @@ public class ControlDocenteFrame extends JDialog {
 				});
 				break;
 			case GRUPO:
-				DatosAuto.definirTablaGrupo(Runner.fct.getGrupos());
+				//DatosAuto.definirTablaGrupo(Runner.fct.getGrupos());
+				DatosAuto.definirTablaGrupo(Runner.fct.buscarGruposPorAsignatura(asignaturaSelec));
 				tablaNotas = new JTableNoEdit(Runner.modeloGrupoReporte);
 				tablaNotas.getColumnModel().getColumn(1).setCellRenderer(centrarCelda);
 				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
@@ -290,8 +291,8 @@ public class ControlDocenteFrame extends JDialog {
 				 * Falta metodo para saber que asignaturas da un profe
 				 */
 				/*Profesor profe = Runner.fct.buscarPersona(profeSelec);
-				ArrayList<Asignatura> asig = profe.getAsignaturas() [O algo asi]
-				DatosAuto.definirTablaPlanDeEstudio(Runner.fct.);*/
+				ArrayList<Asignatura> asig = profe.getAsignaturas() [O algo asi]*/
+				DatosAuto.definirTablaPlanDeEstudio(Runner.fct.buscarAsignaturasPorProfe(profeSelec));
 				tablaNotas = new JTableNoEdit(Runner.modeloPlanDeEstudio);
 				for(int i=1; i<=3;i++)
 					tablaNotas.getColumnModel().getColumn(i).setCellRenderer(centrarCelda);
