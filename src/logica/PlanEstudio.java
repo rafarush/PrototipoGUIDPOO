@@ -41,6 +41,19 @@ public class PlanEstudio {
 		return asignatura;
 	}
 	
+	
+	//para buscar las asginaturas de un año dado y el semestre dado
+	public ArrayList<Asignatura> busarAsignaturasPorPeriodo(int anno, int semestre){
+		ArrayList<Asignatura> asignaturasP = new ArrayList<>();
+		
+		for(Asignatura a : asignaturas){
+			if(a.getAnnoAcademico()==anno && a.getSemestre()==semestre)
+				asignaturasP.add(a);
+		}
+		
+		return asignaturasP;
+	}
+	
 	// para eliminar la asignatura
 	public boolean eliminarAsignatura(Asignatura asignatura){
 		ArrayList<Asignatura> asignaturaArr = new ArrayList<>();

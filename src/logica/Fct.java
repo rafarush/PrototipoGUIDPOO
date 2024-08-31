@@ -2,18 +2,23 @@ package logica;
 
 import java.util.ArrayList;
 
-public class Fct {
+public final class Fct {
 	//atributos
 	
 	private ArrayList<Persona> personas;
 	private ArrayList<Grupo> grupos;
 	private PlanEstudio planEstudio;
 	private ArrayList<Periodo> periodos;
+	
+	private static Fct instance;
 
 	
 	
 	//constructor
-	public Fct() {
+	
+	
+	// TENGO QUE PONER EL CONSTRUCTOR DE LA FCT EN PRIVATE
+	private Fct() {
 		personas= new ArrayList<>();
 		grupos = new ArrayList<>();
 		planEstudio =  new PlanEstudio();
@@ -22,6 +27,14 @@ public class Fct {
 		crearPeriodos();
 	}
 	
+	
+	// SINGLENTON
+	public Fct getInstance() {
+		if (instance == null)
+            instance = new Fct();
+		
+        return instance;
+	}
 	
 
 	// ELIMINAR PERSONA
@@ -939,8 +952,8 @@ public class Fct {
 		//PLANES DOCENTES
 		
 		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("95868426587"),getPlanEstudio().buscarAsignatura("Matemática I") , buscarGrupo("Grupo 1.1"));
-		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("05062348364"),getPlanEstudio().buscarAsignatura("Introducción a la Programación") , buscarGrupo("Grupo 6.1"));
-		
+		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("05062348364"),getPlanEstudio().buscarAsignatura("Introducción a la Programación") , buscarGrupo("Grupo 1.2"));
+		 
 	}
 	
 	
@@ -1099,7 +1112,16 @@ public class Fct {
 		return grupos;
 	}
 	
-	
+	// para buscar los grupos por un anno entrante
+	public ArrayList<Grupo> buscarGruposPorAnno(int anno){
+		ArrayList<Grupo> grupos = new ArrayList<>();
+		for(Grupo g : grupos){
+			if(g.getAnnoAcademico()==anno)
+				grupos.add(g);
+		}
+		
+		return grupos;
+	}
 	
 	
 	
