@@ -23,7 +23,10 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+
 import java.awt.Cursor;
+
+import logica.Fct;
 
 
 
@@ -151,8 +154,8 @@ public class InputDialogAsignaturaPE extends JDialog {
 					if(nombreTextField.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Debe ponerle un nombre a la Asignatura");
 					}else{
-						Runner.modeloPlanDeEstudio.addRow(new Object[]{nombreTextField.getText(), annoComboBox.getSelectedItem().toString(), semestreComboBox.getSelectedItem().toString(), spinnerHorasLectivas.getValue().toString()});
-
+						Fct.getInstance().getPlanEstudio().crearAsignatura(nombreTextField.getText(), Integer.valueOf(annoComboBox.getSelectedItem().toString()),
+								Integer.valueOf(semestreComboBox.getSelectedItem().toString()), Integer.valueOf(spinnerHorasLectivas.getValue().toString()));
 						JOptionPane.showMessageDialog(null, "Se ha añadido una Asignatura al Plan de Estudio con éxito");
 						dispose();
 					}	
@@ -303,13 +306,15 @@ public class InputDialogAsignaturaPE extends JDialog {
 					if(nombreTextField.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Debe ponerle un nombre a la Asignatura");
 					}else{
-						Runner.modeloPlanDeEstudio.addRow(new Object[]{nombreTextField.getText(), annoComboBox.getSelectedItem().toString(), semestreComboBox.getSelectedItem().toString(), spinnerHorasLectivas.getValue().toString()});
+						/*Runner.modeloPlanDeEstudio.addRow(new Object[]{nombreTextField.getText(), annoComboBox.getSelectedItem().toString(), semestreComboBox.getSelectedItem().toString(), spinnerHorasLectivas.getValue().toString()});
 						/**
 						 * Elimina la Asignatura original (PROVISIONAL)
-						 */
+						 *//*
 						((DefaultTableModel) MainFrame.getTable().getModel()).removeRow(MainFrame.getTable().getSelectedRow());
-						((DefaultTableModel) MainFrame.getTable().getModel()).fireTableDataChanged();
-						
+						((DefaultTableModel) MainFrame.getTable().getModel()).fireTableDataChanged();*/
+						Fct.getInstance().modificarAsignatura(nombreTextField.getText(), Integer.valueOf(annoComboBox.getSelectedItem().toString()), 
+								Integer.valueOf(semestreComboBox.getSelectedItem().toString()), 
+								Integer.valueOf(spinnerHorasLectivas.getValue().toString()));
 						JOptionPane.showMessageDialog(null, "Se ha modificado la Asignatura del Plan de Estudio con éxito");
 						dispose();
 					}	
@@ -351,7 +356,7 @@ public class InputDialogAsignaturaPE extends JDialog {
 		nombreTextField.setText(valoresDeLaFila[0].toString());//Escribe el nombre
 		annoComboBox.setSelectedItem(valoresDeLaFila[1].toString());//Pone el año
 		semestreComboBox.setSelectedItem(valoresDeLaFila[2].toString());//Pone el semestre
-		spinnerHorasLectivas.setValue((Integer.valueOf(valoresDeLaFila[3].toString())));//Pone la cantidad de horas
+		spinnerHorasLectivas.setValue(valoresDeLaFila[3]);//Pone la cantidad de horas
 	}
 	
 }

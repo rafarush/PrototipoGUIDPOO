@@ -216,6 +216,7 @@ public class MainFrame extends JFrame {
 						} catch (Exception exc) {
 							exc.printStackTrace();
 						}
+						tableDraw();
 					case GRUPO:
 						try {
 							Runner.inputGrupo = new InputDialogGrupo();
@@ -758,7 +759,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		consejoDireccBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ConsejoDireccBarBotton.png")));
-		consejoDireccBarBotton.setToolTipText("Mostrar los datos del Plan de Estudio ");
+		consejoDireccBarBotton.setToolTipText("Mostrar los profesores que forman parte del Consejo de Direcci\u00F3n ");
 		consejoDireccBarBotton.setBounds(10, 271, 203, 34);
 		menuBarPanel.add(consejoDireccBarBotton);
 		
@@ -1235,7 +1236,7 @@ public class MainFrame extends JFrame {
 	
 	private void actualizarValoresDeFila(int filaSelec){	
 		for(int i = 0; i < table.getColumnCount();i++){
-			valoresDeFila[i]= table.getValueAt(filaSelec, i);
+			valoresDeFila[i] = table.getValueAt(filaSelec, i);
 		}
 	}
 	public static JTableNoEdit getTable(){
