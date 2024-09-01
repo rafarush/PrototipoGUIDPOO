@@ -39,6 +39,7 @@ import logica.Asignatura;
 import logica.ComboBoxTextInicial;
 import logica.DatosAuto;
 import logica.Estudiante;
+import logica.Fct;
 import logica.Grupo;
 import logica.JTableNoEdit;
 import logica.Profesor;
@@ -171,17 +172,17 @@ public class PlanDocente extends JDialog {
 								//Llamar a crear planificacion docente
 								grupoSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
 								if(semestreComboBox.getSelectedItem().toString().equalsIgnoreCase("1")){
-									Runner.fct.getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())-1).crearPlanificacionDocente(Runner.fct.buscarUnProfesor(profeSelec), 
-											Runner.fct.getPlanEstudio().buscarAsignatura(asignaturaSelec),
-											Runner.fct.buscarGrupo(grupoSelec));
+									Fct.getInstance().getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())-1).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor(profeSelec), 
+											Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec),
+											Fct.getInstance().buscarGrupo(grupoSelec));
 								}else{
-									Runner.fct.getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())+5).crearPlanificacionDocente(Runner.fct.buscarUnProfesor(profeSelec), 
-											Runner.fct.getPlanEstudio().buscarAsignatura(asignaturaSelec),
-											Runner.fct.buscarGrupo(grupoSelec));
+									Fct.getInstance().getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())+5).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor(profeSelec), 
+											Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec),
+											Fct.getInstance().buscarGrupo(grupoSelec));
 								}
-								/*Runner.fct.getPeriodos().get(0).crearPlanificacionDocente(Runner.fct.buscarUnProfesor(profeSelec), 
-										Runner.fct.getPlanEstudio().buscarAsignatura(asignaturaSelec),
-										Runner.fct.buscarGrupo(grupoSelec));*/
+								/*Fct.getInstance().getPeriodos().get(0).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor(profeSelec), 
+										Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec),
+										Fct.getInstance().buscarGrupo(grupoSelec));*/
 								JOptionPane.showMessageDialog(null, "Planificación realizada con éxito");
 								btnSeleccionado = BotonSelec.PLAN_DOCENTE;
 								auxBtn.setText("Crear Planificaci\u00F3n Docente");
@@ -304,7 +305,7 @@ public class PlanDocente extends JDialog {
 			case PROFESOR:
 				semestreComboBox.setEnabled(false);
 				annoComboBox.setEnabled(false);
-				DatosAuto.definirTablaProfes(Runner.fct.buscarProfesores());
+				DatosAuto.definirTablaProfes(Fct.getInstance().buscarProfesores());
 				tabla = new JTableNoEdit(Runner.modeloProfesor);
 				tabla.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -319,7 +320,7 @@ public class PlanDocente extends JDialog {
 				});
 				break;
 			case GRUPO:
-				DatosAuto.definirTablaGrupo(Runner.fct.getGrupos());
+				DatosAuto.definirTablaGrupo(Fct.getInstance().getGrupos());
 				tabla = new JTableNoEdit(Runner.modeloGrupoReporte);/*
 				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
 				tablaNotas.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);*/
@@ -331,7 +332,7 @@ public class PlanDocente extends JDialog {
 				});
 				break;
 			case PLAN_ESTUDIO:
-				DatosAuto.definirTablaPlanDeEstudio(Runner.fct.getPlanEstudio().getAsignaturas());
+				DatosAuto.definirTablaPlanDeEstudio(Fct.getInstance().getPlanEstudio().getAsignaturas());
 				tabla = new JTableNoEdit(Runner.modeloPlanDeEstudio);
 				tabla.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -348,9 +349,9 @@ public class PlanDocente extends JDialog {
 				semestreComboBox.setEnabled(true);
 				annoComboBox.setEnabled(true);
 				if(semestreComboBox.getSelectedItem().toString().equalsIgnoreCase("1")){
-					DatosAuto.definirTablaPlanDocente(Runner.fct.getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())-1).getPlanificacionesDocentes());
+					DatosAuto.definirTablaPlanDocente(Fct.getInstance().getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())-1).getPlanificacionesDocentes());
 				}else{
-					DatosAuto.definirTablaPlanDocente(Runner.fct.getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())+5).getPlanificacionesDocentes());
+					DatosAuto.definirTablaPlanDocente(Fct.getInstance().getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())+5).getPlanificacionesDocentes());
 				}
 				tabla = new JTableNoEdit(Runner.modeloPlanDocente);
 				tabla.addMouseListener(new java.awt.event.MouseAdapter() {

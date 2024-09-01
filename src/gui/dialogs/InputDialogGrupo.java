@@ -23,6 +23,7 @@ import javax.swing.DefaultComboBoxModel;
 
 import java.awt.Cursor;
 
+import logica.Fct;
 import logica.PersonalApoyo;
 
 
@@ -126,7 +127,7 @@ public class InputDialogGrupo extends JDialog {
 					if (nombreTextField.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Debe poner un nombre al grupo");
 					}else{
-						Runner.fct.crearGrupo(nombreTextField.getText(), Integer.valueOf(annoAcademicoComboBox.getSelectedItem().toString()));
+						Fct.getInstance().crearGrupo(nombreTextField.getText(), Integer.valueOf(annoAcademicoComboBox.getSelectedItem().toString()));
 						JOptionPane.showMessageDialog(null, "Se ha creado el grupo correctamente");
 						Runner.frame.tableDraw();
 						dispose();

@@ -30,6 +30,7 @@ import javax.swing.SpinnerListModel;
 
 import logica.Asignatura;
 import logica.Estudiante;
+import logica.Fct;
 import logica.Grupo;
 import logica.Profesor;
 
@@ -143,10 +144,10 @@ public class InputDialogNota extends JDialog {
 				public void mouseClicked(MouseEvent e) {
 					nota1 = spinnerNota1.getModel().getValue().toString();
 					nota2 = spinnerNota2.getModel().getValue().toString();
-					Profesor profe = (Profesor) Runner.fct.buscarPersona(ControlDocenteFrame.profeSelec);
-					Asignatura asignatura = Runner.fct.getPlanEstudio().buscarAsignatura(ControlDocenteFrame.asignaturaSelec);
-					Estudiante estudiante = Runner.fct.buscarUnEstudiante(ControlDocenteFrame.estuSelec);
-					//Grupo grupo = Runner.fct.buscarGrupo(ControlDocenteFrame.grupoSelec);
+					Profesor profe = (Profesor) Fct.getInstance().buscarPersona(ControlDocenteFrame.profeSelec);
+					Asignatura asignatura = Fct.getInstance().getPlanEstudio().buscarAsignatura(ControlDocenteFrame.asignaturaSelec);
+					Estudiante estudiante = Fct.getInstance().buscarUnEstudiante(ControlDocenteFrame.estuSelec);
+					//Grupo grupo = Fct.getInstance().buscarGrupo(ControlDocenteFrame.grupoSelec);
 					/*
 					 * MANDAR NOTA A LOGICA
 					 */

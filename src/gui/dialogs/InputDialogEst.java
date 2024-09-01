@@ -24,6 +24,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Cursor;
 
 import logica.Estudiante;
+import logica.Fct;
 
 
 
@@ -169,7 +170,7 @@ public class InputDialogEst extends JDialog {
 					if(nombreTextField.getText().isEmpty() || ciTextField.getText().isEmpty() || direccTextField.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Existen campos vacíos");
 					}else{
-						Runner.fct.crearPersona(ciTextField.getText(), nombreTextField.getText(),Integer.valueOf(anyoComboBox.getSelectedItem().toString()),
+						Fct.getInstance().crearPersona(ciTextField.getText(), nombreTextField.getText(),Integer.valueOf(anyoComboBox.getSelectedItem().toString()),
 								centroLaboralTextField.getText(),organismoTextField.getText(), direccTextField.getText());
 						
 						JOptionPane.showMessageDialog(null, "Se ha añadido al estudiante con éxito");

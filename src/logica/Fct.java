@@ -29,7 +29,7 @@ public final class Fct {
 	
 	
 	// SINGLENTON
-	public Fct getInstance() {
+	public static Fct getInstance() {
 		if (instance == null)
             instance = new Fct();
 		

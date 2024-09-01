@@ -47,6 +47,7 @@ import java.util.ArrayList;
 
 import logica.DatosAuto;
 import logica.Enums.BotonSelec;
+import logica.Fct;
 import logica.Grupo;
 import logica.JTableNoEdit;
 import logica.Profesor;
@@ -296,7 +297,7 @@ public class MainFrame extends JFrame {
 						if (btnSeleccionado != BotonSelec.GRUPO && btnSeleccionado != BotonSelec.PLAN_ESTUDIO && btnSeleccionado != BotonSelec.CONSEJO_DIRECC){
 							//Falta revisar si el profe esta en alguna planificacion docente
 							//Profesor profe = (Profesor) Runner.fct.buscarPersona(table.getValueAt(table.getSelectedRow(), 0).toString());
-							Runner.fct.eliminarPersona(table.getValueAt(table.getSelectedRow(), 0).toString());
+							Fct.getInstance().eliminarPersona(table.getValueAt(table.getSelectedRow(), 0).toString());
 							tableDraw();
 						}else if(btnSeleccionado == BotonSelec.GRUPO){
 							//Falta revisar si el grupo esta en alguna planificacion docente
@@ -342,7 +343,7 @@ public class MainFrame extends JFrame {
 					switch(btnSeleccionado){
 						case PROFESOR:
 							try {
-								Runner.inputProfe = new InputDialogProfe(Runner.fct.buscarUnProfesor(table.getValueAt(filaSelec, 0).toString()));
+								Runner.inputProfe = new InputDialogProfe(Fct.getInstance().buscarUnProfesor(table.getValueAt(filaSelec, 0).toString()));
 								Runner.inputProfe.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								Runner.inputProfe.setVisible(true);
 							} catch (Exception exc) {
@@ -352,7 +353,7 @@ public class MainFrame extends JFrame {
 							break;
 						case ESTUDIANTE:
 							try {
-								Runner.inputEst = new InputDialogEst(Runner.fct.buscarUnEstudiante(table.getValueAt(filaSelec, 0).toString()));
+								Runner.inputEst = new InputDialogEst(Fct.getInstance().buscarUnEstudiante(table.getValueAt(filaSelec, 0).toString()));
 								Runner.inputEst.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								Runner.inputEst.setVisible(true);
 							} catch (Exception exc) {
@@ -362,7 +363,7 @@ public class MainFrame extends JFrame {
 							break;
 						case PERSO_AUX:
 							try {
-								Runner.inputPerAux = new InputDialogPerAux(Runner.fct.buscarUnPersonalApoyo(table.getValueAt(filaSelec, 0).toString()));
+								Runner.inputPerAux = new InputDialogPerAux(Fct.getInstance().buscarUnPersonalApoyo(table.getValueAt(filaSelec, 0).toString()));
 								Runner.inputPerAux.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								Runner.inputPerAux.setVisible(true);
 							} catch (Exception exc) {
@@ -393,7 +394,7 @@ public class MainFrame extends JFrame {
 							break;
 						case CONSEJO_DIRECC:
 							try {
-								Runner.inputModConDir = new InputDialogModifConsejoDirecc(Runner.fct.buscarUnProfesor(table.getValueAt(table.getSelectedRow(), 0).toString()));
+								Runner.inputModConDir = new InputDialogModifConsejoDirecc(Fct.getInstance().buscarUnProfesor(table.getValueAt(table.getSelectedRow(), 0).toString()));
 								Runner.inputModConDir.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								Runner.inputModConDir.setVisible(true);
 							} catch (Exception exc) {
@@ -424,7 +425,7 @@ public class MainFrame extends JFrame {
 				//JOptionPane.showMessageDialog(null, "Implementar");
 				switch (periodo) {
 				case 0:
-					if (Runner.fct.pasarPeriodo()){
+					if (Fct.getInstance().pasarPeriodo()){
 						JOptionPane.showMessageDialog(null, "Inicio de semestre 1");
 						periodo = 1;
 					}else{
@@ -432,7 +433,7 @@ public class MainFrame extends JFrame {
 					}
 					break;
 				case 1:
-					if (Runner.fct.pasarPeriodo()){
+					if (Fct.getInstance().pasarPeriodo()){
 						JOptionPane.showMessageDialog(null, "Inicio de semestre 2");
 						periodo = 2;
 					}else{
@@ -440,7 +441,7 @@ public class MainFrame extends JFrame {
 					}
 					break;
 				case 2:
-					if (Runner.fct.pasarAnno()){
+					if (Fct.getInstance().pasarAnno()){
 						JOptionPane.showMessageDialog(null, "Se pudo pasar de año (Inicio de preparación de semestre)");
 						periodo = 0;
 					}else{
@@ -1142,7 +1143,7 @@ public class MainFrame extends JFrame {
 	public void tableDraw(){
 		switch(btnSeleccionado){
 			case PROFESOR:
-				DatosAuto.definirTablaProfes(Runner.fct.buscarProfesores());
+				DatosAuto.definirTablaProfes(Fct.getInstance().buscarProfesores());
 				table = new JTableNoEdit(Runner.modeloProfesor);
 				table.getColumnModel().getColumn(7).setCellRenderer(centrarCelda);
 				tableSorter = new TableRowSorter<>(Runner.modeloProfesor);
@@ -1155,7 +1156,7 @@ public class MainFrame extends JFrame {
 				});
 				break;
 			case ESTUDIANTE:
-				DatosAuto.definirTablaEstudiantes(Runner.fct.buscarEstudiantes());
+				DatosAuto.definirTablaEstudiantes(Fct.getInstance().buscarEstudiantes());
 				table = new JTableNoEdit(Runner.modeloEstudiante);
 				table.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
 				tableSorter = new TableRowSorter<>(Runner.modeloEstudiante);
@@ -1168,7 +1169,7 @@ public class MainFrame extends JFrame {
 				});
 				break;
 			case PERSO_AUX:
-				DatosAuto.definirTablaPersonalAux(Runner.fct.buscarPersonalApoyo());
+				DatosAuto.definirTablaPersonalAux(Fct.getInstance().buscarPersonalApoyo());
 				table = new JTableNoEdit(Runner.modeloPersonalAux);
 				tableSorter = new TableRowSorter<>(Runner.modeloPersonalAux);
 				table.setRowSorter(tableSorter);
@@ -1180,7 +1181,7 @@ public class MainFrame extends JFrame {
 				});
 				break;	
 			case PLAN_ESTUDIO:
-				DatosAuto.definirTablaPlanDeEstudio(Runner.fct.getPlanEstudio().getAsignaturas());
+				DatosAuto.definirTablaPlanDeEstudio(Fct.getInstance().getPlanEstudio().getAsignaturas());
 				table = new JTableNoEdit(Runner.modeloPlanDeEstudio);
 				for(int i=1; i<=3;i++)
 					table.getColumnModel().getColumn(i).setCellRenderer(centrarCelda);
@@ -1194,7 +1195,7 @@ public class MainFrame extends JFrame {
 				});
 				break;
 			case GRUPO:
-				DatosAuto.definirTablaGrupo(Runner.fct.getGrupos());
+				DatosAuto.definirTablaGrupo(Fct.getInstance().getGrupos());
 				table = new JTableNoEdit(Runner.modeloGrupoReporte);
 				table.getColumnModel().getColumn(1).setCellRenderer(centrarCelda);
 				table.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
@@ -1210,7 +1211,7 @@ public class MainFrame extends JFrame {
 				});
 				break;
 			case CONSEJO_DIRECC:
-				DatosAuto.definirTablaProfesConsejo(Runner.fct.buscarConsejoDireccion());
+				DatosAuto.definirTablaProfesConsejo(Fct.getInstance().buscarConsejoDireccion());
 				table = new JTableNoEdit(Runner.modeloProfesorConsejo);
 				tableSorter = new TableRowSorter<>(Runner.modeloProfesorConsejo);
 				table.setRowSorter(tableSorter);

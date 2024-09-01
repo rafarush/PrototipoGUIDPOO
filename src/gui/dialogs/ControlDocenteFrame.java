@@ -36,6 +36,7 @@ import logica.Asignatura;
 import logica.ComboBoxTextInicial;
 import logica.DatosAuto;
 import logica.Estudiante;
+import logica.Fct;
 import logica.Grupo;
 import logica.JTableNoEdit;
 import logica.Profesor;
@@ -246,7 +247,7 @@ public class ControlDocenteFrame extends JDialog {
 	private void tableDraw(){
 		switch(btnSeleccionado){
 			case PROFESOR:
-				DatosAuto.definirTablaProfes(Runner.fct.buscarProfesores());
+				DatosAuto.definirTablaProfes(Fct.getInstance().buscarProfesores());
 				tablaNotas = new JTableNoEdit(Runner.modeloProfesor);
 				tablaNotas.getColumnModel().getColumn(7).setCellRenderer(centrarCelda);
 				tablaNotas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -260,8 +261,8 @@ public class ControlDocenteFrame extends JDialog {
 				});
 				break;
 			case GRUPO:
-				//DatosAuto.definirTablaGrupo(Runner.fct.getGrupos());
-				DatosAuto.definirTablaGrupo(Runner.fct.buscarGruposPorAsignatura(asignaturaSelec));
+				//DatosAuto.definirTablaGrupo(Fct.getInstance().getGrupos());
+				DatosAuto.definirTablaGrupo(Fct.getInstance().buscarGruposPorAsignatura(asignaturaSelec));
 				tablaNotas = new JTableNoEdit(Runner.modeloGrupoReporte);
 				tablaNotas.getColumnModel().getColumn(1).setCellRenderer(centrarCelda);
 				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
@@ -277,7 +278,7 @@ public class ControlDocenteFrame extends JDialog {
 				});
 				break;
 			case ESTUDIANTE:
-				DatosAuto.definirTablaEstudiantesCorto(Runner.fct.buscarGrupo(grupoSelec).getGrupoEstudiantes());
+				DatosAuto.definirTablaEstudiantesCorto(Fct.getInstance().buscarGrupo(grupoSelec).getGrupoEstudiantes());
 				tablaNotas = new JTableNoEdit(Runner.modeloEstudiante);
 				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
 				tablaNotas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -292,7 +293,7 @@ public class ControlDocenteFrame extends JDialog {
 				 */
 				/*Profesor profe = Runner.fct.buscarPersona(profeSelec);
 				ArrayList<Asignatura> asig = profe.getAsignaturas() [O algo asi]*/
-				DatosAuto.definirTablaPlanDeEstudio(Runner.fct.buscarAsignaturasPorProfe(profeSelec));
+				DatosAuto.definirTablaPlanDeEstudio(Fct.getInstance().buscarAsignaturasPorProfe(profeSelec));
 				tablaNotas = new JTableNoEdit(Runner.modeloPlanDeEstudio);
 				for(int i=1; i<=3;i++)
 					tablaNotas.getColumnModel().getColumn(i).setCellRenderer(centrarCelda);

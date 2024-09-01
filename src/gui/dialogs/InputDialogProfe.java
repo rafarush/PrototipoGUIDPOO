@@ -24,6 +24,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Cursor;
 
 import logica.DatosAuto;
+import logica.Fct;
 import logica.Profesor;
 
 
@@ -185,10 +186,10 @@ public class InputDialogProfe extends JDialog {
 					if(nombreTextField.getText().isEmpty() || ciTextField.getText().isEmpty() || direccTextField.getText().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Existen campos vacíos");
 					}else{
-						Runner.fct.crearPersona(ciTextField.getText(), nombreTextField.getText(), catCienComboBox.getSelectedItem().toString(), 
+						Fct.getInstance().crearPersona(ciTextField.getText(), nombreTextField.getText(), catCienComboBox.getSelectedItem().toString(), 
 								catDocComboBox.getSelectedItem().toString(),centroLabTextField.getText(), organismoTextField.getText(),
 								direccTextField.getText());
-						//DatosAuto.definirTablaProfes(Runner.fct.buscarProfesores());
+						//DatosAuto.definirTablaProfes(Fct.getInstance().buscarProfesores());
 						/*Runner.modeloProfesor.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(), 
 								(String)catCienComboBox.getSelectedItem(),(String)catDocComboBox.getSelectedItem(),
 								centroLabTextField.getText(), organismoTextField.getText(), direccTextField.getText()});*/

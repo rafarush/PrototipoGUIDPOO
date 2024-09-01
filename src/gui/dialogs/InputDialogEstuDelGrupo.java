@@ -24,6 +24,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Cursor;
 
 import logica.DatosAuto;
+import logica.Fct;
 import logica.JTableNoEdit;
 import logica.PersonalApoyo;
 import logica.Enums.BotonSelec;
@@ -127,10 +128,10 @@ public class InputDialogEstuDelGrupo extends JDialog {
 					}else{
 						if(table.getSelectedRow()!=-1){
 							String estId = table.getValueAt(table.getSelectedRow(), 0).toString();
-							Runner.fct.buscarGrupo(nombreGrupo).insertarAGrupoEstudiante(Runner.fct.buscarUnEstudiante(estId));
+							Fct.getInstance().buscarGrupo(nombreGrupo).insertarAGrupoEstudiante(Fct.getInstance().buscarUnEstudiante(estId));
 							JOptionPane.showMessageDialog(null, "               CONFIRMACIÓN:\nSe añadió a "
-									+Runner.fct.buscarUnEstudiante(estId).getNombre()
-									+" al "+Runner.fct.buscarGrupo(nombreGrupo).getNombreGrupo());
+									+Fct.getInstance().buscarUnEstudiante(estId).getNombre()
+									+" al "+Fct.getInstance().buscarGrupo(nombreGrupo).getNombreGrupo());
 							agregar = false;
 							tableDraw(nombreGrupo);
 							Runner.frame.tableDraw();
@@ -175,7 +176,7 @@ public class InputDialogEstuDelGrupo extends JDialog {
 	
 	private void tableDraw(String nombreGrupo){
 		if (!agregar){
-			DatosAuto.definirTablaEstudiantesCorto(Runner.fct.buscarGrupo(nombreGrupo).getGrupoEstudiantes());
+			DatosAuto.definirTablaEstudiantesCorto(Fct.getInstance().buscarGrupo(nombreGrupo).getGrupoEstudiantes());
 			table = new JTableNoEdit(Runner.modeloEstudiante);
 			table.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -188,7 +189,7 @@ public class InputDialogEstuDelGrupo extends JDialog {
 			scrollPane.setViewportView(table);
 			actualizarNombreEncabezado();
 		}else{
-			DatosAuto.definirTablaEstudiantesCorto(Runner.fct.buscarEstudiantesSinGrupo());
+			DatosAuto.definirTablaEstudiantesCorto(Fct.getInstance().buscarEstudiantesSinGrupo());
 			table = new JTableNoEdit(Runner.modeloEstudiante);
 			table.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {

@@ -24,6 +24,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Cursor;
 
 import logica.DatosAuto;
+import logica.Fct;
 import logica.JTableNoEdit;
 import logica.PersonalApoyo;
 import logica.Enums.BotonSelec;
@@ -129,7 +130,7 @@ public class InputDialogProfeAConsejo extends JDialog {
 						}
 						dispose();
 						try {
-							Runner.inputModConDir = new InputDialogModifConsejoDirecc(Runner.fct.buscarUnProfesor(profeID));
+							Runner.inputModConDir = new InputDialogModifConsejoDirecc(Fct.getInstance().buscarUnProfesor(profeID));
 							Runner.inputModConDir.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 							Runner.inputModConDir.setVisible(true);
 						} catch (Exception exc) {
@@ -147,7 +148,7 @@ public class InputDialogProfeAConsejo extends JDialog {
 	
 	private void tableDraw(){
 			JOptionPane.showMessageDialog(null, "Recordar a jorge la funcion para profes fuera del consejo,\nestos datos son de prueba");
-			DatosAuto.definirTablaProfesConsejo(Runner.fct.buscarProfesores());
+			DatosAuto.definirTablaProfesConsejo(Fct.getInstance().buscarProfesores());
 			table = new JTableNoEdit(Runner.modeloProfesorConsejo);
 			table.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
