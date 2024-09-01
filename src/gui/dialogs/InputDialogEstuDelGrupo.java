@@ -24,7 +24,9 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Cursor;
 
 import logica.DatosAuto;
+import logica.Estudiante;
 import logica.Fct;
+import logica.Grupo;
 import logica.JTableNoEdit;
 import logica.PersonalApoyo;
 import logica.Enums.BotonSelec;
@@ -45,8 +47,12 @@ public class InputDialogEstuDelGrupo extends JDialog {
 	final JLabel delBotton;
 	private final JLabel atrasBtn;
 	private boolean agregar = false;
-
-
+	
+	
+    /**
+     * Crea el JDialog para editar el grupo
+     * @param nombreGrupo
+     */
 	public InputDialogEstuDelGrupo(final String nombreGrupo) {
 		setUndecorated(true);
 		setModal(true);
@@ -163,7 +169,16 @@ public class InputDialogEstuDelGrupo extends JDialog {
 					if(table.getSelectedRow() == -1){
 						JOptionPane.showMessageDialog(null, "Debe seleccionar la fila que desea eliminar");
 					}else{
-						JOptionPane.showMessageDialog(null, "Función de sacar un estudiante del grupo");
+						JOptionPane.showMessageDialog(null, "Todavia, ya avise a jorge para revisar");
+						/*Grupo grupo = Fct.getInstance().buscarGrupo(nombreGrupo);
+						if(!Fct.getInstance().verificarGrupoPD(grupo)){
+							String estudianteID = table.getValueAt(table.getSelectedRow(), 0).toString();
+							Estudiante estudiante = (Estudiante)Fct.getInstance().buscarPersona(estudianteID);
+							Fct.getInstance().eliminarEstudianteDeGrupo(estudiante, grupo);
+							tableDraw(nombreGrupo);
+						}else{
+							JOptionPane.showMessageDialog(null, "No puede eliminar un estudiante de un grupo que tenga Planificación Docente");
+						}*/
 					}
 				}
 			});
@@ -219,6 +234,7 @@ public class InputDialogEstuDelGrupo extends JDialog {
 			actualizarNombreEncabezado();
 		}else{
 			DatosAuto.definirTablaEstudiantesCorto(Fct.getInstance().buscarEstudiantesSinGrupo());
+			//DatosAuto.definirTablaEstudiantesCorto(Fct.getInstance().buscarE);
 			table = new JTableNoEdit(Runner.modeloEstudiante);
 			table.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {

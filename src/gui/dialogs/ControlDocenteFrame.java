@@ -288,11 +288,7 @@ public class ControlDocenteFrame extends JDialog {
 					}
 				});
 				break;
-			case PLAN_ESTUDIO:/*
-				 * Falta metodo para saber que asignaturas da un profe
-				 */
-				/*Profesor profe = Runner.fct.buscarPersona(profeSelec);
-				ArrayList<Asignatura> asig = profe.getAsignaturas() [O algo asi]*/
+			case PLAN_ESTUDIO:
 				DatosAuto.definirTablaPlanDeEstudio(Fct.getInstance().buscarAsignaturasPorProfe(profeSelec));
 				tablaNotas = new JTableNoEdit(Runner.modeloPlanDeEstudio);
 				for(int i=1; i<=3;i++)
