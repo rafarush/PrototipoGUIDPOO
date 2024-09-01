@@ -217,6 +217,7 @@ public class MainFrame extends JFrame {
 							exc.printStackTrace();
 						}
 						tableDraw();
+						break;
 					case GRUPO:
 						try {
 							InputDialogGrupo inputGrupo = new InputDialogGrupo();
@@ -234,6 +235,8 @@ public class MainFrame extends JFrame {
 						} catch (Exception exc) {
 							exc.printStackTrace();
 						}
+						break;
+					default:
 						break;
 				}		
 			}
