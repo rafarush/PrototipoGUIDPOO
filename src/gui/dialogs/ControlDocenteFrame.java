@@ -147,9 +147,9 @@ public class ControlDocenteFrame extends JDialog {
 						}else{
 							estuSelec = tablaNotas.getValueAt(filaSelec, 0).toString();
 							try {
-								Runner.inputNota = new InputDialogNota();
-								Runner.inputNota.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-								Runner.inputNota.setVisible(true);
+								InputDialogNota inputNota = new InputDialogNota();
+								inputNota.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								inputNota.setVisible(true);
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}

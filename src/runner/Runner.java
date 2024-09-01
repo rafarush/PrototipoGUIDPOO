@@ -22,16 +22,6 @@ public class Runner {
 	
 	public static MainFrame frame;
 	public static User usuario;
-	public static LoginUser login;
-	public static InputDialogProfe inputProfe;
-	public static InputDialogEst inputEst;
-	public static InputDialogGrupo inputGrupo;
-	public static InputDialogPerAux inputPerAux;
-	public static InputDialogAsignaturaPE inputAsignatura;
-	public static InputDialogNota inputNota;
-	public static InputDialogModifConsejoDirecc inputModConDir;
-	public static InputDialogEstuDelGrupo inputDialogEstuDelGrupo;
-	public static InputDialogProfeAConsejo inputProfeAConsejo;
 	public static DefaultTableModel modeloProfesor;
 	public static DefaultTableModel modeloProfesorConsejo;
 	public static DefaultTableModel modeloEstudiante;
@@ -142,7 +132,7 @@ public class Runner {
 	    
 	    
 		try {
-			login = new LoginUser();
+			LoginUser login = new LoginUser();
 			login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			login.setVisible(true);
 		} catch (Exception exc) {

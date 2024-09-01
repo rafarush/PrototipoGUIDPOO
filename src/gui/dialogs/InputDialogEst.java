@@ -68,7 +68,7 @@ public class InputDialogEst extends JDialog {
 			public void mouseClicked(MouseEvent e) {
 				if(JOptionPane.showConfirmDialog(null, "¿Seguro que desea cerrar la entrada de datos?\n Su progreso no se guardará", "Confirmación", 
 						JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION){
-					Runner.inputEst.dispose();
+					dispose();
 				}
 			}
 		});
@@ -243,7 +243,7 @@ public class InputDialogEst extends JDialog {
 			public void mouseClicked(MouseEvent e) {
 				if(JOptionPane.showConfirmDialog(null, "¿Seguro que desea cerrar la entrada de datos?\n Su progreso no se guardará", "Confirmación", 
 						JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION){
-					Runner.inputEst.dispose();
+					dispose();
 				}
 			}
 		});

@@ -130,9 +130,9 @@ public class InputDialogProfeAConsejo extends JDialog {
 						}
 						dispose();
 						try {
-							Runner.inputModConDir = new InputDialogModifConsejoDirecc(Fct.getInstance().buscarUnProfesor(profeID));
-							Runner.inputModConDir.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-							Runner.inputModConDir.setVisible(true);
+							InputDialogModifConsejoDirecc inputModConDir = new InputDialogModifConsejoDirecc(Fct.getInstance().buscarUnProfesor(profeID));
+							inputModConDir.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							inputModConDir.setVisible(true);
 						} catch (Exception exc) {
 							exc.printStackTrace();
 						}

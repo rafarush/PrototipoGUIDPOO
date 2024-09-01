@@ -181,9 +181,9 @@ public class MainFrame extends JFrame {
 				switch(btnSeleccionado){
 					case PROFESOR:
 						try {
-							Runner.inputProfe = new InputDialogProfe();
-							Runner.inputProfe.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-							Runner.inputProfe.setVisible(true);
+							InputDialogProfe inputProfe = new InputDialogProfe();
+							inputProfe.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							inputProfe.setVisible(true);
 						} catch (Exception exc) {
 							exc.printStackTrace();
 						}
@@ -191,9 +191,9 @@ public class MainFrame extends JFrame {
 						break;
 					case ESTUDIANTE:
 						try {
-							Runner.inputEst = new InputDialogEst();
-							Runner.inputEst.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-							Runner.inputEst.setVisible(true);
+							InputDialogEst inputEst = new InputDialogEst();
+							inputEst.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							inputEst.setVisible(true);
 						} catch (Exception exc) {
 							exc.printStackTrace();
 						}
@@ -201,36 +201,36 @@ public class MainFrame extends JFrame {
 						break;
 					case PERSO_AUX:
 						try {
-							Runner.inputPerAux = new InputDialogPerAux();
-							Runner.inputPerAux.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-							Runner.inputPerAux.setVisible(true);
+							InputDialogPerAux inputPerAux = new InputDialogPerAux();
+							inputPerAux.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							inputPerAux.setVisible(true);
 						} catch (Exception exc) {
 							exc.printStackTrace();
 						}
 						break;	
 					case PLAN_ESTUDIO:
 						try {
-							Runner.inputAsignatura = new InputDialogAsignaturaPE();
-							Runner.inputAsignatura.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-							Runner.inputAsignatura.setVisible(true);
+							InputDialogAsignaturaPE inputAsignatura = new InputDialogAsignaturaPE();
+							inputAsignatura.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							inputAsignatura.setVisible(true);
 						} catch (Exception exc) {
 							exc.printStackTrace();
 						}
 						tableDraw();
 					case GRUPO:
 						try {
-							Runner.inputGrupo = new InputDialogGrupo();
-							Runner.inputGrupo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-							Runner.inputGrupo.setVisible(true);
+							InputDialogGrupo inputGrupo = new InputDialogGrupo();
+							inputGrupo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							inputGrupo.setVisible(true);
 						} catch (Exception exc) {
 							exc.printStackTrace();
 						}
 						break;
 					case CONSEJO_DIRECC:
 						try {
-							Runner.inputProfeAConsejo = new InputDialogProfeAConsejo();
-							Runner.inputProfeAConsejo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-							Runner.inputProfeAConsejo.setVisible(true);
+							InputDialogProfeAConsejo inputProfeAConsejo = new InputDialogProfeAConsejo();
+							inputProfeAConsejo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							inputProfeAConsejo.setVisible(true);
 						} catch (Exception exc) {
 							exc.printStackTrace();
 						}
@@ -344,9 +344,9 @@ public class MainFrame extends JFrame {
 					switch(btnSeleccionado){
 						case PROFESOR:
 							try {
-								Runner.inputProfe = new InputDialogProfe(Fct.getInstance().buscarUnProfesor(table.getValueAt(filaSelec, 0).toString()));
-								Runner.inputProfe.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-								Runner.inputProfe.setVisible(true);
+								InputDialogProfe inputProfe = new InputDialogProfe(Fct.getInstance().buscarUnProfesor(table.getValueAt(filaSelec, 0).toString()));
+								inputProfe.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								inputProfe.setVisible(true);
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
@@ -354,9 +354,9 @@ public class MainFrame extends JFrame {
 							break;
 						case ESTUDIANTE:
 							try {
-								Runner.inputEst = new InputDialogEst(Fct.getInstance().buscarUnEstudiante(table.getValueAt(filaSelec, 0).toString()));
-								Runner.inputEst.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-								Runner.inputEst.setVisible(true);
+								InputDialogEst inputEst = new InputDialogEst(Fct.getInstance().buscarUnEstudiante(table.getValueAt(filaSelec, 0).toString()));
+								inputEst.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								inputEst.setVisible(true);
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
@@ -364,9 +364,9 @@ public class MainFrame extends JFrame {
 							break;
 						case PERSO_AUX:
 							try {
-								Runner.inputPerAux = new InputDialogPerAux(Fct.getInstance().buscarUnPersonalApoyo(table.getValueAt(filaSelec, 0).toString()));
-								Runner.inputPerAux.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-								Runner.inputPerAux.setVisible(true);
+								InputDialogPerAux inputPerAux = new InputDialogPerAux(Fct.getInstance().buscarUnPersonalApoyo(table.getValueAt(filaSelec, 0).toString()));
+								inputPerAux.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								inputPerAux.setVisible(true);
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
@@ -376,9 +376,9 @@ public class MainFrame extends JFrame {
 							try {
 								//actualizar campos
 								actualizarValoresDeFila(table.getSelectedRow());
-								Runner.inputAsignatura = new InputDialogAsignaturaPE(valoresDeFila);
-								Runner.inputAsignatura.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-								Runner.inputAsignatura.setVisible(true);
+								InputDialogAsignaturaPE inputAsignatura = new InputDialogAsignaturaPE(valoresDeFila);
+								inputAsignatura.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								inputAsignatura.setVisible(true);
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
@@ -386,18 +386,18 @@ public class MainFrame extends JFrame {
 						case GRUPO:
 							//JOptionPane.showMessageDialog(null, "Haga doble click sobre el grupo para realizar modificaciones");
 							try {
-								Runner.inputDialogEstuDelGrupo = new InputDialogEstuDelGrupo(table.getValueAt(table.getSelectedRow(), 0).toString());
-								Runner.inputDialogEstuDelGrupo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-								Runner.inputDialogEstuDelGrupo.setVisible(true);
+								InputDialogEstuDelGrupo inputDialogEstuDelGrupo = new InputDialogEstuDelGrupo(table.getValueAt(table.getSelectedRow(), 0).toString());
+								inputDialogEstuDelGrupo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								inputDialogEstuDelGrupo.setVisible(true);
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
 							break;
 						case CONSEJO_DIRECC:
 							try {
-								Runner.inputModConDir = new InputDialogModifConsejoDirecc(Fct.getInstance().buscarUnProfesor(table.getValueAt(table.getSelectedRow(), 0).toString()));
-								Runner.inputModConDir.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-								Runner.inputModConDir.setVisible(true);
+								InputDialogModifConsejoDirecc inputModConDir = new InputDialogModifConsejoDirecc(Fct.getInstance().buscarUnProfesor(table.getValueAt(table.getSelectedRow(), 0).toString()));
+								inputModConDir.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								inputModConDir.setVisible(true);
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
