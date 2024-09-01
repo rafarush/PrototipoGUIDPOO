@@ -45,7 +45,7 @@ public class LoginUser extends JDialog {
 	private JPasswordField passwordField;
 
 	/**
-	 * Crear Input para agregar
+	 * Crear JDialog Login
 	 */
 	public LoginUser() {
 		setUndecorated(true);
@@ -169,10 +169,10 @@ public class LoginUser extends JDialog {
 									EventQueue.invokeLater(new Runnable() {
 										public void run() {
 											try {
-												Runner.frame = new MainFrame();
+												MainFrame frame = new MainFrame();
 												ImageIcon appIcono = new ImageIcon(MainFrame.class.getResource("/gui/utils/appicon.png"));
-												Runner.frame.setIconImage(appIcono.getImage());
-												Runner.frame.setVisible(true);
+												frame.setIconImage(appIcono.getImage());
+												frame.setVisible(true);
 											} catch (Exception e1) {
 												e1.printStackTrace();
 											}
@@ -233,10 +233,10 @@ public class LoginUser extends JDialog {
 								EventQueue.invokeLater(new Runnable() {
 									public void run() {
 										try {
-											Runner.frame = new MainFrame();
+											MainFrame frame = new MainFrame();
 											ImageIcon appIcono = new ImageIcon(MainFrame.class.getResource("/gui/utils/appicon.png"));
-											Runner.frame.setIconImage(appIcono.getImage());
-											Runner.frame.setVisible(true);
+											frame.setIconImage(appIcono.getImage());
+											frame.setVisible(true);
 											//Runner.frame.setExtendedState(JFrame.NORMAL);
 										} catch (Exception e1) {
 											e1.printStackTrace();

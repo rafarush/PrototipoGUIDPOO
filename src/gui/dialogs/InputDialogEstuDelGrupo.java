@@ -42,6 +42,8 @@ public class InputDialogEstuDelGrupo extends JDialog {
 	private static JTableNoEdit table;
 	private JScrollPane scrollPane;
 	private JLabel lblEncabezado;
+	final JLabel delBotton;
+	private final JLabel atrasBtn;
 	private boolean agregar = false;
 
 
@@ -134,7 +136,6 @@ public class InputDialogEstuDelGrupo extends JDialog {
 									+" al "+Fct.getInstance().buscarGrupo(nombreGrupo).getNombreGrupo());
 							agregar = false;
 							tableDraw(nombreGrupo);
-							Runner.frame.tableDraw();
 						}else{
 							JOptionPane.showMessageDialog(null, "Debe seleccionar el estudiante que desea agregar");
 						}	
@@ -145,7 +146,7 @@ public class InputDialogEstuDelGrupo extends JDialog {
 			inputBotton.setBounds(102, 345, 63, 21);
 			mainPanel.add(inputBotton);
 			
-			final JLabel delBotton = new JLabel("");
+			delBotton = new JLabel("");
 			delBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			delBotton.addMouseListener(new MouseAdapter() {
 				@Override
@@ -169,6 +170,34 @@ public class InputDialogEstuDelGrupo extends JDialog {
 			delBotton.setIcon(new ImageIcon(InputDialogEstuDelGrupo.class.getResource("/gui/utils/delBotton.png")));
 			delBotton.setBounds(211, 345, 63, 21);
 			mainPanel.add(delBotton);
+			
+			
+			atrasBtn = new JLabel("");
+			atrasBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			atrasBtn.setIcon(new ImageIcon(ControlDocenteFrame.class.getResource("/gui/utils/flechaAtras24Selected.png")));
+			atrasBtn.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					atrasBtn.setIcon(new ImageIcon(ControlDocenteFrame.class.getResource("/gui/utils/flechaAtras24Selected.png")));
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					atrasBtn.setIcon(new ImageIcon(ControlDocenteFrame.class.getResource("/gui/utils/flechaAtras24.png")));
+				}
+				@Override
+				public void mouseClicked(MouseEvent e){
+					if (!agregar){
+						JOptionPane.showMessageDialog(null, "No hay ruta hacia atrás");
+					}else{
+						agregar = false;
+						tableDraw(nombreGrupo);
+						actualizarNombreEncabezado();
+					}
+				}
+			});
+			atrasBtn.setToolTipText("Retornar a los estudiantes del grupo");
+			atrasBtn.setBounds(10, 26, 24, 14);
+			mainPanel.add(atrasBtn);
 			
 			tableDraw(nombreGrupo);
 		}
@@ -207,8 +236,10 @@ public class InputDialogEstuDelGrupo extends JDialog {
 	private void actualizarNombreEncabezado(){
 		if(!agregar){
 			lblEncabezado.setText("Estudiantes del Grupo:");
+			delBotton.setEnabled(true);
 		}else{
 			lblEncabezado.setText("Seleccione y añada al Estudiante:");
+			delBotton.setEnabled(false);
 		}
 	}
 }

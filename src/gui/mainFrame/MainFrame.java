@@ -226,6 +226,7 @@ public class MainFrame extends JFrame {
 						} catch (Exception exc) {
 							exc.printStackTrace();
 						}
+						tableDraw();
 						break;
 					case CONSEJO_DIRECC:
 						try {
@@ -395,6 +396,7 @@ public class MainFrame extends JFrame {
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
+							tableDraw();
 							break;
 						case CONSEJO_DIRECC:
 							try {
@@ -404,6 +406,7 @@ public class MainFrame extends JFrame {
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
+							tableDraw();
 							break;
 					}
 				}

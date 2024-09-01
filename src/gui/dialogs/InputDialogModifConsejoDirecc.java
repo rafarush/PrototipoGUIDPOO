@@ -144,7 +144,6 @@ public class InputDialogModifConsejoDirecc extends JDialog {
 				public void mouseClicked(MouseEvent e) {
 					profe.setCargoConsejoDireccion(cargoComboBox.getSelectedItem().toString());
 					JOptionPane.showMessageDialog(null, "Se ha asignado el cargo en el Consejo de Dirección con éxito");
-					Runner.frame.tableDraw();
 					dispose();
 				}
 			});

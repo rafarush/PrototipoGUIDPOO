@@ -129,7 +129,6 @@ public class InputDialogGrupo extends JDialog {
 					}else{
 						Fct.getInstance().crearGrupo(nombreTextField.getText(), Integer.valueOf(annoAcademicoComboBox.getSelectedItem().toString()));
 						JOptionPane.showMessageDialog(null, "Se ha creado el grupo correctamente");
-						Runner.frame.tableDraw();
 						dispose();
 					}
 					dispose();
