@@ -93,9 +93,7 @@ public class Runner {
 		/*Fct.getInstance().crearPersona("09062235147", "Federico Criado Domínguez","Laboratorio", "Calle 30 entre 34 y Ave. 56");
 		Fct.getInstance().crearPersona("59868285496", "Maria Elena Gómez Pérez","Biblioteca", "Ave. 26 entre calles A y B");
 		*/
-							
 		//DatosAuto.definirTablaPersonalAux(Fct.getInstance().buscarPersonalApoyo());
-		
 		
 		// JORGITOOOOOOO ---->>>>    la creacion de las asignaturas por defecto
 		/*Fct.getInstance().getPlanEstudio().crearAsignatura("Matemática I", 1, 1, 50);
@@ -128,7 +126,7 @@ public class Runner {
 		/*Fct.getInstance().getPeriodos().get(0).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor("95868426587"),Fct.getInstance().getPlanEstudio().buscarAsignatura("Matemática I") , Fct.getInstance().buscarGrupo("13"));
 		Fct.getInstance().getPeriodos().get(0).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor("05062347564"),Fct.getInstance().getPlanEstudio().buscarAsignatura("Introducción a la Programación") , Fct.getInstance().buscarGrupo("13"));
 		*/
-		
+
 	    //DatosAuto.definirTablaPlanDocente(Fct.getInstance().getPeriodos().get(0).getPlanificacionesDocentes());
 		//DatosAuto.llenarTablaPlanificacionDocente(Fct.getInstance().getPeriodos().get(0).getPlanificacionesDocentes());
 	    

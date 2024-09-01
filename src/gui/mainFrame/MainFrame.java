@@ -442,6 +442,7 @@ public class MainFrame extends JFrame {
 					break;
 				case 2:
 					if (Fct.getInstance().pasarAnno()){
+
 						JOptionPane.showMessageDialog(null, "Se pudo pasar de año (Inicio de preparación de semestre)");
 						periodo = 0;
 					}else{
