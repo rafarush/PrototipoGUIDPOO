@@ -802,6 +802,21 @@ public final class Fct {
 		
 		return sinGrupo;
 	}
+	
+	
+	// para buscar los estudiantes sin grupo de un año dado
+	public ArrayList<Estudiante> buscarEstudiantesSinGrupoPorAnno(int anno){
+		ArrayList<Estudiante> estudiantes = new ArrayList<>();
+		
+		for(Estudiante e : buscarEstudiantesSinGrupo()){
+			if(e.getAnnoAcademico()==anno)
+				estudiantes.add(e);
+		}
+		
+		return estudiantes;
+	}
+	
+	
 	//**************************************** fin reportes ******************************************************************
 	
 	
@@ -875,7 +890,7 @@ public final class Fct {
 			if(i==grupo.getAnnoAcademico()-1 || i==grupo.getAnnoAcademico()+5){
 				int e = 0;
 				while(i<periodos.get(i).getPlanificacionesDocentes().size() && !val){
-					if(periodos.get(i).getPlanificacionesDocentes().get(e).getAsignatura().equals(grupo))
+					if(periodos.get(i).getPlanificacionesDocentes().get(e).getGrupo().equals(grupo))
 						val=true;
 					e++;
 				}
