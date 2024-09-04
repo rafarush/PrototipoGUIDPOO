@@ -10,6 +10,8 @@ public final class Fct {
 	private PlanEstudio planEstudio;
 	private ArrayList<Periodo> periodos;
 	
+	private User usuario;
+	
 	private static Fct instance;
 
 	
@@ -23,6 +25,8 @@ public final class Fct {
 		grupos = new ArrayList<>();
 		planEstudio =  new PlanEstudio();
 		periodos = new ArrayList<>();
+		
+		usuario = new User("Fermin", "1234");
 		
 		crearPeriodos();
 	}
