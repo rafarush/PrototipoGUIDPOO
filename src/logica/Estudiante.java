@@ -196,6 +196,14 @@ public class Estudiante extends Persona{
 			setDireccion(direccion);
 		}
 		
+		
+		//para buscar una nota especifica
+		public ArrayList<Float> buscarNotaEspecifica(){
+			ArrayList<Float> notas = new ArrayList<>();
+			
+			
+			return notas;
+		} 
 }
 
 
