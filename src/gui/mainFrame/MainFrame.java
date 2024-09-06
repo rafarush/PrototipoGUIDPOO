@@ -232,6 +232,7 @@ public class MainFrame extends JFrame {
 						} catch (Exception exc) {
 							exc.printStackTrace();
 						}
+						tableDraw();
 						break;
 					default:
 						break;
@@ -301,7 +302,7 @@ public class MainFrame extends JFrame {
 						
 						switch (btnSeleccionado) {
 						case ESTUDIANTE:
-							//Falta verificar que no este en un grupo con plan docente
+							//Falta verificar 
 							JOptionPane.showMessageDialog(null, "Falta verificar que no este en un grupo con plan docente");
 							Estudiante estudiante = Fct.getInstance().buscarUnEstudiante(table.getValueAt(table.getSelectedRow(), 0).toString());
 							Fct.getInstance().eliminarPersona(estudiante.getID());
