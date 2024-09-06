@@ -201,8 +201,8 @@ public final class Fct {
 	// PARA ELIMINAR UN ESTUDIANTE DE UN GRUPO
 	public boolean eliminarEstudianteDeGrupo( Estudiante estudiante, Grupo grupo){
 		boolean val = false;
-		if(verificarGrupoPD(grupo))
-			val = grupo.getGrupoEstudiantes().remove(estudiante);
+		if(!verificarGrupoPD(grupo))
+			val = grupo.eliminarEstudiante(estudiante);
 		
 		return val;
 	}
