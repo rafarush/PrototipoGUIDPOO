@@ -10,6 +10,8 @@ public final class Fct {
 	private PlanEstudio planEstudio;
 	private ArrayList<Periodo> periodos;
 	
+	private User usuario;
+	
 	private static Fct instance;
 
 	
@@ -23,6 +25,8 @@ public final class Fct {
 		grupos = new ArrayList<>();
 		planEstudio =  new PlanEstudio();
 		periodos = new ArrayList<>();
+		
+		usuario = new User("Fermin", "1234");
 		
 		crearPeriodos();
 	}
@@ -197,8 +201,8 @@ public final class Fct {
 	// PARA ELIMINAR UN ESTUDIANTE DE UN GRUPO
 	public boolean eliminarEstudianteDeGrupo( Estudiante estudiante, Grupo grupo){
 		boolean val = false;
-		if(verificarGrupoPD(grupo))
-			val = grupo.getGrupoEstudiantes().remove(estudiante);
+		if(!verificarGrupoPD(grupo))
+			val = grupo.eliminarEstudiante(estudiante);
 		
 		return val;
 	}
@@ -872,9 +876,8 @@ public final class Fct {
 	//PARA ELIMINAR UN GRUPO
 	public boolean eliminarGrupo(Grupo grupo){
 		boolean eliminada = false;
-		boolean val = verificarGrupoPD(grupo);
 		
-		if(val)
+		if(!verificarGrupoPD(grupo))
 			eliminada = grupos.remove(grupo);
 		
 		return eliminada;

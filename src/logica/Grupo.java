@@ -71,6 +71,13 @@ public class Grupo {
 		return estudiante;
 	}
 	
+	//para eliminar los estudiantes
+	public boolean eliminarEstudiante(Estudiante estudiante){
+		boolean val;
+		val = grupoEstudiantes.remove(estudiante);
+	
+		return val;
+	}
 	
 	
 	

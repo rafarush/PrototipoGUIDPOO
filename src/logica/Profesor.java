@@ -116,7 +116,9 @@ public class Profesor extends Trabajador{
 
 	public void setCargoConsejoDireccion(String cargoConsejoDireccion) {
 		
-		if(cargoConsejoDireccion.equalsIgnoreCase("Director"))
+		if(cargoConsejoDireccion==null)
+			this.cargoConsejoDireccion=null;
+	    else if(cargoConsejoDireccion.equalsIgnoreCase("Director"))
 			this.cargoConsejoDireccion = "Director";
 		else if(cargoConsejoDireccion.equalsIgnoreCase("Subdirector Docente"))
 			this.cargoConsejoDireccion = "Subdirector Docente";
@@ -126,8 +128,6 @@ public class Profesor extends Trabajador{
 			this.cargoConsejoDireccion = "Subdirector  de Extension Universitaria";
 		else if(cargoConsejoDireccion.equals("Jefe de Laboratorios"))
 			this.cargoConsejoDireccion = "Jefe de Laboratorios";
-		else
-			throw new IllegalArgumentException("No existe ese cargo en el Consejo de Direccion.");
 		
 	}
 
