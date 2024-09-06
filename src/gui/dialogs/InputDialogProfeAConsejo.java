@@ -125,17 +125,17 @@ public class InputDialogProfeAConsejo extends JDialog {
 				public void mouseClicked(MouseEvent e) {
 						if(table.getSelectedRow()!=-1){
 							profeID = table.getValueAt(table.getSelectedRow(), 0).toString();
+							dispose();
+							try {
+								InputDialogModifConsejoDirecc inputModConDir = new InputDialogModifConsejoDirecc(Fct.getInstance().buscarUnProfesor(profeID));
+								inputModConDir.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								inputModConDir.setVisible(true);
+							} catch (Exception exc) {
+								exc.printStackTrace();
+							}
 						}else{
 							JOptionPane.showMessageDialog(null, "Debe seleccionar el profesor que desea agregar");
-						}
-						dispose();
-						try {
-							InputDialogModifConsejoDirecc inputModConDir = new InputDialogModifConsejoDirecc(Fct.getInstance().buscarUnProfesor(profeID));
-							inputModConDir.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-							inputModConDir.setVisible(true);
-						} catch (Exception exc) {
-							exc.printStackTrace();
-						}
+						}	
 				}
 			});
 			inputBotton.setIcon(new ImageIcon(InputDialogEst.class.getResource("/gui/utils/addBottonJDialog.png")));
@@ -148,7 +148,7 @@ public class InputDialogProfeAConsejo extends JDialog {
 	
 	private void tableDraw(){
 			JOptionPane.showMessageDialog(null, "Recordar a jorge la funcion para profes fuera del consejo,\nestos datos son de prueba");
-			DatosAuto.definirTablaProfesConsejo(Fct.getInstance().buscarProfesores());
+			DatosAuto.definirTablaProfesConsejo(Fct.getInstance().buscarProfesSinCargo());
 			table = new JTableNoEdit(Runner.modeloProfesorConsejo);
 			table.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
