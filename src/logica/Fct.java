@@ -876,9 +876,8 @@ public final class Fct {
 	//PARA ELIMINAR UN GRUPO
 	public boolean eliminarGrupo(Grupo grupo){
 		boolean eliminada = false;
-		boolean val = verificarGrupoPD(grupo);
 		
-		if(val)
+		if(!verificarGrupoPD(grupo))
 			eliminada = grupos.remove(grupo);
 		
 		return eliminada;
