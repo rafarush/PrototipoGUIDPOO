@@ -415,7 +415,8 @@ public class MainFrame extends JFrame {
 						case GRUPO:
 							//JOptionPane.showMessageDialog(null, "Haga doble click sobre el grupo para realizar modificaciones");
 							try {
-								InputDialogEstuDelGrupo inputDialogEstuDelGrupo = new InputDialogEstuDelGrupo(table.getValueAt(table.getSelectedRow(), 0).toString());
+								Grupo grupo = Fct.getInstance().buscarGrupo(table.getValueAt(table.getSelectedRow(), 0).toString());
+								InputDialogEstuDelGrupo inputDialogEstuDelGrupo = new InputDialogEstuDelGrupo(grupo);
 								inputDialogEstuDelGrupo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								inputDialogEstuDelGrupo.setVisible(true);
 							} catch (Exception exc) {
