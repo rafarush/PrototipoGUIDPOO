@@ -144,15 +144,15 @@ public class InputDialogNota extends JDialog {
 				public void mouseClicked(MouseEvent e) {
 					nota1 = spinnerNota1.getModel().getValue().toString();
 					nota2 = spinnerNota2.getModel().getValue().toString();
-					Profesor profe = (Profesor) Fct.getInstance().buscarPersona(ControlDocenteFrame.profeSelec);
-					Asignatura asignatura = Fct.getInstance().getPlanEstudio().buscarAsignatura(ControlDocenteFrame.asignaturaSelec);
-					Estudiante estudiante = Fct.getInstance().buscarUnEstudiante(ControlDocenteFrame.estuSelec);
+					Profesor profe = (Profesor) Fct.getInstance().buscarPersona(InputJDialogControlDocente.profeSelec);
+					Asignatura asignatura = Fct.getInstance().getPlanEstudio().buscarAsignatura(InputJDialogControlDocente.asignaturaSelec);
+					Estudiante estudiante = Fct.getInstance().buscarUnEstudiante(InputJDialogControlDocente.estuSelec);
 					//Grupo grupo = Fct.getInstance().buscarGrupo(ControlDocenteFrame.grupoSelec);
 					/*
 					 * MANDAR NOTA A LOGICA
 					 */
 					profe.darNota(estudiante, asignatura, Integer.valueOf(nota1), Integer.valueOf(nota2));
-					ControlDocenteFrame.mensajeConfirm(nota1, nota2);
+					InputJDialogControlDocente.mensajeConfirm(nota1, nota2);
 					dispose();
 				}
 			});

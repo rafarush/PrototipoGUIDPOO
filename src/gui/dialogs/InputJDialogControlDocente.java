@@ -1,59 +1,37 @@
 package gui.dialogs;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.JTextField;
-import javax.swing.ListCellRenderer;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 import runner.Runner;
 
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 
-import logica.Asignatura;
-import logica.ComboBoxTextInicial;
 import logica.DatosAuto;
-import logica.Estudiante;
 import logica.Fct;
-import logica.Grupo;
 import logica.JTableNoEdit;
-import logica.Profesor;
 import logica.Enums.BotonSelec;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
-import java.util.ArrayList;
 
 import javax.swing.border.LineBorder;
 
 import java.awt.Cursor;
 
-public class ControlDocenteFrame extends JDialog {
+public class InputJDialogControlDocente extends JDialog {
 
+	
+	private static final long serialVersionUID = 1L;
 	private final JPanel upperBarPanel = new JPanel();
-	private JComboBox asignaturasComboBox;
 	private JScrollPane scrollPane;
 	private static JTableNoEdit tablaNotas;
 	private DefaultTableCellRenderer centrarCelda = new DefaultTableCellRenderer();
@@ -71,12 +49,13 @@ public class ControlDocenteFrame extends JDialog {
 	/**
 	 * Crea el JDialog
 	 */
-	public ControlDocenteFrame() {
+	public InputJDialogControlDocente() {
 		setUndecorated(true);
 		setModal(true);
 		setBounds(100, 100, 617, 415);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
+		
 		
 		final JLabel closeBotton = new JLabel("");
 		closeBotton.setIcon(new ImageIcon(InputDialogAsignaturaPE.class.getResource("/gui/utils/closeBotton.png")));
@@ -154,25 +133,6 @@ public class ControlDocenteFrame extends JDialog {
 								exc.printStackTrace();
 							}
 						}
-							/*
-							String nota = JOptionPane.showInputDialog("Dar Nota", 5);
-							if(nota.isEmpty()){
-								JOptionPane.showMessageDialog(null, "No introdujo ningún valor");
-							}else{
-								/*
-								JOptionPane.showMessageDialog(null, "Confirmación :\nCI Estudiante: "+tablaNotas.getValueAt(selec, 0)+
-															"\nNota: "+nota+"\nAsignatura: "+asignaturaSelec+"\nCI Profesor: "+profeSelec);
-								//Mandar nota a logica...*//*
-								try {
-									Runner.inputNota = new InputDialogNota();
-									Runner.inputNota.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-									Runner.inputNota.setVisible(true);
-								} catch (Exception exc) {
-									exc.printStackTrace();
-								}
-								
-							}
-						}*/
 					}
 					@Override
 					public void mouseEntered(MouseEvent e) {
@@ -194,15 +154,15 @@ public class ControlDocenteFrame extends JDialog {
 				
 				atrasBtn = new JLabel("");
 				atrasBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				atrasBtn.setIcon(new ImageIcon(ControlDocenteFrame.class.getResource("/gui/utils/flechaAtras24Selected.png")));
+				atrasBtn.setIcon(new ImageIcon(InputJDialogControlDocente.class.getResource("/gui/utils/flechaAtras24Selected.png")));
 				atrasBtn.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseEntered(MouseEvent e) {
-						atrasBtn.setIcon(new ImageIcon(ControlDocenteFrame.class.getResource("/gui/utils/flechaAtras24Selected.png")));
+						atrasBtn.setIcon(new ImageIcon(InputJDialogControlDocente.class.getResource("/gui/utils/flechaAtras24Selected.png")));
 					}
 					@Override
 					public void mouseExited(MouseEvent e) {
-						atrasBtn.setIcon(new ImageIcon(ControlDocenteFrame.class.getResource("/gui/utils/flechaAtras24.png")));
+						atrasBtn.setIcon(new ImageIcon(InputJDialogControlDocente.class.getResource("/gui/utils/flechaAtras24.png")));
 					}
 					@Override
 					public void mouseClicked(MouseEvent e){
@@ -227,6 +187,8 @@ public class ControlDocenteFrame extends JDialog {
 							btnSeleccionado = BotonSelec.GRUPO;
 							tableDraw();
 							actualizarLblNombre();
+							break;
+						default:
 							break;
 						}
 						tablaNotas.getTableHeader().setReorderingAllowed(false);
@@ -261,7 +223,6 @@ public class ControlDocenteFrame extends JDialog {
 				});
 				break;
 			case GRUPO:
-				//DatosAuto.definirTablaGrupo(Fct.getInstance().getGrupos());
 				DatosAuto.definirTablaGrupo(Fct.getInstance().buscarGruposPorAsignatura(asignaturaSelec));
 				tablaNotas = new JTableNoEdit(Runner.modeloGrupoReporte);
 				tablaNotas.getColumnModel().getColumn(1).setCellRenderer(centrarCelda);
@@ -278,8 +239,8 @@ public class ControlDocenteFrame extends JDialog {
 				});
 				break;
 			case ESTUDIANTE:
-				DatosAuto.definirTablaEstudiantesCorto(Fct.getInstance().buscarGrupo(grupoSelec).getGrupoEstudiantes());
-				tablaNotas = new JTableNoEdit(Runner.modeloEstudiante);
+				DatosAuto.definirTablaEstudiantesNotas(Fct.getInstance().buscarGrupo(grupoSelec).getGrupoEstudiantes(), Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec));
+				tablaNotas = new JTableNoEdit(Runner.modeloEstudianteCorto);
 				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
 				tablaNotas.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -303,6 +264,8 @@ public class ControlDocenteFrame extends JDialog {
 					}
 				});
 				break;
+			default:
+				break;
 		}
 		tablaNotas.getTableHeader().setReorderingAllowed(false);
 		scrollPane.setViewportView(tablaNotas);
@@ -321,6 +284,8 @@ public class ControlDocenteFrame extends JDialog {
 			break;
 		case GRUPO:
 			lblTabla.setText("Seleccione un Grupo");
+			break;
+		default:
 			break;
 		}
 	}
