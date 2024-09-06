@@ -79,20 +79,20 @@ public class Estudiante extends Persona{
 	
 	
 	// insertar notas
-	public void insertarNotas(Estudiante estudiante, Asignatura asignatura, float nota1, float nota2){
-		buscarControlDocente(estudiante, asignatura).setNota1(nota1);
-		buscarControlDocente(estudiante, asignatura).setNota1(nota2);
+	public void insertarNotas( Asignatura asignatura, float nota1, float nota2){
+		buscarControlDocente(asignatura).setNota1(nota1);
+		buscarControlDocente(asignatura).setNota1(nota2);
 	}
 	
 	
 	// BUSCAR CONTROL DOCENTE
-	public ControlDocente buscarControlDocente(Estudiante estudiante, Asignatura asignatura){
+	public ControlDocente buscarControlDocente(Asignatura asignatura){
 		boolean val = true;
 		int i = 0;
 		ControlDocente controlDocente = null;
 		
 		while(i<notas.size() && val){
-			if(notas.get(i).getAsignatura().equals(asignatura) && notas.get(i).getiDEstudiante().equalsIgnoreCase(estudiante.getID()))
+			if(notas.get(i).getAsignatura().equals(asignatura))
 				controlDocente= notas.get(i);
 				val=false;			
 			i++;
@@ -199,9 +199,10 @@ public class Estudiante extends Persona{
 		
 		
 		//para buscar una nota especifica
-		public ArrayList<Float> buscarNotaEspecifica(){
-			ArrayList<Float> notas = new ArrayList<>();
-			
+		public ArrayList<String> buscarNotaEspecifica(Asignatura asignatura){
+			ArrayList<String> notas = new ArrayList<>();
+			notas.add(Float.toString(buscarControlDocente(asignatura).getNota1()));
+			notas.add(Float.toString(buscarControlDocente(asignatura).getNota2()));
 			
 			return notas;
 		} 

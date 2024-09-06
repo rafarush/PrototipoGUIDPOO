@@ -173,7 +173,7 @@ public class Profesor extends Trabajador{
 		if(buscarControlDocente(estudiante, asignatura)!=null){
 			val = true;
 			buscarControlDocente(estudiante, asignatura).insertarNotas(nota1, nota2);
-			estudiante.insertarNotas(estudiante, asignatura, nota1, nota2);
+			estudiante.insertarNotas(asignatura, nota1, nota2);
 		}
 		
 		return val;
