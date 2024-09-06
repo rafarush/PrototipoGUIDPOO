@@ -36,7 +36,7 @@ import java.awt.event.KeyEvent;
 
 
 
-public class LoginUser extends JDialog {
+public class JDialogLoginUser extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -47,7 +47,7 @@ public class LoginUser extends JDialog {
 	/**
 	 * Crear JDialog Login
 	 */
-	public LoginUser() {
+	public JDialogLoginUser() {
 		setUndecorated(true);
 		setModal(true);
 		setBounds(100, 100, 538, 360);
@@ -56,16 +56,16 @@ public class LoginUser extends JDialog {
 		
 		
 		final JLabel closeBotton = new JLabel("");
-		closeBotton.setIcon(new ImageIcon(LoginUser.class.getResource("/gui/utils/closeBotton.png")));
+		closeBotton.setIcon(new ImageIcon(JDialogLoginUser.class.getResource("/gui/utils/closeBotton.png")));
 		closeBotton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				closeBotton.setIcon(new ImageIcon(LoginUser.class.getResource("/gui/utils/closeBottonSelected1.png")));
+				closeBotton.setIcon(new ImageIcon(JDialogLoginUser.class.getResource("/gui/utils/closeBottonSelected1.png")));
 				closeBotton.setToolTipText("Cerrar");
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				closeBotton.setIcon(new ImageIcon(LoginUser.class.getResource("/gui/utils/closeBotton.png")));
+				closeBotton.setIcon(new ImageIcon(JDialogLoginUser.class.getResource("/gui/utils/closeBotton.png")));
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -125,7 +125,7 @@ public class LoginUser extends JDialog {
 			mainPanel.add(lblContrasenna);
 			
 			JLabel lblUserIcon = new JLabel("\\");
-			lblUserIcon.setIcon(new ImageIcon(LoginUser.class.getResource("/gui/utils/userPhoto.png")));
+			lblUserIcon.setIcon(new ImageIcon(JDialogLoginUser.class.getResource("/gui/utils/userPhoto.png")));
 			lblUserIcon.setBounds(93, 11, 192, 146);
 			mainPanel.add(lblUserIcon);
 			
@@ -190,11 +190,11 @@ public class LoginUser extends JDialog {
 			loginBotton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					loginBotton.setIcon(new ImageIcon(LoginUser.class.getResource("/gui/utils/LogInBottonSelected_60x25_via_10015_io.png")));
+					loginBotton.setIcon(new ImageIcon(JDialogLoginUser.class.getResource("/gui/utils/LogInBottonSelected_60x25_via_10015_io.png")));
 				}
 				@Override
 				public void mouseExited(MouseEvent e) {
-					loginBotton.setIcon(new ImageIcon(LoginUser.class.getResource("/gui/utils/LogInBotton_60x25_via_10015_io.png")));
+					loginBotton.setIcon(new ImageIcon(JDialogLoginUser.class.getResource("/gui/utils/LogInBotton_60x25_via_10015_io.png")));
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -247,7 +247,7 @@ public class LoginUser extends JDialog {
 					}
 				}
 			});
-			loginBotton.setIcon(new ImageIcon(LoginUser.class.getResource("/gui/utils/LogInBotton_60x25_via_10015_io.png")));
+			loginBotton.setIcon(new ImageIcon(JDialogLoginUser.class.getResource("/gui/utils/LogInBotton_60x25_via_10015_io.png")));
 			loginBotton.setBounds(158, 265, 60, 25);
 			mainPanel.add(loginBotton);
 			

@@ -675,7 +675,7 @@ public class MainFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					Reportes dialog = new Reportes();
+					JDialogReportes dialog = new JDialogReportes();
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				} catch (Exception exc) {
@@ -754,7 +754,7 @@ public class MainFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					PlanDocente dialog = new PlanDocente();
+					InputJDialogPlanifDocente dialog = new InputJDialogPlanifDocente();
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				} catch (Exception exc) {
@@ -777,7 +777,7 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 try {
-        			LoginUser login = new LoginUser();
+        			JDialogLoginUser login = new JDialogLoginUser();
         			login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         			login.setVisible(true);
         		} catch (Exception exc) {
