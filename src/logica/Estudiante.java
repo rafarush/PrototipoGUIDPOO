@@ -80,26 +80,27 @@ public class Estudiante extends Persona{
 	
 	// insertar notas
 	public void insertarNotas(Estudiante estudiante, Asignatura asignatura, float nota1, float nota2){
-		notas.get(buscarControlDocente(estudiante, asignatura)).setNota1(nota1);
-		notas.get(buscarControlDocente(estudiante, asignatura)).setNota1(nota2);
+		buscarControlDocente(estudiante, asignatura).setNota1(nota1);
+		buscarControlDocente(estudiante, asignatura).setNota1(nota2);
 	}
 	
 	
 	// BUSCAR CONTROL DOCENTE
-	public int buscarControlDocente(Estudiante estudiante, Asignatura asignatura){
+	public ControlDocente buscarControlDocente(Estudiante estudiante, Asignatura asignatura){
 		boolean val = true;
 		int i = 0;
-		ControlDocente controlDocente = new ControlDocente(estudiante, asignatura);
+		ControlDocente controlDocente = null;
 		
 		while(i<notas.size() && val){
-			if(notas.get(i).equals(controlDocente))
+			if(notas.get(i).getAsignatura().equals(asignatura) && notas.get(i).getiDEstudiante().equalsIgnoreCase(estudiante.getID()))
+				controlDocente= notas.get(i);
 				val=false;			
 			i++;
 		}
 		if(val)
 			i=0;
 		
-		return i-1;
+		return controlDocente;
 	}
 	
 	
