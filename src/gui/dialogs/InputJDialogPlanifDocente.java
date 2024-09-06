@@ -53,7 +53,7 @@ import javax.swing.border.LineBorder;
 
 import java.awt.Cursor;
 
-public class PlanDocente extends JDialog {
+public class InputJDialogPlanifDocente extends JDialog {
 
 	private final JPanel upperBarPanel = new JPanel();
 	private JComboBox asignaturasComboBox;
@@ -75,7 +75,7 @@ public class PlanDocente extends JDialog {
 	/**
 	 * Crea el JDialog
 	 */
-	public PlanDocente() {
+	public InputJDialogPlanifDocente() {
 		setUndecorated(true);
 		setModal(true);
 		setBounds(100, 100, 617, 415);
@@ -217,15 +217,15 @@ public class PlanDocente extends JDialog {
 				
 				atrasBtn = new JLabel("");
 				atrasBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				atrasBtn.setIcon(new ImageIcon(PlanDocente.class.getResource("/gui/utils/flechaAtras24Selected.png")));
+				atrasBtn.setIcon(new ImageIcon(InputJDialogPlanifDocente.class.getResource("/gui/utils/flechaAtras24Selected.png")));
 				atrasBtn.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseEntered(MouseEvent e) {
-						atrasBtn.setIcon(new ImageIcon(PlanDocente.class.getResource("/gui/utils/flechaAtras24Selected.png")));
+						atrasBtn.setIcon(new ImageIcon(InputJDialogPlanifDocente.class.getResource("/gui/utils/flechaAtras24Selected.png")));
 					}
 					@Override
 					public void mouseExited(MouseEvent e) {
-						atrasBtn.setIcon(new ImageIcon(PlanDocente.class.getResource("/gui/utils/flechaAtras24.png")));
+						atrasBtn.setIcon(new ImageIcon(InputJDialogPlanifDocente.class.getResource("/gui/utils/flechaAtras24.png")));
 					}
 					@Override
 					public void mouseClicked(MouseEvent e){

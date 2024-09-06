@@ -66,7 +66,7 @@ public class Runner {
 	    
 	    
 		try {
-			LoginUser login = new LoginUser();
+			JDialogLoginUser login = new JDialogLoginUser();
 			login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			login.setVisible(true);
 		} catch (Exception exc) {

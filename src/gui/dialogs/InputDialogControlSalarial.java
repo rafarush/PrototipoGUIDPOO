@@ -128,7 +128,7 @@ public class InputDialogControlSalarial extends JDialog {
 				@Override
 				public void mouseEntered(MouseEvent e) {
 					cancelBotton.setIcon(new ImageIcon(InputDialogEst.class.getResource("/gui/utils/cancelBottonSelected.png")));
-					cancelBotton.setToolTipText("Agregar datos");
+					cancelBotton.setToolTipText("Cancelar entrada de datos");
 				}
 				@Override
 				public void mouseExited(MouseEvent e) {

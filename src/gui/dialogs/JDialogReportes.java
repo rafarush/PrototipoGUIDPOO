@@ -43,7 +43,7 @@ import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.awt.Cursor;
 
-public class Reportes extends JDialog {
+public class JDialogReportes extends JDialog {
 
 	private final JPanel upperBarPanel = new JPanel();
 	private JComboBox reportesComboBox;
@@ -57,7 +57,7 @@ public class Reportes extends JDialog {
 	/**
 	 * Crea el JDialog
 	 */
-	public Reportes() {
+	public JDialogReportes() {
 		setUndecorated(true);
 		setModal(true);
 		setBounds(100, 100, 617, 415);
@@ -152,16 +152,16 @@ public class Reportes extends JDialog {
 				mainPanel.add(reportesComboBox);		
 				
 				atrasBtn = new JLabel("");
-				atrasBtn.setIcon(new ImageIcon(Reportes.class.getResource("/gui/utils/flechaAtras24Selected.png")));
+				atrasBtn.setIcon(new ImageIcon(JDialogReportes.class.getResource("/gui/utils/flechaAtras24Selected.png")));
 				atrasBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				atrasBtn.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseEntered(MouseEvent e) {
-						atrasBtn.setIcon(new ImageIcon(Reportes.class.getResource("/gui/utils/flechaAtras24Selected.png")));
+						atrasBtn.setIcon(new ImageIcon(JDialogReportes.class.getResource("/gui/utils/flechaAtras24Selected.png")));
 					}
 					@Override
 					public void mouseExited(MouseEvent e) {
-						atrasBtn.setIcon(new ImageIcon(Reportes.class.getResource("/gui/utils/flechaAtras24.png")));
+						atrasBtn.setIcon(new ImageIcon(JDialogReportes.class.getResource("/gui/utils/flechaAtras24.png")));
 					}
 					@Override
 					public void mouseClicked(MouseEvent e){
