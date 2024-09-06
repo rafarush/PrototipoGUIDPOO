@@ -209,15 +209,13 @@ public final class Fct {
 	
 	
 	
-	
-	
-	
 	// CREAR GRUPO
 	public boolean crearGrupo(String nombreGrupo, int anno){
 		boolean val = false;
-		Grupo grupo = new Grupo(nombreGrupo, anno);
+		
 		if(buscarGrupo(nombreGrupo) == null){
 			val = true; 
+			Grupo grupo = new Grupo(nombreGrupo, anno);
 			grupos.add(grupo);
 		}
 		

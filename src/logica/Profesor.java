@@ -170,10 +170,10 @@ public class Profesor extends Trabajador{
 	public boolean darNota(Estudiante estudiante, Asignatura asignatura, float nota1, float nota2){
 		boolean val = false;
 		
-		if(buscarControlDocente(estudiante, asignatura)!=-1){
+		if(buscarControlDocente(estudiante, asignatura)!=null){
 			val = true;
-			notasAlumnos.get(buscarControlDocente(estudiante, asignatura)).insertarNotas(nota1, nota2);
-			estudiante.insertarNotas(estudiante, asignatura, nota1, nota2);
+			buscarControlDocente(estudiante, asignatura).insertarNotas(nota1, nota2);
+			estudiante.insertarNotas(asignatura, nota1, nota2);
 		}
 		
 		return val;
@@ -192,20 +192,21 @@ public class Profesor extends Trabajador{
 	
 	
 	// PARA BUSACR EL CONTROL DOCENTE EN UN PROFESOR DADO UN ESTUDIANTE Y UNA ASIGNATURA
-	public int buscarControlDocente(Estudiante estudiante, Asignatura asignatura){
+	public ControlDocente buscarControlDocente(Estudiante estudiante, Asignatura asignatura){
 		boolean val = true;
 		int i = 0;
-		ControlDocente controlDocente = new ControlDocente(estudiante, asignatura);
+		ControlDocente controlDocente = null;
 		
 		while(i<notasAlumnos.size() && val){
-			if(notasAlumnos.get(i).equals(controlDocente))
+			if(notasAlumnos.get(i).getAsignatura().equals(asignatura) && notasAlumnos.get(i).getiDEstudiante().equalsIgnoreCase(estudiante.getID()))
+				controlDocente=notasAlumnos.get(i);
 				val=false;			
 			i++;
 		}
 		if(val)
 			i=0;
 		
-		return i-1;
+		return controlDocente;
 	}
 	
 	
