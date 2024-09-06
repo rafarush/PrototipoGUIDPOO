@@ -1,22 +1,15 @@
 package gui.dialogs;
 
 
-import gui.mainFrame.MainFrame;
-
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-
-import runner.Runner;
-
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.concurrent.Semaphore;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -151,7 +144,7 @@ public class InputDialogAsignaturaPE extends JDialog {
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(nombreTextField.getText().isEmpty()){
+					if(nombreTextField.getText().trim().isEmpty()){	
 						JOptionPane.showMessageDialog(null, "Debe ponerle un nombre a la Asignatura");
 					}else{
 						Fct.getInstance().getPlanEstudio().crearAsignatura(nombreTextField.getText(), Integer.valueOf(annoComboBox.getSelectedItem().toString()),

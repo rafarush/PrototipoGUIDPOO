@@ -8,6 +8,9 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 
 public class JMenuItemEdit extends JMenuItem{
+
+	private static final long serialVersionUID = 1L;
+
 	public JMenuItemEdit() {
 		setIcon(new ImageIcon(JMenuItemEdit.class.getResource("/gui/utils/closeBotton-removebg-preview.png")));
 		setText("Cerrar Sesi\u00F3n");

@@ -2,17 +2,10 @@ package runner;
 
 
 import gui.dialogs.*;
-import gui.mainFrame.MainFrame;
 import gui.utils.ModeloGrupoEdit;
 import gui.utils.ModeloPlanificacionDocenteEdit;
-import gui.utils.ModeloProfesorEdit;
-
-import java.awt.EventQueue;
 import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import logica.*;

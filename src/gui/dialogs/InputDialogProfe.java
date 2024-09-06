@@ -183,18 +183,18 @@ public class InputDialogProfe extends JDialog {
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(nombreTextField.getText().isEmpty() || ciTextField.getText().isEmpty() || direccTextField.getText().isEmpty()){
+					if(nombreTextField.getText().trim().isEmpty() || ciTextField.getText().trim().isEmpty() || direccTextField.getText().trim().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Existen campos vacíos");
 					}else{
-						Fct.getInstance().crearPersona(ciTextField.getText(), nombreTextField.getText(), catCienComboBox.getSelectedItem().toString(), 
-								catDocComboBox.getSelectedItem().toString(),centroLabTextField.getText(), organismoTextField.getText(),
-								direccTextField.getText());
-						//DatosAuto.definirTablaProfes(Fct.getInstance().buscarProfesores());
-						/*Runner.modeloProfesor.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(), 
-								(String)catCienComboBox.getSelectedItem(),(String)catDocComboBox.getSelectedItem(),
-								centroLabTextField.getText(), organismoTextField.getText(), direccTextField.getText()});*/
-						JOptionPane.showMessageDialog(null, "Se ha añadido al profesor con éxito");
-						dispose();
+						try {
+							Fct.getInstance().crearPersona(ciTextField.getText(), nombreTextField.getText(), catCienComboBox.getSelectedItem().toString(), 
+									catDocComboBox.getSelectedItem().toString(),centroLabTextField.getText(), organismoTextField.getText(),
+									direccTextField.getText());
+							JOptionPane.showMessageDialog(null, "Se ha añadido al profesor con éxito");
+							dispose();
+						} catch (IllegalArgumentException exc) {
+							JOptionPane.showMessageDialog(null, exc.getMessage());
+						}
 					}
 				}
 			});

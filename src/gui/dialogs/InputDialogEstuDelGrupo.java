@@ -1,13 +1,11 @@
 package gui.dialogs;
 
 
-import gui.mainFrame.MainFrame;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
@@ -17,10 +15,6 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-
 import java.awt.Cursor;
 
 import logica.DatosAuto;
@@ -28,11 +22,7 @@ import logica.Estudiante;
 import logica.Fct;
 import logica.Grupo;
 import logica.JTableNoEdit;
-import logica.PersonalApoyo;
-import logica.Enums.BotonSelec;
-
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 
 
@@ -192,15 +182,15 @@ public class InputDialogEstuDelGrupo extends JDialog {
 			
 			atrasBtn = new JLabel("");
 			atrasBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			atrasBtn.setIcon(new ImageIcon(ControlDocenteFrame.class.getResource("/gui/utils/flechaAtras24Selected.png")));
+			atrasBtn.setIcon(new ImageIcon(InputJDialogControlDocente.class.getResource("/gui/utils/flechaAtras24Selected.png")));
 			atrasBtn.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					atrasBtn.setIcon(new ImageIcon(ControlDocenteFrame.class.getResource("/gui/utils/flechaAtras24Selected.png")));
+					atrasBtn.setIcon(new ImageIcon(InputJDialogControlDocente.class.getResource("/gui/utils/flechaAtras24Selected.png")));
 				}
 				@Override
 				public void mouseExited(MouseEvent e) {
-					atrasBtn.setIcon(new ImageIcon(ControlDocenteFrame.class.getResource("/gui/utils/flechaAtras24.png")));
+					atrasBtn.setIcon(new ImageIcon(InputJDialogControlDocente.class.getResource("/gui/utils/flechaAtras24.png")));
 				}
 				@Override
 				public void mouseClicked(MouseEvent e){

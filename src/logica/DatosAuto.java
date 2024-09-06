@@ -1,28 +1,11 @@
 package logica;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
-
-
-
-
-
-
-
-
-
-
-
 import runner.Runner;
-import gui.*;
-import gui.mainFrame.MainFrame;
-import gui.utils.ModeloGrupoEdit;
 import gui.utils.ModeloPlanificacionDocenteEdit;
-import gui.utils.ModeloProfesorEdit;
 
 
 public class DatosAuto {
@@ -159,6 +142,48 @@ public class DatosAuto {
 		return estuObj;
 	}
 	
+/***********************Define modelo de la tabla EstudianteNotas y agrega las filas**************************/
+	
+	/**
+	 * Define el modelo de columnas de la tabla EstudiantesNotas
+	 * @param estudiantes, asignatura
+	 */
+	public static void definirTablaEstudiantesNotas(ArrayList<Estudiante> estudiantes, Asignatura asignatura){
+		Runner.modeloEstudianteCorto = new DefaultTableModel();
+		Runner.modeloEstudianteCorto.addColumn("CI");
+		Runner.modeloEstudianteCorto.addColumn("Nombre");
+		Runner.modeloEstudianteCorto.addColumn("Año");
+		Runner.modeloEstudianteCorto.addColumn("Nota 1");
+		Runner.modeloEstudianteCorto.addColumn("Nota 2");
+		agregarFilasEstudiantesNotas(estudiantes, asignatura);
+	}
+	
+	
+	/**
+	 * Imprime cada fila con los estudianteCorto
+	 * @param estudiantes
+	 */
+	public static void agregarFilasEstudiantesNotas(ArrayList<Estudiante> estudiantes, Asignatura asignatura){
+		if(estudiantes.isEmpty()){
+			JOptionPane.showMessageDialog(null, "No hay registro de estudiantes. Por favor, añada.");
+		}else{
+			for(Estudiante e : estudiantes){
+				Runner.modeloEstudianteCorto.addRow(convertirAObjetoEstudianteNotas(e, asignatura));
+			}
+		}
+	}
+	
+	/**
+	 * Convertir instancia de EstudianteCorto a un array de Objeto
+	 * @return obj
+	 */
+	public static Object[] convertirAObjetoEstudianteNotas(Estudiante estu, Asignatura asignatura){
+		Object[] estuObj = new Object[]{estu.getID(), estu.getNombre(), estu.getAnnoAcademico()};	
+		
+		return estuObj;
+	}
+		
+	
 /***********************Define modelo de la tabla EstudianteCorto y agrega las filas**************************/
 	
 	/**
@@ -166,11 +191,11 @@ public class DatosAuto {
 	 * @param estudiantes
 	 */
 	public static void definirTablaEstudiantesCorto(ArrayList<Estudiante> estudiantes){
-		Runner.modeloEstudiante = new DefaultTableModel();
-		Runner.modeloEstudiante.addColumn("CI");
-		Runner.modeloEstudiante.addColumn("Nombre");
-		Runner.modeloEstudiante.addColumn("Año");
-		agregarFilasEstudiantes(estudiantes);
+		Runner.modeloEstudianteCorto = new DefaultTableModel();
+		Runner.modeloEstudianteCorto.addColumn("CI");
+		Runner.modeloEstudianteCorto.addColumn("Nombre");
+		Runner.modeloEstudianteCorto.addColumn("Año");
+		agregarFilasEstudiantesCorto(estudiantes);
 	}
 	
 	
@@ -183,7 +208,7 @@ public class DatosAuto {
 			JOptionPane.showMessageDialog(null, "No hay registro de estudiantes. Por favor, añada.");
 		}else{
 			for(Estudiante e : estudiantes){
-				Runner.modeloEstudiante.addRow(convertirAObjetoEstudiante(e));
+				Runner.modeloEstudianteCorto.addRow(convertirAObjetoEstudianteCorto(e));
 			}
 		}
 	}
@@ -197,7 +222,7 @@ public class DatosAuto {
 		
 		return estuObj;
 	}
-		
+	
 	
 /*****************************Define modelo de la tabla PersonalAux y agrega las filas**************************************/
 	
