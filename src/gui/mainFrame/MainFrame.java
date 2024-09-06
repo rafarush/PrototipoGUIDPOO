@@ -45,12 +45,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import logica.DatosAuto;
+import logica.*;
 import logica.Enums.BotonSelec;
-import logica.Fct;
-import logica.Grupo;
-import logica.JTableNoEdit;
-import logica.Profesor;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
@@ -307,12 +303,41 @@ public class MainFrame extends JFrame {
 						}else if(btnSeleccionado == BotonSelec.GRUPO){
 							//Falta revisar si el grupo esta en alguna planificacion docente
 							JOptionPane.showMessageDialog(null, "Todavia no se implementa para Grupos");
+							/*
+							Grupo grupo = Fct.getInstance().buscarGrupo(table.getValueAt(table.getSelectedRow(), 0).toString());
+							if (!Fct.getInstance().verificarGrupoPD(grupo)){
+								Fct.getInstance().eliminarGrupo(grupo);
+								JOptionPane.showMessageDialog(null, "Se ha eliminado el grupo correctamente");
+								tableDraw();
+							}else{
+								JOptionPane.showMessageDialog(null, "No se puede eliminar el grupo, ya que forma parte de la Planificación Docente");
+							}*/
+						
 						}else if(btnSeleccionado == BotonSelec.PLAN_ESTUDIO){
 							//Falta revisar si la asignatura esta en alguna planificacion docente
-							JOptionPane.showMessageDialog(null, "Todavia no se implementa para Asignaturas");
+							//JOptionPane.showMessageDialog(null, "Todavia no se implementa para Asignaturas");
+							
+							String nombreAsignatura = table.getValueAt(table.getSelectedRow(), 0).toString();
+							Asignatura asignatura = Fct.getInstance().getPlanEstudio().buscarAsignatura(nombreAsignatura);
+							
+							if (!Fct.getInstance().verificarAsignaturaPD(asignatura)){
+								Fct.getInstance().eliminarAsignatura(asignatura);
+								JOptionPane.showMessageDialog(null, "Se ha eliminado la asignatura correctamente");
+								tableDraw();
+							}else{
+								JOptionPane.showMessageDialog(null, "No se puede eliminar la asignatura, ya que forma parte de la Planificación Docente");
+							}
+							
+							
 						}else if(btnSeleccionado == BotonSelec.CONSEJO_DIRECC){
 							//Falta revisar si la asignatura esta en alguna planificacion docente
-							JOptionPane.showMessageDialog(null, "Todavia no se implementa para Consejo de Dirección");
+							JOptionPane.showMessageDialog(null, "falta arreglo de jorge");
+							
+							String profeID = table.getValueAt(table.getSelectedRow(), 0).toString();
+							Profesor profesor = (Profesor) Fct.getInstance().buscarPersona(profeID);
+							Fct.getInstance().eliminarDelCD(profesor);
+							JOptionPane.showMessageDialog(null, "Ha sido eliminado el profesor del Consejo de Dirección");
+							tableDraw();
 						}
 							
 						/*((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());
@@ -390,7 +415,8 @@ public class MainFrame extends JFrame {
 						case GRUPO:
 							//JOptionPane.showMessageDialog(null, "Haga doble click sobre el grupo para realizar modificaciones");
 							try {
-								InputDialogEstuDelGrupo inputDialogEstuDelGrupo = new InputDialogEstuDelGrupo(table.getValueAt(table.getSelectedRow(), 0).toString());
+								Grupo grupo = Fct.getInstance().buscarGrupo(table.getValueAt(table.getSelectedRow(), 0).toString());
+								InputDialogEstuDelGrupo inputDialogEstuDelGrupo = new InputDialogEstuDelGrupo(grupo);
 								inputDialogEstuDelGrupo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								inputDialogEstuDelGrupo.setVisible(true);
 							} catch (Exception exc) {

@@ -24,7 +24,9 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Cursor;
 
 import logica.DatosAuto;
+import logica.Estudiante;
 import logica.Fct;
+import logica.Grupo;
 import logica.JTableNoEdit;
 import logica.PersonalApoyo;
 import logica.Enums.BotonSelec;
@@ -45,9 +47,13 @@ public class InputDialogEstuDelGrupo extends JDialog {
 	final JLabel delBotton;
 	private final JLabel atrasBtn;
 	private boolean agregar = false;
-
-
-	public InputDialogEstuDelGrupo(final String nombreGrupo) {
+	
+	
+    /**
+     * Crea el JDialog para editar el grupo
+     * @param grupo
+     */
+	public InputDialogEstuDelGrupo(final Grupo grupo) {
 		setUndecorated(true);
 		setModal(true);
 		setBounds(100, 100, 560, 429);
@@ -126,16 +132,16 @@ public class InputDialogEstuDelGrupo extends JDialog {
 				public void mouseClicked(MouseEvent e) {
 					if(!agregar){
 						agregar = true;
-						tableDraw(nombreGrupo);
+						tableDraw(grupo);
 					}else{
 						if(table.getSelectedRow()!=-1){
 							String estId = table.getValueAt(table.getSelectedRow(), 0).toString();
-							Fct.getInstance().buscarGrupo(nombreGrupo).insertarAGrupoEstudiante(Fct.getInstance().buscarUnEstudiante(estId));
+							Fct.getInstance().buscarGrupo(grupo.getNombreGrupo()).insertarAGrupoEstudiante(Fct.getInstance().buscarUnEstudiante(estId));
 							JOptionPane.showMessageDialog(null, "               CONFIRMACIÓN:\nSe añadió a "
 									+Fct.getInstance().buscarUnEstudiante(estId).getNombre()
-									+" al "+Fct.getInstance().buscarGrupo(nombreGrupo).getNombreGrupo());
+									+" al "+Fct.getInstance().buscarGrupo(grupo.getNombreGrupo()).getNombreGrupo());
 							agregar = false;
-							tableDraw(nombreGrupo);
+							tableDraw(grupo);
 						}else{
 							JOptionPane.showMessageDialog(null, "Debe seleccionar el estudiante que desea agregar");
 						}	
@@ -163,7 +169,19 @@ public class InputDialogEstuDelGrupo extends JDialog {
 					if(table.getSelectedRow() == -1){
 						JOptionPane.showMessageDialog(null, "Debe seleccionar la fila que desea eliminar");
 					}else{
-						JOptionPane.showMessageDialog(null, "Función de sacar un estudiante del grupo");
+						if(!Fct.getInstance().verificarGrupoPD(grupo)){
+							String estudianteID = table.getValueAt(table.getSelectedRow(), 0).toString();
+							Estudiante estudiante = (Estudiante)Fct.getInstance().buscarPersona(estudianteID);
+							if(Fct.getInstance().eliminarEstudianteDeGrupo(estudiante, grupo)){
+								JOptionPane.showMessageDialog(null, "Se ha sacado del grupo al estudiante satisfactoriamente");
+								tableDraw(grupo);
+							}else{
+								JOptionPane.showMessageDialog(null, "No se pudo eliminar al estudiante debido a un error");
+							}
+							
+						}else{
+							JOptionPane.showMessageDialog(null, "No puede eliminar un estudiante de un grupo que tenga Planificación Docente");
+						}
 					}
 				}
 			});
@@ -190,7 +208,7 @@ public class InputDialogEstuDelGrupo extends JDialog {
 						JOptionPane.showMessageDialog(null, "No hay ruta hacia atrás");
 					}else{
 						agregar = false;
-						tableDraw(nombreGrupo);
+						tableDraw(grupo);
 						actualizarNombreEncabezado();
 					}
 				}
@@ -199,13 +217,13 @@ public class InputDialogEstuDelGrupo extends JDialog {
 			atrasBtn.setBounds(10, 26, 24, 14);
 			mainPanel.add(atrasBtn);
 			
-			tableDraw(nombreGrupo);
+			tableDraw(grupo);
 		}
 	}
 	
-	private void tableDraw(String nombreGrupo){
+	private void tableDraw(Grupo grupo){
 		if (!agregar){
-			DatosAuto.definirTablaEstudiantesCorto(Fct.getInstance().buscarGrupo(nombreGrupo).getGrupoEstudiantes());
+			DatosAuto.definirTablaEstudiantesCorto(Fct.getInstance().buscarGrupo(grupo.getNombreGrupo()).getGrupoEstudiantes());
 			table = new JTableNoEdit(Runner.modeloEstudiante);
 			table.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -218,7 +236,7 @@ public class InputDialogEstuDelGrupo extends JDialog {
 			scrollPane.setViewportView(table);
 			actualizarNombreEncabezado();
 		}else{
-			DatosAuto.definirTablaEstudiantesCorto(Fct.getInstance().buscarEstudiantesSinGrupo());
+			DatosAuto.definirTablaEstudiantesCorto(Fct.getInstance().buscarEstudiantesSinGrupoPorAnno(grupo.getAnnoAcademico()));
 			table = new JTableNoEdit(Runner.modeloEstudiante);
 			table.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
