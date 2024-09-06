@@ -331,7 +331,13 @@ public class MainFrame extends JFrame {
 							
 						}else if(btnSeleccionado == BotonSelec.CONSEJO_DIRECC){
 							//Falta revisar si la asignatura esta en alguna planificacion docente
-							JOptionPane.showMessageDialog(null, "Todavia no se implementa para Consejo de Dirección");
+							JOptionPane.showMessageDialog(null, "falta arreglo de jorge");
+							
+							String profeID = table.getValueAt(table.getSelectedRow(), 0).toString();
+							Profesor profesor = (Profesor) Fct.getInstance().buscarPersona(profeID);
+							Fct.getInstance().eliminarDelCD(profesor);
+							JOptionPane.showMessageDialog(null, "Ha sido eliminado el profesor del Consejo de Dirección");
+							tableDraw();
 						}
 							
 						/*((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());
