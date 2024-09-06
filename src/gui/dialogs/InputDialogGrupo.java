@@ -124,7 +124,7 @@ public class InputDialogGrupo extends JDialog {
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if (nombreTextField.getText().isEmpty()){
+					if (nombreTextField.getText().trim().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Debe poner un nombre al grupo");
 					}else{
 						Fct.getInstance().crearGrupo(nombreTextField.getText(), Integer.valueOf(annoAcademicoComboBox.getSelectedItem().toString()));

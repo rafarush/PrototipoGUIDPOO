@@ -149,12 +149,16 @@ public class InputDialogPerAux extends JDialog {
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(nombreTextField.getText().isEmpty() || ciTextField.getText().isEmpty() || direccTextField.getText().isEmpty()){
+					if(nombreTextField.getText().trim().isEmpty() || ciTextField.getText().trim().isEmpty() || direccTextField.getText().trim().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Existen campos vacíos");
 					}else{
-						Runner.modeloPersonalAux.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(), (String)areaTrabajoComboBox.getSelectedItem(), direccTextField.getText()});
-						JOptionPane.showMessageDialog(null, "Se ha añadido al miembro del personal auxiliar con éxito");
-						dispose();
+						try {
+							Runner.modeloPersonalAux.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(), (String)areaTrabajoComboBox.getSelectedItem(), direccTextField.getText()});
+							JOptionPane.showMessageDialog(null, "Se ha añadido al miembro del personal auxiliar con éxito");
+							dispose();
+						} catch (IllegalArgumentException exc) {
+							JOptionPane.showMessageDialog(null, exc.getMessage());
+						}
 					}	
 				}
 			});

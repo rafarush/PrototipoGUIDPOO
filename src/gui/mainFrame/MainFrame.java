@@ -1,7 +1,6 @@
 package gui.mainFrame;
 
 import gui.dialogs.*;
-
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -9,7 +8,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -26,19 +24,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-
 import runner.Runner;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
 import logica.*;
 import logica.Enums.BotonSelec;
-
-
 import java.awt.Dimension;
 
 

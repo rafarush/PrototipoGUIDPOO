@@ -167,14 +167,18 @@ public class InputDialogEst extends JDialog {
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(nombreTextField.getText().isEmpty() || ciTextField.getText().isEmpty() || direccTextField.getText().isEmpty()){
+					if(nombreTextField.getText().trim().isEmpty() || ciTextField.getText().trim().isEmpty() || direccTextField.getText().trim().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Existen campos vacíos");
 					}else{
-						Fct.getInstance().crearPersona(ciTextField.getText(), nombreTextField.getText(),Integer.valueOf(anyoComboBox.getSelectedItem().toString()),
-								centroLaboralTextField.getText(),organismoTextField.getText(), direccTextField.getText());
-						
-						JOptionPane.showMessageDialog(null, "Se ha añadido al estudiante con éxito");
-						dispose();
+						try {
+							Fct.getInstance().crearPersona(ciTextField.getText(), nombreTextField.getText(),Integer.valueOf(anyoComboBox.getSelectedItem().toString()),
+									centroLaboralTextField.getText(),organismoTextField.getText(), direccTextField.getText());
+							
+							JOptionPane.showMessageDialog(null, "Se ha añadido al estudiante con éxito");
+							dispose();
+						} catch (IllegalArgumentException exc) {
+							JOptionPane.showMessageDialog(null, exc.getMessage());
+						}
 					}		
 				}
 			});

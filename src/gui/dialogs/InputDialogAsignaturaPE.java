@@ -144,7 +144,7 @@ public class InputDialogAsignaturaPE extends JDialog {
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(nombreTextField.getText().isEmpty()){
+					if(nombreTextField.getText().trim().isEmpty()){	
 						JOptionPane.showMessageDialog(null, "Debe ponerle un nombre a la Asignatura");
 					}else{
 						Fct.getInstance().getPlanEstudio().crearAsignatura(nombreTextField.getText(), Integer.valueOf(annoComboBox.getSelectedItem().toString()),
