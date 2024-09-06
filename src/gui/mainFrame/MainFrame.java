@@ -275,6 +275,9 @@ public class MainFrame extends JFrame {
 		mainPanel.add(lblFiltro);
 		lblFiltro.setHorizontalAlignment(SwingConstants.CENTER);
 		
+		/*
+		 * Boton de eliminar
+		 */
 		final JLabel delBotton = new JLabel("");
 		delBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		delBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/delBotton.png")));
@@ -295,6 +298,70 @@ public class MainFrame extends JFrame {
 				}else{
 					if(JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esa fila?\n No se podrá recuperar", "Confirmación", 
 					JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION){
+						
+						switch (btnSeleccionado) {
+						case ESTUDIANTE:
+							//Falta verificar que no este en un grupo con plan docente
+							JOptionPane.showMessageDialog(null, "Falta verificar que no este en un grupo con plan docente");
+							Estudiante estudiante = Fct.getInstance().buscarUnEstudiante(table.getValueAt(table.getSelectedRow(), 0).toString());
+							Fct.getInstance().eliminarPersona(estudiante.getID());
+							JOptionPane.showMessageDialog(null, "Se ha eliminado a el estudiante correctamente");
+							tableDraw();
+							break;
+							
+						case PROFESOR:
+							String profe = table.getValueAt(table.getSelectedRow(), 0).toString();
+							if(!Fct.getInstance().verificarProfeEnPlanDoc(profe)){
+								Fct.getInstance().eliminarPersona(profe);
+								JOptionPane.showMessageDialog(null, "Se ha eliminado a el profesor correctamente");
+								tableDraw();
+							}else{
+								JOptionPane.showMessageDialog(null, "No se puede eliminar a el profesor, ya que forma parte de la Planificación Docente");
+							}
+							break;
+							
+						case PERSO_AUX:
+							Fct.getInstance().eliminarPersona(table.getValueAt(table.getSelectedRow(), 0).toString());
+							JOptionPane.showMessageDialog(null, "Se ha eliminado al miembro del personal auxiliar correctamente");
+							tableDraw();
+							break;
+							
+						case GRUPO:
+							Grupo grupo = Fct.getInstance().buscarGrupo(table.getValueAt(table.getSelectedRow(), 0).toString());
+							if (!Fct.getInstance().verificarGrupoPD(grupo)){
+								Fct.getInstance().eliminarGrupo(grupo);
+								JOptionPane.showMessageDialog(null, "Se ha eliminado el grupo correctamente");
+								tableDraw();
+							}else{
+								JOptionPane.showMessageDialog(null, "No se puede eliminar el grupo, ya que forma parte de la Planificación Docente");
+							}
+							break;
+							
+						case PLAN_ESTUDIO:
+							String nombreAsignatura = table.getValueAt(table.getSelectedRow(), 0).toString();
+							Asignatura asignatura = Fct.getInstance().getPlanEstudio().buscarAsignatura(nombreAsignatura);
+							
+							if (!Fct.getInstance().verificarAsignaturaPD(asignatura)){
+								Fct.getInstance().eliminarAsignatura(asignatura);
+								JOptionPane.showMessageDialog(null, "Se ha eliminado la asignatura correctamente");
+								tableDraw();
+							}else{
+								JOptionPane.showMessageDialog(null, "No se puede eliminar la asignatura, ya que forma parte de la Planificación Docente");
+							}
+							break;
+						case CONSEJO_DIRECC:
+							
+							String profeID = table.getValueAt(table.getSelectedRow(), 0).toString();
+							Profesor profesor = (Profesor) Fct.getInstance().buscarPersona(profeID);
+							Fct.getInstance().eliminarDelCD(profesor);
+							JOptionPane.showMessageDialog(null, "Ha sido eliminado el profesor del Consejo de Dirección");
+							tableDraw();
+							break;
+						default:
+							break;
+						}
+					
+						/*
 						if (btnSeleccionado != BotonSelec.GRUPO && btnSeleccionado != BotonSelec.PLAN_ESTUDIO && btnSeleccionado != BotonSelec.CONSEJO_DIRECC){
 							//Falta revisar si el profe esta en alguna planificacion docente
 							//Profesor profe = (Profesor) Runner.fct.buscarPersona(table.getValueAt(table.getSelectedRow(), 0).toString());
@@ -303,7 +370,7 @@ public class MainFrame extends JFrame {
 						}else if(btnSeleccionado == BotonSelec.GRUPO){
 							//Falta revisar si el grupo esta en alguna planificacion docente
 							JOptionPane.showMessageDialog(null, "Todavia no se implementa para Grupos");
-							/*
+							
 							Grupo grupo = Fct.getInstance().buscarGrupo(table.getValueAt(table.getSelectedRow(), 0).toString());
 							if (!Fct.getInstance().verificarGrupoPD(grupo)){
 								Fct.getInstance().eliminarGrupo(grupo);
@@ -311,7 +378,7 @@ public class MainFrame extends JFrame {
 								tableDraw();
 							}else{
 								JOptionPane.showMessageDialog(null, "No se puede eliminar el grupo, ya que forma parte de la Planificación Docente");
-							}*/
+							}
 						
 						}else if(btnSeleccionado == BotonSelec.PLAN_ESTUDIO){
 							//Falta revisar si la asignatura esta en alguna planificacion docente
@@ -338,7 +405,7 @@ public class MainFrame extends JFrame {
 							Fct.getInstance().eliminarDelCD(profesor);
 							JOptionPane.showMessageDialog(null, "Ha sido eliminado el profesor del Consejo de Dirección");
 							tableDraw();
-						}
+						}*/
 							
 						/*((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());
 						((DefaultTableModel) table.getModel()).fireTableDataChanged();*/
@@ -413,7 +480,6 @@ public class MainFrame extends JFrame {
 							}
 							break;
 						case GRUPO:
-							//JOptionPane.showMessageDialog(null, "Haga doble click sobre el grupo para realizar modificaciones");
 							try {
 								Grupo grupo = Fct.getInstance().buscarGrupo(table.getValueAt(table.getSelectedRow(), 0).toString());
 								InputDialogEstuDelGrupo inputDialogEstuDelGrupo = new InputDialogEstuDelGrupo(grupo);
