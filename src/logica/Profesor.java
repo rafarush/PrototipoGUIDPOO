@@ -123,9 +123,9 @@ public class Profesor extends Trabajador{
 		else if(cargoConsejoDireccion.equalsIgnoreCase("Subdirector Docente"))
 			this.cargoConsejoDireccion = "Subdirector Docente";
 		else if(cargoConsejoDireccion.equalsIgnoreCase("Subdirector de Investigaciones y Posgrado"))
-			this.cargoConsejoDireccion = "Subdirector  de Investigaciones y Posgrado";
+			this.cargoConsejoDireccion = "Subdirector de Investigaciones y Posgrado";
 		else if(cargoConsejoDireccion.equalsIgnoreCase("Subdirector de Extensión Universitaria"))
-			this.cargoConsejoDireccion = "Subdirector  de Extension Universitaria";
+			this.cargoConsejoDireccion = "Subdirector de Extensión Universitaria";
 		else if(cargoConsejoDireccion.equals("Jefe de Laboratorios"))
 			this.cargoConsejoDireccion = "Jefe de Laboratorios";
 		
