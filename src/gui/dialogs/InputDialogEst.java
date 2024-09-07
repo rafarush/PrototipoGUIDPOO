@@ -172,11 +172,11 @@ public class InputDialogEst extends JDialog {
 						JOptionPane.showMessageDialog(null, "Existen campos vacíos");
 					}else{
 						if (Validaciones.valCI(ciTextField.getText())){
-							if (Validaciones.todoLetra(nombreTextField.getText())){
+							if (Validaciones.todoLetra(Validaciones.getCadenaSinEspacios(nombreTextField.getText()))){
 								
 								try {
-									Fct.getInstance().crearPersona(ciTextField.getText(), nombreTextField.getText(),Integer.valueOf(anyoComboBox.getSelectedItem().toString()),
-											centroLaboralTextField.getText(),organismoTextField.getText(), direccTextField.getText());
+									Fct.getInstance().crearPersona(ciTextField.getText().trim(), nombreTextField.getText().trim(),Integer.valueOf(anyoComboBox.getSelectedItem().toString()),
+											centroLaboralTextField.getText().trim(),organismoTextField.getText().trim(), direccTextField.getText().trim());
 									
 									JOptionPane.showMessageDialog(null, "Se ha añadido al estudiante con éxito");
 									dispose();
@@ -359,25 +359,18 @@ public class InputDialogEst extends JDialog {
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(nombreTextField.getText().isEmpty() || ciTextField.getText().isEmpty() || direccTextField.getText().isEmpty()){
+					if(nombreTextField.getText().trim().isEmpty() || ciTextField.getText().isEmpty() || direccTextField.getText().trim().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Existen campos vacíos");
 					}else{
+						if (Validaciones.todoLetra(Validaciones.getCadenaSinEspacios(nombreTextField.getText()))){
+							estudiante.modificarEstudiante(ciTextField.getText(), nombreTextField.getText().trim(), Integer.valueOf(annoComboBox.getSelectedItem().toString()),
+									centroLaboralTextField.getText().trim(), organismoTextField.getText().trim(), direccTextField.getText().trim());
+							JOptionPane.showMessageDialog(null, "Se ha modificado al estudiante con éxito");
+							dispose();
+						}else{
+							JOptionPane.showMessageDialog(null, "Solo se permiten letras en el nombre");
+						}
 						
-						estudiante.modificarEstudiante(ciTextField.getText(), nombreTextField.getText(), Integer.valueOf(annoComboBox.getSelectedItem().toString()),
-								centroLaboralTextField.getText(), organismoTextField.getText(), direccTextField.getText());
-						
-						/*Runner.modeloEstudiante.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(),(String)annoComboBox.getSelectedItem(),null,
-						 * centroLaboralTextField.getText(),organismoTextField.getText(), direccTextField.getText()});
-						 */
-						/**
-						 * Elimina al profe original (PROVISIONAL)
-						 *//*
-						((DefaultTableModel) MainFrame.getTable().getModel()).removeRow(MainFrame.getTable().getSelectedRow());
-						((DefaultTableModel) MainFrame.getTable().getModel()).fireTableDataChanged();*/
-
-						JOptionPane.showMessageDialog(null, "Se ha modificado al estudiante con éxito");
-					
-						dispose();
 					}		
 				}
 			});
