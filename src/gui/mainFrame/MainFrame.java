@@ -1,6 +1,7 @@
 package gui.mainFrame;
 
 import gui.dialogs.*;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -8,6 +9,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -24,14 +26,18 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+
 import runner.Runner;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 import logica.*;
 import logica.Enums.BotonSelec;
+
 import java.awt.Dimension;
 
 
@@ -206,14 +212,18 @@ public class MainFrame extends JFrame {
 						tableDraw();
 						break;
 					case CONSEJO_DIRECC:
-						try {
-							InputDialogProfeAConsejo inputProfeAConsejo = new InputDialogProfeAConsejo();
-							inputProfeAConsejo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-							inputProfeAConsejo.setVisible(true);
-						} catch (Exception exc) {
-							exc.printStackTrace();
+						if (Fct.getInstance().buscarCargosCDFaltantes().size()>0){
+							try {
+								InputDialogProfeAConsejo inputProfeAConsejo = new InputDialogProfeAConsejo();
+								inputProfeAConsejo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								inputProfeAConsejo.setVisible(true);
+							} catch (Exception exc) {
+								exc.printStackTrace();
+							}
+							tableDraw();
+						}else{
+							JOptionPane.showMessageDialog(null, "Ya están ocupados todos los cargos en el Consejo de Dirección");
 						}
-						tableDraw();
 						break;
 					default:
 						break;

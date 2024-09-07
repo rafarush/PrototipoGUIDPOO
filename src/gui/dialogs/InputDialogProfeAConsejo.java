@@ -123,19 +123,19 @@ public class InputDialogProfeAConsejo extends JDialog {
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
-						if(table.getSelectedRow()!=-1){
-							profeID = table.getValueAt(table.getSelectedRow(), 0).toString();
-							dispose();
-							try {
-								InputDialogModifConsejoDirecc inputModConDir = new InputDialogModifConsejoDirecc(Fct.getInstance().buscarUnProfesor(profeID));
-								inputModConDir.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-								inputModConDir.setVisible(true);
-							} catch (Exception exc) {
-								exc.printStackTrace();
-							}
-						}else{
-							JOptionPane.showMessageDialog(null, "Debe seleccionar el profesor que desea agregar");
-						}	
+							if(table.getSelectedRow()!=-1){
+								profeID = table.getValueAt(table.getSelectedRow(), 0).toString();
+								dispose();
+								try {
+									InputDialogModifConsejoDirecc inputModConDir = new InputDialogModifConsejoDirecc(Fct.getInstance().buscarUnProfesor(profeID));
+									inputModConDir.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+									inputModConDir.setVisible(true);
+								} catch (Exception exc) {
+									exc.printStackTrace();
+								}
+							}else{
+								JOptionPane.showMessageDialog(null, "Debe seleccionar el profesor que desea agregar");
+							}	
 				}
 			});
 			inputBotton.setIcon(new ImageIcon(InputDialogEst.class.getResource("/gui/utils/addBottonJDialog.png")));
