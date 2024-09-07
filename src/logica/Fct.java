@@ -643,7 +643,7 @@ public final class Fct {
 	//para empezar un nuevo semestre
 	public boolean empezarPeriodo(){
 		boolean val = false;
-		if(buscarEstudiantesSinGrupo().size()==0 && verificarGruposEnSusPD()){
+		if(buscarEstudiantesSinGrupo().size()>0 && verificarGruposEnSusPD()){
 			val = true;
 		}
 		
