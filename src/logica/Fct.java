@@ -48,11 +48,13 @@ public final class Fct {
 		while(i<personas.size() && val){
 			if(personas.get(i).getID().equalsIgnoreCase(iD)){
 				if(buscarPersona(iD) instanceof Estudiante){
-					ArrayList<Grupo> gruposDelEstudiante = eliminarEstudiante(iD);
-					eliminarGruposVacios(gruposDelEstudiante);
+					System.out.println("todavia1");
+					eliminarEstudiante(iD); 
+					System.out.println("todavia2");
+					//eliminarGruposVacios(gruposDelEstudiante);
 				}
 					
-				
+				System.out.println("todavia3");
 				
 				// lo que se va a hacer siempre aunque sea profe, estu o per.apoyo
 				personas.remove(i);
@@ -71,7 +73,15 @@ public final class Fct {
 				grupos.remove(g);
 				val = true;
 			}
+			for(Periodo p : periodos){
+				for(PlanificacionDocente pD : p.getPlanificacionesDocentes()){
+					if(pD.getGrupo().getNombreGrupo().equalsIgnoreCase(g.getNombreGrupo())){
+						p.getPlanificacionesDocentes().remove(pD);
+					}
+				}
+			}
 		}
+		
 		
 		
 		return val;
@@ -190,38 +200,35 @@ public final class Fct {
 	}
 	
 	// ELIMINAR ESTUDIANTE
-	public ArrayList<Grupo> eliminarEstudiante(String iD) {
-		
-		ArrayList<Grupo> gruposDelEstudiante = new ArrayList<>();
-		
-		for(int i=0;i<periodos.size();i++){
-			if(buscarUnEstudiante(iD).getAnnoAcademico()==1){
-				if(i==0 || i==6){
-					for(PlanificacionDocente pD : periodos.get(i).getPlanificacionesDocentes()){
-						if(pD.getGrupo().buscarEstudiante(iD)!=null){
-							pD.getGrupo().getGrupoEstudiantes().remove(buscarUnEstudiante(iD));
-						}
-					}
-				}
-			}else{
-				if(i==buscarUnEstudiante(iD).getAnnoAcademico()-1 || i==buscarUnEstudiante(iD).getAnnoAcademico()-2 || i==buscarUnEstudiante(iD).getAnnoAcademico()+6 || i==buscarUnEstudiante(iD).getAnnoAcademico()+5){
-					for(PlanificacionDocente pD : periodos.get(i).getPlanificacionesDocentes()){
-						if(pD.getGrupo().buscarEstudiante(iD)!=null){
-							pD.getGrupo().getGrupoEstudiantes().remove(buscarUnEstudiante(iD));
-						}
-					}
-				}
-			}
-		}
-		
-		
+	public boolean eliminarEstudiante(String iD) {
+		ArrayList<Grupo> gP = new ArrayList<>();
+		boolean val = false;
 		for(Grupo g : grupos){
 			if(g.getGrupoEstudiantes().contains(buscarUnEstudiante(iD))){
-				g.eliminarEstudiante(buscarUnEstudiante(iD));
-				gruposDelEstudiante.add(g);
+				g.getGrupoEstudiantes().remove(buscarUnEstudiante(iD));
+				if(g.getGrupoEstudiantes().size()==0){
+					gP.add(g);
+				}
+				val = true;
+				
 			}
+			
 		}
-		return gruposDelEstudiante;
+ 
+		for (Periodo p : periodos){
+			ArrayList<PlanificacionDocente> pDB = new ArrayList<>();
+			for(PlanificacionDocente pD : p.getPlanificacionesDocentes()){
+				for(Grupo g : gP){
+					if(pD.getGrupo().getNombreGrupo().equalsIgnoreCase(g.getNombreGrupo()))
+						pDB.add(pD);
+				}
+			}
+			p.getPlanificacionesDocentes().removeAll(pDB);
+			pDB.clear();
+		}
+		
+		grupos.removeAll(gP);
+		return val;
 	}
 	
 	
@@ -980,23 +987,31 @@ public final class Fct {
 		getPlanEstudio().crearAsignatura("Diseño y POO", 1, 2, 90);
 		getPlanEstudio().crearAsignatura("Estructuras de Datos", 2, 1, 40);
 		getPlanEstudio().crearAsignatura("Seguridad Nacional", 2, 1, 90);
+		getPlanEstudio().crearAsignatura("Inteligencia artificial", 6, 1, 90);
 		
 		// GRUPOS
 		crearGrupo("Grupo 1.1", 1);
 		crearGrupo("Grupo 1.2", 1);
 		crearGrupo("Grupo 6.1", 6);
+		crearGrupo("Grupo 2.1", 2);
+		
 		
 		// AGREGAR A GRUPOS
 		buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(buscarUnEstudiante("05032379581"));
 		buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(buscarUnEstudiante("08868513264"));
-		buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(buscarUnEstudiante("04021324587"));
+		buscarGrupo("Grupo 2.1").insertarAGrupoEstudiante(buscarUnEstudiante("04021324587"));
 		buscarGrupo("Grupo 6.1").insertarAGrupoEstudiante(buscarUnEstudiante("04021334457"));
 		
 		//PLANES DOCENTES
 		
 		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("95868426587"),getPlanEstudio().buscarAsignatura("Matemática I") , buscarGrupo("Grupo 1.1"));
-		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("05062348364"),getPlanEstudio().buscarAsignatura("Introducción a la Programación") , buscarGrupo("Grupo 1.2"));
-		 
+		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("05062348364"),getPlanEstudio().buscarAsignatura("Introducción a la Programación") , buscarGrupo("Grupo 1.1"));
+		getPeriodos().get(5).crearPlanificacionDocente(buscarUnProfesor("95868426587"),getPlanEstudio().buscarAsignatura("Inteligencia artificial") , buscarGrupo("Grupo 6.1"));
+	
+
+		System.out.println(getPeriodos().get(0).getPlanificacionesDocentes().get(0).getAsignatura().getNombre());
+		System.out.println(getPeriodos().get(0).getPlanificacionesDocentes().get(1).getAsignatura().getNombre());
+		System.out.println(periodos.get(5).getPlanificacionesDocentes().get(0).getAsignatura().getNombre());
 	}
 	
 	

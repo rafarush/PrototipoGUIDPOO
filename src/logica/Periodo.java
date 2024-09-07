@@ -26,8 +26,8 @@ public class Periodo {
 		
 		public boolean crearPlanificacionDocente(Profesor profesor, Asignatura asignatura, Grupo grupo){
 			boolean val = false;
-			PlanificacionDocente planificacionDocente =  new PlanificacionDocente(profesor, asignatura, grupo);
-			if(!verificarPlanificacionDocente(planificacionDocente)){
+			if(!verificarPlanificacionDocente(grupo, asignatura)){
+				PlanificacionDocente planificacionDocente =  new PlanificacionDocente(profesor, asignatura, grupo);
 				planificacionesDocentes.add(planificacionDocente);
 				profesor.crearControlDocente(grupo, asignatura);
 				val = true;
@@ -37,12 +37,26 @@ public class Periodo {
 		}
 
 		// PARA VERIFICAR SI UNA PLANFICACION DOCENTE YA ESTA CREADA
-		public boolean verificarPlanificacionDocente(PlanificacionDocente planificacionDocente) {
+		public boolean verificarPlanificacionDocente(Grupo grupo, Asignatura asignatura) {
 			boolean val = false;
-			
-			if(planificacionesDocentes.contains(planificacionDocente))
-				val = true;
+			int i = 0;
+			while(i<planificacionesDocentes.size() && !val){
+				if(planificacionesDocentes.get(i).getAsignatura().equals(asignatura) && planificacionesDocentes.get(i).getGrupo().getNombreGrupo().equalsIgnoreCase(grupo.getNombreGrupo()))
+					val = true;
+				i++;
+			}
 			
 			return val;
 		}
 }
+
+
+
+
+
+
+
+
+
+
+
