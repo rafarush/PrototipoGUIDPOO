@@ -644,6 +644,7 @@ public final class Fct {
 	public boolean empezarPeriodo(){
 		boolean val = false;
 		if(buscarEstudiantesSinGrupo().size()>0 && verificarGruposEnSusPD()){
+
 			val = true;
 		}
 		
