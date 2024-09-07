@@ -638,7 +638,42 @@ public final class Fct {
 		
 		return val;
 	}
+
+
+	//para empezar un nuevo semestre
+	public boolean empezarPeriodo(){
+		boolean val = false;
+		if(buscarEstudiantesSinGrupo().size()==0 && verificarGruposEnSusPD()){
+			val = true;
+		}
+		
+		return val;
+	}
 	
+	//para verificar que todos los grupos estan entre las planidicaciones docentes
+	public boolean verificarGruposEnSusPD() {
+		 boolean val = true;
+		 boolean var = false;
+		 
+		 for(int i = 0;i<grupos.size() && val; i++){
+				for(Asignatura a : planEstudio.buscarAsignaturaPorAnno(grupos.get(i).getAnnoAcademico())){
+					for(int e=0;e<periodos.size() && val;e++){
+						if(i==grupos.get(i).getAnnoAcademico()-1 || i==grupos.get(i).getAnnoAcademico()+5){ 
+							var = false;
+							for(PlanificacionDocente pD : periodos.get(i).getPlanificacionesDocentes()){
+								if(pD.getAsignatura().equals(a) && pD.getGrupo().equals(grupos.get(i)))
+									var = true;
+							}
+							if(!var)
+								val = false;
+						}
+					}
+				}
+			}
+		 
+		 
+		 return val;
+	}
 	
 	// PARA PASAR DE ANNO
 	public boolean pasarAnno(){
