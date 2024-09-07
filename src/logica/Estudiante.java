@@ -31,7 +31,7 @@ public class Estudiante extends Persona{
 	}
 
 	public void setAnnoAcademico(int annoAcademico) {
-		if(annoAcademico>0 && annoAcademico<7)
+		if(annoAcademico>0 && annoAcademico<8)
 			this.annoAcademico = annoAcademico;
 		else 
 			throw new IllegalArgumentException("Solo existen annos entre 1 y 6");
