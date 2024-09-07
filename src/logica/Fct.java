@@ -980,11 +980,7 @@ public final class Fct {
 		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("95868426587"),getPlanEstudio().buscarAsignatura("Matemática I") , buscarGrupo("Grupo 1.1"));
 		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("05062348364"),getPlanEstudio().buscarAsignatura("Introducción a la Programación") , buscarGrupo("Grupo 1.1"));
 		getPeriodos().get(5).crearPlanificacionDocente(buscarUnProfesor("95868426587"),getPlanEstudio().buscarAsignatura("Inteligencia artificial") , buscarGrupo("Grupo 6.1"));
-	
 
-		System.out.println(getPeriodos().get(0).getPlanificacionesDocentes().get(0).getAsignatura().getNombre());
-		System.out.println(getPeriodos().get(0).getPlanificacionesDocentes().get(1).getAsignatura().getNombre());
-		System.out.println(periodos.get(5).getPlanificacionesDocentes().get(0).getAsignatura().getNombre());
 	}
 	
 	
@@ -1154,7 +1150,17 @@ public final class Fct {
 		return gruposPorAnno;
 	}
 	
-	
+	// para busacr los grupos por un anno especifico que no estne vacios
+	public ArrayList<Grupo> buscarGruposPorAnnoNoVacio(int anno){
+		ArrayList<Grupo> gruposPorAnnoNoVacios = new ArrayList<>();
+		
+		for(Grupo g : buscarGruposPorAnno(anno)){
+			if(g.getGrupoEstudiantes().size()>0)
+				gruposPorAnnoNoVacios.add(g);
+		}
+		
+		return gruposPorAnnoNoVacios;
+	}
 	
 	
 	
