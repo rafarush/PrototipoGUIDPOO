@@ -81,7 +81,7 @@ public class Estudiante extends Persona{
 	// insertar notas
 	public void insertarNotas( Asignatura asignatura, float nota1, float nota2){
 		buscarControlDocente(asignatura).setNota1(nota1);
-		buscarControlDocente(asignatura).setNota1(nota2);
+		buscarControlDocente(asignatura).setNota2(nota2);
 	}
 	
 	
