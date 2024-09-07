@@ -1130,13 +1130,13 @@ public final class Fct {
 	
 	// para buscar los grupos por un anno entrante
 	public ArrayList<Grupo> buscarGruposPorAnno(int anno){
-		ArrayList<Grupo> grupos = new ArrayList<>();
+		ArrayList<Grupo> gruposPorAnno = new ArrayList<>();
 		for(Grupo g : grupos){
 			if(g.getAnnoAcademico()==anno)
-				grupos.add(g);
+				gruposPorAnno.add(g);
 		}
 		
-		return grupos;
+		return gruposPorAnno;
 	}
 	
 	
