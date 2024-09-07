@@ -360,7 +360,6 @@ public class DatosAuto {
 	 * @param grupos
 	 */
 	public static void definirTablaGrupo(ArrayList<Grupo> grupos){
-		System.out.println(grupos.size());
 		Runner.modeloGrupoReporte = new DefaultTableModel();
 		Runner.modeloGrupoReporte.addColumn("Nombre");
 		Runner.modeloGrupoReporte.addColumn("Año");

@@ -4,7 +4,10 @@ package runner;
 import gui.dialogs.*;
 import gui.utils.ModeloGrupoEdit;
 import gui.utils.ModeloPlanificacionDocenteEdit;
+import gui.utils.Validaciones;
+
 import java.util.ArrayList;
+
 import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
 
@@ -57,15 +60,9 @@ public class Runner {
 		Fct.getInstance().getPeriodos().get(1).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor("95868426587"),Fct.getInstance().getPlanEstudio().buscarAsignatura("Matemática III") , Fct.getInstance().buscarGrupo("Grupo 2.1"));
 		Fct.getInstance().getPeriodos().get(7).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor("95868426587"),Fct.getInstance().getPlanEstudio().buscarAsignatura("IA") , Fct.getInstance().buscarGrupo("Grupo 2.2"));
 	    
-	    
-		ArrayList<Grupo> g = Fct.getInstance().buscarGruposPorAnno(1);
-		System.out.println(g);
-	    for (Grupo grupo : g) {
-	    	System.out.println(grupo.getNombreGrupo());
-		}
-	    
-	    
+		String cI = "00022977685";
 		
+		System.out.println(Validaciones.valCI(cI));
 		
 		try {
 			JDialogLoginUser login = new JDialogLoginUser();

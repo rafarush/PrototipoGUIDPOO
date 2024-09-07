@@ -147,8 +147,15 @@ public class InputDialogNota extends JDialog {
 					Profesor profe = (Profesor) Fct.getInstance().buscarPersona(InputJDialogControlDocente.profeSelec);
 					Asignatura asignatura = Fct.getInstance().getPlanEstudio().buscarAsignatura(InputJDialogControlDocente.asignaturaSelec);
 					Estudiante estudiante = Fct.getInstance().buscarUnEstudiante(InputJDialogControlDocente.estuSelec);
-					profe.darNota(estudiante, asignatura, Integer.valueOf(nota1), Integer.valueOf(nota2));
-					InputJDialogControlDocente.mensajeConfirm(nota1, nota2);
+					
+					if(profe.buscarControlDocente(estudiante, asignatura)!=null){
+						profe.darNota(estudiante, asignatura, Integer.valueOf(nota1), Integer.valueOf(nota2));
+						InputJDialogControlDocente.mensajeConfirm(nota1, nota2);
+						System.out.println(estudiante.buscarNotaEspecifica(asignatura).get(0));
+						System.out.println(estudiante.buscarNotaEspecifica(asignatura).get(1));
+					}else{
+						JOptionPane.showMessageDialog(null, "No se pudo dar nota al estudiante");
+					}
 					dispose();
 				}
 			});
