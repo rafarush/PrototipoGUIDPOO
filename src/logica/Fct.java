@@ -48,13 +48,8 @@ public final class Fct {
 		while(i<personas.size() && val){
 			if(personas.get(i).getID().equalsIgnoreCase(iD)){
 				if(buscarPersona(iD) instanceof Estudiante){
-					System.out.println("todavia1");
 					eliminarEstudiante(iD); 
-					System.out.println("todavia2");
-					//eliminarGruposVacios(gruposDelEstudiante);
 				}
-					
-				System.out.println("todavia3");
 				
 				// lo que se va a hacer siempre aunque sea profe, estu o per.apoyo
 				personas.remove(i);
@@ -63,28 +58,6 @@ public final class Fct {
 			i++;
 		}
 		
-	}
-	
-	// para eliminar grupos vacios
-	public boolean eliminarGruposVacios( ArrayList<Grupo> gruposRevisar){
-		boolean val = false;
-		for(Grupo g : gruposRevisar){
-			if(g.getGrupoEstudiantes().size()==0){
-				grupos.remove(g);
-				val = true;
-			}
-			for(Periodo p : periodos){
-				for(PlanificacionDocente pD : p.getPlanificacionesDocentes()){
-					if(pD.getGrupo().getNombreGrupo().equalsIgnoreCase(g.getNombreGrupo())){
-						p.getPlanificacionesDocentes().remove(pD);
-					}
-				}
-			}
-		}
-		
-		
-		
-		return val;
 	}
 	
 	//**************************************  PROFESOR ************************************************************
