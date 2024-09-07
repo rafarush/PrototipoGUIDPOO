@@ -178,7 +178,12 @@ public class DatosAuto {
 	 * @return obj
 	 */
 	public static Object[] convertirAObjetoEstudianteNotas(Estudiante estu, Asignatura asignatura){
-		Object[] estuObj = new Object[]{estu.getID(), estu.getNombre(), estu.getAnnoAcademico()};	
+		Object[] estuObj = new Object[]{estu.getID(), estu.getNombre(), estu.getAnnoAcademico(),
+				estu.buscarNotaEspecifica(asignatura).get(0),estu.buscarNotaEspecifica(asignatura).get(1)};	
+		if(estu.buscarNotaEspecifica(asignatura).get(0).equalsIgnoreCase("0.0"))
+			estuObj[3] = "Sin nota";
+		if(estu.buscarNotaEspecifica(asignatura).get(0).equalsIgnoreCase("0.0"))
+			estuObj[4] = "Sin nota";
 		
 		return estuObj;
 	}
@@ -355,6 +360,7 @@ public class DatosAuto {
 	 * @param grupos
 	 */
 	public static void definirTablaGrupo(ArrayList<Grupo> grupos){
+		System.out.println(grupos.size());
 		Runner.modeloGrupoReporte = new DefaultTableModel();
 		Runner.modeloGrupoReporte.addColumn("Nombre");
 		Runner.modeloGrupoReporte.addColumn("Año");
