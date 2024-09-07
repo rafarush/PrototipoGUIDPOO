@@ -198,13 +198,12 @@ public class Profesor extends Trabajador{
 		ControlDocente controlDocente = null;
 		
 		while(i<notasAlumnos.size() && val){
-			if(notasAlumnos.get(i).getAsignatura().equals(asignatura) && notasAlumnos.get(i).getiDEstudiante().equalsIgnoreCase(estudiante.getID()))
+			if(notasAlumnos.get(i).getAsignatura().equals(asignatura) && notasAlumnos.get(i).getiDEstudiante().equalsIgnoreCase(estudiante.getID())){
 				controlDocente=notasAlumnos.get(i);
-				val=false;			
+				val=false;
+			}			
 			i++;
 		}
-		if(val)
-			i=0;
 		
 		return controlDocente;
 	}

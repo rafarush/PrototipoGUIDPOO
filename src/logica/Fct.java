@@ -437,13 +437,13 @@ public final class Fct {
 		
 		if(buscarDirector()==null)
 			cargos.add("Director");
-		else if(buscarSubdirectorDocente() ==null)
+		if(buscarSubdirectorDocente() ==null)
 			cargos.add("Subdirector Docente");
-		else if(buscarSubdirectorInvPos() ==null)
+		if(buscarSubdirectorInvPos() ==null)
 			cargos.add("Subdirector de Investigaciones y Posgrado");
-		else if(buscarSubdirectorExtendUni() ==null)
+		if(buscarSubdirectorExtendUni() ==null)
 			cargos.add("Subdirector de Extensión Universitaria");
-		else if(buscarJefeLaboratorios() ==null)
+		if(buscarJefeLaboratorios() ==null)
 			cargos.add("Jefe de Laboratorios");
 		
 		return cargos;
