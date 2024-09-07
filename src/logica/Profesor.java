@@ -30,6 +30,8 @@ public class Profesor extends Trabajador{
 		
 		this.cargoConsejoDireccion = null;
 		
+		this.salario = 100;
+		
 		notasAlumnos = new ArrayList<ControlDocente>();
 		
 	}
