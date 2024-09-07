@@ -2,6 +2,7 @@ package gui.dialogs;
 
 
 import gui.mainFrame.MainFrame;
+import gui.utils.Validaciones;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -23,6 +24,7 @@ import javax.swing.DefaultComboBoxModel;
 
 import java.awt.Cursor;
 
+import logica.Fct;
 import logica.PersonalApoyo;
 
 
@@ -152,12 +154,23 @@ public class InputDialogPerAux extends JDialog {
 					if(nombreTextField.getText().trim().isEmpty() || ciTextField.getText().trim().isEmpty() || direccTextField.getText().trim().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Existen campos vacíos");
 					}else{
-						try {
-							Runner.modeloPersonalAux.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(), (String)areaTrabajoComboBox.getSelectedItem(), direccTextField.getText()});
-							JOptionPane.showMessageDialog(null, "Se ha añadido al miembro del personal auxiliar con éxito");
-							dispose();
-						} catch (IllegalArgumentException exc) {
-							JOptionPane.showMessageDialog(null, exc.getMessage());
+						if (Validaciones.valCI(ciTextField.getText())){
+							if (Validaciones.todoLetra(nombreTextField.getText())){
+								
+								try {
+									Runner.modeloPersonalAux.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(), (String)areaTrabajoComboBox.getSelectedItem(), direccTextField.getText()});
+									JOptionPane.showMessageDialog(null, "Se ha añadido al miembro del personal auxiliar con éxito");
+									dispose();
+								} catch (IllegalArgumentException exc) {
+									JOptionPane.showMessageDialog(null, exc.getMessage());
+								}
+								
+							 }else{
+								JOptionPane.showMessageDialog(null, "En el campo de nombre no se permiten números");
+							}
+							
+						} else{
+							JOptionPane.showMessageDialog(null, "Carné de identidad no válido");
 						}
 					}	
 				}

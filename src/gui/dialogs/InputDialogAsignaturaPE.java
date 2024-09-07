@@ -1,12 +1,15 @@
 package gui.dialogs;
 
 
+import gui.utils.Validaciones;
+
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -147,10 +150,14 @@ public class InputDialogAsignaturaPE extends JDialog {
 					if(nombreTextField.getText().trim().isEmpty()){	
 						JOptionPane.showMessageDialog(null, "Debe ponerle un nombre a la Asignatura");
 					}else{
-						Fct.getInstance().getPlanEstudio().crearAsignatura(nombreTextField.getText(), Integer.valueOf(annoComboBox.getSelectedItem().toString()),
-								Integer.valueOf(semestreComboBox.getSelectedItem().toString()), Integer.valueOf(spinnerHorasLectivas.getValue().toString()));
-						JOptionPane.showMessageDialog(null, "Se ha añadido una Asignatura al Plan de Estudio con éxito");
-						dispose();
+						if(Validaciones.todoLetra(nombreTextField.getText().trim())){
+							Fct.getInstance().getPlanEstudio().crearAsignatura(nombreTextField.getText(), Integer.valueOf(annoComboBox.getSelectedItem().toString()),
+									Integer.valueOf(semestreComboBox.getSelectedItem().toString()), Integer.valueOf(spinnerHorasLectivas.getValue().toString()));
+							JOptionPane.showMessageDialog(null, "Se ha añadido una Asignatura al Plan de Estudio con éxito");
+							dispose();
+						}else{
+							JOptionPane.showMessageDialog(null, "El nombre de la asignatura solo puede contener caracteres alfabéticos");
+						}
 					}	
 				}
 			});
