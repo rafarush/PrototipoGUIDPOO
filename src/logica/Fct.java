@@ -47,8 +47,11 @@ public final class Fct {
 		int i=0;
 		while(i<personas.size() && val){
 			if(personas.get(i).getID().equalsIgnoreCase(iD)){
-				if(buscarPersona(iD) instanceof Estudiante)
-					eliminarEstudiante(iD);
+				if(buscarPersona(iD) instanceof Estudiante){
+					ArrayList<Grupo> gruposDelEstudiante = eliminarEstudiante(iD);
+					eliminarGruposVacios(gruposDelEstudiante);
+				}
+					
 				
 				
 				// lo que se va a hacer siempre aunque sea profe, estu o per.apoyo
@@ -60,6 +63,19 @@ public final class Fct {
 		
 	}
 	
+	// para eliminar grupos vacios
+	public boolean eliminarGruposVacios( ArrayList<Grupo> gruposRevisar){
+		boolean val = false;
+		for(Grupo g : gruposRevisar){
+			if(g.getGrupoEstudiantes().size()==0){
+				grupos.remove(g);
+				val = true;
+			}
+		}
+		
+		
+		return val;
+	}
 	
 	//**************************************  PROFESOR ************************************************************
 	
@@ -174,7 +190,9 @@ public final class Fct {
 	}
 	
 	// ELIMINAR ESTUDIANTE
-	public void eliminarEstudiante(String iD) {
+	public ArrayList<Grupo> eliminarEstudiante(String iD) {
+		
+		ArrayList<Grupo> gruposDelEstudiante = new ArrayList<>();
 		
 		for(int i=0;i<periodos.size();i++){
 			if(buscarUnEstudiante(iD).getAnnoAcademico()==1){
@@ -195,6 +213,15 @@ public final class Fct {
 				}
 			}
 		}
+		
+		
+		for(Grupo g : grupos){
+			if(g.getGrupoEstudiantes().contains(buscarUnEstudiante(iD))){
+				g.eliminarEstudiante(buscarUnEstudiante(iD));
+				gruposDelEstudiante.add(g);
+			}
+		}
+		return gruposDelEstudiante;
 	}
 	
 	
