@@ -155,10 +155,11 @@ public class InputDialogPerAux extends JDialog {
 						JOptionPane.showMessageDialog(null, "Existen campos vacíos");
 					}else{
 						if (Validaciones.valCI(ciTextField.getText())){
-							if (Validaciones.todoLetra(nombreTextField.getText())){
+							if (Validaciones.todoLetra(Validaciones.getCadenaSinEspacios(nombreTextField.getText()))){
 								
 								try {
-									Runner.modeloPersonalAux.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(), (String)areaTrabajoComboBox.getSelectedItem(), direccTextField.getText()});
+									Runner.modeloPersonalAux.addRow(new Object[]{ciTextField.getText().trim(), nombreTextField.getText().trim(),
+											(String)areaTrabajoComboBox.getSelectedItem(), direccTextField.getText().trim()});
 									JOptionPane.showMessageDialog(null, "Se ha añadido al miembro del personal auxiliar con éxito");
 									dispose();
 								} catch (IllegalArgumentException exc) {
@@ -315,21 +316,17 @@ public class InputDialogPerAux extends JDialog {
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(nombreTextField.getText().isEmpty() || ciTextField.getText().isEmpty() || direccTextField.getText().isEmpty()){
+					if(nombreTextField.getText().trim().isEmpty() || direccTextField.getText().trim().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Existen campos vacíos");
 					}else{
-						persoAp.modificarPersonalApoyo(ciTextField.getText(), nombreTextField.getText(), areaTrabajoComboBox.getSelectedItem().toString(),
-								direccTextField.getText());
-						/*
-						Runner.modeloPersonalAux.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(), (String)areaTrabajoComboBox.getSelectedItem(), direccTextField.getText()});
-						/**
-						 * Elimina la Asignatura original (PROVISIONAL)
-						 *//*
-						((DefaultTableModel) MainFrame.getTable().getModel()).removeRow(MainFrame.getTable().getSelectedRow());
-						((DefaultTableModel) MainFrame.getTable().getModel()).fireTableDataChanged();*/
-						
-						JOptionPane.showMessageDialog(null, "Se ha modificado al miembro del personal auxiliar con éxito");
-						dispose();
+						if (Validaciones.todoLetra(Validaciones.getCadenaSinEspacios(nombreTextField.getText()))){
+							persoAp.modificarPersonalApoyo(ciTextField.getText(), nombreTextField.getText().trim(), areaTrabajoComboBox.getSelectedItem().toString(),
+									direccTextField.getText().trim());
+							JOptionPane.showMessageDialog(null, "Se ha modificado al miembro del personal auxiliar con éxito");
+							dispose();
+						}else{
+							JOptionPane.showMessageDialog(null, "Solo se permiten letras en el nombre");
+						}
 					}	
 				}
 			});

@@ -60,9 +60,11 @@ public class Runner {
 		Fct.getInstance().getPeriodos().get(1).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor("95868426587"),Fct.getInstance().getPlanEstudio().buscarAsignatura("Matemática III") , Fct.getInstance().buscarGrupo("Grupo 2.1"));
 		Fct.getInstance().getPeriodos().get(7).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor("95868426587"),Fct.getInstance().getPlanEstudio().buscarAsignatura("IA") , Fct.getInstance().buscarGrupo("Grupo 2.2"));
 	    
-		String cI = "00022977685";
-		
-		System.out.println(Validaciones.valCI(cI));
+		ArrayList<String> cargos = Fct.getInstance().buscarCargosCDFaltantes();
+		System.out.println(cargos.size());
+		for (String c : cargos) {
+			System.out.println(c);
+		}
 		
 		try {
 			JDialogLoginUser login = new JDialogLoginUser();
