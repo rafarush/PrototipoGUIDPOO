@@ -328,7 +328,7 @@ public class InputJDialogPlanifDocente extends JDialog {
 				});
 				break;
 			case PLAN_ESTUDIO:
-				DatosAuto.definirTablaPlanDeEstudio(Fct.getInstance().getPlanEstudio().getAsignaturas());
+				DatosAuto.definirTablaPlanDeEstudio(Fct.getInstance().getPlanEstudio().busarAsignaturasPorPeriodo(Integer.valueOf(annoComboBox.getSelectedItem().toString()), Integer.valueOf(semestreComboBox.getSelectedItem().toString())));
 				tabla = new JTableNoEdit(Runner.modeloPlanDeEstudio);
 				tabla.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
