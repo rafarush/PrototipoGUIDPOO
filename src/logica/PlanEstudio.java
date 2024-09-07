@@ -54,6 +54,17 @@ public class PlanEstudio {
 		return asignaturasP;
 	}
 	
+	//para busacr las asignaturas por año
+	public ArrayList<Asignatura> buscarAsignaturaPorAnno(int anno){
+		ArrayList<Asignatura> asignaturasP = new ArrayList<>();
+		for(Asignatura a : asignaturas){
+			if(a.getAnnoAcademico()==anno)
+				asignaturasP.add(a);
+		}
+		
+		return asignaturasP;
+	}
+	
 	// para eliminar la asignatura
 	public boolean eliminarAsignatura(Asignatura asignatura){
 		ArrayList<Asignatura> asignaturaArr = new ArrayList<>();
