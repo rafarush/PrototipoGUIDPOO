@@ -188,12 +188,12 @@ public class InputDialogProfe extends JDialog {
 						JOptionPane.showMessageDialog(null, "Existen campos vacíos");
 					}else{
 						if (Validaciones.valCI(ciTextField.getText())){
-							if (Validaciones.todoLetra(nombreTextField.getText())){
+							if (Validaciones.todoLetra(Validaciones.getCadenaSinEspacios(nombreTextField.getText()))){
 								
 								try {
-									Fct.getInstance().crearPersona(ciTextField.getText(), nombreTextField.getText(), catCienComboBox.getSelectedItem().toString(), 
-											catDocComboBox.getSelectedItem().toString(),centroLabTextField.getText(), organismoTextField.getText(),
-											direccTextField.getText());
+									Fct.getInstance().crearPersona(ciTextField.getText().trim(), nombreTextField.getText().trim(), catCienComboBox.getSelectedItem().toString(), 
+											catDocComboBox.getSelectedItem().toString(),centroLabTextField.getText(), organismoTextField.getText().trim(),
+											direccTextField.getText().trim());
 									JOptionPane.showMessageDialog(null, "Se ha añadido al profesor con éxito");
 									dispose();
 								} catch (IllegalArgumentException exc) {
@@ -384,23 +384,18 @@ public class InputDialogProfe extends JDialog {
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(nombreTextField.getText().isEmpty() || ciTextField.getText().isEmpty() || direccTextField.getText().isEmpty()){
+					if(nombreTextField.getText().trim().isEmpty() || ciTextField.getText().trim().isEmpty() || direccTextField.getText().trim().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Existen campos vacíos");
 					}else{
-						profe.modificarProfesor(ciTextField.getText(), nombreTextField.getText(), catDocComboBox.getSelectedItem().toString(), 
-								catCienComboBox.getSelectedItem().toString(),centroLabTextField.getText(), organismoTextField.getText(), direccTextField.getText());
-						/*
-						Runner.modeloProfesor.addRow(new Object[]{ciTextField.getText(), nombreTextField.getText(), 
-								(String)catCienComboBox.getSelectedItem(),(String)catDocComboBox.getSelectedItem(),
-								centroLabTextField.getText(), organismoTextField.getText(), direccTextField.getText()});*/
-						/**
-						 * Elimina al profe original (PROVISIONAL)
-						 *//*
-						((DefaultTableModel) MainFrame.getTable().getModel()).removeRow(MainFrame.getTable().getSelectedRow());
-						((DefaultTableModel) MainFrame.getTable().getModel()).fireTableDataChanged();*/
-
-						JOptionPane.showMessageDialog(null, "Se ha modificado al profesor con éxito");
-						dispose();
+						if (Validaciones.todoLetra(Validaciones.getCadenaSinEspacios(nombreTextField.getText()))){
+							profe.modificarProfesor(ciTextField.getText(), nombreTextField.getText().trim(), catDocComboBox.getSelectedItem().toString(), 
+									catCienComboBox.getSelectedItem().toString(),centroLabTextField.getText().trim(), organismoTextField.getText().trim(), 
+									direccTextField.getText().trim());
+							JOptionPane.showMessageDialog(null, "Se ha modificado al profesor con éxito");
+							dispose();
+						}else{
+							JOptionPane.showMessageDialog(null, "Solo se permiten letras en el nombre");
+						}
 					}
 				}
 			});

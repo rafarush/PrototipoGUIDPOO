@@ -150,8 +150,8 @@ public class InputDialogAsignaturaPE extends JDialog {
 					if(nombreTextField.getText().trim().isEmpty()){	
 						JOptionPane.showMessageDialog(null, "Debe ponerle un nombre a la Asignatura");
 					}else{
-						if(Validaciones.todoLetra(nombreTextField.getText().trim())){
-							Fct.getInstance().getPlanEstudio().crearAsignatura(nombreTextField.getText(), Integer.valueOf(annoComboBox.getSelectedItem().toString()),
+						if(Validaciones.todoLetra(Validaciones.getCadenaSinEspacios(nombreTextField.getText()))){
+							Fct.getInstance().getPlanEstudio().crearAsignatura(nombreTextField.getText().trim(), Integer.valueOf(annoComboBox.getSelectedItem().toString()),
 									Integer.valueOf(semestreComboBox.getSelectedItem().toString()), Integer.valueOf(spinnerHorasLectivas.getValue().toString()));
 							JOptionPane.showMessageDialog(null, "Se ha añadido una Asignatura al Plan de Estudio con éxito");
 							dispose();
@@ -303,20 +303,18 @@ public class InputDialogAsignaturaPE extends JDialog {
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(nombreTextField.getText().isEmpty()){
+					if(nombreTextField.getText().trim().isEmpty()){
 						JOptionPane.showMessageDialog(null, "Debe ponerle un nombre a la Asignatura");
 					}else{
-						/*Runner.modeloPlanDeEstudio.addRow(new Object[]{nombreTextField.getText(), annoComboBox.getSelectedItem().toString(), semestreComboBox.getSelectedItem().toString(), spinnerHorasLectivas.getValue().toString()});
-						/**
-						 * Elimina la Asignatura original (PROVISIONAL)
-						 *//*
-						((DefaultTableModel) MainFrame.getTable().getModel()).removeRow(MainFrame.getTable().getSelectedRow());
-						((DefaultTableModel) MainFrame.getTable().getModel()).fireTableDataChanged();*/
-						Fct.getInstance().modificarAsignatura(nombreTextField.getText(), Integer.valueOf(annoComboBox.getSelectedItem().toString()), 
-								Integer.valueOf(semestreComboBox.getSelectedItem().toString()), 
-								Integer.valueOf(spinnerHorasLectivas.getValue().toString()));
-						JOptionPane.showMessageDialog(null, "Se ha modificado la Asignatura del Plan de Estudio con éxito");
-						dispose();
+						if (Validaciones.todoLetra(Validaciones.getCadenaSinEspacios(nombreTextField.getText()))){
+							Fct.getInstance().modificarAsignatura(nombreTextField.getText(), Integer.valueOf(annoComboBox.getSelectedItem().toString()), 
+									Integer.valueOf(semestreComboBox.getSelectedItem().toString()), 
+									Integer.valueOf(spinnerHorasLectivas.getValue().toString()));
+							JOptionPane.showMessageDialog(null, "Se ha modificado la Asignatura del Plan de Estudio con éxito");
+							dispose();
+						} else{
+							JOptionPane.showMessageDialog(null, "Solo se permiten letras en el nombre de la Asignatura");
+						}
 					}	
 				}
 			});
