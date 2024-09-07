@@ -129,6 +129,7 @@ public class InputJDialogControlDocente extends JDialog {
 								InputDialogNota inputNota = new InputDialogNota();
 								inputNota.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								inputNota.setVisible(true);
+								tableDraw();
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
@@ -242,6 +243,8 @@ public class InputJDialogControlDocente extends JDialog {
 				DatosAuto.definirTablaEstudiantesNotas(Fct.getInstance().buscarGrupo(grupoSelec).getGrupoEstudiantes(), Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec));
 				tablaNotas = new JTableNoEdit(Runner.modeloEstudianteCorto);
 				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
+				tablaNotas.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);
+				tablaNotas.getColumnModel().getColumn(4).setCellRenderer(centrarCelda);
 				tablaNotas.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 

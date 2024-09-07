@@ -58,6 +58,15 @@ public class Runner {
 		Fct.getInstance().getPeriodos().get(7).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor("95868426587"),Fct.getInstance().getPlanEstudio().buscarAsignatura("IA") , Fct.getInstance().buscarGrupo("Grupo 2.2"));
 	    
 	    
+		ArrayList<Grupo> g = Fct.getInstance().buscarGruposPorAnno(1);
+		System.out.println(g);
+	    for (Grupo grupo : g) {
+	    	System.out.println(grupo.getNombreGrupo());
+		}
+	    
+	    
+		
+		
 		try {
 			JDialogLoginUser login = new JDialogLoginUser();
 			login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

@@ -147,10 +147,6 @@ public class InputDialogNota extends JDialog {
 					Profesor profe = (Profesor) Fct.getInstance().buscarPersona(InputJDialogControlDocente.profeSelec);
 					Asignatura asignatura = Fct.getInstance().getPlanEstudio().buscarAsignatura(InputJDialogControlDocente.asignaturaSelec);
 					Estudiante estudiante = Fct.getInstance().buscarUnEstudiante(InputJDialogControlDocente.estuSelec);
-					//Grupo grupo = Fct.getInstance().buscarGrupo(ControlDocenteFrame.grupoSelec);
-					/*
-					 * MANDAR NOTA A LOGICA
-					 */
 					profe.darNota(estudiante, asignatura, Integer.valueOf(nota1), Integer.valueOf(nota2));
 					InputJDialogControlDocente.mensajeConfirm(nota1, nota2);
 					dispose();
