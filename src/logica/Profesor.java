@@ -30,6 +30,8 @@ public class Profesor extends Trabajador{
 		
 		this.cargoConsejoDireccion = null;
 		
+		this.salario = 100;
+		
 		notasAlumnos = new ArrayList<ControlDocente>();
 		
 	}
@@ -149,19 +151,19 @@ public class Profesor extends Trabajador{
 
 
 	public float calcularSalario(){
-		float salarioTotal = 0;
+		float salarioTotal = salario;
 		
 		if(categoriaDocente.equalsIgnoreCase("Asistente"))
-			salarioTotal=salario+200;
+			salarioTotal+=200;
 		else if(categoriaDocente.equalsIgnoreCase("Auxiliar"))
-			salarioTotal=salario+300;
+			salarioTotal+=300;
 		else if(categoriaDocente.equalsIgnoreCase("Titular"))
-			salarioTotal=salario+540;
+			salarioTotal+=540;
 		
-		if(categoriaCientifica.equalsIgnoreCase("Master"))
-			salarioTotal=salario+380;
+		if(categoriaCientifica.equalsIgnoreCase("Máster"))
+			salarioTotal+=380;
 		else if(categoriaCientifica.equalsIgnoreCase("Doctor"))
-			salarioTotal=salario+550;
+			salarioTotal+=+550;
 		
 		return salarioTotal;
 	}
