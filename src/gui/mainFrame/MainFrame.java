@@ -136,7 +136,7 @@ public class MainFrame extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(JOptionPane.showConfirmDialog(null, "¿Seguro que desea cerrar la ventana?", "Confirmación", 
+				if(JOptionPane.showConfirmDialog(null, "Â¿Seguro que desea cerrar la ventana?", "ConfirmaciÃ³n", 
 						JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION){
 					dispose();
 				}
@@ -223,7 +223,7 @@ public class MainFrame extends JFrame {
 							}
 							tableDraw();
 						}else{
-							JOptionPane.showMessageDialog(null, "Ya están ocupados todos los cargos en el Consejo de Dirección");
+							JOptionPane.showMessageDialog(null, "Ya estÃ¡n ocupados todos los cargos en el Consejo de DirecciÃ³n");
 						}
 						break;
 					default:
@@ -278,7 +278,7 @@ public class MainFrame extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				delBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/delBottonSelected1.png")));
-				delBotton.setToolTipText("Eliminar algún elemento");
+				delBotton.setToolTipText("Eliminar algÃºn elemento");
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -289,7 +289,7 @@ public class MainFrame extends JFrame {
 				if(table.getSelectedRow() == -1){
 					JOptionPane.showMessageDialog(null, "Debe seleccionar la fila que desea eliminar");
 				}else{
-					if(JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esa fila?\n No se podrá recuperar", "Confirmación", 
+					if(JOptionPane.showConfirmDialog(null, "Â¿Seguro que desea eliminar esa fila?\n No se podrÃ¡ recuperar", "ConfirmaciÃ³n", 
 					JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION){
 						
 						switch (btnSeleccionado) {
@@ -308,7 +308,7 @@ public class MainFrame extends JFrame {
 								JOptionPane.showMessageDialog(null, "Se ha eliminado a el profesor correctamente");
 								tableDraw();
 							}else{
-								JOptionPane.showMessageDialog(null, "No se puede eliminar a el profesor, ya que forma parte de la Planificación Docente");
+								JOptionPane.showMessageDialog(null, "No se puede eliminar a el profesor, ya que forma parte de la PlanificaciÃ³n Docente");
 							}
 							break;
 							
@@ -325,7 +325,7 @@ public class MainFrame extends JFrame {
 								JOptionPane.showMessageDialog(null, "Se ha eliminado el grupo correctamente");
 								tableDraw();
 							}else{
-								JOptionPane.showMessageDialog(null, "No se puede eliminar el grupo, ya que forma parte de la Planificación Docente");
+								JOptionPane.showMessageDialog(null, "No se puede eliminar el grupo, ya que forma parte de la PlanificaciÃ³n Docente");
 							}
 							break;
 							
@@ -338,7 +338,7 @@ public class MainFrame extends JFrame {
 								JOptionPane.showMessageDialog(null, "Se ha eliminado la asignatura correctamente");
 								tableDraw();
 							}else{
-								JOptionPane.showMessageDialog(null, "No se puede eliminar la asignatura, ya que forma parte de la Planificación Docente");
+								JOptionPane.showMessageDialog(null, "No se puede eliminar la asignatura, ya que forma parte de la PlanificaciÃ³n Docente");
 							}
 							break;
 						case CONSEJO_DIRECC:
@@ -346,7 +346,7 @@ public class MainFrame extends JFrame {
 							String profeID = table.getValueAt(table.getSelectedRow(), 0).toString();
 							Profesor profesor = (Profesor) Fct.getInstance().buscarPersona(profeID);
 							Fct.getInstance().eliminarDelCD(profesor);
-							JOptionPane.showMessageDialog(null, "Ha sido eliminado el profesor del Consejo de Dirección");
+							JOptionPane.showMessageDialog(null, "Ha sido eliminado el profesor del Consejo de DirecciÃ³n");
 							tableDraw();
 							break;
 						default:
@@ -366,7 +366,7 @@ public class MainFrame extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				modifyBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/modifyBottonSelected.png")));
-				modifyBotton.setToolTipText("Modificar elementos de algún campo");
+				modifyBotton.setToolTipText("Modificar elementos de algÃºn campo");
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -467,40 +467,48 @@ public class MainFrame extends JFrame {
 			}*/
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(JOptionPane.showConfirmDialog(null, "¿Seguro que desea pasar a la siguiente fase?\n No se podrá recuperar", "Confirmación", 
+				if(JOptionPane.showConfirmDialog(null, "Â¿Seguro que desea pasar a la siguiente fase?\n No se podrÃ¡ recuperar", "ConfirmaciÃ³n", 
 						JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION){
 					
 					switch (periodo) {
 					case 0:
-						if (Fct.getInstance().empezarPeriodo()){
-							JOptionPane.showMessageDialog(null, "Inicio de semestre 1");
-							periodo = 1;
-							actualizarLblPeriodoActual();
-							//actualizarIcoBotonPeriodoActual();
-						}else{
-							JOptionPane.showMessageDialog(null, "No se puede pasar");
+						try {
+							if (Fct.getInstance().empezarPeriodo()){
+								JOptionPane.showMessageDialog(null, "Inicio de semestre 1");
+								periodo = 1;
+								actualizarLblPeriodoActual();
+								//actualizarIcoBotonPeriodoActual();
+							}
+						} catch (ProcesoNoPermitidoException exc) {
+							JOptionPane.showMessageDialog(null, "No se pudo empezar:\n"+ exc.getMessage());
 						}
+						
 						break;
 					case 1:
-						if (Fct.getInstance().pasarPeriodo()){
-							JOptionPane.showMessageDialog(null, "Inicio de semestre 2");
-							periodo = 2;
-							actualizarLblPeriodoActual();
-							//actualizarIcoBotonPeriodoActual();
-						}else{
-							JOptionPane.showMessageDialog(null, "No se puede pasar");
+						try {
+							if (Fct.getInstance().pasarPeriodo()){
+								JOptionPane.showMessageDialog(null, "Inicio de semestre 2");
+								periodo = 2;
+								actualizarLblPeriodoActual();
+								//actualizarIcoBotonPeriodoActual();
+							}
+						} catch (ProcesoNoPermitidoException exc) {
+							JOptionPane.showMessageDialog(null, "No se pudo pasar de periodo:\n"+ exc.getMessage());
 						}
+						
 						break;
 					case 2:
-						if (Fct.getInstance().pasarAnno()){
-
-							JOptionPane.showMessageDialog(null, "Se pudo pasar de año (Inicio de preparación de semestre)");
-							periodo = 0;
-							actualizarLblPeriodoActual();
-							//actualizarIcoBotonPeriodoActual();
-						}else{
-							JOptionPane.showMessageDialog(null, "No se pudo pasar de año");
+						try {
+							if (Fct.getInstance().pasarAnno()){
+								JOptionPane.showMessageDialog(null, "Se pudo pasar de aÃ±o (Inicio de preparaciÃ³n de semestre)");
+								periodo = 0;
+								actualizarLblPeriodoActual();
+								//actualizarIcoBotonPeriodoActual();
+							}
+						} catch (ProcesoNoPermitidoException exc) {
+							JOptionPane.showMessageDialog(null, "No se pudo pasar de aÃ±o:\n"+ exc.getMessage());
 						}
+						
 						break;
 					default:
 						break;
@@ -718,7 +726,7 @@ public class MainFrame extends JFrame {
 						exc.printStackTrace();
 					}
 				}else{
-					JOptionPane.showMessageDialog(null, "Faltan datos para poder crear Planificaciones Docentes, por favor, añada");
+					JOptionPane.showMessageDialog(null, "Faltan datos para poder crear Planificaciones Docentes, por favor, aÃ±ada");
 				}
 			}
 		});
@@ -745,18 +753,18 @@ public class MainFrame extends JFrame {
         		}
             }
         });
-		cambiarContraButtonItem.setText("Cambiar contraseña");
+		cambiarContraButtonItem.setText("Cambiar contraseÃ±a");
 		cambiarContraButtonItem.setIcon(null);
 		cambiarContraButtonItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             	String contra = "";
-            	contra = JOptionPane.showInputDialog("Escriba la nueva contraseña:");
+            	contra = JOptionPane.showInputDialog("Escriba la nueva contraseÃ±a:");
             	if(contra.isEmpty()){
-            		JOptionPane.showMessageDialog(null, "No se escribió nada");
+            		JOptionPane.showMessageDialog(null, "No se escribiÃ³ nada");
             	}else{
             		Runner.usuario.setPassword(contra);
-            		JOptionPane.showMessageDialog(null, "Se ha cambiado la contraseña satisfactoriamente");
+            		JOptionPane.showMessageDialog(null, "Se ha cambiado la contraseÃ±a satisfactoriamente");
             	} 	
             }
         });
@@ -1088,9 +1096,9 @@ public class MainFrame extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if(menuBarPanel.getWidth()==218){
-					menuBarBotton.setToolTipText("Encoger menú");
+					menuBarBotton.setToolTipText("Encoger menÃº");
 				}else{
-					menuBarBotton.setToolTipText("Desplegar menú");
+					menuBarBotton.setToolTipText("Desplegar menÃº");
 				}
 			}
 		});
@@ -1224,7 +1232,7 @@ public class MainFrame extends JFrame {
 				table.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 
-							JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
+							JOptionPane.showMessageDialog(null, "Para editar un campo use el botÃ³n modificar");
 					}
 				});
 				break;
@@ -1237,7 +1245,7 @@ public class MainFrame extends JFrame {
 				table.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 
-							JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
+							JOptionPane.showMessageDialog(null, "Para editar un campo use el botÃ³n modificar");
 					}
 				});
 				break;
@@ -1249,7 +1257,7 @@ public class MainFrame extends JFrame {
 				table.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 
-							JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
+							JOptionPane.showMessageDialog(null, "Para editar un campo use el botÃ³n modificar");
 					}
 				});
 				break;	
@@ -1263,7 +1271,7 @@ public class MainFrame extends JFrame {
 				table.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 
-							JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
+							JOptionPane.showMessageDialog(null, "Para editar un campo use el botÃ³n modificar");
 					}
 				});
 				break;
@@ -1277,7 +1285,7 @@ public class MainFrame extends JFrame {
 				table.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) {
-							JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
+							JOptionPane.showMessageDialog(null, "Para editar un campo use el botÃ³n modificar");
 							
 						}	
 					}
@@ -1291,7 +1299,7 @@ public class MainFrame extends JFrame {
 				table.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) {
-							JOptionPane.showMessageDialog(null, "Para editar un campo use el botón modificar");
+							JOptionPane.showMessageDialog(null, "Para editar un campo use el botÃ³n modificar");
 							
 						}	
 					}
