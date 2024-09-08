@@ -2,6 +2,8 @@ package logica;
 
 import java.util.ArrayList;
 
+import logica.utils.ProcesoNoPermitido;
+
 public final class Fct {
 	//atributos
 	
@@ -641,7 +643,7 @@ public final class Fct {
 
 
 	//para empezar un nuevo semestre
-	public boolean empezarPeriodo(){
+	public boolean empezarPeriodo() throws ProcesoNoPermitido{
 		boolean val = false;
 		
 		if(buscarEstudiantesSinGrupo().size()==0){
@@ -650,16 +652,16 @@ public final class Fct {
 					if(buscarEstudiantes().size()>0){
 						val = true;
 					}else{
-						throw new IllegalArgumentException("No existen estudiantes para empezar.");
+						throw new ProcesoNoPermitido("No existen estudiantes para empezar.");
 					}
 				}else{
-					throw new IllegalArgumentException("En algún período no se han creado asignaturas.");
+					throw new ProcesoNoPermitido("En algún período no se han creado asignaturas.");
 				}
 			}else{
-				throw new IllegalArgumentException("Hay grupos que le faltan crear sus planificaciones docentes correspondientes.");
+				throw new ProcesoNoPermitido("Hay grupos que le faltan crear sus planificaciones docentes correspondientes.");
 			}
 		}else{
-			throw new IllegalArgumentException("Hay "+buscarEstudiantesSinGrupo().size()+" sin grupo.");
+			throw new ProcesoNoPermitido("Hay "+buscarEstudiantesSinGrupo().size()+" sin grupo.");
 		}
 		
 		return val;
