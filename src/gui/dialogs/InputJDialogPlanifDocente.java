@@ -316,6 +316,10 @@ public class InputJDialogPlanifDocente extends JDialog {
 				break;
 			case GRUPO:
 				Asignatura asignatura = Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec);
+<<<<<<< HEAD
+=======
+				//DatosAuto.definirTablaGrupo(Fct.getInstance().buscarGruposPorAnno(asignatura.getAnnoAcademico()));
+>>>>>>> 5e69e3203c33d30461ed6ed8ee35907d8ed01a24
 				DatosAuto.definirTablaGrupo(Fct.getInstance().buscarGruposPorAnnoNoVacio(asignatura.getAnnoAcademico()));
 				tabla = new JTableNoEdit(Runner.modeloGrupoReporte);/*
 				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
