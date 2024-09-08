@@ -701,11 +701,8 @@ public class MainFrame extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-<<<<<<< HEAD
+				
 				if (Fct.getInstance().getPlanEstudio().getAsignaturas().size()>0 || Fct.getInstance().buscarGruposNoVacio().size()>0 || Fct.getInstance().buscarEstudiantes().size()>0){
-=======
-				if (Fct.getInstance().getPlanEstudio().getAsignaturas().size()>0 || Fct.getInstance().getGrupos().size()>0 || Fct.getInstance().buscarEstudiantes().size()>0){
->>>>>>> 5e69e3203c33d30461ed6ed8ee35907d8ed01a24
 					try {
 						InputJDialogPlanifDocente dialog = new InputJDialogPlanifDocente();
 						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
