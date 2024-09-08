@@ -9,7 +9,9 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import logica.Clases.*;
+
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -36,7 +38,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import logica.*;
-import logica.Enums.BotonSelec;
+import gui.utils.*;
+import gui.utils.Enums.BotonSelec;
 import logica.Clases.Fct;
 import logica.utils.ProcesoNoPermitidoException;
 

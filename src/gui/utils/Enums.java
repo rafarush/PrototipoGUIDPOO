@@ -1,4 +1,4 @@
-package logica;
+package gui.utils;
 
 public class Enums {
 	

@@ -34,9 +34,9 @@ public class Runner {
 	public static ArrayList<PlanificacionDocente> planesDocentes;
 	
 	
-		/**
-		* Launch the application.
-		*/
+	/**
+	* Launch the application.
+	*/
 	public static void main(String[] args) {
 		
 		

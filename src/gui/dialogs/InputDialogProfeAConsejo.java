@@ -23,9 +23,7 @@ import javax.swing.DefaultComboBoxModel;
 
 import java.awt.Cursor;
 
-import logica.DatosAuto;
-import logica.JTableNoEdit;
-import logica.Enums.BotonSelec;
+import gui.utils.*;
 import logica.Clases.*;
 
 import javax.swing.JScrollPane;
