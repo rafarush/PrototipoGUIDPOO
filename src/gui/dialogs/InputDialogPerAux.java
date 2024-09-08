@@ -159,9 +159,7 @@ public class InputDialogPerAux extends JDialog {
 								
 								try {
 									Fct.getInstance().crearPersona(ciTextField.getText().trim(), nombreTextField.getText().trim(),
-											(String)areaTrabajoComboBox.getSelectedItem(), direccTextField.getText().trim());/*
-									Runner.modeloPersonalAux.addRow(new Object[]{ciTextField.getText().trim(), nombreTextField.getText().trim(),
-											(String)areaTrabajoComboBox.getSelectedItem(), direccTextField.getText().trim()});*/
+											(String)areaTrabajoComboBox.getSelectedItem(), direccTextField.getText().trim());
 									JOptionPane.showMessageDialog(null, "Se ha añadido al miembro del personal auxiliar con éxito");
 									dispose();
 								} catch (IllegalArgumentException exc) {
