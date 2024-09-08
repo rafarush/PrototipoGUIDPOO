@@ -242,7 +242,6 @@ public class MainFrame extends JFrame {
 		
 		filterTextField = new JTextField();
 		filterTextField.setInputVerifier(new InputVerificadorPersonalizado(5));
-		System.out.println(filterTextField.getInputVerifier().getClass().getSimpleName());
 		filterTextField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -475,7 +474,7 @@ public class MainFrame extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				switch (periodo) {
 				case 0:
-					if (Fct.getInstance().pasarPeriodo()){
+					if (Fct.getInstance().empezarPeriodo()){
 						JOptionPane.showMessageDialog(null, "Inicio de semestre 1");
 						periodo = 1;
 					}else{
@@ -496,7 +495,7 @@ public class MainFrame extends JFrame {
 						JOptionPane.showMessageDialog(null, "Se pudo pasar de año (Inicio de preparación de semestre)");
 						periodo = 0;
 					}else{
-						JOptionPane.showMessageDialog(null, "Se pudo pasar de año");
+						JOptionPane.showMessageDialog(null, "No se pudo pasar de año");
 					}
 					break;
 				default:
