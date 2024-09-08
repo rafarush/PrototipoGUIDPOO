@@ -190,6 +190,7 @@ public class MainFrame extends JFrame {
 						} catch (Exception exc) {
 							exc.printStackTrace();
 						}
+						tableDraw();
 						break;	
 					case PLAN_ESTUDIO:
 						try {
