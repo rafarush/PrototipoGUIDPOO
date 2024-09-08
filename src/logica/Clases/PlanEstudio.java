@@ -1,4 +1,4 @@
-package logica;
+package logica.Clases;
 
 import java.util.ArrayList;
 

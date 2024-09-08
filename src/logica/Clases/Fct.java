@@ -1,6 +1,8 @@
-package logica;
+package logica.Clases;
 
 import java.util.ArrayList;
+
+import logica.utils.ProcesoNoPermitidoException;
 
 public final class Fct {
 	//atributos
@@ -641,11 +643,25 @@ public final class Fct {
 
 
 	//para empezar un nuevo semestre
-	public boolean empezarPeriodo(){
+	public boolean empezarPeriodo() throws ProcesoNoPermitidoException{
 		boolean val = false;
-		if(buscarEstudiantesSinGrupo().size()==0 && verificarGruposEnSusPD() && planEstudio.verificarAsignaturasMinimas() && buscarEstudiantes().size()>0){                    
-
-			val = true;
+		
+		if(buscarEstudiantesSinGrupo().size()==0){
+			if(verificarGruposEnSusPD()){
+				if(planEstudio.verificarAsignaturasMinimas()){
+					if(buscarEstudiantes().size()>0){
+						val = true;
+					}else{
+						throw new ProcesoNoPermitidoException("No existen estudiantes para empezar.");
+					}
+				}else{
+					throw new ProcesoNoPermitidoException("En algún período no se han creado asignaturas.");
+				}
+			}else{
+				throw new ProcesoNoPermitidoException("Hay grupos que le faltan crear sus planificaciones docentes correspondientes.");
+			}
+		}else{
+			throw new ProcesoNoPermitidoException("Hay "+buscarEstudiantesSinGrupo().size()+" sin grupo.");
 		}
 		
 		return val;
@@ -657,19 +673,19 @@ public final class Fct {
 		 boolean var = false;
 		 
 		 for(int i = 0;i<grupos.size() && val; i++){
-				for(Asignatura a : planEstudio.buscarAsignaturaPorAnno(grupos.get(i).getAnnoAcademico())){
 					for(int e=0;e<periodos.size() && val;e++){
-						if(i==grupos.get(i).getAnnoAcademico()-1 || i==grupos.get(i).getAnnoAcademico()+5){ 
+						if(e==grupos.get(i).getAnnoAcademico()-1 || e==grupos.get(i).getAnnoAcademico()+5){ 
 							var = false;
-							for(PlanificacionDocente pD : periodos.get(i).getPlanificacionesDocentes()){
-								if(pD.getAsignatura().equals(a) && pD.getGrupo().equals(grupos.get(i)))
+							for(PlanificacionDocente pD : periodos.get(e).getPlanificacionesDocentes()){
+								if((planEstudio.buscarAsignaturasPorPeriodo(grupos.get(i).getAnnoAcademico(), 1).contains(pD.getAsignatura()) || planEstudio.buscarAsignaturasPorPeriodo(grupos.get(i).getAnnoAcademico(), 2).contains(pD.getAsignatura())) && pD.getGrupo().equals(grupos.get(i))){
 									var = true;
+								}
 							}
 							if(!var)
 								val = false;
 						}
 					}
-				}
+				
 			}
 		 
 		 
@@ -915,6 +931,11 @@ public final class Fct {
 	
 	
 	//PARA ELIMINAR UN GRUPO
+	/***
+	 * 
+	 * @param grupo
+	 * @return un booleano si se elimino o no
+	 */
 	public boolean eliminarGrupo(Grupo grupo){
 		boolean eliminada = false;
 		
@@ -1072,7 +1093,7 @@ public final class Fct {
 		crearPersona("05034567890", "Luis Miguel Hernández Ruiz", 1, "CIME", "MINED", "Calle 25 entre 12 y 14");
 		crearPersona("04045678901", "María Fernanda López Martínez", 1, "ETECSA", "FMC", "Calle 7 entre 12 y 14");
 		
-		crearGrupo("Grupo", 1);
+		crearGrupo("Grupo 1.1", 1);
 		
 		/*
 		//Grupo 1.2

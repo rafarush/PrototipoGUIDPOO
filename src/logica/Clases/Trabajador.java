@@ -1,4 +1,4 @@
-package logica;
+package logica.Clases;
 
 public abstract class Trabajador extends Persona {
 
