@@ -643,8 +643,23 @@ public final class Fct {
 	//para empezar un nuevo semestre
 	public boolean empezarPeriodo(){
 		boolean val = false;
-		if(buscarEstudiantesSinGrupo().size()==0 && verificarGruposEnSusPD() && planEstudio.verificarAsignaturasMinimas() && buscarEstudiantes().size()>0){                    
-			val = true;
+		
+		if(buscarEstudiantesSinGrupo().size()==0){
+			if(verificarGruposEnSusPD()){
+				if(planEstudio.verificarAsignaturasMinimas()){
+					if(buscarEstudiantes().size()>0){
+						val = true;
+					}else{
+						throw new IllegalArgumentException("No existen estudiantes para empezar.");
+					}
+				}else{
+					throw new IllegalArgumentException("En algún período no se han creado asignaturas.");
+				}
+			}else{
+				throw new IllegalArgumentException("Hay grupos que le faltan crear sus planificaciones docentes correspondientes.");
+			}
+		}else{
+			throw new IllegalArgumentException("Hay "+buscarEstudiantesSinGrupo().size()+" sin grupo.");
 		}
 		
 		return val;
@@ -654,28 +669,6 @@ public final class Fct {
 	public boolean verificarGruposEnSusPD() {
 		 boolean val = true;
 		 boolean var = false;
-		 
-		/* for(int i = 0;i<grupos.size() && val; i++){
-			 System.out.println("Ngrupo"+grupos.get(i).getNombreGrupo());
-				for(Asignatura a : planEstudio.buscarAsignaturaPorAnno(grupos.get(i).getAnnoAcademico())){
-					System.out.println("Nasignatura"+a.getNombre());
-					for(int e=0;e<periodos.size() && val;e++){
-						if(e==grupos.get(i).getAnnoAcademico()-1 || e==grupos.get(i).getAnnoAcademico()+5){ 
-							var = false;
-							for(PlanificacionDocente pD : periodos.get(e).getPlanificacionesDocentes()){
-								System.out.println("entra al for d pD");
-								if(pD.getAsignatura().equals(a) && pD.getGrupo().equals(grupos.get(i))){
-									var = true;
-									System.out.println("entra al for d pD");
-								}
-							}
-							System.out.println("var"+var);
-							if(!var)
-								val = false;
-						}
-					}
-				}
-			}*/
 		 
 		 for(int i = 0;i<grupos.size() && val; i++){
 					for(int e=0;e<periodos.size() && val;e++){
