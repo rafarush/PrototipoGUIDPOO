@@ -43,7 +43,7 @@ public class PlanEstudio {
 	
 	
 	//para buscar las asginaturas de un año dado y el semestre dado
-	public ArrayList<Asignatura> busarAsignaturasPorPeriodo(int anno, int semestre){
+	public ArrayList<Asignatura> buscarAsignaturasPorPeriodo(int anno, int semestre){
 		ArrayList<Asignatura> asignaturasP = new ArrayList<>();
 		
 		for(Asignatura a : asignaturas){
@@ -75,4 +75,21 @@ public class PlanEstudio {
 		return val;
 	}
 
+	
+	// para verificar q rn cada periodo hay al menos una 
+	public boolean verificarAsignaturasMinimas() {
+		boolean val = true;
+		for(int i = 0; i<7 && val;i++){
+			if(buscarAsignaturasPorPeriodo(i,1).size()==0 || buscarAsignaturasPorPeriodo(i,2).size()==0)
+				val = false;
+			
+		}
+		
+		return val;
+	}
+	
+	
+	
+	
+	
 }
