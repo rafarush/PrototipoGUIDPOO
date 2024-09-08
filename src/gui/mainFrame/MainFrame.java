@@ -49,12 +49,16 @@ public class MainFrame extends JFrame {
 	private static JTableNoEdit table;
 	private TableRowSorter<DefaultTableModel> tableSorter;
 	private JTextField filterTextField;
+	final JLabel lblPeriodoActual;
+	final JLabel nextPeriodBotton;
+	final JPanel mainPanel;
 	private boolean maximized = false;
 	private Point initialClick;
 	private BotonSelec btnSeleccionado = BotonSelec.PROFESOR;
 	DefaultTableCellRenderer centrarCelda = new DefaultTableCellRenderer();
 	private static Object[] valoresDeFila = new Object[50];
 	private static int periodo = 0;
+	
 	
 	
 	
@@ -78,7 +82,7 @@ public class MainFrame extends JFrame {
 		mainPane.setBounds(0, 0, 914, 618);
 		contentPane.add(mainPane);
 		
-		final JPanel mainPanel = new JPanel();
+		mainPanel = new JPanel();
 		mainPanel.setBackground(Color.WHITE);
 		mainPane.setLayer(mainPanel, 1);
 		mainPanel.setBounds(0, 0, 914, 618);
@@ -90,10 +94,6 @@ public class MainFrame extends JFrame {
 		scrollPane.setBackground(Color.WHITE);
 		scrollPane.setBounds(240, 154, 664, 437);
 		mainPanel.add(scrollPane);
-		
-		//Define los modelos y dibuja las tablas con datos predeterminados
-		centrarCelda.setHorizontalAlignment(JLabel.CENTER);
-		tableDraw();
 		
 		
 		JLabel frameName = new JLabel("Gestor de la Filial de Ciencias T\u00E9cnicas");
@@ -453,17 +453,18 @@ public class MainFrame extends JFrame {
 		mainPanel.add(modifyBotton);
 		
 		
-		final JLabel lblnextPeriod = new JLabel("");
-		lblnextPeriod.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblnextPeriod.addMouseListener(new MouseAdapter() {
-			@Override
+		nextPeriodBotton = new JLabel("");
+		
+		nextPeriodBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		nextPeriodBotton.addMouseListener(new MouseAdapter() {
+			/*@Override
 			public void mouseEntered(MouseEvent e) {
-				lblnextPeriod.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextPeriodBottonSelected.png")));
+				nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextPeriodBottonSelected.png")));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblnextPeriod.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextPeriodBotton.png")));
-			}
+				nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextPeriodBotton.png")));
+			}*/
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(JOptionPane.showConfirmDialog(null, "¿Seguro que desea pasar a la siguiente fase?\n No se podrá recuperar", "Confirmación", 
@@ -474,6 +475,8 @@ public class MainFrame extends JFrame {
 						if (Fct.getInstance().empezarPeriodo()){
 							JOptionPane.showMessageDialog(null, "Inicio de semestre 1");
 							periodo = 1;
+							actualizarLblPeriodoActual();
+							//actualizarIcoBotonPeriodoActual();
 						}else{
 							JOptionPane.showMessageDialog(null, "No se puede pasar");
 						}
@@ -482,6 +485,8 @@ public class MainFrame extends JFrame {
 						if (Fct.getInstance().pasarPeriodo()){
 							JOptionPane.showMessageDialog(null, "Inicio de semestre 2");
 							periodo = 2;
+							actualizarLblPeriodoActual();
+							//actualizarIcoBotonPeriodoActual();
 						}else{
 							JOptionPane.showMessageDialog(null, "No se puede pasar");
 						}
@@ -491,6 +496,8 @@ public class MainFrame extends JFrame {
 
 							JOptionPane.showMessageDialog(null, "Se pudo pasar de año (Inicio de preparación de semestre)");
 							periodo = 0;
+							actualizarLblPeriodoActual();
+							//actualizarIcoBotonPeriodoActual();
 						}else{
 							JOptionPane.showMessageDialog(null, "No se pudo pasar de año");
 						}
@@ -502,10 +509,10 @@ public class MainFrame extends JFrame {
 				
 			}
 		});
-		lblnextPeriod.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextPeriodBotton.png")));
-		lblnextPeriod.setToolTipText("Pasar al siguiente periodo");
-		lblnextPeriod.setBounds(729, 122, 101, 21);
-		mainPanel.add(lblnextPeriod);
+		nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextPeriodBotton.png")));
+		nextPeriodBotton.setToolTipText("Avanzar entre los periodos");
+		nextPeriodBotton.setBounds(729, 122, 101, 21);
+		mainPanel.add(nextPeriodBotton);
 		
 					
 		final JPanel menuBarPanel = new JPanel();
@@ -970,6 +977,13 @@ public class MainFrame extends JFrame {
 		mainPanel.add(filtroBtn);
 		
 		
+		lblPeriodoActual = new JLabel("New label");
+		lblPeriodoActual.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPeriodoActual.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblPeriodoActual.setBounds(490, 80, 168, 14);
+		mainPanel.add(lblPeriodoActual);
+		
+		
 		final JLabel menuBarBotton = new JLabel("");
 		menuBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		menuBarBotton.setBounds(new Rectangle(10, 11, 46, 32));
@@ -1118,7 +1132,7 @@ public class MainFrame extends JFrame {
 						scrollPane.setBounds(79, 154, 1270, 560);
 						delBotton.setBounds(700, 122, 56, 21);
 						addBotton.setBounds(579, 122, 101, 21);
-						lblnextPeriod.setBounds(1100, 122, 101, 21);
+						nextPeriodBotton.setBounds(1100, 122, 101, 21);
 						lblFiltro.setBounds(63, 122, 61, 21);
 						filterTextField.setBounds(115, 122, 115, 20);
 						mainTitle.setBounds(270, 37, 804, 44);
@@ -1130,7 +1144,7 @@ public class MainFrame extends JFrame {
 					modifyBotton.setBounds(1290, 122, 63, 21);
 					delBotton.setBounds(900, 122, 56, 21);
 					addBotton.setBounds(779, 122, 101, 21);
-					lblnextPeriod.setBounds(1100, 122, 101, 21);
+					nextPeriodBotton.setBounds(1100, 122, 101, 21);
 					mainTitle.setBounds(470, 37, 642, 44);	
 					maximized = true;
 				}else{
@@ -1156,7 +1170,7 @@ public class MainFrame extends JFrame {
 					modifyBotton.setBounds(841, 122, 63, 21);
 					delBotton.setBounds(651, 122, 56, 21);
 					addBotton.setBounds(530, 122, 101, 21);
-					lblnextPeriod.setBounds(729, 122, 101, 21);
+					nextPeriodBotton.setBounds(729, 122, 101, 21);
 					mainTitle.setBounds(240, 37, 642, 44);
 					maximized = false;
 				}		
@@ -1192,6 +1206,10 @@ public class MainFrame extends JFrame {
 		upperFrameBar.setBounds(0, 0, 914, 34);
 		mainPanel.add(upperFrameBar);
 		
+		//Define los modelos y dibuja las tablas con datos predeterminados
+		centrarCelda.setHorizontalAlignment(JLabel.CENTER);
+		tableDraw();
+		actualizarLblPeriodoActual();
 		
 	}
 	
@@ -1295,4 +1313,89 @@ public class MainFrame extends JFrame {
 	public static JTableNoEdit getTable(){
 		return table;
 	}
+	
+	private void actualizarLblPeriodoActual(){
+		switch (periodo) {
+		case 0:
+			
+			lblPeriodoActual.setText("(Fase Preparatoria)");
+			nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/startPeriodsBotton.png")));
+			
+			break;
+		case 1:
+			
+			lblPeriodoActual.setText("(Semestre 1)");
+			nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextPeriodBotton.png")));
+			
+			break;
+		case 2:
+			
+			lblPeriodoActual.setText("(Semestre 2)");
+			nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextYearBotton.png")));
+			
+			break;
+		default:
+			break;
+		}
+	}
+	
+	/*
+	private void actualizarIcoBotonPeriodoActual(){
+		switch (periodo) {
+		case 0:
+			
+			nextPeriodBotton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/startPeriodsBottonSelected.png")));
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/startPeriodsBotton.png")));
+				}
+			});
+			nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/startPeriodsBotton.png")));
+			nextPeriodBotton.setToolTipText("Comenzar periodos");
+			mainPanel.add(nextPeriodBotton);
+			
+			break;
+		case 1:
+			
+			nextPeriodBotton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextPeriodBottonSelected.png")));
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextPeriodBotton.png")));
+				}
+			});
+			nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextPeriodBotton.png")));
+			nextPeriodBotton.setToolTipText("Pasar al siguiente periodo");
+			mainPanel.add(nextPeriodBotton);
+			
+			break;
+		case 2:
+
+			nextPeriodBotton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextYearBottonSelected.png")));
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextYearBotton.png")));
+				}
+			});
+			nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextYearBotton.png")));
+			nextPeriodBotton.setToolTipText("Pasar al siguiente periodo");
+			mainPanel.add(nextPeriodBotton);
+			
+			break;
+		default:
+			break;
+		}
+	}
+	*/
 }
