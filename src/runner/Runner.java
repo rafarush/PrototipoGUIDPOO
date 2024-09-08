@@ -42,10 +42,10 @@ public class Runner {
 		/**********************************************Datos Prueba********************************************************/
 		
 		//Usuario
-	    usuario = new User("Fermin", "1234");
-		
+	  usuario = new User("Fermin", "1234");
+    
 		Fct.getInstance().datosAutomaticos();
-		
+    
 		try {
 			JDialogLoginUser login = new JDialogLoginUser();
 			login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
