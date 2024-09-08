@@ -58,6 +58,7 @@ public class Asignatura {
 			throw new IllegalArgumentException("La cantidad de horas clases tiene que ser mayor que 0");
 	}
 
+	//
 	public int devolverPeriodo(){
 		int periodo;
 		

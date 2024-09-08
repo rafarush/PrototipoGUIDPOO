@@ -154,7 +154,7 @@ public class Validaciones {
 	 */
 	public static int completarAnno(String anno, char siglo){
 		String annoCompleto = "";
-		int annoInt = 0;
+		int a = 0;
 		
 		if(siglo >= '0' && siglo <= '5'){
 			annoCompleto = "19"+anno;
@@ -165,9 +165,9 @@ public class Validaciones {
 		}
 		
 		if(!annoCompleto.isEmpty())
-			annoInt = Integer.valueOf(getCadenaSinEspacios(annoCompleto));
+			a = Integer.valueOf(getCadenaSinEspacios(annoCompleto));
 		
-		return annoInt;
+		return a;
 	}
 	
 	

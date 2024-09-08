@@ -1,7 +1,6 @@
 package gui.mainFrame;
 
 import gui.dialogs.*;
-import gui.utils.InputVerificadorPersonalizado;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -241,8 +240,6 @@ public class MainFrame extends JFrame {
 		mainPanel.add(mainTitle);
 		
 		filterTextField = new JTextField();
-		filterTextField.setInputVerifier(new InputVerificadorPersonalizado(5));
-		System.out.println(filterTextField.getInputVerifier().getClass().getSimpleName());
 		filterTextField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -296,6 +293,8 @@ public class MainFrame extends JFrame {
 						
 						switch (btnSeleccionado) {
 						case ESTUDIANTE:
+							//Falta verificar 
+							JOptionPane.showMessageDialog(null, "Falta verificar que no este en un grupo con plan docente");
 							Estudiante estudiante = Fct.getInstance().buscarUnEstudiante(table.getValueAt(table.getSelectedRow(), 0).toString());
 							Fct.getInstance().eliminarPersona(estudiante.getID());
 							JOptionPane.showMessageDialog(null, "Se ha eliminado a el estudiante correctamente");
@@ -353,6 +352,55 @@ public class MainFrame extends JFrame {
 						default:
 							break;
 						}
+					
+						/*
+						if (btnSeleccionado != BotonSelec.GRUPO && btnSeleccionado != BotonSelec.PLAN_ESTUDIO && btnSeleccionado != BotonSelec.CONSEJO_DIRECC){
+							//Falta revisar si el profe esta en alguna planificacion docente
+							//Profesor profe = (Profesor) Runner.fct.buscarPersona(table.getValueAt(table.getSelectedRow(), 0).toString());
+							Fct.getInstance().eliminarPersona(table.getValueAt(table.getSelectedRow(), 0).toString());
+							tableDraw();
+						}else if(btnSeleccionado == BotonSelec.GRUPO){
+							//Falta revisar si el grupo esta en alguna planificacion docente
+							JOptionPane.showMessageDialog(null, "Todavia no se implementa para Grupos");
+							
+							Grupo grupo = Fct.getInstance().buscarGrupo(table.getValueAt(table.getSelectedRow(), 0).toString());
+							if (!Fct.getInstance().verificarGrupoPD(grupo)){
+								Fct.getInstance().eliminarGrupo(grupo);
+								JOptionPane.showMessageDialog(null, "Se ha eliminado el grupo correctamente");
+								tableDraw();
+							}else{
+								JOptionPane.showMessageDialog(null, "No se puede eliminar el grupo, ya que forma parte de la Planificación Docente");
+							}
+						
+						}else if(btnSeleccionado == BotonSelec.PLAN_ESTUDIO){
+							//Falta revisar si la asignatura esta en alguna planificacion docente
+							//JOptionPane.showMessageDialog(null, "Todavia no se implementa para Asignaturas");
+							
+							String nombreAsignatura = table.getValueAt(table.getSelectedRow(), 0).toString();
+							Asignatura asignatura = Fct.getInstance().getPlanEstudio().buscarAsignatura(nombreAsignatura);
+							
+							if (!Fct.getInstance().verificarAsignaturaPD(asignatura)){
+								Fct.getInstance().eliminarAsignatura(asignatura);
+								JOptionPane.showMessageDialog(null, "Se ha eliminado la asignatura correctamente");
+								tableDraw();
+							}else{
+								JOptionPane.showMessageDialog(null, "No se puede eliminar la asignatura, ya que forma parte de la Planificación Docente");
+							}
+							
+							
+						}else if(btnSeleccionado == BotonSelec.CONSEJO_DIRECC){
+							//Falta revisar si la asignatura esta en alguna planificacion docente
+							JOptionPane.showMessageDialog(null, "falta arreglo de jorge");
+							
+							String profeID = table.getValueAt(table.getSelectedRow(), 0).toString();
+							Profesor profesor = (Profesor) Fct.getInstance().buscarPersona(profeID);
+							Fct.getInstance().eliminarDelCD(profesor);
+							JOptionPane.showMessageDialog(null, "Ha sido eliminado el profesor del Consejo de Dirección");
+							tableDraw();
+						}*/
+							
+						/*((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());
+						((DefaultTableModel) table.getModel()).fireTableDataChanged();*/
 					}
 				}
 			}
@@ -435,20 +483,14 @@ public class MainFrame extends JFrame {
 							tableDraw();
 							break;
 						case CONSEJO_DIRECC:
-							if (Fct.getInstance().buscarCargosCDFaltantes().size()>0){
-								try {
-									InputDialogModifConsejoDirecc inputModConDir = new InputDialogModifConsejoDirecc(Fct.getInstance().buscarUnProfesor(table.getValueAt(table.getSelectedRow(), 0).toString()));
-									inputModConDir.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-									inputModConDir.setVisible(true);
-								} catch (Exception exc) {
-									exc.printStackTrace();
-								}
-								tableDraw();
-							}else{
-								JOptionPane.showMessageDialog(null, "No puede cambiarle el cargo al profesor seleccionado\n"
-										+ "porque no hay otro cargo disponible");
+							try {
+								InputDialogModifConsejoDirecc inputModConDir = new InputDialogModifConsejoDirecc(Fct.getInstance().buscarUnProfesor(table.getValueAt(table.getSelectedRow(), 0).toString()));
+								inputModConDir.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								inputModConDir.setVisible(true);
+							} catch (Exception exc) {
+								exc.printStackTrace();
 							}
-							
+							tableDraw();
 							break;
 						default:
 							break;
@@ -473,6 +515,7 @@ public class MainFrame extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				//JOptionPane.showMessageDialog(null, "Implementar");
 				switch (periodo) {
 				case 0:
 					if (Fct.getInstance().pasarPeriodo()){
