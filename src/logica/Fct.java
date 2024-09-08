@@ -1029,7 +1029,9 @@ public final class Fct {
 		crearPersona("83023456789", "José Antonio Rodríguez Sánchez", "Máster", "Instructor", "CineSoft", "PCC", "Calle 2 entre 1 y 3");
 		crearPersona("82034567890", "Luis Miguel Hernández Ruiz", "Ninguno", "Asistente", "ETECSA", "MINED", "Calle 3 entre 2 y 4");
 		crearPersona("80056789012", "María Fernanda López Martínez", "Doctor", "Titular", "CIME", "FMC", "Calle 4 entre 5 y 7");
-			
+		
+		
+		/*
 		//2do
 		crearPersona("80056789012", "Francisco Javier Sánchez Morales", "Doctor", "Titular", "CIME", "PCC", "Calle 5 entre 6 y 8");
 		crearPersona("79067890123", "Alejandro David Romero Vargas", "Máster", "Instructor", "Cujae", "MINED", "Calle 6 entre 3 y 5");
@@ -1059,17 +1061,20 @@ public final class Fct {
 		crearPersona("78078901234", "Mario Alberto Ortiz Navarro", "Máster", "Instructor", "ETECSA", "PCC", "Calle 22 entre 11 y 13");
 		crearPersona("81045678901", "Paula Andrea Castillo Rojas", "Ninguno", "Asistente", "CIME", "FMC", "Calle 23 entre 6 y 8");
 		crearPersona("74012345678", "Carlos Alberto Fernández López", "Ninguno", "Auxiliar", "Cujae", "MINED", "Calle 24 entre 21 y 23");
+		*/
 		
 		// ESTUDIANTES
-		/*
+		
 		//1ro
 		//Grupo 1.1
-		crearPersona("03012345678", "Juan Carlos Pérez Gómez", "1", "", "", "");
-		crearPersona("04023456789", "José Antonio Rodríguez Sánchez", "1", "", "", "");
-		crearPersona("05034567890", "Luis Miguel Hernández Ruiz", "1", "", "", "");
-		crearPersona("04045678901", "María Fernanda López Martínez", "1", "", "", "");
+		crearPersona("03012345678", "Juan Carlos Pérez Gómez", 1, "CIME", "MINED", "Calle 30 entre 13 y 15");
+		crearPersona("04023456789", "José Antonio Rodríguez Sánchez", 1, "ETECSA", "PCC", "Calle 21 entre 34 y 324");
+		crearPersona("05034567890", "Luis Miguel Hernández Ruiz", 1, "CIME", "MINED", "Calle 25 entre 12 y 14");
+		crearPersona("04045678901", "María Fernanda López Martínez", 1, "ETECSA", "FMC", "Calle 7 entre 12 y 14");
 		
+		crearGrupo("Grupo", 1);
 		
+		/*
 		//Grupo 1.2
 		crearPersona("03045678901", "Pedro Javier González Torres", "1", "", "", "");
 		crearPersona("04056789012", "Francisco Javier Sánchez Morales", "1", "", "", "");
@@ -1143,6 +1148,25 @@ public final class Fct {
 		crearPersona("", "", "", "", "", "");
 		
 		*/
+		
+		// Personal de apoyo
+		crearPersona("0311568003", "Juan Peña Pina", "Secretaria", "Calle 20 entre 16 y 18");
+		crearPersona("0311568003", "Miguel Reina Monte", "Biblioteca", "Calle 19 entre 18 y 20");
+		
+		
+		// Asignatura
+		planEstudio.crearAsignatura("Calculo I",1 ,1 ,50 );
+		planEstudio.crearAsignatura("Calculo II",1 ,2 ,46 );
+		planEstudio.crearAsignatura("Calculo III",2 ,1 ,52 );
+		planEstudio.crearAsignatura("RA",2 ,2 ,60 );
+		planEstudio.crearAsignatura("Red PC",3 ,1 ,26 );
+		planEstudio.crearAsignatura("WEB",3 ,2 , 38);
+		planEstudio.crearAsignatura("WEB II",4 ,1 ,48 );
+		planEstudio.crearAsignatura("WEB III",4 ,2 ,50 );
+		planEstudio.crearAsignatura("Inteligencia Artificial",5 ,1 ,20 );
+		planEstudio.crearAsignatura("Inteligencia Artificial II",5 ,2 ,30 );
+		planEstudio.crearAsignatura("Metodología de la invstigación	",6 ,1 ,38 );
+		planEstudio.crearAsignatura("Seguridad Nascional",6 ,2 ,40 );
 		
 		
 	}
