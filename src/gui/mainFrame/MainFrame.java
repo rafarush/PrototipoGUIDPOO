@@ -472,35 +472,44 @@ public class MainFrame extends JFrame {
 					
 					switch (periodo) {
 					case 0:
-						if (Fct.getInstance().empezarPeriodo()){
-							JOptionPane.showMessageDialog(null, "Inicio de semestre 1");
-							periodo = 1;
-							actualizarLblPeriodoActual();
-							//actualizarIcoBotonPeriodoActual();
-						}else{
-							JOptionPane.showMessageDialog(null, "No se puede pasar");
+						try {
+							if (Fct.getInstance().empezarPeriodo()){
+								JOptionPane.showMessageDialog(null, "Inicio de semestre 1");
+								periodo = 1;
+								actualizarLblPeriodoActual();
+								//actualizarIcoBotonPeriodoActual();
+							}
+						} catch (ProcesoNoPermitidoException exc) {
+							JOptionPane.showMessageDialog(null, "No se pudo empezar:\n"+ exc.getMessage());
 						}
+						
 						break;
 					case 1:
-						if (Fct.getInstance().pasarPeriodo()){
-							JOptionPane.showMessageDialog(null, "Inicio de semestre 2");
-							periodo = 2;
-							actualizarLblPeriodoActual();
-							//actualizarIcoBotonPeriodoActual();
-						}else{
-							JOptionPane.showMessageDialog(null, "No se puede pasar");
+						try {
+							if (Fct.getInstance().pasarPeriodo()){
+								JOptionPane.showMessageDialog(null, "Inicio de semestre 2");
+								periodo = 2;
+								actualizarLblPeriodoActual();
+								//actualizarIcoBotonPeriodoActual();
+							}
+						} catch (ProcesoNoPermitidoException exc) {
+							JOptionPane.showMessageDialog(null, "No se pudo pasar de periodo:\n"+ exc.getMessage());
 						}
+						
 						break;
 					case 2:
-						if (Fct.getInstance().pasarAnno()){
+						try {
+							if (Fct.getInstance().pasarAnno()){
 
-							JOptionPane.showMessageDialog(null, "Se pudo pasar de año (Inicio de preparación de semestre)");
-							periodo = 0;
-							actualizarLblPeriodoActual();
-							//actualizarIcoBotonPeriodoActual();
-						}else{
-							JOptionPane.showMessageDialog(null, "No se pudo pasar de año");
+								JOptionPane.showMessageDialog(null, "Se pudo pasar de año (Inicio de preparación de semestre)");
+								periodo = 0;
+								actualizarLblPeriodoActual();
+								//actualizarIcoBotonPeriodoActual();
+							}
+						} catch (ProcesoNoPermitidoException exc) {
+							JOptionPane.showMessageDialog(null, "No se pudo pasar de año:\n"+ exc.getMessage());
 						}
+						
 						break;
 					default:
 						break;
