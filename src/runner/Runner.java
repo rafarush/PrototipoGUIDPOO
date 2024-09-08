@@ -43,7 +43,7 @@ public class Runner {
 		
 		//Usuario
 	    usuario = new User("Fermin", "1234");
-		
+		/*
 		Fct.getInstance().datosAutomaticos();
 		
 
@@ -64,7 +64,7 @@ public class Runner {
 		System.out.println(cargos.size());
 		for (String c : cargos) {
 			System.out.println(c);
-		}
+		}*/
 		
 		try {
 			JDialogLoginUser login = new JDialogLoginUser();

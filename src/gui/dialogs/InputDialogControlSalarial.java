@@ -23,8 +23,10 @@ import javax.swing.DefaultComboBoxModel;
 
 import java.awt.Cursor;
 
+import logica.Fct;
 import logica.PersonalApoyo;
 import logica.Profesor;
+
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
@@ -35,7 +37,8 @@ public class InputDialogControlSalarial extends JDialog {
 	private static final long serialVersionUID = 1L;
 	
 	private final JPanel upperBarPanel = new JPanel();
-	private final JSpinner spinnerSalarioBase;
+	private final JSpinner spinnerSalarioBaseProfe;
+	private final JSpinner spinnerSalarioBasePA;
 
 
 	/**
@@ -95,10 +98,27 @@ public class InputDialogControlSalarial extends JDialog {
 			panel.setBounds(281, 0, 150, 192);
 			mainPanel.add(panel);
 			
-			JLabel lblSalarioBase = new JLabel("Salario Base:");
+			JLabel lblSalarioBase = new JLabel("Salario base Profesor:");
 			lblSalarioBase.setForeground(new Color(51, 51, 51));
-			lblSalarioBase.setBounds(10, 29, 166, 20);
+			lblSalarioBase.setBounds(10, 29, 106, 20);
 			mainPanel.add(lblSalarioBase);
+			
+			
+			spinnerSalarioBaseProfe = new JSpinner();
+			spinnerSalarioBaseProfe.setModel(new SpinnerNumberModel(100, 1, 20000, 50));
+			spinnerSalarioBaseProfe.setBounds(10, 64, 82, 20);
+			JSpinner.DefaultEditor editor = (JSpinner.DefaultEditor) spinnerSalarioBaseProfe.getEditor();
+			editor.getTextField().setEditable(false);
+			mainPanel.add(spinnerSalarioBaseProfe);
+			
+			
+			spinnerSalarioBasePA = new JSpinner();
+			spinnerSalarioBasePA.setModel(new SpinnerNumberModel(100, 1, 20000, 50));
+			spinnerSalarioBasePA.setBounds(131, 64, 82, 20);
+			JSpinner.DefaultEditor editor2 = (JSpinner.DefaultEditor) spinnerSalarioBasePA.getEditor();
+			editor2.getTextField().setEditable(false);
+			mainPanel.add(spinnerSalarioBasePA);
+			
 			
 			final JLabel inputBotton = new JLabel("");
 			inputBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -114,7 +134,9 @@ public class InputDialogControlSalarial extends JDialog {
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					JOptionPane.showMessageDialog(null, "Implementar");
+					//JOptionPane.showMessageDialog(null, "Implementar");
+					Fct.getInstance().cambiarSalarioBaseProfe(Float.valueOf(spinnerSalarioBaseProfe.getValue().toString()));
+					Fct.getInstance().cambiarSalarioBasePersonalA(Float.valueOf(spinnerSalarioBasePA.getValue().toString()));
 					dispose();
 				}
 			});
@@ -146,18 +168,17 @@ public class InputDialogControlSalarial extends JDialog {
 			cancelBotton.setBounds(136, 122, 63, 21);
 			mainPanel.add(cancelBotton);
 			
-			spinnerSalarioBase = new JSpinner();
-			spinnerSalarioBase.setModel(new SpinnerNumberModel(100, 1, 20000, 50));
-			spinnerSalarioBase.setBounds(10, 64, 82, 20);
-			JSpinner.DefaultEditor editor = (JSpinner.DefaultEditor) spinnerSalarioBase.getEditor();
-			editor.getTextField().setEditable(false);
-			mainPanel.add(spinnerSalarioBase);
+			JLabel lblSalarioBasePersonal = new JLabel("Salario base Personal Auxiliar:");
+			lblSalarioBasePersonal.setForeground(new Color(51, 51, 51));
+			lblSalarioBasePersonal.setBounds(131, 29, 150, 20);
+			mainPanel.add(lblSalarioBasePersonal);
+			
 			
 			llenarValores();
 		}
 	}
 	
 	private void llenarValores(){
-		spinnerSalarioBase.setValue(150);
+		spinnerSalarioBaseProfe.setValue(150);
 	}
 }

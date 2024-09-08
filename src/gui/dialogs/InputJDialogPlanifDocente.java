@@ -316,7 +316,8 @@ public class InputJDialogPlanifDocente extends JDialog {
 				break;
 			case GRUPO:
 				Asignatura asignatura = Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec);
-				DatosAuto.definirTablaGrupo(Fct.getInstance().buscarGruposPorAnno(asignatura.getAnnoAcademico()));
+				//DatosAuto.definirTablaGrupo(Fct.getInstance().buscarGruposPorAnno(asignatura.getAnnoAcademico()));
+				DatosAuto.definirTablaGrupo(Fct.getInstance().buscarGruposPorAnnoNoVacio(asignatura.getAnnoAcademico()));
 				tabla = new JTableNoEdit(Runner.modeloGrupoReporte);/*
 				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
 				tablaNotas.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);*/
@@ -334,10 +335,6 @@ public class InputJDialogPlanifDocente extends JDialog {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 
 							JOptionPane.showMessageDialog(null, "No se permite modificar");
-							/*btnSeleccionado = BotonSelec.GRUPO;
-							asignaturaSelec = tablaNotas.getValueAt(tablaNotas.getSelectedRow(), 0).toString();
-							tableDraw();
-							actualizarLblNombre();*/
 					}
 				});
 				break;
