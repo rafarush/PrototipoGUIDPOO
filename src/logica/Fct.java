@@ -1027,7 +1027,7 @@ public final class Fct {
 		// 1ro
 		crearPersona("84012345678", "Juan Carlos Pérez Gómez", "Doctor", "Titular", "Cujae", "MINED", "Calle 1 entre 2 y 4");
 		crearPersona("83023456789", "José Antonio Rodríguez Sánchez", "Máster", "Instructor", "CineSoft", "PCC", "Calle 2 entre 1 y 3");
-		crearPersona("82034567890", "Luis Miguel Hernández Ruiz", "Ninguno", "Asistente", "ETECSA", "MINED", "Calle 3 entre 2 y 4");
+		crearPersona("82034567890", "Luis Miguel Hernández Ruiz", "Ninguna", "Asistente", "ETECSA", "MINED", "Calle 3 entre 2 y 4");
 		crearPersona("80056789012", "María Fernanda López Martínez", "Doctor", "Titular", "CIME", "FMC", "Calle 4 entre 5 y 7");
 		
 		
@@ -1151,7 +1151,7 @@ public final class Fct {
 		
 		// Personal de apoyo
 		crearPersona("0311568003", "Juan Peña Pina", "Secretaria", "Calle 20 entre 16 y 18");
-		crearPersona("0311568003", "Miguel Reina Monte", "Biblioteca", "Calle 19 entre 18 y 20");
+		crearPersona("0311568004", "Miguel Reina Monte", "Biblioteca", "Calle 19 entre 18 y 20");
 		
 		
 		// Asignatura
