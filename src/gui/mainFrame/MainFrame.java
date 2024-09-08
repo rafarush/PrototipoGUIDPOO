@@ -294,7 +294,6 @@ public class MainFrame extends JFrame {
 						
 						switch (btnSeleccionado) {
 						case ESTUDIANTE:
-							//Falta verificar 
 							JOptionPane.showMessageDialog(null, "Falta verificar que no este en un grupo con plan docente");
 							Estudiante estudiante = Fct.getInstance().buscarUnEstudiante(table.getValueAt(table.getSelectedRow(), 0).toString());
 							Fct.getInstance().eliminarPersona(estudiante.getID());
@@ -353,55 +352,6 @@ public class MainFrame extends JFrame {
 						default:
 							break;
 						}
-					
-						/*
-						if (btnSeleccionado != BotonSelec.GRUPO && btnSeleccionado != BotonSelec.PLAN_ESTUDIO && btnSeleccionado != BotonSelec.CONSEJO_DIRECC){
-							//Falta revisar si el profe esta en alguna planificacion docente
-							//Profesor profe = (Profesor) Runner.fct.buscarPersona(table.getValueAt(table.getSelectedRow(), 0).toString());
-							Fct.getInstance().eliminarPersona(table.getValueAt(table.getSelectedRow(), 0).toString());
-							tableDraw();
-						}else if(btnSeleccionado == BotonSelec.GRUPO){
-							//Falta revisar si el grupo esta en alguna planificacion docente
-							JOptionPane.showMessageDialog(null, "Todavia no se implementa para Grupos");
-							
-							Grupo grupo = Fct.getInstance().buscarGrupo(table.getValueAt(table.getSelectedRow(), 0).toString());
-							if (!Fct.getInstance().verificarGrupoPD(grupo)){
-								Fct.getInstance().eliminarGrupo(grupo);
-								JOptionPane.showMessageDialog(null, "Se ha eliminado el grupo correctamente");
-								tableDraw();
-							}else{
-								JOptionPane.showMessageDialog(null, "No se puede eliminar el grupo, ya que forma parte de la Planificación Docente");
-							}
-						
-						}else if(btnSeleccionado == BotonSelec.PLAN_ESTUDIO){
-							//Falta revisar si la asignatura esta en alguna planificacion docente
-							//JOptionPane.showMessageDialog(null, "Todavia no se implementa para Asignaturas");
-							
-							String nombreAsignatura = table.getValueAt(table.getSelectedRow(), 0).toString();
-							Asignatura asignatura = Fct.getInstance().getPlanEstudio().buscarAsignatura(nombreAsignatura);
-							
-							if (!Fct.getInstance().verificarAsignaturaPD(asignatura)){
-								Fct.getInstance().eliminarAsignatura(asignatura);
-								JOptionPane.showMessageDialog(null, "Se ha eliminado la asignatura correctamente");
-								tableDraw();
-							}else{
-								JOptionPane.showMessageDialog(null, "No se puede eliminar la asignatura, ya que forma parte de la Planificación Docente");
-							}
-							
-							
-						}else if(btnSeleccionado == BotonSelec.CONSEJO_DIRECC){
-							//Falta revisar si la asignatura esta en alguna planificacion docente
-							JOptionPane.showMessageDialog(null, "falta arreglo de jorge");
-							
-							String profeID = table.getValueAt(table.getSelectedRow(), 0).toString();
-							Profesor profesor = (Profesor) Fct.getInstance().buscarPersona(profeID);
-							Fct.getInstance().eliminarDelCD(profesor);
-							JOptionPane.showMessageDialog(null, "Ha sido eliminado el profesor del Consejo de Dirección");
-							tableDraw();
-						}*/
-							
-						/*((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());
-						((DefaultTableModel) table.getModel()).fireTableDataChanged();*/
 					}
 				}
 			}
@@ -516,36 +466,40 @@ public class MainFrame extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//JOptionPane.showMessageDialog(null, "Implementar");
-				switch (periodo) {
-				case 0:
-					if (Fct.getInstance().empezarPeriodo()){
-						JOptionPane.showMessageDialog(null, "Inicio de semestre 1");
-						periodo = 1;
-					}else{
-						JOptionPane.showMessageDialog(null, "No se puede pasar");
-					}
-					break;
-				case 1:
-					if (Fct.getInstance().pasarPeriodo()){
-						JOptionPane.showMessageDialog(null, "Inicio de semestre 2");
-						periodo = 2;
-					}else{
-						JOptionPane.showMessageDialog(null, "No se puede pasar");
-					}
-					break;
-				case 2:
-					if (Fct.getInstance().pasarAnno()){
+				if(JOptionPane.showConfirmDialog(null, "¿Seguro que desea pasar a la siguiente fase?\n No se podrá recuperar", "Confirmación", 
+						JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION){
+					
+					switch (periodo) {
+					case 0:
+						if (Fct.getInstance().empezarPeriodo()){
+							JOptionPane.showMessageDialog(null, "Inicio de semestre 1");
+							periodo = 1;
+						}else{
+							JOptionPane.showMessageDialog(null, "No se puede pasar");
+						}
+						break;
+					case 1:
+						if (Fct.getInstance().pasarPeriodo()){
+							JOptionPane.showMessageDialog(null, "Inicio de semestre 2");
+							periodo = 2;
+						}else{
+							JOptionPane.showMessageDialog(null, "No se puede pasar");
+						}
+						break;
+					case 2:
+						if (Fct.getInstance().pasarAnno()){
 
-						JOptionPane.showMessageDialog(null, "Se pudo pasar de año (Inicio de preparación de semestre)");
-						periodo = 0;
-					}else{
-						JOptionPane.showMessageDialog(null, "No se pudo pasar de año");
+							JOptionPane.showMessageDialog(null, "Se pudo pasar de año (Inicio de preparación de semestre)");
+							periodo = 0;
+						}else{
+							JOptionPane.showMessageDialog(null, "No se pudo pasar de año");
+						}
+						break;
+					default:
+						break;
 					}
-					break;
-				default:
-					break;
 				}
+				
 			}
 		});
 		lblnextPeriod.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextPeriodBotton.png")));
@@ -747,12 +701,16 @@ public class MainFrame extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
-					InputJDialogPlanifDocente dialog = new InputJDialogPlanifDocente();
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					dialog.setVisible(true);
-				} catch (Exception exc) {
-					exc.printStackTrace();
+				if (Fct.getInstance().getPlanEstudio().getAsignaturas().size()>0 || Fct.getInstance().getGrupos().size()>0 || Fct.getInstance().buscarEstudiantes().size()>0){
+					try {
+						InputJDialogPlanifDocente dialog = new InputJDialogPlanifDocente();
+						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						dialog.setVisible(true);
+					} catch (Exception exc) {
+						exc.printStackTrace();
+					}
+				}else{
+					JOptionPane.showMessageDialog(null, "Faltan datos para poder crear Planificaciones Docentes, por favor, añada");
 				}
 			}
 		});
@@ -975,6 +933,7 @@ public class MainFrame extends JFrame {
 				} catch (Exception exc) {
 					exc.printStackTrace();
 				}
+				tableDraw();
 			}
 		});
 		controlSalarialBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ControlSalarial.png")));
