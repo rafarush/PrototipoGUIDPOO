@@ -267,7 +267,7 @@ public final class Fct {
 		return periodos;
 	}
 
-	// Este set no sera necesario ya que seran siempre 6 aÒos y los que cambiara dentro d estos es responsabilidad d ellos
+	// Este set no sera necesario ya que seran siempre 6 a√±os y los que cambiara dentro d estos es responsabilidad d ellos
 	public void setPeriodos(ArrayList<Periodo> periodos) {
 		this.periodos = periodos;
 	}	
@@ -277,7 +277,7 @@ public final class Fct {
 	//OTROS
 
 	
-	//   TENGO que implementar que tengan todos el mismo aÒo ---->>>> YA IMPLEMENTADO
+	//   TENGO que implementar que tengan todos el mismo a√±o ---->>>> YA IMPLEMENTADO
 
 	//   TENGO que implementar que el estudiante no puede entrar si esta en otro grupo 
 	public void insertarAGrupo(Estudiante estudiante, String grupo){
@@ -415,7 +415,7 @@ public final class Fct {
 		}else if(cargo.equalsIgnoreCase("Subdirector de Investigaciones y Posgrado")&& buscarSubdirectorInvPos()==null ){
 			profesor.agregarCargoConsejoDireccion(cargo);
 			val = true;
-		}else if(cargo.equalsIgnoreCase("Subdirector de ExtensiÛn Universitaria")&& buscarSubdirectorExtendUni()==null ){
+		}else if(cargo.equalsIgnoreCase("Subdirector de Extensi√≥n Universitaria")&& buscarSubdirectorExtendUni()==null ){
 			profesor.agregarCargoConsejoDireccion(cargo);
 			val = true;
 		}else if(cargo.equalsIgnoreCase("Jefe de Laboratorios")&& buscarJefeLaboratorios()==null ){
@@ -449,7 +449,7 @@ public final class Fct {
 		if(buscarSubdirectorInvPos() ==null)
 			cargos.add("Subdirector de Investigaciones y Posgrado");
 		if(buscarSubdirectorExtendUni() ==null)
-			cargos.add("Subdirector de ExtensiÛn Universitaria");
+			cargos.add("Subdirector de Extensi√≥n Universitaria");
 		if(buscarJefeLaboratorios() ==null)
 			cargos.add("Jefe de Laboratorios");
 		
@@ -507,14 +507,14 @@ public final class Fct {
 		return profesor;
 	}
 	
-	// BUSCAR Subdirector de ExtensiÛn Universitaria
+	// BUSCAR Subdirector de Extensi√≥n Universitaria
 	public Profesor buscarSubdirectorExtendUni() {
 		Profesor profesor = null;
 		boolean val = true;
 		int i = 0;
 		
 		while(i<buscarConsejoDireccion().size() && val){
-			if(buscarConsejoDireccion().get(i).getCargoConsejoDireccion().equalsIgnoreCase("Subdirector de ExtensiÛn Universitaria")){
+			if(buscarConsejoDireccion().get(i).getCargoConsejoDireccion().equalsIgnoreCase("Subdirector de Extensi√≥n Universitaria")){
 				profesor = buscarConsejoDireccion().get(i);
 				val = false;
 			}
@@ -644,6 +644,7 @@ public final class Fct {
 	public boolean empezarPeriodo(){
 		boolean val = false;
 		if(buscarEstudiantesSinGrupo().size()>0 && verificarGruposEnSusPD()){
+
 			val = true;
 		}
 		
@@ -783,7 +784,7 @@ public final class Fct {
 		return suspensos;
 	}
 	
-	// 5- PARA BUSCAR en cada aÒo cual es el grupo con menor cantidad de estudiantes
+	// 5- PARA BUSCAR en cada a√±o cual es el grupo con menor cantidad de estudiantes
 	public ArrayList<Grupo> buscarGrupoConMenorCantidad(){
 		ArrayList<Grupo> gruposM = new ArrayList<>();
 		
@@ -804,7 +805,7 @@ public final class Fct {
 	}
 	
 	
-	// 6- para saber los estudiantes que tienen m·s de 4.5  de promedio en todas las asignaturas de su carrera.
+	// 6- para saber los estudiantes que tienen m√°s de 4.5  de promedio en todas las asignaturas de su carrera.
 	public ArrayList<Estudiante> buscarEstudiantesOros(){
 		ArrayList<Estudiante> oros = new ArrayList<>();
 		
@@ -848,7 +849,7 @@ public final class Fct {
 	}
 	
 	
-	// para buscar los estudiantes sin grupo de un aÒo dado
+	// para buscar los estudiantes sin grupo de un a√±o dado
 	public ArrayList<Estudiante> buscarEstudiantesSinGrupoPorAnno(int anno){
 		ArrayList<Estudiante> estudiantes = new ArrayList<>();
 		
@@ -950,10 +951,10 @@ public final class Fct {
 	public void datosAutomaticos(){
 		
 		// JORGITOOOOOOO ---->>>>    la creacion de los profesores por defecto
-		crearPersona("95868426587", "Luis PÈrez Fern·ndez","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B");
+		crearPersona("95868426587", "Luis P√©rez Fern√°ndez","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B");
 		crearPersona("05062348364", "Rafael Castro Reyes","Doctor","Titular","Cujae","MINED", "Calle 30 entre 34 y Ave. 56");
-		crearPersona("05022358174", "Jorge Castro PÈrez","M·ster","Asistente","Cujae","MINED", "Calle 25 entre 21 y Ave. 26");
-		crearPersona("05062347564", "Manuel Castro Reyes","M·ster","Titular","Cujae","MINED", "Calle 30 entre 34 y Ave. 56");
+		crearPersona("05022358174", "Jorge Castro P√©rez","M√°ster","Asistente","Cujae","MINED", "Calle 25 entre 21 y Ave. 26");
+		crearPersona("05062347564", "Manuel Castro Reyes","M√°ster","Titular","Cujae","MINED", "Calle 30 entre 34 y Ave. 56");
 		
 		// los nuevos
 		
@@ -962,8 +963,8 @@ public final class Fct {
 		//***************************************   ESTUDIANTES   ********************************************************
 		
 		// JORGITOOOOOOO ---->>>>    la creacion de los estudiantes por defecto
-		crearPersona("05032379581", "Rafael MenÈndez Rodriguez", 1 ,"Sucursal Comercial #5","Etecsa", "Calle 30 entre 34 y Ave. 56");
-		crearPersona("08868513264", "Alejandro Gonz·lez Fern·ndez",1,"La Mariposa","TRD","Ave. 26 entre calles A y B");
+		crearPersona("05032379581", "Rafael Men√©ndez Rodriguez", 1 ,"Sucursal Comercial #5","Etecsa", "Calle 30 entre 34 y Ave. 56");
+		crearPersona("08868513264", "Alejandro Gonz√°lez Fern√°ndez",1,"La Mariposa","TRD","Ave. 26 entre calles A y B");
 		crearPersona("04021324587", "Jorgito", 2, "Las Palamas", "CTC", "Tulipan y Boyeros");
 		crearPersona("04021334457", "Rafa", 6, "Las Palamas", "CTC", "Tulipan y Boyeros");
 		crearPersona("90990834457", "TOYCHOLITO", 6, "Las Palamas", "CTC", "Tulipan y Boyeros");
@@ -985,14 +986,14 @@ public final class Fct {
 		
 			
 		// JORGITOOOOOOO ---->>>>    la creacion del personal de apoyo por defecto
-		crearPersona("09062235147", "Federico Criado DomÌnguez","Laboratorio", "Calle 30 entre 34 y Ave. 56");
-		crearPersona("59868285496", "Maria Elena GÛmez PÈrez","Biblioteca", "Ave. 26 entre calles A y B");
+		crearPersona("09062235147", "Federico Criado Dom√≠nguez","Laboratorio", "Calle 30 entre 34 y Ave. 56");
+		crearPersona("59868285496", "Maria Elena G√≥mez P√©rez","Biblioteca", "Ave. 26 entre calles A y B");
 		
 		// JORGITOOOOOOO ---->>>>    la creacion de las asignaturas por defecto
-		getPlanEstudio().crearAsignatura("Matem·tica I", 1, 1, 50);
-		getPlanEstudio().crearAsignatura("Matem·tica II", 1, 2, 50);
-		getPlanEstudio().crearAsignatura("IntroducciÛn a la ProgramaciÛn", 1, 1, 60);
-		getPlanEstudio().crearAsignatura("DiseÒo y POO", 1, 2, 90);
+		getPlanEstudio().crearAsignatura("Matem√°tica I", 1, 1, 50);
+		getPlanEstudio().crearAsignatura("Matem√°tica II", 1, 2, 50);
+		getPlanEstudio().crearAsignatura("Introducci√≥n a la Programaci√≥n", 1, 1, 60);
+		getPlanEstudio().crearAsignatura("Dise√±o y POO", 1, 2, 90);
 		getPlanEstudio().crearAsignatura("Estructuras de Datos", 2, 1, 40);
 		getPlanEstudio().crearAsignatura("Seguridad Nacional", 2, 1, 90);
 		getPlanEstudio().crearAsignatura("Inteligencia artificial", 6, 1, 90);
@@ -1012,8 +1013,8 @@ public final class Fct {
 		
 		//PLANES DOCENTES
 		
-		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("95868426587"),getPlanEstudio().buscarAsignatura("Matem·tica I") , buscarGrupo("Grupo 1.1"));
-		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("05062348364"),getPlanEstudio().buscarAsignatura("IntroducciÛn a la ProgramaciÛn") , buscarGrupo("Grupo 1.1"));
+		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("95868426587"),getPlanEstudio().buscarAsignatura("Matem√°tica I") , buscarGrupo("Grupo 1.1"));
+		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("05062348364"),getPlanEstudio().buscarAsignatura("Introducci√≥n a la Programaci√≥n") , buscarGrupo("Grupo 1.1"));
 		getPeriodos().get(5).crearPlanificacionDocente(buscarUnProfesor("95868426587"),getPlanEstudio().buscarAsignatura("Inteligencia artificial") , buscarGrupo("Grupo 6.1"));
 
 	}
@@ -1024,56 +1025,56 @@ public final class Fct {
 		
 		// PROFESORES
 		// 1ro
-		crearPersona("84012345678", "Juan Carlos PÈrez GÛmez", "Doctor", "Titular", "Cujae", "MINED", "Calle 1 entre 2 y 4");
-		crearPersona("83023456789", "JosÈ Antonio RodrÌguez S·nchez", "M·ster", "Instructor", "CineSoft", "PCC", "Calle 2 entre 1 y 3");
-		crearPersona("82034567890", "Luis Miguel Hern·ndez Ruiz", "Ninguno", "Asistente", "ETECSA", "MINED", "Calle 3 entre 2 y 4");
-		crearPersona("80056789012", "MarÌa Fernanda LÛpez MartÌnez", "Doctor", "Titular", "CIME", "FMC", "Calle 4 entre 5 y 7");
+		crearPersona("84012345678", "Juan Carlos P√©rez G√≥mez", "Doctor", "Titular", "Cujae", "MINED", "Calle 1 entre 2 y 4");
+		crearPersona("83023456789", "Jos√© Antonio Rodr√≠guez S√°nchez", "M√°ster", "Instructor", "CineSoft", "PCC", "Calle 2 entre 1 y 3");
+		crearPersona("82034567890", "Luis Miguel Hern√°ndez Ruiz", "Ninguno", "Asistente", "ETECSA", "MINED", "Calle 3 entre 2 y 4");
+		crearPersona("80056789012", "Mar√≠a Fernanda L√≥pez Mart√≠nez", "Doctor", "Titular", "CIME", "FMC", "Calle 4 entre 5 y 7");
 			
 		//2do
-		crearPersona("80056789012", "Francisco Javier S·nchez Morales", "Doctor", "Titular", "CIME", "PCC", "Calle 5 entre 6 y 8");
-		crearPersona("79067890123", "Alejandro David Romero Vargas", "M·ster", "Instructor", "Cujae", "MINED", "Calle 6 entre 3 y 5");
-		crearPersona("79067890123", "Ana Isabel GarcÌa Fern·ndez", "Ninguno", "Asistente", "CineSoft", "FMC", "Calle 7 entre 8 y 10");
-		crearPersona("77089012345", "Manuel Jes˙s Ramos Herrera", "M·ster", "Auxiliar", "ETECSA", "MINED", "Calle 8 entre 1 y 3");
+		crearPersona("80056789012", "Francisco Javier S√°nchez Morales", "Doctor", "Titular", "CIME", "PCC", "Calle 5 entre 6 y 8");
+		crearPersona("79067890123", "Alejandro David Romero Vargas", "M√°ster", "Instructor", "Cujae", "MINED", "Calle 6 entre 3 y 5");
+		crearPersona("79067890123", "Ana Isabel Garc√≠a Fern√°ndez", "Ninguno", "Asistente", "CineSoft", "FMC", "Calle 7 entre 8 y 10");
+		crearPersona("77089012345", "Manuel Jes√∫s Ramos Herrera", "M√°ster", "Auxiliar", "ETECSA", "MINED", "Calle 8 entre 1 y 3");
 			
 		//3ro
-		crearPersona("76090123456", "Ricardo AndrÈs Vega Paredes", "Doctor", "Titular", "CineSoft", "MINED", "Calle 9 entre 4 y 6");
-		crearPersona("75001234567", "Sergio Daniel Cruz Aguilar", "M·ster", "Instructor", "Cujae", "MINED", "Calle 10 entre 3 y 5");
-		crearPersona("84012345678", "Laura Patricia DÌaz RamÌrez", "Ninguno", "Asistente", "CIME", "FMC", "Calle 11 entre 2 y 4");
-		crearPersona("73023456789", "Miguel ¡ngel Torres MartÌnez", "Ninguno", "Auxiliar", "ETECSA", "PCC", "Calle 12 entre 11 y 13");
+		crearPersona("76090123456", "Ricardo Andr√©s Vega Paredes", "Doctor", "Titular", "CineSoft", "MINED", "Calle 9 entre 4 y 6");
+		crearPersona("75001234567", "Sergio Daniel Cruz Aguilar", "M√°ster", "Instructor", "Cujae", "MINED", "Calle 10 entre 3 y 5");
+		crearPersona("84012345678", "Laura Patricia D√≠az Ram√≠rez", "Ninguno", "Asistente", "CIME", "FMC", "Calle 11 entre 2 y 4");
+		crearPersona("73023456789", "Miguel √Ångel Torres Mart√≠nez", "Ninguno", "Auxiliar", "ETECSA", "PCC", "Calle 12 entre 11 y 13");
 				
 		//4to
-		crearPersona("83023456789", "Marta Elena JimÈnez Castro", "Doctor", "Titular", "CineSoft", "FMC", "Calle 13 entre 4 y 6");
-		crearPersona("71045678901", "Rafael Eduardo DÌaz RamÌrez", "M·ster", "Instructor", "CIME", "PCC", "Calle 14 entre 9 y 11");
-		crearPersona("70056789012", "Fernando JosÈ GarcÌa Fern·ndez", "Ninguno", "Asistente", "Cujae", "MINED", "Calle 15 entre 22 y 24");
-		crearPersona("69067890123", "AndrÈs Felipe MartÌnez LÛpez", "Doctor", "Titular", "ETECSA", "MINED", "Calle 16 entre 15 y 17");
+		crearPersona("83023456789", "Marta Elena Jim√©nez Castro", "Doctor", "Titular", "CineSoft", "FMC", "Calle 13 entre 4 y 6");
+		crearPersona("71045678901", "Rafael Eduardo D√≠az Ram√≠rez", "M√°ster", "Instructor", "CIME", "PCC", "Calle 14 entre 9 y 11");
+		crearPersona("70056789012", "Fernando Jos√© Garc√≠a Fern√°ndez", "Ninguno", "Asistente", "Cujae", "MINED", "Calle 15 entre 22 y 24");
+		crearPersona("69067890123", "Andr√©s Felipe Mart√≠nez L√≥pez", "Doctor", "Titular", "ETECSA", "MINED", "Calle 16 entre 15 y 17");
 				
 		// 5to
-		crearPersona("82034567890", "SofÌa Valentina Torres Mendoza", "Doctor", "Titular", "CIME", "FMC", "Calle 17 entre 16 y 18");
-		crearPersona("67089012345", "Javier Alejandro Gonz·lez Torres", "M·ster", "Instructor", "ETECSA", "MINED", "Calle 18 entre 7 y 9");
-		crearPersona("66090123456", "Daniel Enrique S·nchez Morales", "Ninguno", "Asistente", "Cujae", "MINED", "Calle 19 entre 10 y 12");
-		crearPersona("65001234567", "Roberto Carlos JimÈnez Castro", "M·ster", "Auxiliar", "CineSoft", "PCC", "Calle 20 entre 13 y 15");
+		crearPersona("82034567890", "Sof√≠a Valentina Torres Mendoza", "Doctor", "Titular", "CIME", "FMC", "Calle 17 entre 16 y 18");
+		crearPersona("67089012345", "Javier Alejandro Gonz√°lez Torres", "M√°ster", "Instructor", "ETECSA", "MINED", "Calle 18 entre 7 y 9");
+		crearPersona("66090123456", "Daniel Enrique S√°nchez Morales", "Ninguno", "Asistente", "Cujae", "MINED", "Calle 19 entre 10 y 12");
+		crearPersona("65001234567", "Roberto Carlos Jim√©nez Castro", "M√°ster", "Auxiliar", "CineSoft", "PCC", "Calle 20 entre 13 y 15");
 				
 		//6to
-		crearPersona("81045678901", "Adri·n David Romero Vargas", "Doctor", "Titular", "CineSoft", "MINED", "Calle 21 entre 12 y 14");
-		crearPersona("78078901234", "Mario Alberto Ortiz Navarro", "M·ster", "Instructor", "ETECSA", "PCC", "Calle 22 entre 11 y 13");
+		crearPersona("81045678901", "Adri√°n David Romero Vargas", "Doctor", "Titular", "CineSoft", "MINED", "Calle 21 entre 12 y 14");
+		crearPersona("78078901234", "Mario Alberto Ortiz Navarro", "M√°ster", "Instructor", "ETECSA", "PCC", "Calle 22 entre 11 y 13");
 		crearPersona("81045678901", "Paula Andrea Castillo Rojas", "Ninguno", "Asistente", "CIME", "FMC", "Calle 23 entre 6 y 8");
-		crearPersona("74012345678", "Carlos Alberto Fern·ndez LÛpez", "Ninguno", "Auxiliar", "Cujae", "MINED", "Calle 24 entre 21 y 23");
+		crearPersona("74012345678", "Carlos Alberto Fern√°ndez L√≥pez", "Ninguno", "Auxiliar", "Cujae", "MINED", "Calle 24 entre 21 y 23");
 		
 		// ESTUDIANTES
 		/*
 		//1ro
 		//Grupo 1.1
-		crearPersona("03012345678", "Juan Carlos PÈrez GÛmez", "1", "", "", "");
-		crearPersona("04023456789", "JosÈ Antonio RodrÌguez S·nchez", "1", "", "", "");
-		crearPersona("05034567890", "Luis Miguel Hern·ndez Ruiz", "1", "", "", "");
-		crearPersona("04045678901", "MarÌa Fernanda LÛpez MartÌnez", "1", "", "", "");
+		crearPersona("03012345678", "Juan Carlos P√©rez G√≥mez", "1", "", "", "");
+		crearPersona("04023456789", "Jos√© Antonio Rodr√≠guez S√°nchez", "1", "", "", "");
+		crearPersona("05034567890", "Luis Miguel Hern√°ndez Ruiz", "1", "", "", "");
+		crearPersona("04045678901", "Mar√≠a Fernanda L√≥pez Mart√≠nez", "1", "", "", "");
 		
 		
 		//Grupo 1.2
-		crearPersona("03045678901", "Pedro Javier Gonz·lez Torres", "1", "", "", "");
-		crearPersona("04056789012", "Francisco Javier S·nchez Morales", "1", "", "", "");
-		crearPersona("05056789012", "Ana Isabel GarcÌa Fern·ndez", "1", "", "", "");
-		crearPersona("04067890123", "Laura Patricia DÌaz RamÌrez", "1", "", "", "");
+		crearPersona("03045678901", "Pedro Javier Gonz√°lez Torres", "1", "", "", "");
+		crearPersona("04056789012", "Francisco Javier S√°nchez Morales", "1", "", "", "");
+		crearPersona("05056789012", "Ana Isabel Garc√≠a Fern√°ndez", "1", "", "", "");
+		crearPersona("04067890123", "Laura Patricia D√≠az Ram√≠rez", "1", "", "", "");
 		
 		
 		//2do
