@@ -316,7 +316,6 @@ public class InputJDialogPlanifDocente extends JDialog {
 				break;
 			case GRUPO:
 				Asignatura asignatura = Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec);
-				//DatosAuto.definirTablaGrupo(Fct.getInstance().buscarGruposPorAnno(asignatura.getAnnoAcademico()));
 				DatosAuto.definirTablaGrupo(Fct.getInstance().buscarGruposPorAnnoNoVacio(asignatura.getAnnoAcademico()));
 				tabla = new JTableNoEdit(Runner.modeloGrupoReporte);/*
 				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
@@ -329,7 +328,7 @@ public class InputJDialogPlanifDocente extends JDialog {
 				});
 				break;
 			case PLAN_ESTUDIO:
-				DatosAuto.definirTablaPlanDeEstudio(Fct.getInstance().getPlanEstudio().busarAsignaturasPorPeriodo(Integer.valueOf(annoComboBox.getSelectedItem().toString()), Integer.valueOf(semestreComboBox.getSelectedItem().toString())));
+				DatosAuto.definirTablaPlanDeEstudio(Fct.getInstance().getPlanEstudio().buscarAsignaturasPorPeriodo(Integer.valueOf(annoComboBox.getSelectedItem().toString()), Integer.valueOf(semestreComboBox.getSelectedItem().toString())));
 				tabla = new JTableNoEdit(Runner.modeloPlanDeEstudio);
 				tabla.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -374,6 +373,8 @@ public class InputJDialogPlanifDocente extends JDialog {
 			break;
 		case PLAN_DOCENTE:
 			lblTabla.setText("Planes Docentes");
+			break;
+		default:
 			break;
 		}
 	}
