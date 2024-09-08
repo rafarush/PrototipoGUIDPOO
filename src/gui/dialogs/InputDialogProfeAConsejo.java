@@ -147,7 +147,6 @@ public class InputDialogProfeAConsejo extends JDialog {
 	}
 	
 	private void tableDraw(){
-			JOptionPane.showMessageDialog(null, "Recordar a jorge la funcion para profes fuera del consejo,\nestos datos son de prueba");
 			DatosAuto.definirTablaProfesConsejo(Fct.getInstance().buscarProfesSinCargo());
 			table = new JTableNoEdit(Runner.modeloProfesorConsejo);
 			table.addMouseListener(new java.awt.event.MouseAdapter() {
