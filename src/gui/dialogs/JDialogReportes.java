@@ -33,9 +33,7 @@ import javax.swing.JScrollPane;
 
 import logica.ComboBoxTextInicial;
 import logica.DatosAuto;
-import logica.Estudiante;
-import logica.Fct;
-import logica.Grupo;
+import logica.Clases.*;
 import logica.JTableNoEdit;
 
 import java.beans.PropertyChangeListener;

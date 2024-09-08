@@ -24,11 +24,9 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Cursor;
 
 import logica.DatosAuto;
-import logica.Fct;
 import logica.JTableNoEdit;
-import logica.PersonalApoyo;
 import logica.Enums.BotonSelec;
-import logica.Profesor;
+import logica.Clases.*;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;

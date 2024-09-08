@@ -24,8 +24,7 @@ import javax.swing.DefaultComboBoxModel;
 
 import java.awt.Cursor;
 
-import logica.Estudiante;
-import logica.Fct;
+import logica.Clases.*;
 
 
 

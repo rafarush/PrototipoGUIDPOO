@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
 
-import logica.*;
+
+import logica.Clases.*;
 
 
 public class Runner {
