@@ -190,6 +190,7 @@ public class MainFrame extends JFrame {
 						} catch (Exception exc) {
 							exc.printStackTrace();
 						}
+						tableDraw();
 						break;	
 					case PLAN_ESTUDIO:
 						try {
@@ -518,7 +519,7 @@ public class MainFrame extends JFrame {
 				//JOptionPane.showMessageDialog(null, "Implementar");
 				switch (periodo) {
 				case 0:
-					if (Fct.getInstance().pasarPeriodo()){
+					if (Fct.getInstance().empezarPeriodo()){
 						JOptionPane.showMessageDialog(null, "Inicio de semestre 1");
 						periodo = 1;
 					}else{
@@ -539,7 +540,7 @@ public class MainFrame extends JFrame {
 						JOptionPane.showMessageDialog(null, "Se pudo pasar de año (Inicio de preparación de semestre)");
 						periodo = 0;
 					}else{
-						JOptionPane.showMessageDialog(null, "Se pudo pasar de año");
+						JOptionPane.showMessageDialog(null, "No se pudo pasar de año");
 					}
 					break;
 				default:
