@@ -28,11 +28,7 @@ import java.awt.Cursor;
 
 import javax.swing.SpinnerListModel;
 
-import logica.Asignatura;
-import logica.Estudiante;
-import logica.Fct;
-import logica.Grupo;
-import logica.Profesor;
+import logica.Clases.*;
 
 
 

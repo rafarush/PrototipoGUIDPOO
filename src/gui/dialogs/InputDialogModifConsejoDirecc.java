@@ -24,9 +24,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Cursor;
 import java.util.ArrayList;
 
-import logica.Fct;
-import logica.PersonalApoyo;
-import logica.Profesor;
+import logica.Clases.*;
 
 
 

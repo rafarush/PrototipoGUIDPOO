@@ -21,7 +21,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPasswordField;
 import javax.swing.SwingWorker;
 
-import logica.User;
+import logica.Clases.*;
 
 import javax.swing.JProgressBar;
 

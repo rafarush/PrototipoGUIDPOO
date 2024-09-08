@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import runner.Runner;
 import gui.utils.ModeloPlanificacionDocenteEdit;
-
+import logica.Clases.*;
 
 public class DatosAuto {
 	

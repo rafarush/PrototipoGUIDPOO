@@ -18,7 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 
 import logica.DatosAuto;
-import logica.Fct;
+import logica.Clases.*;
 import logica.JTableNoEdit;
 import logica.Enums.BotonSelec;
 

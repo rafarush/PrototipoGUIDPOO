@@ -2,6 +2,7 @@ package gui.dialogs;
 
 
 import gui.utils.Validaciones;
+import logica.Clases.*;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -22,7 +23,7 @@ import javax.swing.SpinnerNumberModel;
 
 import java.awt.Cursor;
 
-import logica.Fct;
+
 
 
 

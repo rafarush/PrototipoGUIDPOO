@@ -4,7 +4,7 @@ import javax.swing.table.AbstractTableModel;
 
 import java.util.List;
 
-import logica.Profesor;
+import logica.Clases.Profesor;
 
 public class ModeloProfesorEdit extends AbstractTableModel {
 

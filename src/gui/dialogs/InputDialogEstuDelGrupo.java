@@ -18,9 +18,7 @@ import java.awt.event.MouseEvent;
 import java.awt.Cursor;
 
 import logica.DatosAuto;
-import logica.Estudiante;
-import logica.Fct;
-import logica.Grupo;
+import logica.Clases.*;
 import logica.JTableNoEdit;
 import javax.swing.JScrollPane;
 

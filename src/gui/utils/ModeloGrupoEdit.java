@@ -4,8 +4,7 @@ import javax.swing.table.AbstractTableModel;
 
 import java.util.List;
 
-import logica.Grupo;
-import logica.PlanificacionDocente;
+import logica.Clases.Grupo;
 
 public class ModeloGrupoEdit extends AbstractTableModel {
 
