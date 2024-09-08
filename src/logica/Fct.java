@@ -644,24 +644,8 @@ public final class Fct {
 	public boolean empezarPeriodo(){
 		boolean val = false;
 		if(buscarEstudiantesSinGrupo().size()==0 && verificarGruposEnSusPD() && planEstudio.verificarAsignaturasMinimas() && buscarEstudiantes().size()>0){                    
-
-			System.out.println("buscar estudiantes sin grupo   "+buscarEstudiantesSinGrupo().size());
-			System.out.println("verificarGruposEnSusPD     "+verificarGruposEnSusPD());
-			System.out.println("planEstudio.verificarAsignaturasMinimas     "+planEstudio.verificarAsignaturasMinimas());
-			System.out.println("buscarEstudiantes()     "+buscarEstudiantes().size());
-			System.out.println();
-			
-			
-			System.out.println("----------------------------------------------");
-			
 			val = true;
 		}
-		
-		System.out.println("buscar estudiantes sin grupo    "+buscarEstudiantesSinGrupo().size());
-		System.out.println("verificarGruposEnSusPD    "+verificarGruposEnSusPD());
-		System.out.println("planEstudio.verificarAsignaturasMinimas    "+planEstudio.verificarAsignaturasMinimas());
-		System.out.println("buscarEstudiantes()     "+buscarEstudiantes().size());
-		System.out.println();
 		
 		return val;
 	}
