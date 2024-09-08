@@ -44,7 +44,7 @@ public class Runner {
 		//Usuario
 	    usuario = new User("Fermin", "1234");
 		
-		Fct.getInstance().datosAutomaticos();
+		Fct.getInstance().generarDatosAutomaticos();
 		
 		try {
 			JDialogLoginUser login = new JDialogLoginUser();
