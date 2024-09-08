@@ -31,10 +31,8 @@ import runner.Runner;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 
-import logica.ComboBoxTextInicial;
-import logica.DatosAuto;
+import gui.utils.*;
 import logica.Clases.*;
-import logica.JTableNoEdit;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;

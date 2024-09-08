@@ -24,7 +24,7 @@ import javax.swing.DefaultComboBoxModel;
 
 import java.awt.Cursor;
 
-import logica.DatosAuto;
+import gui.utils.*;
 import logica.Clases.*;
 
 

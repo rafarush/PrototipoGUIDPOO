@@ -1,4 +1,4 @@
-package logica;
+package gui.utils;
 
 import java.awt.Color;
 import java.awt.Component;

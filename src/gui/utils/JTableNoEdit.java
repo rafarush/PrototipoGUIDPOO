@@ -1,4 +1,4 @@
-package logica;
+package gui.utils;
 
 import gui.utils.ModeloGrupoEdit;
 import gui.utils.ModeloPlanificacionDocenteEdit;

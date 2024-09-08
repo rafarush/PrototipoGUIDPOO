@@ -17,11 +17,9 @@ import runner.Runner;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 
-import logica.DatosAuto;
 import logica.Clases.*;
-import logica.JTableNoEdit;
-import logica.Enums.BotonSelec;
-
+import gui.utils.*;
+import gui.utils.Enums.BotonSelec;
 
 import javax.swing.border.LineBorder;
 
