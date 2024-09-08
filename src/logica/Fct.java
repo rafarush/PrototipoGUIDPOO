@@ -645,8 +645,23 @@ public final class Fct {
 		boolean val = false;
 		if(buscarEstudiantesSinGrupo().size()==0 && verificarGruposEnSusPD() && planEstudio.verificarAsignaturasMinimas() && buscarEstudiantes().size()>0){                    
 
+			System.out.println("buscar estudiantes sin grupo   "+buscarEstudiantesSinGrupo().size());
+			System.out.println("verificarGruposEnSusPD     "+verificarGruposEnSusPD());
+			System.out.println("planEstudio.verificarAsignaturasMinimas     "+planEstudio.verificarAsignaturasMinimas());
+			System.out.println("buscarEstudiantes()     "+buscarEstudiantes().size());
+			System.out.println();
+			
+			
+			System.out.println("----------------------------------------------");
+			
 			val = true;
 		}
+		
+		System.out.println("buscar estudiantes sin grupo    "+buscarEstudiantesSinGrupo().size());
+		System.out.println("verificarGruposEnSusPD    "+verificarGruposEnSusPD());
+		System.out.println("planEstudio.verificarAsignaturasMinimas    "+planEstudio.verificarAsignaturasMinimas());
+		System.out.println("buscarEstudiantes()     "+buscarEstudiantes().size());
+		System.out.println();
 		
 		return val;
 	}
@@ -656,20 +671,42 @@ public final class Fct {
 		 boolean val = true;
 		 boolean var = false;
 		 
-		 for(int i = 0;i<grupos.size() && val; i++){
+		/* for(int i = 0;i<grupos.size() && val; i++){
+			 System.out.println("Ngrupo"+grupos.get(i).getNombreGrupo());
 				for(Asignatura a : planEstudio.buscarAsignaturaPorAnno(grupos.get(i).getAnnoAcademico())){
+					System.out.println("Nasignatura"+a.getNombre());
 					for(int e=0;e<periodos.size() && val;e++){
-						if(i==grupos.get(i).getAnnoAcademico()-1 || i==grupos.get(i).getAnnoAcademico()+5){ 
+						if(e==grupos.get(i).getAnnoAcademico()-1 || e==grupos.get(i).getAnnoAcademico()+5){ 
 							var = false;
-							for(PlanificacionDocente pD : periodos.get(i).getPlanificacionesDocentes()){
-								if(pD.getAsignatura().equals(a) && pD.getGrupo().equals(grupos.get(i)))
+							for(PlanificacionDocente pD : periodos.get(e).getPlanificacionesDocentes()){
+								System.out.println("entra al for d pD");
+								if(pD.getAsignatura().equals(a) && pD.getGrupo().equals(grupos.get(i))){
 									var = true;
+									System.out.println("entra al for d pD");
+								}
 							}
+							System.out.println("var"+var);
 							if(!var)
 								val = false;
 						}
 					}
 				}
+			}*/
+		 
+		 for(int i = 0;i<grupos.size() && val; i++){
+					for(int e=0;e<periodos.size() && val;e++){
+						if(e==grupos.get(i).getAnnoAcademico()-1 || e==grupos.get(i).getAnnoAcademico()+5){ 
+							var = false;
+							for(PlanificacionDocente pD : periodos.get(e).getPlanificacionesDocentes()){
+								if((planEstudio.buscarAsignaturasPorPeriodo(grupos.get(i).getAnnoAcademico(), 1).contains(pD.getAsignatura()) || planEstudio.buscarAsignaturasPorPeriodo(grupos.get(i).getAnnoAcademico(), 2).contains(pD.getAsignatura())) && pD.getGrupo().equals(grupos.get(i))){
+									var = true;
+								}
+							}
+							if(!var)
+								val = false;
+						}
+					}
+				
 			}
 		 
 		 
@@ -1068,11 +1105,11 @@ public final class Fct {
 		//1ro
 		//Grupo 1.1
 		crearPersona("03012345678", "Juan Carlos Pérez Gómez", 1, "CIME", "MINED", "Calle 30 entre 13 y 15");
-		crearPersona("04023456789", "José Antonio Rodríguez Sánchez", 1, "ETECSA", "PCC", "Calle 21 entre 34 y 324");
-		crearPersona("05034567890", "Luis Miguel Hernández Ruiz", 1, "CIME", "MINED", "Calle 25 entre 12 y 14");
-		crearPersona("04045678901", "María Fernanda López Martínez", 1, "ETECSA", "FMC", "Calle 7 entre 12 y 14");
+		//crearPersona("04023456789", "José Antonio Rodríguez Sánchez", 1, "ETECSA", "PCC", "Calle 21 entre 34 y 324");
+		//crearPersona("05034567890", "Luis Miguel Hernández Ruiz", 1, "CIME", "MINED", "Calle 25 entre 12 y 14");
+		//crearPersona("04045678901", "María Fernanda López Martínez", 1, "ETECSA", "FMC", "Calle 7 entre 12 y 14");
 		
-		crearGrupo("Grupo", 1);
+		crearGrupo("Grupo 1.1", 1);
 		
 		/*
 		//Grupo 1.2
