@@ -44,27 +44,22 @@ public class Runner {
 		//Usuario
 	    usuario = new User("Fermin", "1234");
 		
-		Fct.getInstance().datosAutomaticos();
+		//Fct.getInstance().datosAutomaticos();
 		
 
-		Fct.getInstance().crearPersona("05064807564", "Manuel Cuadrado Aldiva","Máster","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
-		Profesor profe = (Profesor) Fct.getInstance().buscarPersona("05064807564");
-		profe.setCargoConsejoDireccion("Director");
+		//Fct.getInstance().crearPersona("05064807564", "Manuel Cuadrado Aldiva","Máster","Titular","Cujae","MINES", "Calle 30 entre 34 y Ave. 56");
+		//Profesor profe = (Profesor) Fct.getInstance().buscarPersona("05064807564");
+		//profe.setCargoConsejoDireccion("Director");
 	    
-		Fct.getInstance().getPlanEstudio().crearAsignatura("Matemática III", 2, 1, 50);
-		Fct.getInstance().getPlanEstudio().crearAsignatura("IA", 2, 2, 50);
+		//Fct.getInstance().getPlanEstudio().crearAsignatura("Matemática III", 2, 1, 50);
+		//Fct.getInstance().getPlanEstudio().crearAsignatura("IA", 2, 2, 50);
 	    
-		Fct.getInstance().crearGrupo("Grupo 2.2", 2);
-		Fct.getInstance().crearGrupo("Grupo 2.1", 2);
+		//Fct.getInstance().crearGrupo("Grupo 2.2", 2);
+		//Fct.getInstance().crearGrupo("Grupo 2.1", 2);
 	    
-		Fct.getInstance().getPeriodos().get(1).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor("95868426587"),Fct.getInstance().getPlanEstudio().buscarAsignatura("Matemática III") , Fct.getInstance().buscarGrupo("Grupo 2.1"));
-		Fct.getInstance().getPeriodos().get(7).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor("95868426587"),Fct.getInstance().getPlanEstudio().buscarAsignatura("IA") , Fct.getInstance().buscarGrupo("Grupo 2.2"));
+		//Fct.getInstance().getPeriodos().get(1).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor("95868426587"),Fct.getInstance().getPlanEstudio().buscarAsignatura("Matemática III") , Fct.getInstance().buscarGrupo("Grupo 2.1"));
+		//Fct.getInstance().getPeriodos().get(7).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor("95868426587"),Fct.getInstance().getPlanEstudio().buscarAsignatura("IA") , Fct.getInstance().buscarGrupo("Grupo 2.2"));
 	    
-		ArrayList<String> cargos = Fct.getInstance().buscarCargosCDFaltantes();
-		System.out.println(cargos.size());
-		for (String c : cargos) {
-			System.out.println(c);
-		}
 		
 		try {
 			JDialogLoginUser login = new JDialogLoginUser();
