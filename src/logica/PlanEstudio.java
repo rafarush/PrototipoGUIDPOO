@@ -79,7 +79,7 @@ public class PlanEstudio {
 	// para verificar q rn cada periodo hay al menos una 
 	public boolean verificarAsignaturasMinimas() {
 		boolean val = true;
-		for(int i = 0; i<7 && val;i++){
+		for(int i = 1; i<7 && val;i++){
 			if(buscarAsignaturasPorPeriodo(i,1).size()==0 || buscarAsignaturasPorPeriodo(i,2).size()==0)
 				val = false;
 			
