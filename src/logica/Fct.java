@@ -1089,9 +1089,9 @@ public final class Fct {
 		//1ro
 		//Grupo 1.1
 		crearPersona("03012345678", "Juan Carlos Pérez Gómez", 1, "CIME", "MINED", "Calle 30 entre 13 y 15");
-		//crearPersona("04023456789", "José Antonio Rodríguez Sánchez", 1, "ETECSA", "PCC", "Calle 21 entre 34 y 324");
-		//crearPersona("05034567890", "Luis Miguel Hernández Ruiz", 1, "CIME", "MINED", "Calle 25 entre 12 y 14");
-		//crearPersona("04045678901", "María Fernanda López Martínez", 1, "ETECSA", "FMC", "Calle 7 entre 12 y 14");
+		crearPersona("04023456789", "José Antonio Rodríguez Sánchez", 1, "ETECSA", "PCC", "Calle 21 entre 34 y 324");
+		crearPersona("05034567890", "Luis Miguel Hernández Ruiz", 1, "CIME", "MINED", "Calle 25 entre 12 y 14");
+		crearPersona("04045678901", "María Fernanda López Martínez", 1, "ETECSA", "FMC", "Calle 7 entre 12 y 14");
 		
 		crearGrupo("Grupo 1.1", 1);
 		
