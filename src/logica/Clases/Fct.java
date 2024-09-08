@@ -1,8 +1,8 @@
-package logica;
+package logica.Clases;
 
 import java.util.ArrayList;
 
-import logica.utils.ProcesoNoPermitido;
+import logica.utils.ProcesoNoPermitidoException;
 
 public final class Fct {
 	//atributos
@@ -643,7 +643,7 @@ public final class Fct {
 
 
 	//para empezar un nuevo semestre
-	public boolean empezarPeriodo() throws ProcesoNoPermitido{
+	public boolean empezarPeriodo() throws ProcesoNoPermitidoException{
 		boolean val = false;
 		
 		if(buscarEstudiantesSinGrupo().size()==0){
@@ -652,16 +652,16 @@ public final class Fct {
 					if(buscarEstudiantes().size()>0){
 						val = true;
 					}else{
-						throw new ProcesoNoPermitido("No existen estudiantes para empezar.");
+						throw new ProcesoNoPermitidoException("No existen estudiantes para empezar.");
 					}
 				}else{
-					throw new ProcesoNoPermitido("En algún período no se han creado asignaturas.");
+					throw new ProcesoNoPermitidoException("En algún período no se han creado asignaturas.");
 				}
 			}else{
-				throw new ProcesoNoPermitido("Hay grupos que le faltan crear sus planificaciones docentes correspondientes.");
+				throw new ProcesoNoPermitidoException("Hay grupos que le faltan crear sus planificaciones docentes correspondientes.");
 			}
 		}else{
-			throw new ProcesoNoPermitido("Hay "+buscarEstudiantesSinGrupo().size()+" sin grupo.");
+			throw new ProcesoNoPermitidoException("Hay "+buscarEstudiantesSinGrupo().size()+" sin grupo.");
 		}
 		
 		return val;

@@ -1,4 +1,4 @@
-package logica;
+package logica.Clases;
 
 public class Asignatura {
 	// ATRIBUTOS
