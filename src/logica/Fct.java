@@ -936,6 +936,11 @@ public final class Fct {
 	
 	
 	//PARA ELIMINAR UN GRUPO
+	/***
+	 * 
+	 * @param grupo
+	 * @return un booleano si se elimino o no
+	 */
 	public boolean eliminarGrupo(Grupo grupo){
 		boolean eliminada = false;
 		
