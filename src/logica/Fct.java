@@ -643,7 +643,7 @@ public final class Fct {
 	//para empezar un nuevo semestre
 	public boolean empezarPeriodo(){
 		boolean val = false;
-		if(buscarEstudiantesSinGrupo().size()>0 && verificarGruposEnSusPD()){
+		if(buscarEstudiantesSinGrupo().size()==0 && verificarGruposEnSusPD() && planEstudio.verificarAsignaturasMinimas() && buscarEstudiantes().size()>0){                    
 
 			val = true;
 		}
@@ -1199,6 +1199,17 @@ public final class Fct {
 	}
 	
 	
+	// para buscar lso grupos que no esten vacios
+	public ArrayList<Grupo> buscarGruposNoVacio(){
+		ArrayList<Grupo> gruposNoVacios = new ArrayList<>();
+		
+		for(Grupo g : grupos){
+			if(g.getGrupoEstudiantes().size()>0)
+				gruposNoVacios.add(g);
+		}
+		
+		return gruposNoVacios;
+	}
 	
 	
 	
