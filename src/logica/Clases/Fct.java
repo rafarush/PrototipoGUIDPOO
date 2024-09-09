@@ -1223,9 +1223,6 @@ public final class Fct {
 		planEstudio.crearAsignatura("Calculo II",1 ,2 ,46 );
 		periodos.get(6).crearPlanificacionDocente(buscarUnProfesor("84012345678"), planEstudio.buscarAsignatura("Calculo II"), buscarGrupo("Grupo 1.1"));
 		
-		System.out.println(buscarUnEstudiante("03012345678").getNotas().size());
-		System.out.println(buscarUnEstudiante("03012345678").buscarControlDocente(planEstudio.buscarAsignatura("Calculo II")).getNota1());
-		
 		planEstudio.crearAsignatura("Calculo III",2 ,1 ,52 );
 		planEstudio.crearAsignatura("RA",2 ,2 ,60 );
 		planEstudio.crearAsignatura("Red PC",3 ,1 ,26 );

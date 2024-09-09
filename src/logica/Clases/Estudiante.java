@@ -226,9 +226,6 @@ public class Estudiante extends Persona{
 		public ArrayList<String> buscarNotaEspecifica(Asignatura asignatura){
 			ArrayList<String> notas = new ArrayList<>();
 			
-			System.out.println(buscarControlDocente(asignatura).getNota1());
-			System.out.println(buscarControlDocente(asignatura).getNota1());
-			System.out.println(buscarControlDocente(asignatura).getNota2());
 			notas.add(Float.toString(buscarControlDocente(asignatura).getNota1()));
 			notas.add(Float.toString(buscarControlDocente(asignatura).getNota2()));
 			
