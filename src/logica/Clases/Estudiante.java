@@ -92,9 +92,11 @@ public class Estudiante extends Persona{
 		ControlDocente controlDocente = null;
 		
 		while(i<notas.size() && val){
-			if(notas.get(i).getAsignatura().equals(asignatura))
+			if(notas.get(i).getAsignatura().equals(asignatura)){
 				controlDocente= notas.get(i);
-				val=false;			
+				val=false;
+			}
+							
 			i++;
 		}
 		if(val)
@@ -123,6 +125,28 @@ public class Estudiante extends Persona{
 			return val;
 		}
 	
+		
+		//DEVUELVE TRUE O FALSE SEGUN TENGA O NO TODAS LAS NOTAS del primer semestre
+		public boolean verificarNotasPrimerSemestre(){
+			boolean val = true;
+			int i = 0;
+			
+			while(i<notas.size() && val){
+				if(notas.get(i).getNota1()==0 && notas.get(i).getAsignatura().getSemestre()==1){
+					val= false;
+				}else{
+					if(notas.get(i).getNota1()<3 && notas.get(i).getNota2()==0 && notas.get(i).getAsignatura().getSemestre()==1)
+						val=false;
+				}
+				
+				i++;
+			}
+			
+			return val;
+		}
+		
+		
+		
 		
 		// DEVUELVE UN ENTERO CON LA CANTIDAD DE ASIGNATURAS SUSPENSAS
 		public ArrayList<ControlDocente> verificarNotasSuspensas(){
@@ -201,6 +225,10 @@ public class Estudiante extends Persona{
 		//para buscar una nota especifica
 		public ArrayList<String> buscarNotaEspecifica(Asignatura asignatura){
 			ArrayList<String> notas = new ArrayList<>();
+			
+			System.out.println(buscarControlDocente(asignatura).getNota1());
+			System.out.println(buscarControlDocente(asignatura).getNota1());
+			System.out.println(buscarControlDocente(asignatura).getNota2());
 			notas.add(Float.toString(buscarControlDocente(asignatura).getNota1()));
 			notas.add(Float.toString(buscarControlDocente(asignatura).getNota2()));
 			
