@@ -186,6 +186,7 @@ public class Profesor extends Trabajador{
 	public ControlDocente crearControlDocente(Estudiante estudiante, Asignatura asignatura){
 		
 		ControlDocente controlDocente = new ControlDocente(estudiante, asignatura);
+		notasAlumnos.add(controlDocente);
 		
 		return controlDocente;
 	}
