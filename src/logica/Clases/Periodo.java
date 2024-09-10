@@ -29,7 +29,12 @@ public class Periodo {
 			if(!verificarPlanificacionDocente(grupo, asignatura)){
 				PlanificacionDocente planificacionDocente =  new PlanificacionDocente(profesor, asignatura, grupo);
 				planificacionesDocentes.add(planificacionDocente);
-				profesor.crearControlDocente(grupo, asignatura);
+				
+				for(Estudiante e : grupo.getGrupoEstudiantes()){
+					ControlDocente controlDocente=profesor.crearControlDocente(e, asignatura);
+					e.insertarControlDocente(controlDocente);
+				}
+				
 				val = true;
 			}
 			

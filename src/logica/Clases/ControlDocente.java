@@ -18,7 +18,6 @@ public class ControlDocente {
 		//setNota2(nota2);
 	}
 	
-	
 
 	
 	// SETS Y GETS

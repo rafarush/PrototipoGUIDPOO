@@ -183,13 +183,12 @@ public class Profesor extends Trabajador{
 	
 	
 	// PARA CREAR EL CONTROL DOCENTE
-	public void crearControlDocente(Grupo grupo, Asignatura asignatura){
+	public ControlDocente crearControlDocente(Estudiante estudiante, Asignatura asignatura){
 		
-		for(Estudiante i : grupo.getGrupoEstudiantes()){
-			ControlDocente controlDocente = new ControlDocente(i, asignatura);
-			notasAlumnos.add(controlDocente);
-			i.insertarControlDocente(controlDocente);
-		}
+		ControlDocente controlDocente = new ControlDocente(estudiante, asignatura);
+		notasAlumnos.add(controlDocente);
+		
+		return controlDocente;
 	}
 	
 	
