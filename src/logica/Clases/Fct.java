@@ -635,9 +635,11 @@ public final class Fct {
 	public boolean pasarPeriodo(){
 		boolean val = true;
 		
-		if(buscarEstudiantesSinNotasPrimerSemestre().size()==0)
+		if(buscarEstudiantesSinNotasPrimerSemestre().size()!=0)
 			val=false;
 		
+		
+		System.out.println(val);
 		for( Estudiante e : buscarEstudiantesSinNotasPrimerSemestre()){
 			System.out.println(e.getNombre());
 		}
@@ -704,9 +706,15 @@ public final class Fct {
 			val=false;
 		else{
 			for(Estudiante e : buscarEstudiantes()){
-				if(e.verificarArrastre() || e.verificarNotasSuspensas().size()==0)
+				
+				System.out.println(e.verificarArrastre());
+				System.out.println(e.verificarNotasSuspensas().size());
+				
+				
+				if(e.verificarArrastre() || (e.verificarNotasSuspensas1erSemestre().size()<2 && e.verificarNotasSuspensas2doSemestre().size()<2 ))
 					e.setAnnoAcademico(e.getAnnoAcademico()+1);
 			}
+			
 			grupos.clear();
 			crearGruposArrastres();
 		}
@@ -874,10 +882,11 @@ public final class Fct {
 		
 		
 		for(Estudiante i : buscarEstudiantes()){
-			if(!i.verificarNotas())
+			if(!i.verificarNotasPrimerSemestre())
 				sinNotas1erSem.add(i);
 		}
-		
+		for(Estudiante e : sinNotas1erSem)
+			System.out.println(e.getNombre());
 		
 		return sinNotas1erSem;
 	}
@@ -1218,7 +1227,9 @@ public final class Fct {
 		
 		// Asignatura
 		planEstudio.crearAsignatura("Calculo I",1 ,1 ,50 );
+		planEstudio.crearAsignatura("IP",1 ,1 ,50 );
 		periodos.get(0).crearPlanificacionDocente(buscarUnProfesor("84012345678"), planEstudio.buscarAsignatura("Calculo I"), buscarGrupo("Grupo 1.1"));
+		periodos.get(0).crearPlanificacionDocente(buscarUnProfesor("84012345678"), planEstudio.buscarAsignatura("IP"), buscarGrupo("Grupo 1.1"));
 		
 		planEstudio.crearAsignatura("Calculo II",1 ,2 ,46 );
 		periodos.get(6).crearPlanificacionDocente(buscarUnProfesor("84012345678"), planEstudio.buscarAsignatura("Calculo II"), buscarGrupo("Grupo 1.1"));

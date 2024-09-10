@@ -134,10 +134,8 @@ public class Estudiante extends Persona{
 			while(i<notas.size() && val){
 				if(notas.get(i).getNota1()==0 && notas.get(i).getAsignatura().getSemestre()==1){
 					val= false;
-				}else{
-					if(notas.get(i).getNota1()<3 && notas.get(i).getNota2()==0 && notas.get(i).getAsignatura().getSemestre()==1)
-						val=false;
-				}
+				}else if(notas.get(i).getNota1()<3 && notas.get(i).getNota2()==0 && notas.get(i).getAsignatura().getSemestre()==1)
+					val=false;
 				
 				i++;
 			}
@@ -148,7 +146,7 @@ public class Estudiante extends Persona{
 		
 		
 		
-		// DEVUELVE UN ENTERO CON LA CANTIDAD DE ASIGNATURAS SUSPENSAS
+		// DEVUELVE   LAs ASIGNATURAS SUSPENSAS
 		public ArrayList<ControlDocente> verificarNotasSuspensas(){
 			ArrayList<ControlDocente> suspensas = new ArrayList<>();
 			
@@ -159,6 +157,41 @@ public class Estudiante extends Persona{
 			
 			return suspensas;
 		}
+		
+		
+		
+		//DEVUELVE   LAs ASIGNATURAS SUSPENSAS
+		public ArrayList<ControlDocente> verificarNotasSuspensas1erSemestre(){
+			ArrayList<ControlDocente> suspensas1 = new ArrayList<>();
+			
+			for(ControlDocente i : notas){
+				if(i.getNota1()<3 && i.getNota2()<3 && i.getAsignatura().getSemestre()==1)
+					suspensas1.add(i);
+			}
+			
+			return suspensas1;
+		}
+		
+		
+		
+		//DEVUELVE   LAs ASIGNATURAS SUSPENSAS
+		public ArrayList<ControlDocente> verificarNotasSuspensas2doSemestre(){
+			ArrayList<ControlDocente> suspensas2 = new ArrayList<>();
+			
+			for(ControlDocente i : notas){
+				if(i.getNota1()<3 && i.getNota2()<3 && i.getAsignatura().getSemestre()==2)
+					suspensas2.add(i);
+			}
+			
+			return suspensas2;
+		}
+		
+		
+		
+		
+		
+		
+		
 		
 		// PARA CALCULAR EL PROMEDIO DE LAS NOTAS 
 		public float calcularPromedio(){
