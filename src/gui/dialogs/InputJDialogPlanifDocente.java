@@ -69,7 +69,7 @@ public class InputJDialogPlanifDocente extends JDialog {
 	/**
 	 * Crea el JDialog
 	 */
-	public InputJDialogPlanifDocente() {
+	public InputJDialogPlanifDocente(final int periodo) {
 		setUndecorated(true);
 		setModal(true);
 		setBounds(100, 100, 617, 415);
@@ -138,55 +138,65 @@ public class InputJDialogPlanifDocente extends JDialog {
 				auxBtn.addMouseListener(new MouseAdapter() {
 					@Override
 				public void mouseClicked(MouseEvent e) {
-						if (btnSeleccionado != BotonSelec.PLAN_DOCENTE && tabla.getSelectedRow() == -1){
-							JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
-						}else{
-							switch (btnSeleccionado) {
-							case PLAN_DOCENTE:
-								btnSeleccionado = BotonSelec.PROFESOR;
-								auxBtn.setText("Asignar Profesor");
-								actualizarLblNombre();
-								tableDraw();
-								break;
-							case PROFESOR:
-								btnSeleccionado = BotonSelec.PLAN_ESTUDIO;
-								auxBtn.setText("Asignar Asignatura");
-								profeSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
-								actualizarLblNombre();
-								tableDraw();
-								break;
-							case PLAN_ESTUDIO:
-								btnSeleccionado = BotonSelec.GRUPO;
-								auxBtn.setText("Asignar Grupo");
-								asignaturaSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
-								actualizarLblNombre();
-								tableDraw();
-								break;
-							case GRUPO:
-								//Llamar a crear planificacion docente
-								grupoSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
-								if(semestreComboBox.getSelectedItem().toString().equalsIgnoreCase("1")){
-									Fct.getInstance().getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())-1).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor(profeSelec), 
-											Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec),
-											Fct.getInstance().buscarGrupo(grupoSelec));
-								}else{
-									Fct.getInstance().getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())+5).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor(profeSelec), 
-											Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec),
-											Fct.getInstance().buscarGrupo(grupoSelec));
-								}
-								/*Fct.getInstance().getPeriodos().get(0).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor(profeSelec), 
-										Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec),
-										Fct.getInstance().buscarGrupo(grupoSelec));*/
-								JOptionPane.showMessageDialog(null, "Planificación realizada con éxito");
-								btnSeleccionado = BotonSelec.PLAN_DOCENTE;
-								auxBtn.setText("Crear Planificaci\u00F3n Docente");
-								actualizarLblNombre();
-								tableDraw();
-								break;
+						if (periodo == 0){
+							if (btnSeleccionado != BotonSelec.PLAN_DOCENTE && tabla.getSelectedRow() == -1){
+								JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
+							}else{
+								switch (btnSeleccionado) {
+								case PLAN_DOCENTE:
+									btnSeleccionado = BotonSelec.PROFESOR;
+									auxBtn.setText("Asignar Profesor");
+									actualizarLblNombre();
+									tableDraw();
+									break;
+								case PROFESOR:
+									btnSeleccionado = BotonSelec.PLAN_ESTUDIO;
+									auxBtn.setText("Asignar Asignatura");
+									profeSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
+									actualizarLblNombre();
+									tableDraw();
+									break;
+								case PLAN_ESTUDIO:
+									btnSeleccionado = BotonSelec.GRUPO;
+									auxBtn.setText("Asignar Grupo");
+									asignaturaSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
+									actualizarLblNombre();
+									tableDraw();
+									break;
+								case GRUPO:
+									//Llamar a crear planificacion docente
+									grupoSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
+									if(semestreComboBox.getSelectedItem().toString().equalsIgnoreCase("1")){
+										if (Fct.getInstance().getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())-1).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor(profeSelec), 
+												Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec),
+												Fct.getInstance().buscarGrupo(grupoSelec))){
+											JOptionPane.showMessageDialog(null, "Planificación Docente realizada con éxito");
+										}else{
+											JOptionPane.showMessageDialog(null, "ERROR!!!\nPlanificación Docente ya existente");
+										}
+										
+									}else{
+										if(Fct.getInstance().getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())+5).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor(profeSelec), 
+												Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec),
+												Fct.getInstance().buscarGrupo(grupoSelec))){
+											JOptionPane.showMessageDialog(null, "Planificación Docente realizada con éxito");
+										}else{
+											JOptionPane.showMessageDialog(null, "ERROR!!!\nPlanificación Docente ya existente");
+										}
+										
+									}
+									btnSeleccionado = BotonSelec.PLAN_DOCENTE;
+									auxBtn.setText("Crear Planificaci\u00F3n Docente");
+									actualizarLblNombre();
+									tableDraw();
+									break;
 
-							default:
-								break;
+								default:
+									break;
+								}
 							}
+						}else{
+							JOptionPane.showMessageDialog(null, "Solo se podrán crear Planificaciones Docentes en la Fase Preparatoria");
 						}		
 				}
 

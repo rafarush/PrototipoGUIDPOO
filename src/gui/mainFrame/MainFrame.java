@@ -166,7 +166,8 @@ public class MainFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//Define que JDialog se activa 
-				switch(btnSeleccionado){
+				if (periodo == 0){
+					switch(btnSeleccionado){
 					case PROFESOR:
 						try {
 							InputDialogProfe inputProfe = new InputDialogProfe();
@@ -233,7 +234,10 @@ public class MainFrame extends JFrame {
 						break;
 					default:
 						break;
-				}		
+				}	
+				}else{
+					JOptionPane.showMessageDialog(null, "Solo se pueden agregar datos al sistema en la Fase Preparatoria");
+				}	
 			}
 		});
 		addBotton.setBounds(530, 122, 101, 21);
@@ -291,73 +295,76 @@ public class MainFrame extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {	
-				if(table.getSelectedRow() == -1){
-					JOptionPane.showMessageDialog(null, "Debe seleccionar la fila que desea eliminar");
-				}else{
-					if(JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esa fila?\n No se podrá recuperar", "Confirmación", 
-					JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION){
-						
-						switch (btnSeleccionado) {
-						case ESTUDIANTE:
-							JOptionPane.showMessageDialog(null, "Falta verificar que no este en un grupo con plan docente");
-							Estudiante estudiante = Fct.getInstance().buscarUnEstudiante(table.getValueAt(table.getSelectedRow(), 0).toString());
-							Fct.getInstance().eliminarPersona(estudiante.getID());
-							JOptionPane.showMessageDialog(null, "Se ha eliminado a el estudiante correctamente");
-							tableDraw();
-							break;
+				if(periodo==0){
+					if(table.getSelectedRow() == -1){
+						JOptionPane.showMessageDialog(null, "Debe seleccionar la fila que desea eliminar");
+					}else{
+						if(JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esa fila?\n No se podrá recuperar", "Confirmación", 
+						JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION){
 							
-						case PROFESOR:
-							String profe = table.getValueAt(table.getSelectedRow(), 0).toString();
-							if(!Fct.getInstance().verificarProfeEnPlanDoc(profe)){
-								Fct.getInstance().eliminarPersona(profe);
-								JOptionPane.showMessageDialog(null, "Se ha eliminado a el profesor correctamente");
+							switch (btnSeleccionado) {
+							case ESTUDIANTE:
+								Estudiante estudiante = Fct.getInstance().buscarUnEstudiante(table.getValueAt(table.getSelectedRow(), 0).toString());
+								Fct.getInstance().eliminarPersona(estudiante.getID());
+								JOptionPane.showMessageDialog(null, "Se ha eliminado a el estudiante correctamente");
 								tableDraw();
-							}else{
-								JOptionPane.showMessageDialog(null, "No se puede eliminar a el profesor, ya que forma parte de la Planificación Docente");
-							}
-							break;
-							
-						case PERSO_AUX:
-							Fct.getInstance().eliminarPersona(table.getValueAt(table.getSelectedRow(), 0).toString());
-							JOptionPane.showMessageDialog(null, "Se ha eliminado al miembro del personal auxiliar correctamente");
-							tableDraw();
-							break;
-							
-						case GRUPO:
-							Grupo grupo = Fct.getInstance().buscarGrupo(table.getValueAt(table.getSelectedRow(), 0).toString());
-							if (!Fct.getInstance().verificarGrupoPD(grupo)){
-								Fct.getInstance().eliminarGrupo(grupo);
-								JOptionPane.showMessageDialog(null, "Se ha eliminado el grupo correctamente");
+								break;
+								
+							case PROFESOR:
+								String profe = table.getValueAt(table.getSelectedRow(), 0).toString();
+								if(!Fct.getInstance().verificarProfeEnPlanDoc(profe)){
+									Fct.getInstance().eliminarPersona(profe);
+									JOptionPane.showMessageDialog(null, "Se ha eliminado a el profesor correctamente");
+									tableDraw();
+								}else{
+									JOptionPane.showMessageDialog(null, "No se puede eliminar a el profesor, ya que forma parte de la Planificación Docente");
+								}
+								break;
+								
+							case PERSO_AUX:
+								Fct.getInstance().eliminarPersona(table.getValueAt(table.getSelectedRow(), 0).toString());
+								JOptionPane.showMessageDialog(null, "Se ha eliminado al miembro del personal auxiliar correctamente");
 								tableDraw();
-							}else{
-								JOptionPane.showMessageDialog(null, "No se puede eliminar el grupo, ya que forma parte de la Planificación Docente");
-							}
-							break;
-							
-						case PLAN_ESTUDIO:
-							String nombreAsignatura = table.getValueAt(table.getSelectedRow(), 0).toString();
-							Asignatura asignatura = Fct.getInstance().getPlanEstudio().buscarAsignatura(nombreAsignatura);
-							
-							if (!Fct.getInstance().verificarAsignaturaPD(asignatura)){
-								Fct.getInstance().eliminarAsignatura(asignatura);
-								JOptionPane.showMessageDialog(null, "Se ha eliminado la asignatura correctamente");
+								break;
+								
+							case GRUPO:
+								Grupo grupo = Fct.getInstance().buscarGrupo(table.getValueAt(table.getSelectedRow(), 0).toString());
+								if (!Fct.getInstance().verificarGrupoPD(grupo)){
+									Fct.getInstance().eliminarGrupo(grupo);
+									JOptionPane.showMessageDialog(null, "Se ha eliminado el grupo correctamente");
+									tableDraw();
+								}else{
+									JOptionPane.showMessageDialog(null, "No se puede eliminar el grupo, ya que forma parte de la Planificación Docente");
+								}
+								break;
+								
+							case PLAN_ESTUDIO:
+								String nombreAsignatura = table.getValueAt(table.getSelectedRow(), 0).toString();
+								Asignatura asignatura = Fct.getInstance().getPlanEstudio().buscarAsignatura(nombreAsignatura);
+								
+								if (!Fct.getInstance().verificarAsignaturaPD(asignatura)){
+									Fct.getInstance().eliminarAsignatura(asignatura);
+									JOptionPane.showMessageDialog(null, "Se ha eliminado la asignatura correctamente");
+									tableDraw();
+								}else{
+									JOptionPane.showMessageDialog(null, "No se puede eliminar la asignatura, ya que forma parte de la Planificación Docente");
+								}
+								break;
+							case CONSEJO_DIRECC:
+								
+								String profeID = table.getValueAt(table.getSelectedRow(), 0).toString();
+								Profesor profesor = (Profesor) Fct.getInstance().buscarPersona(profeID);
+								Fct.getInstance().eliminarDelCD(profesor);
+								JOptionPane.showMessageDialog(null, "Ha sido eliminado el profesor del Consejo de Dirección");
 								tableDraw();
-							}else{
-								JOptionPane.showMessageDialog(null, "No se puede eliminar la asignatura, ya que forma parte de la Planificación Docente");
+								break;
+							default:
+								break;
 							}
-							break;
-						case CONSEJO_DIRECC:
-							
-							String profeID = table.getValueAt(table.getSelectedRow(), 0).toString();
-							Profesor profesor = (Profesor) Fct.getInstance().buscarPersona(profeID);
-							Fct.getInstance().eliminarDelCD(profesor);
-							JOptionPane.showMessageDialog(null, "Ha sido eliminado el profesor del Consejo de Dirección");
-							tableDraw();
-							break;
-						default:
-							break;
 						}
 					}
+				}else{
+					JOptionPane.showMessageDialog(null, "Solo se pueden eliminar datos fuera de la Fase Preparatoria");
 				}
 			}
 		});
@@ -379,79 +386,87 @@ public class MainFrame extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				table.getSelectedRow();
-				if(table.getSelectedRow() == - 1){
-					JOptionPane.showMessageDialog(null, "Debe seleccionar la fila que desea modificar");
+				if(periodo != 0 && btnSeleccionado == BotonSelec.PLAN_ESTUDIO){
+					
+					JOptionPane.showMessageDialog(null, "No se permite cambiar el nombre a una asignatura fuera de la Fase Preparatoria");
+					
 				}else{
-					int filaSelec = table.getSelectedRow();
-					//Define que JDialog se activa 
-					switch(btnSeleccionado){
-						case PROFESOR:
-							try {
-								InputDialogProfe inputProfe = new InputDialogProfe(Fct.getInstance().buscarUnProfesor(table.getValueAt(filaSelec, 0).toString()));
-								inputProfe.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-								inputProfe.setVisible(true);
-							} catch (Exception exc) {
-								exc.printStackTrace();
-							}
-							tableDraw();
-							break;
-						case ESTUDIANTE:
-							try {
-								InputDialogEst inputEst = new InputDialogEst(Fct.getInstance().buscarUnEstudiante(table.getValueAt(filaSelec, 0).toString()));
-								inputEst.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-								inputEst.setVisible(true);
-							} catch (Exception exc) {
-								exc.printStackTrace();
-							}
-							tableDraw();
-							break;
-						case PERSO_AUX:
-							try {
-								InputDialogPerAux inputPerAux = new InputDialogPerAux(Fct.getInstance().buscarUnPersonalApoyo(table.getValueAt(filaSelec, 0).toString()));
-								inputPerAux.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-								inputPerAux.setVisible(true);
-							} catch (Exception exc) {
-								exc.printStackTrace();
-							}
-							tableDraw();
-							break;	
-						case PLAN_ESTUDIO:
-							try {
-								//actualizar campos
-								actualizarValoresDeFila(table.getSelectedRow());
-								InputDialogAsignaturaPE inputAsignatura = new InputDialogAsignaturaPE(valoresDeFila);
-								inputAsignatura.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-								inputAsignatura.setVisible(true);
-							} catch (Exception exc) {
-								exc.printStackTrace();
-							}
-							break;
-						case GRUPO:
-							try {
-								Grupo grupo = Fct.getInstance().buscarGrupo(table.getValueAt(table.getSelectedRow(), 0).toString());
-								InputDialogEstuDelGrupo inputDialogEstuDelGrupo = new InputDialogEstuDelGrupo(grupo);
-								inputDialogEstuDelGrupo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-								inputDialogEstuDelGrupo.setVisible(true);
-							} catch (Exception exc) {
-								exc.printStackTrace();
-							}
-							tableDraw();
-							break;
-						case CONSEJO_DIRECC:
-							try {
-								InputDialogModifConsejoDirecc inputModConDir = new InputDialogModifConsejoDirecc(Fct.getInstance().buscarUnProfesor(table.getValueAt(table.getSelectedRow(), 0).toString()));
-								inputModConDir.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-								inputModConDir.setVisible(true);
-							} catch (Exception exc) {
-								exc.printStackTrace();
-							}
-							tableDraw();
-							break;
-						default:
-							break;
+					
+					if(table.getSelectedRow() == - 1){
+						JOptionPane.showMessageDialog(null, "Debe seleccionar la fila que desea modificar");
+					}else{
+						int filaSelec = table.getSelectedRow();
+						//Define que JDialog se activa 
+						switch(btnSeleccionado){
+							case PROFESOR:
+								try {
+									InputDialogProfe inputProfe = new InputDialogProfe(Fct.getInstance().buscarUnProfesor(table.getValueAt(filaSelec, 0).toString()));
+									inputProfe.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+									inputProfe.setVisible(true);
+								} catch (Exception exc) {
+									exc.printStackTrace();
+								}
+								tableDraw();
+								break;
+							case ESTUDIANTE:
+								try {
+									InputDialogEst inputEst = new InputDialogEst(Fct.getInstance().buscarUnEstudiante(table.getValueAt(filaSelec, 0).toString()));
+									inputEst.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+									inputEst.setVisible(true);
+								} catch (Exception exc) {
+									exc.printStackTrace();
+								}
+								tableDraw();
+								break;
+							case PERSO_AUX:
+								try {
+									InputDialogPerAux inputPerAux = new InputDialogPerAux(Fct.getInstance().buscarUnPersonalApoyo(table.getValueAt(filaSelec, 0).toString()));
+									inputPerAux.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+									inputPerAux.setVisible(true);
+								} catch (Exception exc) {
+									exc.printStackTrace();
+								}
+								tableDraw();
+								break;	
+							case PLAN_ESTUDIO:
+								try {
+									//actualizar campos
+									actualizarValoresDeFila(table.getSelectedRow());
+									InputDialogAsignaturaPE inputAsignatura = new InputDialogAsignaturaPE(valoresDeFila);
+									inputAsignatura.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+									inputAsignatura.setVisible(true);
+								} catch (Exception exc) {
+									exc.printStackTrace();
+								}
+								break;
+							case GRUPO:
+								try {
+									Grupo grupo = Fct.getInstance().buscarGrupo(table.getValueAt(table.getSelectedRow(), 0).toString());
+									InputDialogEstuDelGrupo inputDialogEstuDelGrupo = new InputDialogEstuDelGrupo(grupo);
+									inputDialogEstuDelGrupo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+									inputDialogEstuDelGrupo.setVisible(true);
+								} catch (Exception exc) {
+									exc.printStackTrace();
+								}
+								tableDraw();
+								break;
+							case CONSEJO_DIRECC:
+								try {
+									InputDialogModifConsejoDirecc inputModConDir = new InputDialogModifConsejoDirecc(Fct.getInstance().buscarUnProfesor(table.getValueAt(table.getSelectedRow(), 0).toString()));
+									inputModConDir.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+									inputModConDir.setVisible(true);
+								} catch (Exception exc) {
+									exc.printStackTrace();
+								}
+								tableDraw();
+								break;
+							default:
+								break;
+						}
 					}
+					
 				}
+				
 			}
 		});
 		modifyBotton.setBounds(847, 122, 57, 21);
@@ -594,6 +609,8 @@ public class MainFrame extends JFrame {
 		
 		
 		final JLabel grupoBarBotton = new JLabel("");
+		grupoBarBotton.setToolTipText("Mostrar los Grupos");
+		grupoBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		grupoBarBotton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -700,13 +717,18 @@ public class MainFrame extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
-					InputJDialogControlDocente dialog = new InputJDialogControlDocente();
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					dialog.setVisible(true);
-				} catch (Exception exc) {
-					exc.printStackTrace();
+				if (periodo != 0){
+					try {
+						InputJDialogControlDocente dialog = new InputJDialogControlDocente();
+						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						dialog.setVisible(true);
+					} catch (Exception exc) {
+						exc.printStackTrace();
+					}
+				}else{
+					JOptionPane.showMessageDialog(null, "No se puede otorgar notas en Fase Preparatoria");
 				}
+				
 			}
 		});
 		otorgarNotasBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/OtorgarNotaBarBotton.png")));
@@ -740,7 +762,7 @@ public class MainFrame extends JFrame {
 				
 				if (Fct.getInstance().getPlanEstudio().getAsignaturas().size()>0 && Fct.getInstance().buscarGruposNoVacio().size()>0 && Fct.getInstance().buscarEstudiantes().size()>0){
 					try {
-						InputJDialogPlanifDocente dialog = new InputJDialogPlanifDocente();
+						InputJDialogPlanifDocente dialog = new InputJDialogPlanifDocente(periodo);
 						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 						dialog.setVisible(true);
 					} catch (Exception exc) {
@@ -836,6 +858,7 @@ public class MainFrame extends JFrame {
 		
 		
 		final JLabel consejoDireccBarBotton = new JLabel("");
+		consejoDireccBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		consejoDireccBarBotton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
