@@ -309,7 +309,6 @@ public class MainFrame extends JFrame {
 								JOptionPane.showMessageDialog(null, "Se ha eliminado a el estudiante correctamente");
 								tableDraw();
 								break;
-								
 							case PROFESOR:
 								String profe = table.getValueAt(table.getSelectedRow(), 0).toString();
 								if(!Fct.getInstance().verificarProfeEnPlanDoc(profe)){
