@@ -638,12 +638,6 @@ public final class Fct {
 		if(buscarEstudiantesSinNotasPrimerSemestre().size()!=0)
 			val=false;
 		
-		
-		System.out.println(val);
-		for( Estudiante e : buscarEstudiantesSinNotasPrimerSemestre()){
-			System.out.println(e.getNombre());
-		}
-		
 		return val;
 	}
 
@@ -706,10 +700,6 @@ public final class Fct {
 			val=false;
 		else{
 			for(Estudiante e : buscarEstudiantes()){
-				
-				System.out.println(e.verificarArrastre());
-				System.out.println(e.verificarNotasSuspensas().size());
-				
 				
 				if(e.verificarArrastre() || (e.verificarNotasSuspensas1erSemestre().size()<2 && e.verificarNotasSuspensas2doSemestre().size()<2 ))
 					e.setAnnoAcademico(e.getAnnoAcademico()+1);
