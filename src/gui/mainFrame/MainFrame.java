@@ -669,6 +669,7 @@ public class MainFrame extends JFrame {
 		reportesIco.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/marker-documents_filtered_via_10015_io_filtered_via_10015_ioCambiTam.png")));
 		
 		final JLabel reportesBarBotton = new JLabel("");
+		reportesBarBotton.setToolTipText("Mostrar reportes");
 		reportesBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		reportesBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ReportesBarBotton.png")));
 		reportesBarBotton.addMouseListener(new MouseAdapter() {
@@ -702,6 +703,7 @@ public class MainFrame extends JFrame {
 		menuBarPanel.add(otorgarNotasIcon);
 		
 		final JLabel otorgarNotasBarBotton = new JLabel("");
+		otorgarNotasBarBotton.setToolTipText("Otorgamiento de notas a Estudiantes");
 		otorgarNotasBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		otorgarNotasBarBotton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -744,6 +746,7 @@ public class MainFrame extends JFrame {
 		menuBarPanel.add(planDocenteIcon);
 		
 		final JLabel planificacionDocenteBarBotton = new JLabel("");
+		planificacionDocenteBarBotton.setToolTipText("Mostrar Planificaciones Docentes y su creaci\u00F3n");
 		planificacionDocenteBarBotton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		planificacionDocenteBarBotton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -996,7 +999,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		controlSalarialBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/ControlSalarial.png")));
-		controlSalarialBarBotton.setToolTipText("Cambiar salario base de los tranajadores");
+		controlSalarialBarBotton.setToolTipText("Cambiar salario base de los trabajadores");
 		controlSalarialBarBotton.setBounds(10, 465, 171, 25);
 		menuBarPanel.add(controlSalarialBarBotton);
 		
