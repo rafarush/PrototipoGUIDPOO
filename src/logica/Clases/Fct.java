@@ -632,11 +632,13 @@ public final class Fct {
 	
 	
 	// PARA PASAR DE PERIODO
-	public boolean pasarPeriodo(){
+	public boolean pasarPeriodo() throws ProcesoNoPermitidoException{
 		boolean val = true;
 		
-		if(buscarEstudiantesSinNotasPrimerSemestre().size()!=0)
+		if(buscarEstudiantesSinNotasPrimerSemestre().size()!=0){
 			val=false;
+			throw new ProcesoNoPermitidoException("Hay "+buscarEstudiantesSinNotasPrimerSemestre().size()+" estudiantes sin notas.");
+		}
 		
 		return val;
 	}
@@ -693,11 +695,13 @@ public final class Fct {
 	}
 	
 	// PARA PASAR DE ANNO
-	public boolean pasarAnno(){
+	public boolean pasarAnno() throws ProcesoNoPermitidoException{
 		boolean val = true;
 		
-		if(buscarEstudiantesSinNotas().size()!=0)
+		if(buscarEstudiantesSinNotas().size()!=0){
 			val=false;
+			throw new ProcesoNoPermitidoException("Hay "+buscarEstudiantesSinNotas().size()+" estudiantes sin notas.");
+		}
 		else{
 			for(Estudiante e : buscarEstudiantes()){
 				
@@ -1239,12 +1243,12 @@ public final class Fct {
 	}
 	
 	// Para que entrando un profesor te devuelva las asignaturas que da
-	public ArrayList<Asignatura> buscarAsignaturasPorProfe(String id){
+	public ArrayList<Asignatura> buscarAsignaturasPorProfeYSemestre(String id , int semestre){
 		ArrayList<Asignatura> asignaturas = new ArrayList<>();
 		
 		for(Periodo p : periodos){
 			for(PlanificacionDocente pD : p.getPlanificacionesDocentes()){
-				if(pD.getProfesor().getID().equalsIgnoreCase(id))
+				if(pD.getProfesor().getID().equalsIgnoreCase(id) && pD.getAsignatura().getSemestre()==semestre && !asignaturas.contains(pD.getAsignatura()))
 					asignaturas.add(pD.getAsignatura());
 			}
 		}
