@@ -307,6 +307,17 @@ public class Estudiante extends Persona{
 		} 
 		
 		
+		// limpiar con el estudiantes, que repita el anno que debe por suspender mucho
+		public void limpiarEstudiante(){
+			for(ControlDocente cD : notas){
+				if(cD.getAsignatura().getAnnoAcademico()==annoAcademico || cD.getAsignatura().getAnnoAcademico()==annoAcademico)
+					notas.remove(cD);
+			}
+			
+			setAnnoAcademico(annoAcademico-1);
+		}
+		
+		
 }
 
 
