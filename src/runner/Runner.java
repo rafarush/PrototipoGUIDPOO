@@ -12,7 +12,9 @@ import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
 
 
+
 import logica.Clases.*;
+import logica.utils.DatosAutomaticos;
 
 
 public class Runner {
@@ -45,7 +47,7 @@ public class Runner {
 		//Usuario
 	    usuario = new User("Fermin", "1234");
 		
-		Fct.getInstance().generarDatosAutomaticos();
+		DatosAutomaticos.datosAutomaticos();
 
 		try {
 			JDialogLoginUser login = new JDialogLoginUser();
