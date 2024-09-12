@@ -679,11 +679,18 @@ public final class Fct {
 		 for(int i = 0;i<grupos.size() && val; i++){
 			 if(grupos.get(i) instanceof GrupoEspecial){
 				 var2=false;
+				 
 				 int anno = ((GrupoEspecial) grupos.get(i)).getAsignatura().getAnnoAcademico();
 				 int sem = ((GrupoEspecial) grupos.get(i)).getAsignatura().getSemestre();
-				 for(int j=0;j<periodos.get((anno * sem)-1).getPlanificacionesDocentes().size() && var2 ; j++){
-					 if(periodos.get((anno * sem)-1).getPlanificacionesDocentes().get(j).getAsignatura().equals(((GrupoEspecial) grupos.get(i)).getAsignatura())){
-						 val = true;
+				 
+				 int per = anno-1;
+				 
+				 if(sem==2)
+					 per=anno+5;
+				 
+				 for(int j=0;j<periodos.get(per).getPlanificacionesDocentes().size() && !var2 ; j++){
+					 if(periodos.get(per).getPlanificacionesDocentes().get(j).getAsignatura().equals(((GrupoEspecial) grupos.get(i)).getAsignatura())){
+						 var2 = true;
 					 }
 				 }
 				 if(!var2)
@@ -719,11 +726,9 @@ public final class Fct {
 		}
 		else{
 			
-			
-			
 			for(Estudiante e : buscarEstudiantes()){
 				
-				if(e.verificarArrastre() || (e.verificarNotasSuspensas1erSemestre().size()<2 && e.verificarNotasSuspensas2doSemestre().size()<2 ))
+				if(e.verificarArrastreEspecial() && (e.verificarNotasSuspensas1erSemestre().size()<2 && e.verificarNotasSuspensas2doSemestre().size()<2 ))
 					e.setAnnoAcademico(e.getAnnoAcademico()+1);
 			}
 			
@@ -877,7 +882,7 @@ public final class Fct {
 		ArrayList<Estudiante> arrastres = new ArrayList<>();
 		
 		for(Estudiante e : buscarEstudiantes()){
-			if(e.verificarArrastre())
+			if(e.verificarArrastre() || e.verificarArrastreEspecial())
 				arrastres.add(e);
 		}
 		
@@ -939,14 +944,17 @@ public final class Fct {
 			boolean val = true;
 			
 			
-			
+			if(!e.verificarArrastreEspecial() && !e.verificarNecesidadGrupo())
+				val = false;
 			
 			while(i<grupos.size() && val){
 				if(grupos.get(i).getGrupoEstudiantes().contains(e) && grupos.get(i).getAnnoAcademico()==e.getAnnoAcademico())
 					val=false;
 				i++;
 			}
-			sinGrupo.add(e);
+
+			if(val)
+				sinGrupo.add(e);
 			
 			/*
 			if(!e.verificarArrastre()){
