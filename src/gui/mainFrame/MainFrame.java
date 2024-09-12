@@ -49,6 +49,7 @@ import java.awt.Dimension;
 public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private int periodo = 0;
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
 	private static JTableNoEdit table;
@@ -62,8 +63,6 @@ public class MainFrame extends JFrame {
 	private BotonSelec btnSeleccionado = BotonSelec.PROFESOR;
 	DefaultTableCellRenderer centrarCelda = new DefaultTableCellRenderer();
 	private static Object[] valoresDeFila = new Object[50];
-	private static int periodo = 0;
-	
 	
 	
 	
@@ -496,7 +495,6 @@ public class MainFrame extends JFrame {
 								JOptionPane.showMessageDialog(null, "Inicio de semestre 1");
 								periodo = 1;
 								actualizarLblPeriodoActual();
-								//actualizarIcoBotonPeriodoActual();
 							}
 						} catch (ProcesoNoPermitidoException exc) {
 							JOptionPane.showMessageDialog(null, "No se pudo empezar:\n"+ exc.getMessage());
@@ -504,44 +502,26 @@ public class MainFrame extends JFrame {
 						
 						break;
 					case 1:
-						/*try {
+						try {
 							if (Fct.getInstance().pasarPeriodo()){
 								JOptionPane.showMessageDialog(null, "Inicio de semestre 2");
 								periodo = 2;
 								actualizarLblPeriodoActual();
-								//actualizarIcoBotonPeriodoActual();
 							}
 						} catch (ProcesoNoPermitidoException exc) {
 							JOptionPane.showMessageDialog(null, "No se pudo pasar de periodo:\n"+ exc.getMessage());
-						}*/
-						if (Fct.getInstance().pasarPeriodo()){
-							JOptionPane.showMessageDialog(null, "Inicio de semestre 2");
-							periodo = 2;
-							actualizarLblPeriodoActual();
-							//actualizarIcoBotonPeriodoActual();
-						}else{
-							JOptionPane.showMessageDialog(null, "No se pudo pasar de periodo:\n");
 						}
 						
 						break;
 					case 2:
-						/*try {
+						try {
 							if (Fct.getInstance().pasarAnno()){
 								JOptionPane.showMessageDialog(null, "Se pudo pasar de año (Inicio de preparación de semestre)");
 								periodo = 0;
 								actualizarLblPeriodoActual();
-								//actualizarIcoBotonPeriodoActual();
 							}
 						} catch (ProcesoNoPermitidoException exc) {
 							JOptionPane.showMessageDialog(null, "No se pudo pasar de año:\n"+ exc.getMessage());
-						}*/
-						if (Fct.getInstance().pasarAnno()){
-							JOptionPane.showMessageDialog(null, "Se pudo pasar de año (Inicio de preparación de semestre)");
-							periodo = 0;
-							actualizarLblPeriodoActual();
-							//actualizarIcoBotonPeriodoActual();
-						}else{
-							JOptionPane.showMessageDialog(null, "No se pudo pasar de periodo:\n");
 						}
 						
 						break;
@@ -720,7 +700,7 @@ public class MainFrame extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if (periodo != 0){
 					try {
-						InputJDialogControlDocente dialog = new InputJDialogControlDocente();
+						InputJDialogControlDocente dialog = new InputJDialogControlDocente(periodo);
 						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 						dialog.setVisible(true);
 					} catch (Exception exc) {
@@ -1052,6 +1032,7 @@ public class MainFrame extends JFrame {
 						filterTextField.setBounds(115, 122, 115, 20);
 						filtroBtn.setBounds(235, 122, 61, 21);
 						mainTitle.setBounds(78, 37, 804, 44);
+						lblPeriodoActual.setBounds(400, 80, 168, 14);
 						profeBarBotton.setVisible(false);
 						estuBarBotton.setVisible(false);
 						grupoBarBotton.setVisible(false);
@@ -1073,6 +1054,7 @@ public class MainFrame extends JFrame {
 						filterTextField.setBounds(277, 123, 115, 20);
 						filtroBtn.setBounds(402, 122, 61, 21);
 						mainTitle.setBounds(233, 37, 649, 44);
+						lblPeriodoActual.setBounds(490, 80, 168, 14);
 						profeBarBotton.setVisible(true);
 						estuBarBotton.setVisible(true);
 						grupoBarBotton.setVisible(true);
@@ -1098,6 +1080,7 @@ public class MainFrame extends JFrame {
 						filterTextField.setBounds(117, 122, 115, 20);
 						filtroBtn.setBounds(237, 122, 61, 21);
 						mainTitle.setBounds(270, 37, 804, 44);
+						lblPeriodoActual.setBounds(600, 80, 168, 14);
 						profeBarBotton.setVisible(false);
 						estuBarBotton.setVisible(false);
 						grupoBarBotton.setVisible(false);
@@ -1121,6 +1104,7 @@ public class MainFrame extends JFrame {
 						filterTextField.setBounds(275, 123, 141, 20);
 						filtroBtn.setBounds(421, 122, 61, 21);
 						mainTitle.setBounds(470, 37, 642, 44);	
+						lblPeriodoActual.setBounds(700, 80, 168, 14);
 						profeBarBotton.setVisible(true);
 						estuBarBotton.setVisible(true);
 						grupoBarBotton.setVisible(true);
@@ -1189,7 +1173,8 @@ public class MainFrame extends JFrame {
 						nextPeriodBotton.setBounds(1100, 122, 101, 21);
 						lblFiltro.setBounds(63, 122, 61, 21);
 						filterTextField.setBounds(115, 122, 115, 20);
-						mainTitle.setBounds(270, 37, 804, 44);
+						mainTitle.setBounds(250, 37, 804, 44);
+						lblPeriodoActual.setBounds(350, 80, 168, 14);
 					}else{
 						menuBarPanel.setBounds(0, 33, 218, 729);
 					}		
@@ -1200,6 +1185,7 @@ public class MainFrame extends JFrame {
 					addBotton.setBounds(779, 122, 101, 21);
 					nextPeriodBotton.setBounds(1100, 122, 101, 21);
 					mainTitle.setBounds(470, 37, 642, 44);	
+					lblPeriodoActual.setBounds(700, 80, 168, 14);
 					maximized = true;
 				}else{
 					mainPane.setBounds(0, 0, 914, 618);
@@ -1216,6 +1202,7 @@ public class MainFrame extends JFrame {
 						lblFiltro.setBounds(65, 122, 61, 21);
 						filterTextField.setBounds(117, 122, 115, 20);
 						mainTitle.setBounds(78, 37, 804, 44);
+						lblPeriodoActual.setBounds(390, 80, 168, 14);
 					}else{
 						menuBarPanel.setBounds(0, 33, 218, 618);
 					}				
@@ -1226,6 +1213,7 @@ public class MainFrame extends JFrame {
 					addBotton.setBounds(530, 122, 101, 21);
 					nextPeriodBotton.setBounds(729, 122, 101, 21);
 					mainTitle.setBounds(240, 37, 642, 44);
+					lblPeriodoActual.setBounds(490, 80, 168, 14);
 					maximized = false;
 				}		
 			}
@@ -1392,64 +1380,4 @@ public class MainFrame extends JFrame {
 			break;
 		}
 	}
-	
-	/*
-	private void actualizarIcoBotonPeriodoActual(){
-		switch (periodo) {
-		case 0:
-			
-			nextPeriodBotton.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/startPeriodsBottonSelected.png")));
-				}
-				@Override
-				public void mouseExited(MouseEvent e) {
-					nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/startPeriodsBotton.png")));
-				}
-			});
-			nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/startPeriodsBotton.png")));
-			nextPeriodBotton.setToolTipText("Comenzar periodos");
-			mainPanel.add(nextPeriodBotton);
-			
-			break;
-		case 1:
-			
-			nextPeriodBotton.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextPeriodBottonSelected.png")));
-				}
-				@Override
-				public void mouseExited(MouseEvent e) {
-					nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextPeriodBotton.png")));
-				}
-			});
-			nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextPeriodBotton.png")));
-			nextPeriodBotton.setToolTipText("Pasar al siguiente periodo");
-			mainPanel.add(nextPeriodBotton);
-			
-			break;
-		case 2:
-
-			nextPeriodBotton.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextYearBottonSelected.png")));
-				}
-				@Override
-				public void mouseExited(MouseEvent e) {
-					nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextYearBotton.png")));
-				}
-			});
-			nextPeriodBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/nextYearBotton.png")));
-			nextPeriodBotton.setToolTipText("Pasar al siguiente periodo");
-			mainPanel.add(nextPeriodBotton);
-			
-			break;
-		default:
-			break;
-		}
-	}
-	*/
 }
