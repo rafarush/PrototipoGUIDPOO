@@ -528,6 +528,7 @@ public class MainFrame extends JFrame {
 					default:
 						break;
 					}
+					tableDraw();
 				}
 				
 			}
