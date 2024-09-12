@@ -759,6 +759,7 @@ public final class Fct {
 	}
 	
 	
+	// para encontrar los anos en los q 
 	
 	
 	//Para buscar los arrastre de un anno especifico
@@ -937,6 +938,17 @@ public final class Fct {
 			int i = 0;
 			boolean val = true;
 			
+			
+			
+			
+			while(i<grupos.size() && val){
+				if(grupos.get(i).getGrupoEstudiantes().contains(e) && grupos.get(i).getAnnoAcademico()==e.getAnnoAcademico())
+					val=false;
+				i++;
+			}
+			sinGrupo.add(e);
+			
+			/*
 			if(!e.verificarArrastre()){
 				while(i<grupos.size() && val){
 					if(grupos.get(i).getGrupoEstudiantes().contains(e))
@@ -954,7 +966,7 @@ public final class Fct {
 			}
 			
 			if(val)
-				sinGrupo.add(e);
+				sinGrupo.add(e);*/
 		}
 		
 		return sinGrupo;
