@@ -49,6 +49,7 @@ import java.awt.Dimension;
 public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private int periodo = 0;
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
 	private static JTableNoEdit table;
@@ -62,8 +63,6 @@ public class MainFrame extends JFrame {
 	private BotonSelec btnSeleccionado = BotonSelec.PROFESOR;
 	DefaultTableCellRenderer centrarCelda = new DefaultTableCellRenderer();
 	private static Object[] valoresDeFila = new Object[50];
-	private static int periodo = 0;
-	
 	
 	
 	
@@ -504,7 +503,7 @@ public class MainFrame extends JFrame {
 						
 						break;
 					case 1:
-						/*try {
+						try {
 							if (Fct.getInstance().pasarPeriodo()){
 								JOptionPane.showMessageDialog(null, "Inicio de semestre 2");
 								periodo = 2;
@@ -513,7 +512,7 @@ public class MainFrame extends JFrame {
 							}
 						} catch (ProcesoNoPermitidoException exc) {
 							JOptionPane.showMessageDialog(null, "No se pudo pasar de periodo:\n"+ exc.getMessage());
-						}*/
+						}/*
 						if (Fct.getInstance().pasarPeriodo()){
 							JOptionPane.showMessageDialog(null, "Inicio de semestre 2");
 							periodo = 2;
@@ -521,11 +520,11 @@ public class MainFrame extends JFrame {
 							//actualizarIcoBotonPeriodoActual();
 						}else{
 							JOptionPane.showMessageDialog(null, "No se pudo pasar de periodo:\n");
-						}
+						}*/
 						
 						break;
 					case 2:
-						/*try {
+						try {
 							if (Fct.getInstance().pasarAnno()){
 								JOptionPane.showMessageDialog(null, "Se pudo pasar de año (Inicio de preparación de semestre)");
 								periodo = 0;
@@ -534,7 +533,7 @@ public class MainFrame extends JFrame {
 							}
 						} catch (ProcesoNoPermitidoException exc) {
 							JOptionPane.showMessageDialog(null, "No se pudo pasar de año:\n"+ exc.getMessage());
-						}*/
+						}/*
 						if (Fct.getInstance().pasarAnno()){
 							JOptionPane.showMessageDialog(null, "Se pudo pasar de año (Inicio de preparación de semestre)");
 							periodo = 0;
@@ -542,7 +541,7 @@ public class MainFrame extends JFrame {
 							//actualizarIcoBotonPeriodoActual();
 						}else{
 							JOptionPane.showMessageDialog(null, "No se pudo pasar de periodo:\n");
-						}
+						}*/
 						
 						break;
 					default:
@@ -720,7 +719,7 @@ public class MainFrame extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if (periodo != 0){
 					try {
-						InputJDialogControlDocente dialog = new InputJDialogControlDocente();
+						InputJDialogControlDocente dialog = new InputJDialogControlDocente(periodo);
 						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 						dialog.setVisible(true);
 					} catch (Exception exc) {

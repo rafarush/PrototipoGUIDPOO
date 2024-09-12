@@ -47,7 +47,7 @@ public class InputJDialogControlDocente extends JDialog {
 	/**
 	 * Crea el JDialog
 	 */
-	public InputJDialogControlDocente() {
+	public InputJDialogControlDocente(final int periodo) {
 		setUndecorated(true);
 		setModal(true);
 		setBounds(100, 100, 617, 415);
@@ -127,7 +127,7 @@ public class InputJDialogControlDocente extends JDialog {
 								InputDialogNota inputNota = new InputDialogNota();
 								inputNota.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 								inputNota.setVisible(true);
-								tableDraw();
+								tableDraw(periodo);
 							} catch (Exception exc) {
 								exc.printStackTrace();
 							}
@@ -172,19 +172,19 @@ public class InputJDialogControlDocente extends JDialog {
 						case PLAN_ESTUDIO:
 							centrarCelda.setHorizontalAlignment(JLabel.CENTER);
 							btnSeleccionado = BotonSelec.PROFESOR;
-							tableDraw();
+							tableDraw(periodo);
 							actualizarLblNombre();
 							break;
 						case GRUPO:
 							centrarCelda.setHorizontalAlignment(JLabel.CENTER);
 							btnSeleccionado = BotonSelec.PLAN_ESTUDIO;
-							tableDraw();
+							tableDraw(periodo);
 							actualizarLblNombre();
 							break;
 						case ESTUDIANTE:
 							centrarCelda.setHorizontalAlignment(JLabel.CENTER);
 							btnSeleccionado = BotonSelec.GRUPO;
-							tableDraw();
+							tableDraw(periodo);
 							actualizarLblNombre();
 							break;
 						default:
@@ -199,13 +199,13 @@ public class InputJDialogControlDocente extends JDialog {
 				mainPanel.add(atrasBtn);
 				
 				
-				tableDraw();
+				tableDraw(periodo);
 		}	
 		
 	}
 	
 	
-	private void tableDraw(){
+	private void tableDraw(final int periodo){
 		switch(btnSeleccionado){
 			case PROFESOR:
 				DatosAuto.definirTablaProfes(Fct.getInstance().buscarProfesores());
@@ -216,7 +216,7 @@ public class InputJDialogControlDocente extends JDialog {
 						if (e.getClickCount() == 2) 
 							btnSeleccionado = BotonSelec.PLAN_ESTUDIO;
 							profeSelec = tablaNotas.getValueAt(tablaNotas.getSelectedRow(), 0).toString();
-							tableDraw();
+							tableDraw(periodo);
 							actualizarLblNombre();
 					}
 				});
@@ -231,7 +231,7 @@ public class InputJDialogControlDocente extends JDialog {
 						if (e.getClickCount() == 2) {
 							btnSeleccionado = BotonSelec.ESTUDIANTE;
 							grupoSelec = tablaNotas.getValueAt(tablaNotas.getSelectedRow(), 0).toString();
-							tableDraw();
+							tableDraw(periodo);
 							actualizarLblNombre();
 						}
 					}
@@ -251,7 +251,7 @@ public class InputJDialogControlDocente extends JDialog {
 				});
 				break;
 			case PLAN_ESTUDIO:
-				DatosAuto.definirTablaPlanDeEstudio(Fct.getInstance().buscarAsignaturasPorProfe(profeSelec));
+				DatosAuto.definirTablaPlanDeEstudio(Fct.getInstance().buscarAsignaturasPorProfeYSemestre(profeSelec, periodo));
 				tablaNotas = new JTableNoEdit(Runner.modeloPlanDeEstudio);
 				for(int i=1; i<=3;i++)
 					tablaNotas.getColumnModel().getColumn(i).setCellRenderer(centrarCelda);
@@ -260,7 +260,7 @@ public class InputJDialogControlDocente extends JDialog {
 						if (e.getClickCount() == 2) 
 							btnSeleccionado = BotonSelec.GRUPO;
 							asignaturaSelec = tablaNotas.getValueAt(tablaNotas.getSelectedRow(), 0).toString();
-							tableDraw();
+							tableDraw(periodo);
 							actualizarLblNombre();
 					}
 				});
