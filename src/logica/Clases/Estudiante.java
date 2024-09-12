@@ -188,6 +188,21 @@ public class Estudiante extends Persona{
 		
 		
 		
+		//para busacr las asignaturas q esta arrastrando
+		public ArrayList<Asignatura> buscarAsignaturasArrastres(){
+			ArrayList<Asignatura> asignaturas = new ArrayList<>();
+			
+			if(verificarNotasSuspensas1erSemestre().size()==1){
+				asignaturas.add(verificarNotasSuspensas1erSemestre().get(0).getAsignatura());
+			}
+			if(verificarNotasSuspensas2doSemestre().size()==1){
+				asignaturas.add(verificarNotasSuspensas2doSemestre().get(0).getAsignatura());
+			}
+			
+			
+			return asignaturas;
+		}
+		
 		
 		
 		

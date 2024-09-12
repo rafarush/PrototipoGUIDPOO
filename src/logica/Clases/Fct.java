@@ -709,6 +709,9 @@ public final class Fct {
 					e.setAnnoAcademico(e.getAnnoAcademico()+1);
 			}
 			
+			for(Periodo p : periodos)
+				p.getPlanificacionesDocentes().clear();
+			
 			grupos.clear();
 			crearGruposArrastres();
 		}
@@ -723,13 +726,29 @@ public final class Fct {
 	// Para crear los grupos de arrastre
 	public void crearGruposArrastres(){
 		
-		for(int i = 2;i<7;i++){
+		/*for(int i = 2;i<7;i++){
 			if(buscarArrastresPorAnno(i).size()!=0){
 				Grupo grupo = new Grupo("Arrastres de "+(i-1) , i-1);
 				grupo.setGrupoEstudiantes(buscarArrastresPorAnno(i));
 				grupos.add(grupo);
 			}
+		}*/
+		
+		
+		
+		
+		
+		for(int i = 2;i<7;i++){
+			if(buscarArrastresPorAnno(i).size()!=0){
+				for(Asignatura a : buscarAsignaturasArrastresPorAnno(i)){
+					Grupo grupo = new Grupo("Arrastres de "+(i-1)+" " +a.getNombre() , i-1);
+					grupo.setGrupoEstudiantes(buscarArrastresPorAsignatura(a));
+					grupos.add(grupo);
+					
+				}
+			}
 		}
+		
 		
 	}
 	
@@ -747,6 +766,48 @@ public final class Fct {
 		}
 		
 		return arrastres;
+	}
+	
+	
+	
+	
+	// Para buscar los arrastre de una asignatura especifica
+	public ArrayList<Estudiante> buscarArrastresPorAsignatura(Asignatura asignatura){
+		ArrayList<Estudiante> arrastres = new ArrayList<>();
+		
+		for(Estudiante e : buscarEstudiantesConArrastre()){
+			if(e.buscarAsignaturasArrastres().contains(asignatura))
+				arrastres.add(e);
+		}
+		
+		
+		return arrastres;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	// poara buscar las asginaturas que estan arrastrando en un anno especifico
+	public ArrayList<Asignatura> buscarAsignaturasArrastresPorAnno(int anno) {
+		
+		ArrayList<Asignatura> asignaturasArrastres = new ArrayList<>();
+		
+		for(Estudiante e : buscarArrastresPorAnno(anno)){
+			if(e.buscarAsignaturasArrastres().size()==1)
+				if(!asignaturasArrastres.contains(e.buscarAsignaturasArrastres().get(0)))
+					asignaturasArrastres.add(e.buscarAsignaturasArrastres().get(0));
+			
+			if(e.buscarAsignaturasArrastres().size()==2)
+				if(!asignaturasArrastres.contains(e.buscarAsignaturasArrastres().get(1)))
+					asignaturasArrastres.add(e.buscarAsignaturasArrastres().get(1));	
+			
+		}
+		
+		return asignaturasArrastres;
 	}
 	
 	
