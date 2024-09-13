@@ -2,6 +2,7 @@ package gui.dialogs;
 
 
 import gui.mainFrame.MainFrame;
+import gui.utils.JTextFieldLimitado;
 import gui.utils.Validaciones;
 
 import javax.swing.BorderFactory;
@@ -38,10 +39,11 @@ public class InputDialogGrupo extends JDialog {
 	private static final long serialVersionUID = 1L;
 	
 	private final JPanel upperBarPanel = new JPanel();
-	private JTextField nombreTextField;
+	private JTextFieldLimitado nombreTextField;
 	private JComboBox annoAcademicoComboBox;
+	private int limite = 25;
 	private final Border bordeRojo = BorderFactory.createLineBorder(Color.RED,1);
-	private final Border bordeNegro = BorderFactory.createLineBorder(Color.BLACK,1);
+	private final Border bordeNegro = BorderFactory.createLineBorder(Color.GRAY,1);
 
 
 	/*
@@ -101,20 +103,14 @@ public class InputDialogGrupo extends JDialog {
 			panel.setBounds(387, 0, 150, 220);
 			mainPanel.add(panel);
 			
-			nombreTextField = new JTextField();
+			nombreTextField = new JTextFieldLimitado();
 			nombreTextField.setToolTipText("Nombre del grupo");
 			nombreTextField.addKeyListener(new KeyAdapter() {
 				@Override
-				public void keyReleased(KeyEvent e) {
-					if(!nombreTextField.getText().isEmpty()){
-						if (Validaciones.todoLetra(Validaciones.getCadenaSinEspacios(nombreTextField.getText()))){
-							nombreTextField.setBorder(bordeNegro);
-						}else{
-							nombreTextField.setBorder(bordeRojo);
-						}
-					}else{
-						nombreTextField.setBorder(bordeNegro);
-					}
+				public void keyTyped(KeyEvent e){
+					JTextField text = (JTextField) e.getSource();
+					if(text.getText().length()== limite)
+						e.consume();
 				}
 			});
 			nombreTextField.setColumns(10);

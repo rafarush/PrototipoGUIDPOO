@@ -1,6 +1,7 @@
 package gui.dialogs;
 
 
+import gui.utils.JTextFieldLimitado;
 import gui.utils.Validaciones;
 import logica.Clases.*;
 
@@ -36,12 +37,13 @@ public class InputDialogAsignaturaPE extends JDialog {
 	private static final long serialVersionUID = 1L;
 	
 	private final JPanel upperBarPanel = new JPanel();
-	private JTextField nombreTextField;
+	private JTextFieldLimitado nombreTextField;
 	private JComboBox annoComboBox;
 	private JComboBox semestreComboBox;
 	private JSpinner spinnerHorasLectivas;
+	private int limite = 25;
 	private Border bordeRojo = BorderFactory.createLineBorder(Color.RED,1);
-	private Border bordeNegro = BorderFactory.createLineBorder(Color.BLACK,1);
+	private Border bordeNegro = BorderFactory.createLineBorder(Color.GRAY,1);
 
 	/**
 	 * Crear Input para agregar
@@ -100,7 +102,7 @@ public class InputDialogAsignaturaPE extends JDialog {
 			panel.setBounds(387, 0, 150, 326);
 			mainPanel.add(panel);
 			
-			nombreTextField = new JTextField();
+			nombreTextField = new JTextFieldLimitado();
 			nombreTextField.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyReleased(KeyEvent e) {
@@ -113,6 +115,12 @@ public class InputDialogAsignaturaPE extends JDialog {
 					}else{
 						nombreTextField.setBorder(bordeNegro);
 					}
+				}
+				@Override
+				public void keyTyped(KeyEvent e){
+					JTextField text = (JTextField) e.getSource();
+					if(text.getText().length()== limite)
+						e.consume();
 				}
 			});
 			nombreTextField.setToolTipText("Nombre de la Asignatura");
@@ -273,8 +281,28 @@ public class InputDialogAsignaturaPE extends JDialog {
 			panel.setBounds(387, 0, 150, 326);
 			mainPanel.add(panel);
 			
-			nombreTextField = new JTextField();
+			nombreTextField = new JTextFieldLimitado();
 			nombreTextField.setToolTipText("Nombre de la persona");
+			nombreTextField.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyReleased(KeyEvent e) {
+					if(!nombreTextField.getText().isEmpty()){
+						if (Validaciones.todoLetra(Validaciones.getCadenaSinEspacios(nombreTextField.getText()))){
+							nombreTextField.setBorder(bordeNegro);
+						}else{
+							nombreTextField.setBorder(bordeRojo);
+						}
+					}else{
+						nombreTextField.setBorder(bordeNegro);
+					}
+				}
+				@Override
+				public void keyTyped(KeyEvent e){
+					JTextField text = (JTextField) e.getSource();
+					if(text.getText().length()== limite)
+						e.consume();
+				}
+			});
 			nombreTextField.setColumns(10);
 			nombreTextField.setBounds(10, 54, 223, 20);
 			mainPanel.add(nombreTextField);

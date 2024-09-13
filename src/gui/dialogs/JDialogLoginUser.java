@@ -1,6 +1,7 @@
 package gui.dialogs;
 
 import gui.mainFrame.MainFrame;
+import gui.utils.JTextFieldLimitado;
 import gui.utils.Validaciones;
 
 import javax.swing.BorderFactory;
@@ -35,12 +36,11 @@ public class JDialogLoginUser extends JDialog {
 	private static final long serialVersionUID = 1L;
 
 	private final JPanel upperBarPanel = new JPanel();
-	private JTextField nombreTextField;
+	private JTextFieldLimitado nombreTextField;
 	private JPasswordField passwordField;
-	private final Border bordeRojo = BorderFactory.createLineBorder(Color.RED,
-			1);
-	private final Border bordeNegro = BorderFactory.createLineBorder(
-			Color.BLACK, 1);
+	private int limite = 35;
+	private final Border bordeRojo = BorderFactory.createLineBorder(Color.RED,1);
+	private final Border bordeNegro = BorderFactory.createLineBorder(Color.GRAY, 1);
 
 	/**
 	 * Crear JDialog Login
@@ -111,12 +111,18 @@ public class JDialogLoginUser extends JDialog {
 			progressBar.setMinimum(0);
 			mainPanel.add(progressBar);
 
-			nombreTextField = new JTextField();
+			nombreTextField = new JTextFieldLimitado();
 			nombreTextField.setToolTipText("Nombre de usuario");
 			nombreTextField.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyReleased(KeyEvent e) {
 					nombreTextField.setBorder(bordeNegro);
+				}
+				@Override
+				public void keyTyped(KeyEvent e){
+					JTextField text = (JTextField) e.getSource();
+					if(text.getText().length()== limite)
+						e.consume();
 				}
 			});
 			nombreTextField.setColumns(10);
@@ -183,6 +189,12 @@ public class JDialogLoginUser extends JDialog {
 				@Override
 				public void keyReleased(KeyEvent e) {
 					passwordField.setBorder(bordeNegro);
+				}
+				@Override
+				public void keyTyped(KeyEvent e){
+					JTextField text = (JTextField) e.getSource();
+					if(text.getText().length()== limite)
+						e.consume();
 				}
 			});
 			passwordField.setBounds(81, 234, 223, 20);

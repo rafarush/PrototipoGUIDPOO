@@ -2,6 +2,7 @@ package gui.dialogs;
 
 
 import gui.mainFrame.MainFrame;
+import gui.utils.JTextFieldLimitado;
 import gui.utils.Validaciones;
 
 import javax.swing.BorderFactory;
@@ -37,12 +38,14 @@ public class InputDialogPerAux extends JDialog {
 	private static final long serialVersionUID = 1L;
 	
 	private final JPanel upperBarPanel = new JPanel();
-	private JTextField nombreTextField;
-	private JTextField ciTextField;
-	private JTextField direccTextField;
+	private JTextFieldLimitado nombreTextField;
+	private JTextFieldLimitado ciTextField;
+	private JTextFieldLimitado direccTextField;
 	private JComboBox areaTrabajoComboBox;
+	private int limite = 35;
+	private int limiteCI = 11;
 	private final Border bordeRojo = BorderFactory.createLineBorder(Color.RED,1);
-	private final Border bordeNegro = BorderFactory.createLineBorder(Color.BLACK,1);
+	private final Border bordeNegro = BorderFactory.createLineBorder(Color.GRAY,1);
 
 
 	/**
@@ -102,7 +105,7 @@ public class InputDialogPerAux extends JDialog {
 			panel.setBounds(387, 0, 150, 326);
 			mainPanel.add(panel);
 			
-			nombreTextField = new JTextField();
+			nombreTextField = new JTextFieldLimitado();
 			nombreTextField.setToolTipText("Nombre de la persona");
 			nombreTextField.addKeyListener(new KeyAdapter() {
 				@Override
@@ -117,6 +120,12 @@ public class InputDialogPerAux extends JDialog {
 						nombreTextField.setBorder(bordeNegro);
 					}
 				}
+				@Override
+				public void keyTyped(KeyEvent e){
+					JTextField text = (JTextField) e.getSource();
+					if(text.getText().length()== limite)
+						e.consume();
+				}
 			});
 			nombreTextField.setColumns(10);
 			nombreTextField.setBounds(10, 54, 223, 20);
@@ -127,7 +136,7 @@ public class InputDialogPerAux extends JDialog {
 			lblNombre.setBounds(10, 29, 166, 20);
 			mainPanel.add(lblNombre);
 			
-			ciTextField = new JTextField();
+			ciTextField = new JTextFieldLimitado();
 			ciTextField.setToolTipText("Carn\u00E9 de identidad de la persona");
 			ciTextField.addKeyListener(new KeyAdapter() {
 				@Override
@@ -142,6 +151,12 @@ public class InputDialogPerAux extends JDialog {
 						ciTextField.setBorder(bordeNegro);
 					}
 				}
+				@Override
+				public void keyTyped(KeyEvent e){
+					JTextField text = (JTextField) e.getSource();
+					if(text.getText().length()== limiteCI)
+						e.consume();
+				}
 			});
 			ciTextField.setColumns(10);
 			ciTextField.setBounds(10, 110, 223, 20);
@@ -151,8 +166,16 @@ public class InputDialogPerAux extends JDialog {
 			lblCarneIden.setBounds(10, 85, 166, 20);
 			mainPanel.add(lblCarneIden);
 			
-			direccTextField = new JTextField();
+			direccTextField = new JTextFieldLimitado();
 			direccTextField.setToolTipText("Direcci\u00F3n particular de la persona");
+			direccTextField.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e){
+					JTextField text = (JTextField) e.getSource();
+					if(text.getText().length()== limite)
+						e.consume();
+				}
+			});
 			direccTextField.setColumns(10);
 			direccTextField.setBounds(10, 171, 223, 20);
 			mainPanel.add(direccTextField);
@@ -296,7 +319,7 @@ public class InputDialogPerAux extends JDialog {
 			panel.setBounds(387, 0, 150, 326);
 			mainPanel.add(panel);
 			
-			nombreTextField = new JTextField();
+			nombreTextField = new JTextFieldLimitado();
 			nombreTextField.setToolTipText("Nombre de la persona");
 			nombreTextField.addKeyListener(new KeyAdapter() {
 				@Override
@@ -311,6 +334,12 @@ public class InputDialogPerAux extends JDialog {
 						nombreTextField.setBorder(bordeNegro);
 					}
 				}
+				@Override
+				public void keyTyped(KeyEvent e) {
+					JTextField text = (JTextField) e.getSource();
+					if (text.getText().length() == limite)
+						e.consume();
+				}
 			});
 			nombreTextField.setColumns(10);
 			nombreTextField.setBounds(10, 54, 223, 20);
@@ -321,7 +350,7 @@ public class InputDialogPerAux extends JDialog {
 			lblNombre.setBounds(10, 29, 166, 20);
 			mainPanel.add(lblNombre);
 			
-			ciTextField = new JTextField();
+			ciTextField = new JTextFieldLimitado();
 			ciTextField.setToolTipText("Carn\u00E9 de identidad de la persona (NO PUEDE MODIFICARSE)");
 			ciTextField.addKeyListener(new KeyAdapter() {
 				@Override
@@ -345,8 +374,16 @@ public class InputDialogPerAux extends JDialog {
 			lblCarneIden.setBounds(10, 85, 166, 20);
 			mainPanel.add(lblCarneIden);
 			
-			direccTextField = new JTextField();
+			direccTextField = new JTextFieldLimitado();
 			direccTextField.setToolTipText("Direcci\u00F3n particular de la persona");
+			direccTextField.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+					JTextField text = (JTextField) e.getSource();
+					if (text.getText().length() == limite)
+						e.consume();
+				}
+			});
 			direccTextField.setColumns(10);
 			direccTextField.setBounds(10, 171, 223, 20);
 			mainPanel.add(direccTextField);
