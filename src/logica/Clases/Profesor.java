@@ -36,23 +36,7 @@ public class Profesor extends Trabajador{
 		
 	}
 
-	// CONSTRUCOTR para los profesores <<CON>> cargo en el consejo de direccion
-		public Profesor(String nombre, String iD, String Direccion, String categoriaDocente, String categoriaCientifica, String centroLaboral, String organismo, String cargoConsejoDireccion) {
-			super(nombre, iD, Direccion);
-			// TODO Auto-generated constructor stub
-			setCategoriaDocente(categoriaDocente);
-			
-			setCategoriaCientifica(categoriaCientifica);
-			
-			setCentroLaboral(centroLaboral);
-			
-			setOrganismo(organismo);
-			
-			setCargoConsejoDireccion(cargoConsejoDireccion);
-			
-		}
 
-	
 
 	//sets y gets
 	public String getCategoriaDocente() {

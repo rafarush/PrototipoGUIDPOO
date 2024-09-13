@@ -40,9 +40,9 @@ public class PersonalApoyo extends Trabajador{
 
 
 
-	/*public float getSalario() {
+	public float getSalario() {
 		return salario;
-	}*/
+	}
 
 	public void setSalario(float salario) {
 		
