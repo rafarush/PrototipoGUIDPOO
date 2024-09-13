@@ -143,7 +143,33 @@ public class Estudiante extends Persona{
 			return val;
 		}
 		
+		// para verificar el CASO ESPECIAL de los arrastres q es qu esten en 2do arrastrando algo d primero y aprueben 2do y no 1ro
+		public boolean  verificarArrastreEspecial() {
+			boolean val = true;
+			
+			for(int i = 0; i<verificarNotasSuspensas().size() && val ; i++){
+				if((verificarNotasSuspensas().get(i).getNota1()<3 && verificarNotasSuspensas().get(i).getNota2()<3) && verificarNotasSuspensas().get(i).getAsignatura().getAnnoAcademico()!=annoAcademico)
+					val=false; 
+			}
+			
+			return val;
+		}
 		
+		
+		//para verificar si le hace falta un grupo
+		public boolean verificarNecesidadGrupo(){
+			boolean val = true;
+			
+			for(ControlDocente cD : verificarNotasSuspensas()){
+				if(cD.getAsignatura().getAnnoAcademico()==annoAcademico && cD.getNota1()!=0 && cD.getNota2()!=0)
+					val = false;
+					
+					
+					
+			}
+			
+			return val;
+		}
 		
 		
 		// DEVUELVE   LAs ASIGNATURAS SUSPENSAS
@@ -279,6 +305,8 @@ public class Estudiante extends Persona{
 			
 			return notas;
 		} 
+		
+		
 }
 
 
