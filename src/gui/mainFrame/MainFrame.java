@@ -786,15 +786,33 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
             	String contra = "";
             	contra = JOptionPane.showInputDialog("Escriba la nueva contraseña:");
-            	if(contra.isEmpty()){
+            	if(contra == null || contra.isEmpty()){
             		JOptionPane.showMessageDialog(null, "No se escribió nada");
+            	}else if(contra.length()!=8){
+            		JOptionPane.showMessageDialog(null, "La contraseña tiene que ser de 8 caracteres");
             	}else{
             		Runner.usuario.setPassword(contra);
             		JOptionPane.showMessageDialog(null, "Se ha cambiado la contraseña satisfactoriamente");
             	} 	
             }
         });
+		
 		cambiarNombreButtonItem.setText("Cambiar nombre de usuario");
+		cambiarNombreButtonItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	String nombre = "";
+            	nombre = JOptionPane.showInputDialog("Escriba el nuevo nombre de ususario:");
+            	if(nombre == null || nombre.isEmpty()){
+            		JOptionPane.showMessageDialog(null, "No se escribió nada");
+            	}else if(nombre.length()>35){
+            		JOptionPane.showMessageDialog(null, "El nombre de usuario no puede ser de más de 35 caracteres");
+            	}else{
+            		Runner.usuario.setName(nombre);
+            		JOptionPane.showMessageDialog(null, "Se ha cambiado el nombre de usuario satisfactoriamente");
+            	} 	
+            }
+        });
 		cambiarNombreButtonItem.setIcon(null);
 		
         popupMenu.add(cerrarSesionButtonItem);
@@ -824,15 +842,11 @@ public class MainFrame extends JFrame {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// if(e.isPopupTrigger()) {
-	                    popupMenu.show(e.getComponent(), e.getX(), e.getY());
-	            // }
+	            popupMenu.show(e.getComponent(), e.getX(), e.getY());
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				// if(e.isPopupTrigger()) {
-	                    popupMenu.show(e.getComponent(), e.getX(), e.getY());
-	             //}
+	            popupMenu.show(e.getComponent(), e.getX(), e.getY());
 			}
 		});
 		sesionIconBarBotton.setIcon(new ImageIcon(MainFrame.class.getResource("/gui/utils/userPhoto-removebg-preview_filtered_via_10015_io_46x39_via_10015_io.png")));
