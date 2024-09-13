@@ -1267,6 +1267,7 @@ public class MainFrame extends JFrame {
 		centrarCelda.setHorizontalAlignment(JLabel.CENTER);
 		tableDraw();
 		actualizarLblPeriodoActual();
+		mostrarMensajeInicial();
 		
 	}
 	
@@ -1394,5 +1395,15 @@ public class MainFrame extends JFrame {
 		default:
 			break;
 		}
+	}
+	
+	private void mostrarMensajeInicial(){
+		JOptionPane.showMessageDialog(null, "Bienvendio al sistema de gestión de la Filial de Ciencias Técnicas:\n\n"
+				+ "El sistema inicia en una Fase de Preparación donde se agregarán, modificarán y eliminarán los datos,"
+				+ "así como la creación de las planificaciones docentes.\n"
+				+ "Al iniciar los periodos se debe dar nota a cada estudiante de todos los grupos matriculados en cada una de las asignaturas\n"
+				+ "para de esta forma, poder avanzar al siguiente semestre o año.\n\n"
+				+ "Al pasar de año se vuelve a iniciar la Fase de Preparación, donde se tendrá que volver a crear los grupos, planificaciones docentes\n"
+				+ "y se volverán a otorgar los permisos de agregar, modificar y eliminar los datos. ");
 	}
 }
