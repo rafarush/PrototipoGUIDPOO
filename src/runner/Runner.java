@@ -19,7 +19,7 @@ import logica.utils.DatosAutomaticos;
 
 public class Runner {
 	
-	public static User usuario;
+	public static Usuario usuario;
 	public static DefaultTableModel modeloProfesor;
 	public static DefaultTableModel modeloProfesorConsejo;
 	public static DefaultTableModel modeloEstudiante;
@@ -46,6 +46,7 @@ public class Runner {
 		
 		//Usuario
 	    usuario = new User("Fermin", "12345678");
+
 		
 		DatosAutomaticos.datosAutomaticos();
 
