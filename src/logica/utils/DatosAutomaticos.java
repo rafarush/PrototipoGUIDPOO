@@ -14,16 +14,16 @@ public  class DatosAutomaticos {
 		
 		//estudiantes
 		Fct.getInstance().crearPersona("03012345678", "Juan Carlos Pérez Gómez", 1, "CIME", "MINED", "Calle 30 entre 13 y 15");
-		Fct.getInstance().crearPersona("04023456789", "José Antonio Rodríguez Sánchez", 1, "ETECSA", "PCC", "Calle 21 entre 34 y 324");
-		Fct.getInstance().crearPersona("05034567890", "Luis Miguel Hernández Ruiz", 1, "CIME", "MINED", "Calle 25 entre 12 y 14");
-		Fct.getInstance().crearPersona("04045678901", "María Fernanda López Martínez", 1, "ETECSA", "FMC", "Calle 7 entre 12 y 14");
+		//Fct.getInstance().crearPersona("04023456789", "José Antonio Rodríguez Sánchez", 1, "ETECSA", "PCC", "Calle 21 entre 34 y 324");
+		//Fct.getInstance().crearPersona("05034567890", "Luis Miguel Hernández Ruiz", 1, "CIME", "MINED", "Calle 25 entre 12 y 14");
+		//Fct.getInstance().crearPersona("04045678901", "María Fernanda López Martínez", 1, "ETECSA", "FMC", "Calle 7 entre 12 y 14");
 		
 		//grupos
 		Fct.getInstance().crearGrupo("Grupo 1.1", 1);
 		Fct.getInstance().buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(Fct.getInstance().buscarUnEstudiante("03012345678"));
-		Fct.getInstance().buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(Fct.getInstance().buscarUnEstudiante("04023456789"));
-		Fct.getInstance().buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(Fct.getInstance().buscarUnEstudiante("05034567890"));
-		Fct.getInstance().buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(Fct.getInstance().buscarUnEstudiante("04045678901"));
+		//Fct.getInstance().buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(Fct.getInstance().buscarUnEstudiante("04023456789"));
+		//Fct.getInstance().buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(Fct.getInstance().buscarUnEstudiante("05034567890"));
+		//Fct.getInstance().buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(Fct.getInstance().buscarUnEstudiante("04045678901"));
 		
 		
 		//plan docente
@@ -32,13 +32,18 @@ public  class DatosAutomaticos {
 		
 		
 		// Asignatura
-		Fct.getInstance().getPlanEstudio().crearAsignatura("Calculo I",1 ,1 ,50 );
-		Fct.getInstance().getPlanEstudio().crearAsignatura("IP",1 ,1 ,50 );
-		Fct.getInstance().getPeriodos().get(0).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor("84012345678"), Fct.getInstance().getPlanEstudio().buscarAsignatura("Calculo I"), Fct.getInstance().buscarGrupo("Grupo 1.1"));
-		Fct.getInstance().getPeriodos().get(0).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor("84012345678"), Fct.getInstance().getPlanEstudio().buscarAsignatura("IP"), Fct.getInstance().buscarGrupo("Grupo 1.1"));
-		
-		Fct.getInstance().getPlanEstudio().crearAsignatura("Calculo II",1 ,2 ,46 );
-		Fct.getInstance().getPeriodos().get(6).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor("84012345678"), Fct.getInstance().getPlanEstudio().buscarAsignatura("Calculo II"), Fct.getInstance().buscarGrupo("Grupo 1.1"));
+		try{
+			Fct.getInstance().getPlanEstudio().crearAsignatura("Calculo I",1 ,1 ,50 );
+			//Fct.getInstance().getPlanEstudio().crearAsignatura("IP",1 ,1 ,50 );
+			Fct.getInstance().getPeriodos().get(0).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor("84012345678"), Fct.getInstance().getPlanEstudio().buscarAsignatura("Calculo I"), Fct.getInstance().buscarGrupo("Grupo 1.1"));
+			//Fct.getInstance().getPeriodos().get(0).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor("84012345678"), Fct.getInstance().getPlanEstudio().buscarAsignatura("IP"), Fct.getInstance().buscarGrupo("Grupo 1.1"));
+			
+			Fct.getInstance().getPlanEstudio().crearAsignatura("Calculo II",1 ,2 ,46 );
+			Fct.getInstance().getPeriodos().get(6).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor("84012345678"), Fct.getInstance().getPlanEstudio().buscarAsignatura("Calculo II"), Fct.getInstance().buscarGrupo("Grupo 1.1"));
+			
+		}catch(ProcesoNoPermitidoException e){
+			System.out.println("CAPTURADA");
+		}
 		
 		Fct.getInstance().getPlanEstudio().crearAsignatura("Calculo III",2 ,1 ,52 );
 		Fct.getInstance().getPlanEstudio().crearAsignatura("RA",2 ,2 ,60 );

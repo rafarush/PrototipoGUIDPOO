@@ -1,5 +1,6 @@
 package logica.Clases;
 
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 
 import logica.utils.ProcesoNoPermitidoException;
@@ -673,9 +674,22 @@ public final class Fct {
 	public boolean verificarGruposEnSusPD() {
 		 boolean val = true;
 		 boolean var = false;
+		 boolean var2 = false;
 		 
 		 for(int i = 0;i<grupos.size() && val; i++){
-					for(int e=0;e<periodos.size() && val;e++){
+			 if(grupos.get(i) instanceof GrupoEspecial){
+				 var2=false;
+				 int anno = ((GrupoEspecial) grupos.get(i)).getAsignatura().getAnnoAcademico();
+				 int sem = ((GrupoEspecial) grupos.get(i)).getAsignatura().getSemestre();
+				 for(int j=0;j<periodos.get((anno * sem)-1).getPlanificacionesDocentes().size() && var2 ; j++){
+					 if(periodos.get((anno * sem)-1).getPlanificacionesDocentes().get(j).getAsignatura().equals(((GrupoEspecial) grupos.get(i)).getAsignatura())){
+						 val = true;
+					 }
+				 }
+				 if(!var2)
+						val = false;
+			 }else{
+				 for(int e=0;e<periodos.size() && val;e++){
 						if(e==grupos.get(i).getAnnoAcademico()-1 || e==grupos.get(i).getAnnoAcademico()+5){ 
 							var = false;
 							for(PlanificacionDocente pD : periodos.get(e).getPlanificacionesDocentes()){
@@ -686,8 +700,9 @@ public final class Fct {
 							if(!var)
 								val = false;
 						}
-					}
-				
+						
+					} 
+			 }
 			}
 		 
 		 
@@ -703,6 +718,9 @@ public final class Fct {
 			throw new ProcesoNoPermitidoException("Hay "+buscarEstudiantesSinNotas().size()+" estudiantes sin notas.");
 		}
 		else{
+			
+			
+			
 			for(Estudiante e : buscarEstudiantes()){
 				
 				if(e.verificarArrastre() || (e.verificarNotasSuspensas1erSemestre().size()<2 && e.verificarNotasSuspensas2doSemestre().size()<2 ))
@@ -726,22 +744,10 @@ public final class Fct {
 	// Para crear los grupos de arrastre
 	public void crearGruposArrastres(){
 		
-		/*for(int i = 2;i<7;i++){
-			if(buscarArrastresPorAnno(i).size()!=0){
-				Grupo grupo = new Grupo("Arrastres de "+(i-1) , i-1);
-				grupo.setGrupoEstudiantes(buscarArrastresPorAnno(i));
-				grupos.add(grupo);
-			}
-		}*/
-		
-		
-		
-		
-		
 		for(int i = 2;i<7;i++){
 			if(buscarArrastresPorAnno(i).size()!=0){
 				for(Asignatura a : buscarAsignaturasArrastresPorAnno(i)){
-					Grupo grupo = new Grupo("Arrastres de "+(i-1)+" " +a.getNombre() , i-1);
+					GrupoEspecial grupo = new GrupoEspecial("Arrastres de "+(i-1)+" en " +a.getNombre() , i-1 , a);
 					grupo.setGrupoEstudiantes(buscarArrastresPorAsignatura(a));
 					grupos.add(grupo);
 					
@@ -785,6 +791,22 @@ public final class Fct {
 	}
 	
 	
+	//buscar grupos de arrastre
+	public ArrayList<Grupo> buscarGruposArrastres(){
+		ArrayList<Grupo> gruposArr = new ArrayList<>();
+		
+		for(Grupo g : grupos){
+			
+			if(g.getGrupoEstudiantes().size()>0){
+				if(g.getAnnoAcademico()!=g.getGrupoEstudiantes().get(0).getAnnoAcademico())
+					gruposArr.add(g);
+			}
+			
+		}
+		
+		
+		return gruposArr;
+	}
 	
 	
 	
@@ -801,11 +823,18 @@ public final class Fct {
 				if(!asignaturasArrastres.contains(e.buscarAsignaturasArrastres().get(0)))
 					asignaturasArrastres.add(e.buscarAsignaturasArrastres().get(0));
 			
-			if(e.buscarAsignaturasArrastres().size()==2)
+			if(e.buscarAsignaturasArrastres().size()==2){
+				if(!asignaturasArrastres.contains(e.buscarAsignaturasArrastres().get(0)))
+					asignaturasArrastres.add(e.buscarAsignaturasArrastres().get(0));
+				
 				if(!asignaturasArrastres.contains(e.buscarAsignaturasArrastres().get(1)))
-					asignaturasArrastres.add(e.buscarAsignaturasArrastres().get(1));	
+					asignaturasArrastres.add(e.buscarAsignaturasArrastres().get(1));
+			}	
 			
 		}
+		
+		for(Asignatura a : asignaturasArrastres)
+			System.out.println(a.getNombre());
 		
 		return asignaturasArrastres;
 	}
@@ -1115,179 +1144,13 @@ public final class Fct {
 		buscarGrupo("Grupo 2.1").insertarAGrupoEstudiante(buscarUnEstudiante("04021324587"));
 		buscarGrupo("Grupo 6.1").insertarAGrupoEstudiante(buscarUnEstudiante("04021334457"));
 		
-		//PLANES DOCENTES
 		
-		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("95868426587"),getPlanEstudio().buscarAsignatura("Matemática I") , buscarGrupo("Grupo 1.1"));
-		getPeriodos().get(0).crearPlanificacionDocente(buscarUnProfesor("05062348364"),getPlanEstudio().buscarAsignatura("Introducción a la Programación") , buscarGrupo("Grupo 1.1"));
-		getPeriodos().get(5).crearPlanificacionDocente(buscarUnProfesor("95868426587"),getPlanEstudio().buscarAsignatura("Inteligencia artificial") , buscarGrupo("Grupo 6.1"));
-
+		
 	}
 	
 	
 	// para GENERAR LOS TODOSSSSSS LOS DATOS AUTOMATICOS
 	public void generarDatosAutomaticos() {
-		
-		// PROFESORES
-		// 1ro
-		crearPersona("84012345678", "Juan Carlos Pérez Gómez", "Doctor", "Titular", "Cujae", "MINED", "Calle 1 entre 2 y 4");
-		crearPersona("83023456789", "José Antonio Rodríguez Sánchez", "Máster", "Instructor", "CineSoft", "PCC", "Calle 2 entre 1 y 3");
-		crearPersona("82034567890", "Luis Miguel Hernández Ruiz", "Ninguna", "Asistente", "ETECSA", "MINED", "Calle 3 entre 2 y 4");
-		crearPersona("80056789012", "María Fernanda López Martínez", "Doctor", "Titular", "CIME", "FMC", "Calle 4 entre 5 y 7");
-		
-		
-		/*
-		//2do
-		crearPersona("80056789012", "Francisco Javier Sánchez Morales", "Doctor", "Titular", "CIME", "PCC", "Calle 5 entre 6 y 8");
-		crearPersona("79067890123", "Alejandro David Romero Vargas", "Máster", "Instructor", "Cujae", "MINED", "Calle 6 entre 3 y 5");
-		crearPersona("79067890123", "Ana Isabel García Fernández", "Ninguno", "Asistente", "CineSoft", "FMC", "Calle 7 entre 8 y 10");
-		crearPersona("77089012345", "Manuel Jesús Ramos Herrera", "Máster", "Auxiliar", "ETECSA", "MINED", "Calle 8 entre 1 y 3");
-			
-		//3ro
-		crearPersona("76090123456", "Ricardo Andrés Vega Paredes", "Doctor", "Titular", "CineSoft", "MINED", "Calle 9 entre 4 y 6");
-		crearPersona("75001234567", "Sergio Daniel Cruz Aguilar", "Máster", "Instructor", "Cujae", "MINED", "Calle 10 entre 3 y 5");
-		crearPersona("84012345678", "Laura Patricia Díaz Ramírez", "Ninguno", "Asistente", "CIME", "FMC", "Calle 11 entre 2 y 4");
-		crearPersona("73023456789", "Miguel Ángel Torres Martínez", "Ninguno", "Auxiliar", "ETECSA", "PCC", "Calle 12 entre 11 y 13");
-				
-		//4to
-		crearPersona("83023456789", "Marta Elena Jiménez Castro", "Doctor", "Titular", "CineSoft", "FMC", "Calle 13 entre 4 y 6");
-		crearPersona("71045678901", "Rafael Eduardo Díaz Ramírez", "Máster", "Instructor", "CIME", "PCC", "Calle 14 entre 9 y 11");
-		crearPersona("70056789012", "Fernando José García Fernández", "Ninguno", "Asistente", "Cujae", "MINED", "Calle 15 entre 22 y 24");
-		crearPersona("69067890123", "Andrés Felipe Martínez López", "Doctor", "Titular", "ETECSA", "MINED", "Calle 16 entre 15 y 17");
-				
-		// 5to
-		crearPersona("82034567890", "Sofía Valentina Torres Mendoza", "Doctor", "Titular", "CIME", "FMC", "Calle 17 entre 16 y 18");
-		crearPersona("67089012345", "Javier Alejandro González Torres", "Máster", "Instructor", "ETECSA", "MINED", "Calle 18 entre 7 y 9");
-		crearPersona("66090123456", "Daniel Enrique Sánchez Morales", "Ninguno", "Asistente", "Cujae", "MINED", "Calle 19 entre 10 y 12");
-		crearPersona("65001234567", "Roberto Carlos Jiménez Castro", "Máster", "Auxiliar", "CineSoft", "PCC", "Calle 20 entre 13 y 15");
-				
-		//6to
-		crearPersona("81045678901", "Adrián David Romero Vargas", "Doctor", "Titular", "CineSoft", "MINED", "Calle 21 entre 12 y 14");
-		crearPersona("78078901234", "Mario Alberto Ortiz Navarro", "Máster", "Instructor", "ETECSA", "PCC", "Calle 22 entre 11 y 13");
-		crearPersona("81045678901", "Paula Andrea Castillo Rojas", "Ninguno", "Asistente", "CIME", "FMC", "Calle 23 entre 6 y 8");
-		crearPersona("74012345678", "Carlos Alberto Fernández López", "Ninguno", "Auxiliar", "Cujae", "MINED", "Calle 24 entre 21 y 23");
-		*/
-		
-		// ESTUDIANTES
-		
-		//1ro
-		//Grupo 1.1
-		crearPersona("03012345678", "Juan Carlos Pérez Gómez", 1, "CIME", "MINED", "Calle 30 entre 13 y 15");
-		crearPersona("04023456789", "José Antonio Rodríguez Sánchez", 1, "ETECSA", "PCC", "Calle 21 entre 34 y 324");
-		crearPersona("05034567890", "Luis Miguel Hernández Ruiz", 1, "CIME", "MINED", "Calle 25 entre 12 y 14");
-		crearPersona("04045678901", "María Fernanda López Martínez", 1, "ETECSA", "FMC", "Calle 7 entre 12 y 14");
-		
-		crearGrupo("Grupo 1.1", 1);
-		buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(buscarUnEstudiante("03012345678"));
-		buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(buscarUnEstudiante("04023456789"));
-		buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(buscarUnEstudiante("05034567890"));
-		buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(buscarUnEstudiante("04045678901"));
-		
-		
-		/*
-		//Grupo 
-		crearPersona("03040678901", "Pedro Javier González Torres", 1, "CIME", "MINED", "Calle 30 entre 13 y 15");
-		crearGrupo("Grupo 2.1", 2);
-		buscarGrupo("Grupo 2.1").insertarAGrupoEstudiante(buscarUnEstudiante("03040678901"));
-		
-		crearPersona("04050789012", "Francisco Javier Sánchez Morales", 1, "CIME", "MINED", "Calle 30 entre 13 y 15");
-		crearGrupo("Grupo 3.1", 3);
-		buscarGrupo("Grupo 3.1").insertarAGrupoEstudiante(buscarUnEstudiante("04050789012"));
-		
-		crearPersona("05050789012", "Ana Isabel García Fernández", 1, "CIME", "MINED", "Calle 30 entre 13 y 15");
-		crearGrupo("Grupo 4.1", 4);
-		buscarGrupo("Grupo 4.1").insertarAGrupoEstudiante(buscarUnEstudiante("05050789012"));
-		
-		crearPersona("04060890123", "Laura Patricia Díaz Ramírez", 1, "CIME", "MINED", "Calle 30 entre 13 y 15");
-		crearGrupo("Grupo 5.1", 5);
-		buscarGrupo("Grupo 5.1").insertarAGrupoEstudiante(buscarUnEstudiante("04060890123"));
-		
-		crearPersona("04060690123", "Lya Rico Alonso", 1, "CIME", "MINED", "Calle 30 entre 13 y 15");
-		crearGrupo("Grupo 6.1", 6);
-		buscarGrupo("Grupo 6.1").insertarAGrupoEstudiante(buscarUnEstudiante("04060690123"));
-		*/
-		
-		
-		/*
-		//2do
-		//Grupo 2.1
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		
-		//Grupo 2.2
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		
-		//3ro
-		//Grupo 3.1
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		
-		//Grupo 3.2
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		
-		//4ro
-		//Grupo 4.1
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		
-		//Grupo 4.2
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		
-		//5to
-		//Grupo 5.1
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		
-		//Grupo 5.2
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		
-		//6to
-		//Grupo 6.1
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		
-		//Grupo 6.2
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		crearPersona("", "", "", "", "", "");
-		
-		*/
-		
-		// Personal de apoyo
-		crearPersona("0311568003", "Juan Peña Pina", "Secretaria", "Calle 20 entre 16 y 18");
-		crearPersona("0311568004", "Miguel Reina Monte", "Biblioteca", "Calle 19 entre 18 y 20");
-		
-		
-		// Asignatura
-		planEstudio.crearAsignatura("Calculo I",1 ,1 ,50 );
-		planEstudio.crearAsignatura("IP",1 ,1 ,50 );
-		periodos.get(0).crearPlanificacionDocente(buscarUnProfesor("84012345678"), planEstudio.buscarAsignatura("Calculo I"), buscarGrupo("Grupo 1.1"));
-		periodos.get(0).crearPlanificacionDocente(buscarUnProfesor("84012345678"), planEstudio.buscarAsignatura("IP"), buscarGrupo("Grupo 1.1"));
-		
-		planEstudio.crearAsignatura("Calculo II",1 ,2 ,46 );
-		periodos.get(6).crearPlanificacionDocente(buscarUnProfesor("84012345678"), planEstudio.buscarAsignatura("Calculo II"), buscarGrupo("Grupo 1.1"));
 		
 		planEstudio.crearAsignatura("Calculo III",2 ,1 ,52 );
 		planEstudio.crearAsignatura("RA",2 ,2 ,60 );

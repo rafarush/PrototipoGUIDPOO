@@ -2,6 +2,8 @@ package logica.Clases;
 
 import java.util.ArrayList;
 
+import logica.utils.ProcesoNoPermitidoException;
+
 public class Periodo {
 	
 	// ATRIBUTOS
@@ -24,16 +26,31 @@ public class Periodo {
 			this.planificacionesDocentes = planificacionesDocentes;
 		}
 		
-		public boolean crearPlanificacionDocente(Profesor profesor, Asignatura asignatura, Grupo grupo){
+		public boolean crearPlanificacionDocente(Profesor profesor, Asignatura asignatura, Grupo grupo) throws ProcesoNoPermitidoException{
 			boolean val = false;
 			if(!verificarPlanificacionDocente(grupo, asignatura)){
-				PlanificacionDocente planificacionDocente =  new PlanificacionDocente(profesor, asignatura, grupo);
-				planificacionesDocentes.add(planificacionDocente);
-				
-				for(Estudiante e : grupo.getGrupoEstudiantes()){
-					ControlDocente controlDocente=profesor.crearControlDocente(e, asignatura);
-					e.insertarControlDocente(controlDocente);
+				if(grupo instanceof GrupoEspecial){
+					if(((GrupoEspecial)grupo).getAsignatura().equals(asignatura)){
+						PlanificacionDocente planificacionDocente =  new PlanificacionDocente(profesor, asignatura, grupo);
+						planificacionesDocentes.add(planificacionDocente);
+					}else{
+						throw new ProcesoNoPermitidoException("Este grupo solo acepta planificaciones docentes de " + ((GrupoEspecial)grupo).getAsignatura().getNombre() + ".");
+					}
+						
+					
+					
+					
+				}else{
+					PlanificacionDocente planificacionDocente =  new PlanificacionDocente(profesor, asignatura, grupo);
+					planificacionesDocentes.add(planificacionDocente);
+					
+					for(Estudiante e : grupo.getGrupoEstudiantes()){
+						ControlDocente controlDocente=profesor.crearControlDocente(e, asignatura);
+						e.insertarControlDocente(controlDocente);
+					}
 				}
+				
+				
 				
 				val = true;
 			}
