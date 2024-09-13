@@ -244,6 +244,18 @@ public final class Fct {
 	//sets y gets
 	
 	
+	
+	
+	public void setPersona(ArrayList<Persona> personas) {
+		this.personas = personas;
+	}
+	
+	public void setPlanEstudio(ArrayList<Grupo> grupos) {
+		this.grupos = grupos;
+	}
+	
+	
+	
 	public PlanEstudio getPlanEstudio() {
 		return planEstudio;
 	}
@@ -945,6 +957,8 @@ public final class Fct {
 			int i = 0;
 			boolean val = true;
 			
+			if(e.getAnnoAcademico()==7)
+				val = false;
 			
 			if(!e.verificarArrastreEspecial() && !e.verificarNecesidadGrupo())
 				val = false;
