@@ -728,7 +728,9 @@ public final class Fct {
 			
 			for(Estudiante e : buscarEstudiantes()){
 				
-				if(e.verificarArrastreEspecial() && (e.verificarNotasSuspensas1erSemestre().size()<2 && e.verificarNotasSuspensas2doSemestre().size()<2 ))
+				if(!e.verificarArrastreEspecial())
+					e.limpiarEstudiante();
+				else if((e.verificarNotasSuspensas1erSemestre().size()<2 && e.verificarNotasSuspensas2doSemestre().size()<2 ))
 					e.setAnnoAcademico(e.getAnnoAcademico()+1);
 			}
 			
