@@ -296,9 +296,6 @@ public final class Fct {
 
 	//OTROS
 
-	
-	//   TENGO que implementar que tengan todos el mismo año ---->>>> YA IMPLEMENTADO
-
 	//   TENGO que implementar que el estudiante no puede entrar si esta en otro grupo 
 	public void insertarAGrupo(Estudiante estudiante, String grupo){
 		int i = 0;
@@ -633,20 +630,6 @@ public final class Fct {
 		return personalApoyo;
 	}
 	
-	
-	// PARA VERIFICAR QUE TODOS LOS ESTUDIANTES TENGAN NOTAS
-	/*public boolean verificarNotas(){
-		boolean val = true;
-		
-		for(Grupo i : grupos){
-			for(Estudiante e : i.getGrupoEstudiantes()){
-				if(!e.verificarNotas())
-					val=false;
-			}
-		}
-		
-		return val;
-	}*/
 	
 	
 	// PARA PASAR DE PERIODO
