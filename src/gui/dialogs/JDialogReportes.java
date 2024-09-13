@@ -179,7 +179,7 @@ public class JDialogReportes extends JDialog {
 	private void tableDraw(){
 		switch (reportesComboBox.getSelectedIndex()) {
 		case 0:
-			DatosAuto.definirTablaReportesEstu(Fct.getInstance().buscarEstudiantesSinNotas());
+			DefinidorDeModelo.definirTablaReportesEstu(Fct.getInstance().buscarEstudiantesSinNotas());
 			tablaReportes = new JTableNoEdit(Runner.modeloEstudianteReporte);
 			tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -192,7 +192,7 @@ public class JDialogReportes extends JDialog {
 			scrollPane.setViewportView(tablaReportes);
 			break;
 		case 1:
-			DatosAuto.definirTablaReportesEstu(Fct.getInstance().buscarEstudiantesSinGrupo());
+			DefinidorDeModelo.definirTablaReportesEstu(Fct.getInstance().buscarEstudiantesSinGrupo());
 			tablaReportes = new JTableNoEdit(Runner.modeloEstudianteReporte);
 			tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -205,7 +205,7 @@ public class JDialogReportes extends JDialog {
 			scrollPane.setViewportView(tablaReportes);
 			break;
 		case 2:
-			DatosAuto.definirTablaReportesEstu(Fct.getInstance().buscarEstudiantesGraduados());
+			DefinidorDeModelo.definirTablaReportesEstu(Fct.getInstance().buscarEstudiantesGraduados());
 			tablaReportes = new JTableNoEdit(Runner.modeloEstudianteReporte);
 			tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -218,7 +218,7 @@ public class JDialogReportes extends JDialog {
 			scrollPane.setViewportView(tablaReportes);
 			break;
 		case 3:
-			DatosAuto.definirTablaReportesEstu(Fct.getInstance().buscarEstudiantesConArrastre());
+			DefinidorDeModelo.definirTablaReportesEstu(Fct.getInstance().buscarEstudiantesConArrastre());
 			tablaReportes = new JTableNoEdit(Runner.modeloEstudianteReporte);
 			tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -231,7 +231,7 @@ public class JDialogReportes extends JDialog {
 			scrollPane.setViewportView(tablaReportes);
 			break;
 		case 4:
-			DatosAuto.definirTablaReportesEstu(Fct.getInstance().buscarEstudiantesOros());
+			DefinidorDeModelo.definirTablaReportesEstu(Fct.getInstance().buscarEstudiantesOros());
 			tablaReportes = new JTableNoEdit(Runner.modeloEstudianteReporte);
 			tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -244,7 +244,7 @@ public class JDialogReportes extends JDialog {
 			scrollPane.setViewportView(tablaReportes);
 			break;
 		case 5:
-			DatosAuto.definirTablaGrupo(Fct.getInstance().buscarGrupoConMenorCantidad());
+			DefinidorDeModelo.definirTablaGrupo(Fct.getInstance().buscarGrupoConMenorCantidad());
 			tablaReportes = new JTableNoEdit(Runner.modeloGrupoReporte);
 			tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e1) {
@@ -255,7 +255,7 @@ public class JDialogReportes extends JDialog {
 						 * Actualiza la tabla con los datos de los estudiantes del grupo clickeado
 						 */
 						String nombreGrupoSelect = tablaReportes.getValueAt(filaSelec,0).toString();
-						DatosAuto.definirTablaReportesEstu(Fct.getInstance().buscarGrupo(nombreGrupoSelect).getGrupoEstudiantes());
+						DefinidorDeModelo.definirTablaReportesEstu(Fct.getInstance().buscarGrupo(nombreGrupoSelect).getGrupoEstudiantes());
 						tablaReportes = new JTableNoEdit(Runner.modeloEstudianteReporte);
 						tablaReportes.addMouseListener(new java.awt.event.MouseAdapter() {
 							public void mouseClicked(java.awt.event.MouseEvent e2) {

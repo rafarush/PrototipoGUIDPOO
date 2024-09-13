@@ -143,7 +143,7 @@ public class InputDialogProfeAConsejo extends JDialog {
 	}
 	
 	private void tableDraw(){
-			DatosAuto.definirTablaProfesConsejo(Fct.getInstance().buscarProfesSinCargo());
+			DefinidorDeModelo.definirTablaProfesConsejo(Fct.getInstance().buscarProfesSinCargo());
 			table = new JTableNoEdit(Runner.modeloProfesorConsejo);
 			table.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {

@@ -317,7 +317,7 @@ public class InputJDialogPlanifDocente extends JDialog {
 			case PROFESOR:
 				semestreComboBox.setEnabled(false);
 				annoComboBox.setEnabled(false);
-				DatosAuto.definirTablaProfes(Fct.getInstance().buscarProfesores());
+				DefinidorDeModelo.definirTablaProfes(Fct.getInstance().buscarProfesores());
 				tabla = new JTableNoEdit(Runner.modeloProfesor);
 				tabla.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -328,10 +328,8 @@ public class InputJDialogPlanifDocente extends JDialog {
 				break;
 			case GRUPO:
 				Asignatura asignatura = Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec);
-				DatosAuto.definirTablaGrupo(Fct.getInstance().buscarGruposPorAnnoNoVacio(asignatura.getAnnoAcademico()));
-				tabla = new JTableNoEdit(Runner.modeloGrupoReporte);/*
-				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
-				tablaNotas.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);*/
+				DefinidorDeModelo.definirTablaGrupo(Fct.getInstance().buscarGruposPorAnnoNoVacio(asignatura.getAnnoAcademico()));
+				tabla = new JTableNoEdit(Runner.modeloGrupoReporte);
 				tabla.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
 						if (e.getClickCount() == 2) 
@@ -340,7 +338,7 @@ public class InputJDialogPlanifDocente extends JDialog {
 				});
 				break;
 			case PLAN_ESTUDIO:
-				DatosAuto.definirTablaPlanDeEstudio(Fct.getInstance().getPlanEstudio().buscarAsignaturasPorPeriodo(Integer.valueOf(annoComboBox.getSelectedItem().toString()), Integer.valueOf(semestreComboBox.getSelectedItem().toString())));
+				DefinidorDeModelo.definirTablaPlanDeEstudio(Fct.getInstance().getPlanEstudio().buscarAsignaturasPorPeriodo(Integer.valueOf(annoComboBox.getSelectedItem().toString()), Integer.valueOf(semestreComboBox.getSelectedItem().toString())));
 				tabla = new JTableNoEdit(Runner.modeloPlanDeEstudio);
 				tabla.addMouseListener(new java.awt.event.MouseAdapter() {
 					public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -353,9 +351,9 @@ public class InputJDialogPlanifDocente extends JDialog {
 				semestreComboBox.setEnabled(true);
 				annoComboBox.setEnabled(true);
 				if(semestreComboBox.getSelectedItem().toString().equalsIgnoreCase("1")){
-					DatosAuto.definirTablaPlanDocente(Fct.getInstance().getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())-1).getPlanificacionesDocentes());
+					DefinidorDeModelo.definirTablaPlanDocente(Fct.getInstance().getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())-1).getPlanificacionesDocentes());
 				}else{
-					DatosAuto.definirTablaPlanDocente(Fct.getInstance().getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())+5).getPlanificacionesDocentes());
+					DefinidorDeModelo.definirTablaPlanDocente(Fct.getInstance().getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())+5).getPlanificacionesDocentes());
 				}
 				tabla = new JTableNoEdit(Runner.modeloPlanDocente);
 				tabla.addMouseListener(new java.awt.event.MouseAdapter() {

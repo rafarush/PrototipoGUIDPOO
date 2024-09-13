@@ -30,26 +30,28 @@ public class ModeloProfesorEdit extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
     	Profesor profesor = profesores.get(rowIndex);
+    	Object valor;
         switch (columnIndex) {
             case 0:
-                return profesor.getID();
+                valor = profesor.getID();
             case 1:
-                return profesor.getNombre();
+            	valor =  profesor.getNombre();
             case 2:
-                return profesor.getCategoriaCientifica();
+            	valor =  profesor.getCategoriaCientifica();
             case 3:
-                return profesor.getCategoriaDocente();
+            	valor =  profesor.getCategoriaDocente();
             case 4:
-                return profesor.getCentroLaboral();
+            	valor =  profesor.getCentroLaboral();
             case 5:
-                return profesor.getOrganismo();
+            	valor =  profesor.getOrganismo();
             case 6:
-                return profesor.getDireccion();
+            	valor =  profesor.getDireccion();
             case 7:
-                return profesor.calcularSalario();
+            	valor =  profesor.calcularSalario();
             default:
-                return null;
+            	valor =  null;
         }
+        return valor;
     }
 
     @Override

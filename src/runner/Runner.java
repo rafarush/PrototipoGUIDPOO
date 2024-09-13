@@ -45,7 +45,7 @@ public class Runner {
 		/**********************************************Datos Prueba********************************************************/
 		
 		//Usuario
-	    usuario = new User("Fermin", "1234");
+	    usuario = new User("Fermin", "12345678");
 		
 		DatosAutomaticos.datosAutomaticos();
 

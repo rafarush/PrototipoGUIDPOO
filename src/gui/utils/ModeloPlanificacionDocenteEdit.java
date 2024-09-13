@@ -28,16 +28,18 @@ public class ModeloPlanificacionDocenteEdit extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         PlanificacionDocente planificacion = planificaciones.get(rowIndex);
+        Object valor;
         switch (columnIndex) {
             case 0:
-                return planificacion.getProfesor().getNombre();
+                valor =  planificacion.getProfesor().getNombre();
             case 1:
-                return planificacion.getAsignatura().getNombre();
+            	valor = planificacion.getAsignatura().getNombre();
             case 2:
-                return planificacion.getGrupo().getNombreGrupo();
+            	valor = planificacion.getGrupo().getNombreGrupo();
             default:
-                return null;
+            	valor = null;
         }
+        return valor;
     }
 
     @Override
