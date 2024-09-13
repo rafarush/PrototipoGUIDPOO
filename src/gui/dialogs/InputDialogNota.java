@@ -103,13 +103,13 @@ public class InputDialogNota extends JDialog {
 			panel.setBounds(209, 0, 150, 107);
 			mainPanel.add(panel);
 			
-			JLabel lblNota1 = new JLabel("Nota 1:");
-			lblNota1.setBounds(10, 11, 51, 20);
+			JLabel lblNota1 = new JLabel("Convocatoria 1:");
+			lblNota1.setBounds(10, 11, 94, 20);
 			mainPanel.add(lblNota1);
 			
 			
 			final JSpinner spinnerNota2 = new JSpinner();
-			spinnerNota2.setModel(new SpinnerListModel(new String[] {"2", "3", "4", "5"}));
+			spinnerNota2.setModel(new SpinnerListModel(new String[] {"No", "2", "3", "4", "5"}));
 			JSpinner.DefaultEditor editor2 = (JSpinner.DefaultEditor) spinnerNota2.getEditor();
 			editor2.getTextField().setEditable(false);
 			spinnerNota2.setBounds(105, 31, 51, 20);
@@ -124,7 +124,7 @@ public class InputDialogNota extends JDialog {
 				@Override
 				public void stateChanged(ChangeEvent e) {
 					String valor = (String) spinnerNota1.getValue();
-					if (valor.equalsIgnoreCase("2")){
+					if (!valor.equalsIgnoreCase("5")){
 						spinnerNota2.setEnabled(true);
 					}else{
 						spinnerNota2.setEnabled(false);
@@ -134,8 +134,8 @@ public class InputDialogNota extends JDialog {
 			spinnerNota1.setBounds(10, 31, 51, 20);
 			mainPanel.add(spinnerNota1);
 			
-			JLabel lblNota2 = new JLabel("Nota 2:");
-			lblNota2.setBounds(105, 11, 51, 20);
+			JLabel lblNota2 = new JLabel("Convocatoria 2:");
+			lblNota2.setBounds(105, 11, 94, 20);
 			mainPanel.add(lblNota2);
 			
 			
@@ -161,13 +161,22 @@ public class InputDialogNota extends JDialog {
 					Estudiante estudiante = Fct.getInstance().buscarUnEstudiante(InputJDialogControlDocente.estuSelec);
 					
 					if(profe.buscarControlDocente(estudiante, asignatura)!=null){
-						if(spinnerNota2.isEnabled()){
-							profe.darNota(estudiante, asignatura, Integer.valueOf(nota1), Integer.valueOf(nota2));
+						if(spinnerNota1.getValue().toString().equalsIgnoreCase("5")){
+							profe.darNota(estudiante, asignatura, 5.0f, 0.0f);
 							InputJDialogControlDocente.mensajeConfirm(nota1, nota2);
+						}else if(spinnerNota1.getValue().toString().equalsIgnoreCase("2") && spinnerNota2.getValue().toString().equalsIgnoreCase("No")){
+							JOptionPane.showMessageDialog(null, "Error! No se pudo dar nota\nSi un estudiante suspende la primera convocatoria tiene que asistir a la segunda.");
 						}else{
-							profe.darNota(estudiante, asignatura, Integer.valueOf(nota1), 0.0f);
-							InputJDialogControlDocente.mensajeConfirm(nota1, nota2);
+							if(spinnerNota2.getValue().toString().equalsIgnoreCase("No")){
+								profe.darNota(estudiante, asignatura, Float.valueOf(nota1), 0.0f);
+								InputJDialogControlDocente.mensajeConfirm(nota1, nota2);
+							}else{
+								profe.darNota(estudiante, asignatura, Float.valueOf(nota1), Float.valueOf(nota2));
+								InputJDialogControlDocente.mensajeConfirm(nota1, nota2);
+							}
+							
 						}
+						
 						
 					}else{
 						JOptionPane.showMessageDialog(null, "No se pudo dar nota al estudiante");

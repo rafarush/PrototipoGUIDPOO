@@ -561,7 +561,6 @@ public final class Fct {
 	
 	// PARA BUSCAR EL GRUPO
 	public Grupo buscarGrupo(String nombre){
-		//System.out.println("grupo");
 		Grupo grupo = null;
 		int i = 0;
 		boolean val = true;
@@ -841,9 +840,6 @@ public final class Fct {
 			
 		}
 		
-		for(Asignatura a : asignaturasArrastres)
-			System.out.println(a.getNombre());
-		
 		return asignaturasArrastres;
 	}
 	
@@ -962,8 +958,6 @@ public final class Fct {
 			if(!i.verificarNotasPrimerSemestre())
 				sinNotas1erSem.add(i);
 		}
-		for(Estudiante e : sinNotas1erSem)
-			System.out.println(e.getNombre());
 		
 		return sinNotas1erSem;
 	}
