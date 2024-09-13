@@ -171,10 +171,8 @@ public class JDialogLoginUser extends JDialog {
 										try {
 											MainFrame frame = new MainFrame();
 											ImageIcon appIcono = new ImageIcon(
-													MainFrame.class
-															.getResource("/gui/utils/appicon.png"));
-											frame.setIconImage(appIcono
-													.getImage());
+													MainFrame.class.getResource("/gui/utils/appicon.png"));
+											frame.setIconImage(appIcono.getImage());
 											frame.setVisible(true);
 										} catch (Exception e1) {
 											e1.printStackTrace();

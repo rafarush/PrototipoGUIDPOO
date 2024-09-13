@@ -252,7 +252,7 @@ public class JDialogReportes extends JDialog {
 					if (e1.getClickCount() == 2) {
 						filaSelec = tablaReportes.getSelectedRow();
 						/**
-						 * Actualiza la tabla con los datos de los esrudiantes del grupo clickeado
+						 * Actualiza la tabla con los datos de los estudiantes del grupo clickeado
 						 */
 						String nombreGrupoSelect = tablaReportes.getValueAt(filaSelec,0).toString();
 						DatosAuto.definirTablaReportesEstu(Fct.getInstance().buscarGrupo(nombreGrupoSelect).getGrupoEstudiantes());
