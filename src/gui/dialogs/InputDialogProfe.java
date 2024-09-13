@@ -44,7 +44,7 @@ public class InputDialogProfe extends JDialog {
 	private JTextFieldLimitado centroLabTextField;
 	private JComboBox catCienComboBox;
 	private JComboBox catDocComboBox;
-	private int limite = 25;
+	private int limite = 35;
 	private int limiteCI = 11;
 	private final Border bordeRojo = BorderFactory.createLineBorder(Color.RED,1);
 	private final Border bordeNegro = BorderFactory.createLineBorder(Color.BLACK,1);
