@@ -791,7 +791,7 @@ public class MainFrame extends JFrame {
             	}else if(contra.length()!=8){
             		JOptionPane.showMessageDialog(null, "La contraseña tiene que ser de 8 caracteres");
             	}else{
-            		Runner.usuario.setPassword(contra);
+            		Fct.getInstance().getUsuario().setPassword(contra);
             		JOptionPane.showMessageDialog(null, "Se ha cambiado la contraseña satisfactoriamente");
             	} 	
             }
@@ -808,7 +808,7 @@ public class MainFrame extends JFrame {
             	}else if(nombre.length()>35){
             		JOptionPane.showMessageDialog(null, "El nombre de usuario no puede ser de más de 35 caracteres");
             	}else{
-            		Runner.usuario.setNombre(nombre);
+            		Fct.getInstance().getUsuario().setNombre(nombre);
             		JOptionPane.showMessageDialog(null, "Se ha cambiado el nombre de usuario satisfactoriamente");
             	} 	
             }
@@ -824,7 +824,7 @@ public class MainFrame extends JFrame {
 		nombreUsuario.setForeground(new Color(255, 255, 255));
 		nombreUsuario.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		nombreUsuario.setBounds(55, 534, 153, 15);
-		nombreUsuario.setText(Runner.usuario.getNombre());
+		nombreUsuario.setText(Fct.getInstance().getUsuario().getNombre());
 		menuBarPanel.add(nombreUsuario);
 		
 		final JLabel sesionIconBarBotton = new JLabel("");

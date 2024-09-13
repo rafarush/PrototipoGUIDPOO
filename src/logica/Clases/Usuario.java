@@ -22,8 +22,8 @@ public class Usuario {
 		return password;
 	}
 	public void setPassword(String password) {
-		if(password.length()==8){
-			throw new IllegalArgumentException("La contraseña debe tener al menos 8 caracteres");
+		if(password.length()!=8){
+			throw new IllegalArgumentException("La contraseña debe tener 8 caracteres");
 		}else{
 			this.password = password;			
 		}

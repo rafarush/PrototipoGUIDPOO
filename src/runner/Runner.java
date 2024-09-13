@@ -41,13 +41,6 @@ public class Runner {
 	*/
 	public static void main(String[] args) {
 		
-		
-		/**********************************************Datos Prueba********************************************************/
-		
-		//Usuario
-	    usuario = new Usuario("Fermin", "12345678");
-
-		
 		DatosAutomaticos.datosAutomaticos();
 
 		try {
@@ -57,10 +50,5 @@ public class Runner {
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		}
-		
-		/******************************************************************************************************************/
-		
-		
 	}
-
 }
