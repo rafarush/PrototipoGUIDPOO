@@ -13,7 +13,7 @@ public final class Fct {
 	private PlanEstudio planEstudio;
 	private ArrayList<Periodo> periodos;
 	
-	private User usuario;
+	private Usuario usuario;
 	
 	private static Fct instance;
 
@@ -29,7 +29,7 @@ public final class Fct {
 		planEstudio =  new PlanEstudio();
 		periodos = new ArrayList<>();
 		
-		usuario = new User("Fermin", "1234");
+		usuario = new Usuario("Fermin", "1234");
 		
 		crearPeriodos();
 	}
@@ -742,7 +742,7 @@ public final class Fct {
 				
 				if(!e.verificarArrastreEspecial())
 					e.limpiarEstudiante();
-				else if((e.verificarNotasSuspensas1erSemestre().size()<2 && e.verificarNotasSuspensas2doSemestre().size()<2 ))
+				else if((e.verificarNotasSuspensas1erSemestre().size()<2 && e.verificarNotasSuspensas2doSemestre().size()<2 ) && e.getAnnoAcademico()!=7)
 					e.setAnnoAcademico(e.getAnnoAcademico()+1);
 			}
 			
@@ -972,25 +972,6 @@ public final class Fct {
 			if(val)
 				sinGrupo.add(e);
 			
-			/*
-			if(!e.verificarArrastre()){
-				while(i<grupos.size() && val){
-					if(grupos.get(i).getGrupoEstudiantes().contains(e))
-						val=false;
-					i++;
-				}
-			}else{
-				int cont = 0;
-				while(i<grupos.size() && val){
-					if(grupos.get(i).getGrupoEstudiantes().contains(e))
-						cont++;
-					if(cont==2)
-						val=false;
-				}
-			}
-			
-			if(val)
-				sinGrupo.add(e);*/
 		}
 		
 		return sinGrupo;
@@ -1034,8 +1015,21 @@ public final class Fct {
 		boolean eliminada = false;
 		boolean val = verificarAsignaturaPD(asignatura);
 		
-		if(!val)
+		if(!val){
+			ArrayList<ControlDocente> borrar = new ArrayList<>();
 			eliminada = planEstudio.eliminarAsignatura(asignatura);
+			for(Estudiante e : buscarEstudiantes()){
+				for(ControlDocente cD : e.getNotas()){
+					if(cD.getAsignatura().equals(asignatura)  && cD.getNota1()==2 && cD.getNota2()==2){
+						borrar.add(cD);
+					}
+						
+				}
+				e.getNotas().removeAll(borrar);
+				borrar.clear();
+			}
+		}
+			
 		
 		
 		return eliminada;
@@ -1114,93 +1108,7 @@ public final class Fct {
 		return val;
 	}
 	
-	
-	
-	//para inicializar los datos automaticos
-	public void datosAutomaticos(){
-		
-		// JORGITOOOOOOO ---->>>>    la creacion de los profesores por defecto
-		crearPersona("95868426587", "Luis Pérez Fernández","Doctor","Instructor","CineSoft","InfoCuba", "Ave. 26 entre calles A y B");
-		crearPersona("05062348364", "Rafael Castro Reyes","Doctor","Titular","Cujae","MINED", "Calle 30 entre 34 y Ave. 56");
-		crearPersona("05022358174", "Jorge Castro Pérez","Máster","Asistente","Cujae","MINED", "Calle 25 entre 21 y Ave. 26");
-		crearPersona("05062347564", "Manuel Castro Reyes","Máster","Titular","Cujae","MINED", "Calle 30 entre 34 y Ave. 56");
-		
-		// los nuevos
-		
-		
-		
-		//***************************************   ESTUDIANTES   ********************************************************
-		
-		// JORGITOOOOOOO ---->>>>    la creacion de los estudiantes por defecto
-		crearPersona("05032379581", "Rafael Menéndez Rodriguez", 1 ,"Sucursal Comercial #5","Etecsa", "Calle 30 entre 34 y Ave. 56");
-		crearPersona("08868513264", "Alejandro González Fernández",1,"La Mariposa","TRD","Ave. 26 entre calles A y B");
-		crearPersona("04021324587", "Jorgito", 2, "Las Palamas", "CTC", "Tulipan y Boyeros");
-		crearPersona("04021334457", "Rafa", 6, "Las Palamas", "CTC", "Tulipan y Boyeros");
-		crearPersona("90990834457", "TOYCHOLITO", 6, "Las Palamas", "CTC", "Tulipan y Boyeros");
-		
-		// JORGITOOOOOOO ---->>>>    la creacion de los profesores por defecto
-		//1ro
-		//2do
-		//3ro
-		//4ro
-		//5to
-		//6to
-		
-		
-		
-		
-		
-		
-		
-		
-			
-		// JORGITOOOOOOO ---->>>>    la creacion del personal de apoyo por defecto
-		crearPersona("09062235147", "Federico Criado Domínguez","Laboratorio", "Calle 30 entre 34 y Ave. 56");
-		crearPersona("59868285496", "Maria Elena Gómez Pérez","Biblioteca", "Ave. 26 entre calles A y B");
-		
-		// JORGITOOOOOOO ---->>>>    la creacion de las asignaturas por defecto
-		getPlanEstudio().crearAsignatura("Matemática I", 1, 1, 50);
-		getPlanEstudio().crearAsignatura("Matemática II", 1, 2, 50);
-		getPlanEstudio().crearAsignatura("Introducción a la Programación", 1, 1, 60);
-		getPlanEstudio().crearAsignatura("Diseño y POO", 1, 2, 90);
-		getPlanEstudio().crearAsignatura("Estructuras de Datos", 2, 1, 40);
-		getPlanEstudio().crearAsignatura("Seguridad Nacional", 2, 1, 90);
-		getPlanEstudio().crearAsignatura("Inteligencia artificial", 6, 1, 90);
-		
-		// GRUPOS
-		crearGrupo("Grupo 1.1", 1);
-		crearGrupo("Grupo 1.2", 1);
-		crearGrupo("Grupo 6.1", 6);
-		crearGrupo("Grupo 2.1", 2);
-		
-		
-		// AGREGAR A GRUPOS
-		buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(buscarUnEstudiante("05032379581"));
-		buscarGrupo("Grupo 1.1").insertarAGrupoEstudiante(buscarUnEstudiante("08868513264"));
-		buscarGrupo("Grupo 2.1").insertarAGrupoEstudiante(buscarUnEstudiante("04021324587"));
-		buscarGrupo("Grupo 6.1").insertarAGrupoEstudiante(buscarUnEstudiante("04021334457"));
-		
-		
-		
-	}
-	
-	
-	// para GENERAR LOS TODOSSSSSS LOS DATOS AUTOMATICOS
-	public void generarDatosAutomaticos() {
-		
-		planEstudio.crearAsignatura("Calculo III",2 ,1 ,52 );
-		planEstudio.crearAsignatura("RA",2 ,2 ,60 );
-		planEstudio.crearAsignatura("Red PC",3 ,1 ,26 );
-		planEstudio.crearAsignatura("WEB",3 ,2 , 38);
-		planEstudio.crearAsignatura("WEB II",4 ,1 ,48 );
-		planEstudio.crearAsignatura("WEB III",4 ,2 ,50 );
-		planEstudio.crearAsignatura("Inteligencia Artificial",5 ,1 ,20 );
-		planEstudio.crearAsignatura("Inteligencia Artificial II",5 ,2 ,30 );
-		planEstudio.crearAsignatura("Metodología de la invstigación	",6 ,1 ,38 );
-		planEstudio.crearAsignatura("Seguridad Nascional",6 ,2 ,40 );
-		
-		
-	}
+
 	
 	// Para que entrando un profesor te devuelva las asignaturas que da
 	public ArrayList<Asignatura> buscarAsignaturasPorProfeYSemestre(String id , int semestre){
