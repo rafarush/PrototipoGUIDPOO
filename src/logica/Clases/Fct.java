@@ -29,7 +29,7 @@ public final class Fct {
 		planEstudio =  new PlanEstudio();
 		periodos = new ArrayList<>();
 		
-		usuario = new Usuario("Fermin", "1234");
+		usuario = new Usuario("Fermin", "12345678");
 		
 		crearPeriodos();
 	}
@@ -275,6 +275,11 @@ public final class Fct {
 	// get de GRUPOS
 	public ArrayList<Grupo> getGrupos() {
 		return grupos;
+	}
+	
+	
+	public Usuario getUsuario() {
+		return usuario;
 	}
 	
 

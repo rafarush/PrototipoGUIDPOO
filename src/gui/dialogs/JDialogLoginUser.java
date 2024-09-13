@@ -154,7 +154,7 @@ public class JDialogLoginUser extends JDialog {
 							passwordField.setBorder(bordeRojo);
 							JOptionPane.showMessageDialog(null,"Existen campos vacíos");
 						} else {
-							if (!login()) {
+							if (!login(Fct.getInstance().getUsuario())) {
 								JOptionPane.showMessageDialog(null,"Credenciales Incorrectas");
 								nombreTextField.setBorder(bordeRojo);
 								passwordField.setBorder(bordeRojo);
@@ -221,7 +221,7 @@ public class JDialogLoginUser extends JDialog {
 						passwordField.setBorder(bordeRojo);
 						JOptionPane.showMessageDialog(null,"Existen campos vacíos");
 					} else {
-						if (!login()) {
+						if (!login(Fct.getInstance().getUsuario())) {
 							JOptionPane.showMessageDialog(null,"Credenciales Incorrectas");
 							nombreTextField.setBorder(bordeRojo);
 							passwordField.setBorder(bordeRojo);
@@ -260,10 +260,10 @@ public class JDialogLoginUser extends JDialog {
 		}
 	}
 
-	public boolean login() {
+	public boolean login(Usuario usuario) {
 		boolean autorizado = false;
-		String name = Runner.usuario.getName();
-		String password = Runner.usuario.getPassword();
+		String name = usuario.getNombre();
+		String password = usuario.getPassword();
 		String nameIn = nombreTextField.getText();
 		String passwordIn = new String(passwordField.getPassword());
 		if (nameIn.equals(name) && passwordIn.equals(password)) {

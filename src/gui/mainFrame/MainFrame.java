@@ -808,7 +808,7 @@ public class MainFrame extends JFrame {
             	}else if(nombre.length()>35){
             		JOptionPane.showMessageDialog(null, "El nombre de usuario no puede ser de más de 35 caracteres");
             	}else{
-            		Runner.usuario.setName(nombre);
+            		Runner.usuario.setNombre(nombre);
             		JOptionPane.showMessageDialog(null, "Se ha cambiado el nombre de usuario satisfactoriamente");
             	} 	
             }
@@ -824,7 +824,7 @@ public class MainFrame extends JFrame {
 		nombreUsuario.setForeground(new Color(255, 255, 255));
 		nombreUsuario.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		nombreUsuario.setBounds(55, 534, 153, 15);
-		nombreUsuario.setText(Runner.usuario.getName());
+		nombreUsuario.setText(Runner.usuario.getNombre());
 		menuBarPanel.add(nombreUsuario);
 		
 		final JLabel sesionIconBarBotton = new JLabel("");
