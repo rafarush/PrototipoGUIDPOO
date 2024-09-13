@@ -132,7 +132,6 @@ public class InputDialogControlSalarial extends JDialog {
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					//JOptionPane.showMessageDialog(null, "Implementar");
 					Fct.getInstance().cambiarSalarioBaseProfe(Float.valueOf(spinnerSalarioBaseProfe.getValue().toString()));
 					Fct.getInstance().cambiarSalarioBasePersonalA(Float.valueOf(spinnerSalarioBasePA.getValue().toString()));
 					dispose();

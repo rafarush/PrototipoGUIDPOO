@@ -124,8 +124,6 @@ public class InputDialogModifConsejoDirecc extends JDialog {
 			
 			cargoComboBox = new JComboBox();
 			cargoComboBox.setToolTipText("Cargo del profesor en el Consejo de Direcci\u00F3n");
-			//definirCargosDisponibles(Fct.getInstance().buscarCargosCDFaltantes());
-			//cargoComboBox.setModel(new DefaultComboBoxModel(new String[] {"Director", "Subdirector Docente", "Subdirector de Investigaciones y Posgrado", "Subdirector de Extensi\u00F3n Universitaria", "Jefe de Laboratorios"}));
 			cargoComboBox.setModel(new DefaultComboBoxModel(Fct.getInstance().buscarCargosCDFaltantes().toArray()));
 			cargoComboBox.setBounds(10, 167, 269, 20);
 			mainPanel.add(cargoComboBox);
@@ -185,6 +183,5 @@ public class InputDialogModifConsejoDirecc extends JDialog {
 	private void llenarTextFields(Profesor profe){
 		ciTextField.setText(profe.getID());//Escribe el carne
 		nombreTextField.setText(profe.getNombre());//Escribe el nombre
-		//cargoComboBox.setSelectedItem(profe.getCargoConsejoDireccion());//Selecciona el cargo
 	}
 }

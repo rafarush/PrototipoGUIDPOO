@@ -1273,7 +1273,7 @@ public class MainFrame extends JFrame {
 	public void tableDraw(){
 		switch(btnSeleccionado){
 			case PROFESOR:
-				DatosAuto.definirTablaProfes(Fct.getInstance().buscarProfesores());
+				DefinidorDeModelo.definirTablaProfes(Fct.getInstance().buscarProfesores());
 				table = new JTableNoEdit(Runner.modeloProfesor);
 				table.getColumnModel().getColumn(7).setCellRenderer(centrarCelda);
 				tableSorter = new TableRowSorter<>(Runner.modeloProfesor);
@@ -1286,7 +1286,7 @@ public class MainFrame extends JFrame {
 				});
 				break;
 			case ESTUDIANTE:
-				DatosAuto.definirTablaEstudiantes(Fct.getInstance().buscarEstudiantes());
+				DefinidorDeModelo.definirTablaEstudiantes(Fct.getInstance().buscarEstudiantes());
 				table = new JTableNoEdit(Runner.modeloEstudiante);
 				table.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
 				tableSorter = new TableRowSorter<>(Runner.modeloEstudiante);
@@ -1299,7 +1299,7 @@ public class MainFrame extends JFrame {
 				});
 				break;
 			case PERSO_AUX:
-				DatosAuto.definirTablaPersonalAux(Fct.getInstance().buscarPersonalApoyo());
+				DefinidorDeModelo.definirTablaPersonalAux(Fct.getInstance().buscarPersonalApoyo());
 				table = new JTableNoEdit(Runner.modeloPersonalAux);
 				tableSorter = new TableRowSorter<>(Runner.modeloPersonalAux);
 				table.setRowSorter(tableSorter);
@@ -1311,7 +1311,7 @@ public class MainFrame extends JFrame {
 				});
 				break;	
 			case PLAN_ESTUDIO:
-				DatosAuto.definirTablaPlanDeEstudio(Fct.getInstance().getPlanEstudio().getAsignaturas());
+				DefinidorDeModelo.definirTablaPlanDeEstudio(Fct.getInstance().getPlanEstudio().getAsignaturas());
 				table = new JTableNoEdit(Runner.modeloPlanDeEstudio);
 				for(int i=1; i<=3;i++)
 					table.getColumnModel().getColumn(i).setCellRenderer(centrarCelda);
@@ -1325,7 +1325,7 @@ public class MainFrame extends JFrame {
 				});
 				break;
 			case GRUPO:
-				DatosAuto.definirTablaGrupo(Fct.getInstance().getGrupos());
+				DefinidorDeModelo.definirTablaGrupo(Fct.getInstance().getGrupos());
 				table = new JTableNoEdit(Runner.modeloGrupoReporte);
 				table.getColumnModel().getColumn(1).setCellRenderer(centrarCelda);
 				table.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
@@ -1341,7 +1341,7 @@ public class MainFrame extends JFrame {
 				});
 				break;
 			case CONSEJO_DIRECC:
-				DatosAuto.definirTablaProfesConsejo(Fct.getInstance().buscarConsejoDireccion());
+				DefinidorDeModelo.definirTablaProfesConsejo(Fct.getInstance().buscarConsejoDireccion());
 				table = new JTableNoEdit(Runner.modeloProfesorConsejo);
 				tableSorter = new TableRowSorter<>(Runner.modeloProfesorConsejo);
 				table.setRowSorter(tableSorter);

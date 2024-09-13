@@ -211,7 +211,7 @@ public class InputDialogEstuDelGrupo extends JDialog {
 	
 	private void tableDraw(Grupo grupo){
 		if (!agregar){
-			DatosAuto.definirTablaEstudiantesCorto(Fct.getInstance().buscarGrupo(grupo.getNombreGrupo()).getGrupoEstudiantes());
+			DefinidorDeModelo.definirTablaEstudiantesCorto(Fct.getInstance().buscarGrupo(grupo.getNombreGrupo()).getGrupoEstudiantes());
 			table = new JTableNoEdit(Runner.modeloEstudianteCorto);
 			table.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -224,7 +224,7 @@ public class InputDialogEstuDelGrupo extends JDialog {
 			scrollPane.setViewportView(table);
 			actualizarNombreEncabezado();
 		}else{
-			DatosAuto.definirTablaEstudiantesCorto(Fct.getInstance().buscarEstudiantesSinGrupoPorAnno(grupo.getAnnoAcademico()));
+			DefinidorDeModelo.definirTablaEstudiantesCorto(Fct.getInstance().buscarEstudiantesSinGrupoPorAnno(grupo.getAnnoAcademico()));
 			table = new JTableNoEdit(Runner.modeloEstudianteCorto);
 			table.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {

@@ -208,7 +208,7 @@ public class InputJDialogControlDocente extends JDialog {
 	private void tableDraw(final int periodo){
 		switch(btnSeleccionado){
 			case PROFESOR:
-				DatosAuto.definirTablaProfes(Fct.getInstance().buscarProfesores());
+				DefinidorDeModelo.definirTablaProfes(Fct.getInstance().buscarProfesores());
 				tablaNotas = new JTableNoEdit(Runner.modeloProfesor);
 				tablaNotas.getColumnModel().getColumn(7).setCellRenderer(centrarCelda);
 				tablaNotas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -222,7 +222,7 @@ public class InputJDialogControlDocente extends JDialog {
 				});
 				break;
 			case GRUPO:
-				DatosAuto.definirTablaGrupo(Fct.getInstance().buscarGruposPorAsignatura(asignaturaSelec));
+				DefinidorDeModelo.definirTablaGrupo(Fct.getInstance().buscarGruposPorAsignatura(asignaturaSelec));
 				tablaNotas = new JTableNoEdit(Runner.modeloGrupoReporte);
 				tablaNotas.getColumnModel().getColumn(1).setCellRenderer(centrarCelda);
 				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
@@ -238,7 +238,7 @@ public class InputJDialogControlDocente extends JDialog {
 				});
 				break;
 			case ESTUDIANTE:
-				DatosAuto.definirTablaEstudiantesNotas(Fct.getInstance().buscarGrupo(grupoSelec).getGrupoEstudiantes(), Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec));
+				DefinidorDeModelo.definirTablaEstudiantesNotas(Fct.getInstance().buscarGrupo(grupoSelec).getGrupoEstudiantes(), Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec));
 				tablaNotas = new JTableNoEdit(Runner.modeloEstudianteCorto);
 				tablaNotas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
 				tablaNotas.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);
@@ -251,7 +251,7 @@ public class InputJDialogControlDocente extends JDialog {
 				});
 				break;
 			case PLAN_ESTUDIO:
-				DatosAuto.definirTablaPlanDeEstudio(Fct.getInstance().buscarAsignaturasPorProfeYSemestre(profeSelec, periodo));
+				DefinidorDeModelo.definirTablaPlanDeEstudio(Fct.getInstance().buscarAsignaturasPorProfeYSemestre(profeSelec, periodo));
 				tablaNotas = new JTableNoEdit(Runner.modeloPlanDeEstudio);
 				for(int i=1; i<=3;i++)
 					tablaNotas.getColumnModel().getColumn(i).setCellRenderer(centrarCelda);
