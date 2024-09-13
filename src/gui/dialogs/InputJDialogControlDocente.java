@@ -292,8 +292,15 @@ public class InputJDialogControlDocente extends JDialog {
 	}
 	
 	public static void mensajeConfirm(String nota1, String nota2){
-		JOptionPane.showMessageDialog(null, "Confirmación :\nCI Estudiante: "+tablaNotas.getValueAt(filaSelec, 0)+
-				"\nGrupo: "+grupoSelec+
-				"\nNota1: "+nota1+"\nNota2: "+nota2+"\nAsignatura: "+asignaturaSelec+"\nCI Profesor: "+profeSelec);
+		if (nota2.equalsIgnoreCase("2")){
+			JOptionPane.showMessageDialog(null, "Confirmación :\nCI Estudiante: "+tablaNotas.getValueAt(filaSelec, 0)+
+					"\nGrupo: "+grupoSelec+
+					"\nNota: "+nota1+"\nAsignatura: "+asignaturaSelec+"\nCI Profesor: "+profeSelec);
+		}else{
+			JOptionPane.showMessageDialog(null, "Confirmación :\nCI Estudiante: "+tablaNotas.getValueAt(filaSelec, 0)+
+					"\nGrupo: "+grupoSelec+
+					"\nNota1: "+nota1+"\nNota2: "+nota2+"\nAsignatura: "+asignaturaSelec+"\nCI Profesor: "+profeSelec);
+		}
+		
 	}
 }

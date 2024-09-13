@@ -4,9 +4,11 @@ package gui.dialogs;
 import gui.mainFrame.MainFrame;
 import gui.utils.Validaciones;
 
+import javax.swing.BorderFactory;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
@@ -15,6 +17,8 @@ import javax.swing.ImageIcon;
 import runner.Runner;
 
 import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -37,6 +41,8 @@ public class InputDialogPerAux extends JDialog {
 	private JTextField ciTextField;
 	private JTextField direccTextField;
 	private JComboBox areaTrabajoComboBox;
+	private final Border bordeRojo = BorderFactory.createLineBorder(Color.RED,1);
+	private final Border bordeNegro = BorderFactory.createLineBorder(Color.BLACK,1);
 
 
 	/**
@@ -98,6 +104,20 @@ public class InputDialogPerAux extends JDialog {
 			
 			nombreTextField = new JTextField();
 			nombreTextField.setToolTipText("Nombre de la persona");
+			nombreTextField.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyReleased(KeyEvent e) {
+					if(!nombreTextField.getText().isEmpty()){
+						if (Validaciones.todoLetra(Validaciones.getCadenaSinEspacios(nombreTextField.getText()))){
+							nombreTextField.setBorder(bordeNegro);
+						}else{
+							nombreTextField.setBorder(bordeRojo);
+						}
+					}else{
+						nombreTextField.setBorder(bordeNegro);
+					}
+				}
+			});
 			nombreTextField.setColumns(10);
 			nombreTextField.setBounds(10, 54, 223, 20);
 			mainPanel.add(nombreTextField);
@@ -109,6 +129,20 @@ public class InputDialogPerAux extends JDialog {
 			
 			ciTextField = new JTextField();
 			ciTextField.setToolTipText("Carn\u00E9 de identidad de la persona");
+			ciTextField.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyReleased(KeyEvent e) {
+					if(!ciTextField.getText().isEmpty()){
+						if (Validaciones.todoNum(Validaciones.getCadenaSinEspacios(ciTextField.getText()))){
+							ciTextField.setBorder(bordeNegro);
+						}else{
+							ciTextField.setBorder(bordeRojo);
+						}
+					}else{
+						ciTextField.setBorder(bordeNegro);
+					}
+				}
+			});
 			ciTextField.setColumns(10);
 			ciTextField.setBounds(10, 110, 223, 20);
 			mainPanel.add(ciTextField);
@@ -264,6 +298,20 @@ public class InputDialogPerAux extends JDialog {
 			
 			nombreTextField = new JTextField();
 			nombreTextField.setToolTipText("Nombre de la persona");
+			nombreTextField.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyReleased(KeyEvent e) {
+					if(!nombreTextField.getText().isEmpty()){
+						if (Validaciones.todoLetra(Validaciones.getCadenaSinEspacios(nombreTextField.getText()))){
+							nombreTextField.setBorder(bordeNegro);
+						}else{
+							nombreTextField.setBorder(bordeRojo);
+						}
+					}else{
+						nombreTextField.setBorder(bordeNegro);
+					}
+				}
+			});
 			nombreTextField.setColumns(10);
 			nombreTextField.setBounds(10, 54, 223, 20);
 			mainPanel.add(nombreTextField);
@@ -275,6 +323,20 @@ public class InputDialogPerAux extends JDialog {
 			
 			ciTextField = new JTextField();
 			ciTextField.setToolTipText("Carn\u00E9 de identidad de la persona (NO PUEDE MODIFICARSE)");
+			ciTextField.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyReleased(KeyEvent e) {
+					if(!ciTextField.getText().isEmpty()){
+						if (Validaciones.todoNum(Validaciones.getCadenaSinEspacios(ciTextField.getText()))){
+							ciTextField.setBorder(bordeNegro);
+						}else{
+							ciTextField.setBorder(bordeRojo);
+						}
+					}else{
+						ciTextField.setBorder(bordeNegro);
+					}
+				}
+			});
 			ciTextField.setColumns(10);
 			ciTextField.setBounds(10, 110, 223, 20);
 			mainPanel.add(ciTextField);

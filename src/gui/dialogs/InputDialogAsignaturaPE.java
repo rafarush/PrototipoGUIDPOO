@@ -7,6 +7,7 @@ import logica.Clases.*;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -15,6 +16,7 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -22,6 +24,8 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
 import java.awt.Cursor;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 
 
@@ -36,6 +40,8 @@ public class InputDialogAsignaturaPE extends JDialog {
 	private JComboBox annoComboBox;
 	private JComboBox semestreComboBox;
 	private JSpinner spinnerHorasLectivas;
+	private Border bordeRojo = BorderFactory.createLineBorder(Color.RED,1);
+	private Border bordeNegro = BorderFactory.createLineBorder(Color.BLACK,1);
 
 	/**
 	 * Crear Input para agregar
@@ -95,8 +101,23 @@ public class InputDialogAsignaturaPE extends JDialog {
 			mainPanel.add(panel);
 			
 			nombreTextField = new JTextField();
+			nombreTextField.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyReleased(KeyEvent e) {
+					if(!nombreTextField.getText().isEmpty()){
+						if (Validaciones.todoLetra(Validaciones.getCadenaSinEspacios(nombreTextField.getText()))){
+							nombreTextField.setBorder(bordeNegro);
+						}else{
+							nombreTextField.setBorder(bordeRojo);
+						}
+					}else{
+						nombreTextField.setBorder(bordeNegro);
+					}
+				}
+			});
 			nombreTextField.setToolTipText("Nombre de la Asignatura");
 			nombreTextField.setColumns(10);
+			nombreTextField.setBorder(bordeNegro);
 			nombreTextField.setBounds(10, 54, 223, 20);
 			mainPanel.add(nombreTextField);
 			
@@ -158,6 +179,7 @@ public class InputDialogAsignaturaPE extends JDialog {
 							dispose();
 						}else{
 							JOptionPane.showMessageDialog(null, "El nombre de la asignatura solo puede contener caracteres alfabéticos");
+							nombreTextField.setBorder(bordeRojo);
 						}
 					}	
 				}
