@@ -901,22 +901,10 @@ public final class Fct {
 		}
 		
 		return arrastres;
-	}
+	}                         
 	
 	
-	// 4- PARA BUSCAR ESTUDIANTES SUSPENSOS EN ALGUNA ASIGNATURA                         
-	public ArrayList<Estudiante> buscarEstudiantesSuspensos(){
-		ArrayList<Estudiante> suspensos = new ArrayList<>();
-		
-		for(Estudiante i : buscarEstudiantes()){
-			if(i.verificarSuspenso())
-				suspensos.add(i);
-		}
-		
-		return suspensos;
-	}
-	
-	// 5- PARA BUSCAR en cada año cual es el grupo con menor cantidad de estudiantes
+	// 4- PARA BUSCAR en cada año cual es el grupo con menor cantidad de estudiantes
 	public ArrayList<Grupo> buscarGrupoConMenorCantidad(){
 		ArrayList<Grupo> gruposM = new ArrayList<>();
 		
@@ -937,7 +925,7 @@ public final class Fct {
 	}
 	
 	
-	// 6- para saber los estudiantes que tienen más de 4.5  de promedio en todas las asignaturas de su carrera.
+	// 5- para saber los estudiantes que tienen más de 4.5  de promedio en todas las asignaturas de su carrera.
 	public ArrayList<Estudiante> buscarEstudiantesOros(){
 		ArrayList<Estudiante> oros = new ArrayList<>();
 		
@@ -949,7 +937,7 @@ public final class Fct {
 		return oros;
 	}
 	
-	// 7- para saber los estudiantes sin grupo
+	// 6- para saber los estudiantes sin grupo
 	public ArrayList<Estudiante> buscarEstudiantesSinGrupo(){
 		ArrayList<Estudiante> sinGrupo = new ArrayList<>();
 		
@@ -1009,6 +997,17 @@ public final class Fct {
 	
 	//**************************************** fin reportes ******************************************************************
 	
+	// PARA BUSCAR ESTUDIANTES SUSPENSOS EN ALGUNA ASIGNATURA 
+	public ArrayList<Estudiante> buscarEstudiantesSuspensos(){
+		ArrayList<Estudiante> suspensos = new ArrayList<>();
+		
+		for(Estudiante i : buscarEstudiantes()){
+			if(i.verificarSuspenso())
+				suspensos.add(i);
+		}
+		
+		return suspensos;
+	}
 	
 	// PARA ELIMINAR UNA ASIGNATURA
 	public boolean eliminarAsignatura(Asignatura asignatura){
