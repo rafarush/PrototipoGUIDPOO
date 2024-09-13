@@ -43,8 +43,10 @@ public class InputDialogEst extends JDialog {
 	private JTextField centroLaboralTextField;
 	private JTextField organismoTextField;
 	private JComboBox annoComboBox;
+	private int limite = 35;
+	private int limiteCI = 11;
 	private final Border bordeRojo = BorderFactory.createLineBorder(Color.RED,1);
-	private final Border bordeNegro = BorderFactory.createLineBorder(Color.BLACK,1);
+	private final Border bordeNegro = BorderFactory.createLineBorder(Color.GRAY,1);
 
 
 	/**
@@ -119,6 +121,12 @@ public class InputDialogEst extends JDialog {
 						nombreTextField.setBorder(bordeNegro);
 					}
 				}
+				@Override
+				public void keyTyped(KeyEvent e){
+					JTextField text = (JTextField) e.getSource();
+					if(text.getText().length()== limite)
+						e.consume();
+				}
 			});
 			nombreTextField.setColumns(10);
 			nombreTextField.setBounds(10, 54, 223, 20);
@@ -143,6 +151,12 @@ public class InputDialogEst extends JDialog {
 					}else{
 						ciTextField.setBorder(bordeNegro);
 					}
+				}
+				@Override
+				public void keyTyped(KeyEvent e){
+					JTextField text = (JTextField) e.getSource();
+					if(text.getText().length()== limiteCI)
+						e.consume();
 				}
 			});
 			ciTextField.setColumns(10);

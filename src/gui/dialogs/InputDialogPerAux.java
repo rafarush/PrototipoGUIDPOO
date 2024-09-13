@@ -41,8 +41,10 @@ public class InputDialogPerAux extends JDialog {
 	private JTextField ciTextField;
 	private JTextField direccTextField;
 	private JComboBox areaTrabajoComboBox;
+	private int limite = 35;
+	private int limiteCI = 11;
 	private final Border bordeRojo = BorderFactory.createLineBorder(Color.RED,1);
-	private final Border bordeNegro = BorderFactory.createLineBorder(Color.BLACK,1);
+	private final Border bordeNegro = BorderFactory.createLineBorder(Color.GRAY,1);
 
 
 	/**
@@ -117,6 +119,12 @@ public class InputDialogPerAux extends JDialog {
 						nombreTextField.setBorder(bordeNegro);
 					}
 				}
+				@Override
+				public void keyTyped(KeyEvent e){
+					JTextField text = (JTextField) e.getSource();
+					if(text.getText().length()== limite)
+						e.consume();
+				}
 			});
 			nombreTextField.setColumns(10);
 			nombreTextField.setBounds(10, 54, 223, 20);
@@ -141,6 +149,12 @@ public class InputDialogPerAux extends JDialog {
 					}else{
 						ciTextField.setBorder(bordeNegro);
 					}
+				}
+				@Override
+				public void keyTyped(KeyEvent e){
+					JTextField text = (JTextField) e.getSource();
+					if(text.getText().length()== limiteCI)
+						e.consume();
 				}
 			});
 			ciTextField.setColumns(10);

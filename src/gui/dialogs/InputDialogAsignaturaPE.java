@@ -40,8 +40,9 @@ public class InputDialogAsignaturaPE extends JDialog {
 	private JComboBox annoComboBox;
 	private JComboBox semestreComboBox;
 	private JSpinner spinnerHorasLectivas;
+	private int limite = 25;
 	private Border bordeRojo = BorderFactory.createLineBorder(Color.RED,1);
-	private Border bordeNegro = BorderFactory.createLineBorder(Color.BLACK,1);
+	private Border bordeNegro = BorderFactory.createLineBorder(Color.GRAY,1);
 
 	/**
 	 * Crear Input para agregar
@@ -113,6 +114,12 @@ public class InputDialogAsignaturaPE extends JDialog {
 					}else{
 						nombreTextField.setBorder(bordeNegro);
 					}
+				}
+				@Override
+				public void keyTyped(KeyEvent e){
+					JTextField text = (JTextField) e.getSource();
+					if(text.getText().length()== limite)
+						e.consume();
 				}
 			});
 			nombreTextField.setToolTipText("Nombre de la Asignatura");
