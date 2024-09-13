@@ -165,7 +165,7 @@ public class InputDialogNota extends JDialog {
 							profe.darNota(estudiante, asignatura, Integer.valueOf(nota1), Integer.valueOf(nota2));
 							InputJDialogControlDocente.mensajeConfirm(nota1, nota2);
 						}else{
-							profe.darNota(estudiante, asignatura, Integer.valueOf(nota1), 0);
+							profe.darNota(estudiante, asignatura, Integer.valueOf(nota1), 0.0f);
 							InputJDialogControlDocente.mensajeConfirm(nota1, nota2);
 						}
 						
