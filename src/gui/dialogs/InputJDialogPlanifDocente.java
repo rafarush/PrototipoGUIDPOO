@@ -36,6 +36,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 
 import logica.Clases.*;
+import logica.utils.ProcesoNoPermitidoException;
 import gui.utils.*;
 import gui.utils.Enums.BotonSelec;
 
@@ -167,23 +168,30 @@ public class InputJDialogPlanifDocente extends JDialog {
 									//Llamar a crear planificacion docente
 									grupoSelec = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
 									if(semestreComboBox.getSelectedItem().toString().equalsIgnoreCase("1")){
-										if (Fct.getInstance().getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())-1).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor(profeSelec), 
-												Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec),
-												Fct.getInstance().buscarGrupo(grupoSelec))){
-											JOptionPane.showMessageDialog(null, "Planificación Docente realizada con éxito");
-										}else{
-											JOptionPane.showMessageDialog(null, "ERROR!!!\nPlanificación Docente ya existente");
+										try {
+											if (Fct.getInstance().getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())-1).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor(profeSelec), 
+													Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec),
+													Fct.getInstance().buscarGrupo(grupoSelec))){
+												JOptionPane.showMessageDialog(null, "Planificación Docente realizada con éxito");
+											}else{
+												JOptionPane.showMessageDialog(null, "ERROR!!!\nPlanificación Docente ya existente");
+											}
+										} catch (ProcesoNoPermitidoException e1) {
+											JOptionPane.showMessageDialog(null, "No se pudo crear la Planificación Docente:\n"+e1.getMessage());
 										}
-										
 									}else{
-										if(Fct.getInstance().getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())+5).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor(profeSelec), 
-												Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec),
-												Fct.getInstance().buscarGrupo(grupoSelec))){
-											JOptionPane.showMessageDialog(null, "Planificación Docente realizada con éxito");
-										}else{
-											JOptionPane.showMessageDialog(null, "ERROR!!!\nPlanificación Docente ya existente");
+										try {
+											if(Fct.getInstance().getPeriodos().get(Integer.valueOf(annoComboBox.getSelectedItem().toString())+5).crearPlanificacionDocente(Fct.getInstance().buscarUnProfesor(profeSelec), 
+													Fct.getInstance().getPlanEstudio().buscarAsignatura(asignaturaSelec),
+													Fct.getInstance().buscarGrupo(grupoSelec))){
+												JOptionPane.showMessageDialog(null, "Planificación Docente realizada con éxito");
+											}else{
+												JOptionPane.showMessageDialog(null, "ERROR!!!\nPlanificación Docente ya existente");
+											}
+											
+										} catch (ProcesoNoPermitidoException e1) {
+											JOptionPane.showMessageDialog(null, "No se pudo crear la Planificación Docente:\n"+e1.getMessage());
 										}
-										
 									}
 									btnSeleccionado = BotonSelec.PLAN_DOCENTE;
 									auxBtn.setText("Crear Planificaci\u00F3n Docente");
