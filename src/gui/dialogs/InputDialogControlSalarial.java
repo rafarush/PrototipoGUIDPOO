@@ -45,7 +45,7 @@ public class InputDialogControlSalarial extends JDialog {
 	public InputDialogControlSalarial() {
 		setUndecorated(true);
 		setModal(true);
-		setBounds(100, 100, 431, 202);
+		setBounds(100, 100, 543, 202);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
 		
@@ -70,12 +70,12 @@ public class InputDialogControlSalarial extends JDialog {
 				}
 			}
 		});
-		closeBotton.setBounds(393, 0, 27, 34);
+		closeBotton.setBounds(506, 0, 27, 34);
 		upperBarPanel.add(closeBotton);
 		
 		
 		upperBarPanel.setBackground(new Color(255, 255, 255));
-		upperBarPanel.setBounds(0, 0, 430, 34);
+		upperBarPanel.setBounds(0, 0, 543, 34);
 		upperBarPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(upperBarPanel);
 		upperBarPanel.setLayout(null);
@@ -87,18 +87,18 @@ public class InputDialogControlSalarial extends JDialog {
 		{
 		    JPanel mainPanel = new JPanel();
 			mainPanel.setBackground(Color.WHITE);
-			mainPanel.setBounds(0, 34, 430, 168);
+			mainPanel.setBounds(0, 34, 543, 168);
 			getContentPane().add(mainPanel);
 			mainPanel.setLayout(null);
 			
 			JPanel panel = new JPanel();
 			panel.setBackground(new Color(0, 204, 255));
-			panel.setBounds(281, 0, 150, 192);
+			panel.setBounds(393, 0, 150, 168);
 			mainPanel.add(panel);
 			
 			JLabel lblSalarioBase = new JLabel("Salario base Profesor:");
 			lblSalarioBase.setForeground(new Color(51, 51, 51));
-			lblSalarioBase.setBounds(10, 29, 106, 20);
+			lblSalarioBase.setBounds(10, 29, 168, 20);
 			mainPanel.add(lblSalarioBase);
 			
 			
@@ -112,7 +112,7 @@ public class InputDialogControlSalarial extends JDialog {
 			
 			spinnerSalarioBasePA = new JSpinner();
 			spinnerSalarioBasePA.setModel(new SpinnerNumberModel(100, 1, 20000, 50));
-			spinnerSalarioBasePA.setBounds(131, 64, 82, 20);
+			spinnerSalarioBasePA.setBounds(188, 64, 82, 20);
 			JSpinner.DefaultEditor editor2 = (JSpinner.DefaultEditor) spinnerSalarioBasePA.getEditor();
 			editor2.getTextField().setEditable(false);
 			mainPanel.add(spinnerSalarioBasePA);
@@ -168,7 +168,7 @@ public class InputDialogControlSalarial extends JDialog {
 			
 			JLabel lblSalarioBasePersonal = new JLabel("Salario base Personal Auxiliar:");
 			lblSalarioBasePersonal.setForeground(new Color(51, 51, 51));
-			lblSalarioBasePersonal.setBounds(131, 29, 150, 20);
+			lblSalarioBasePersonal.setBounds(188, 29, 195, 20);
 			mainPanel.add(lblSalarioBasePersonal);
 			
 			

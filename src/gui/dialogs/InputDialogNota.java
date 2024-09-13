@@ -7,6 +7,8 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -105,16 +107,6 @@ public class InputDialogNota extends JDialog {
 			lblNota1.setBounds(10, 11, 51, 20);
 			mainPanel.add(lblNota1);
 			
-			spinnerNota1 = new JSpinner();
-			spinnerNota1.setModel(new SpinnerListModel(new String[] {"2", "3", "4", "5"}));
-			JSpinner.DefaultEditor editor1 = (JSpinner.DefaultEditor) spinnerNota1.getEditor();
-			editor1.getTextField().setEditable(false);
-			spinnerNota1.setBounds(10, 31, 51, 20);
-			mainPanel.add(spinnerNota1);
-			
-			JLabel lblNota2 = new JLabel("Nota 2:");
-			lblNota2.setBounds(105, 11, 51, 20);
-			mainPanel.add(lblNota2);
 			
 			final JSpinner spinnerNota2 = new JSpinner();
 			spinnerNota2.setModel(new SpinnerListModel(new String[] {"2", "3", "4", "5"}));
@@ -122,6 +114,30 @@ public class InputDialogNota extends JDialog {
 			editor2.getTextField().setEditable(false);
 			spinnerNota2.setBounds(105, 31, 51, 20);
 			mainPanel.add(spinnerNota2);
+			
+			
+			spinnerNota1 = new JSpinner();
+			spinnerNota1.setModel(new SpinnerListModel(new String[] {"2", "3", "4", "5"}));
+			JSpinner.DefaultEditor editor1 = (JSpinner.DefaultEditor) spinnerNota1.getEditor();
+			editor1.getTextField().setEditable(false);
+			spinnerNota1.addChangeListener(new ChangeListener() {
+				@Override
+				public void stateChanged(ChangeEvent e) {
+					String valor = (String) spinnerNota1.getValue();
+					if (valor.equalsIgnoreCase("2")){
+						spinnerNota2.setEnabled(true);
+					}else{
+						spinnerNota2.setEnabled(false);
+					}
+				}
+			});
+			spinnerNota1.setBounds(10, 31, 51, 20);
+			mainPanel.add(spinnerNota1);
+			
+			JLabel lblNota2 = new JLabel("Nota 2:");
+			lblNota2.setBounds(105, 11, 51, 20);
+			mainPanel.add(lblNota2);
+			
 			
 			
 			final JLabel inputBotton = new JLabel("");
