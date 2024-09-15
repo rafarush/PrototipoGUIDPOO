@@ -304,7 +304,7 @@ public class InputDialogPerAux extends JDialog {
 		upperBarPanel.setLayout(null);
 		
 		
-		JLabel nameFrame = new JLabel("Entrada de datos (Personal Auxiliar)");
+		JLabel nameFrame = new JLabel("Modificar datos (Personal Auxiliar)");
 		nameFrame.setBounds(10, 0, 254, 34);
 		upperBarPanel.add(nameFrame);
 		{

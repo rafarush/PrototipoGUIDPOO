@@ -266,7 +266,7 @@ public class InputDialogAsignaturaPE extends JDialog {
 		upperBarPanel.setLayout(null);
 		
 		
-		JLabel nameFrame = new JLabel("Entrada de datos (Asignaturas)");
+		JLabel nameFrame = new JLabel("Modificar datos (Asignaturas)");
 		nameFrame.setBounds(10, 0, 254, 34);
 		upperBarPanel.add(nameFrame);
 		{

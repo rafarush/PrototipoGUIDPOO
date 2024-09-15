@@ -354,7 +354,7 @@ public class InputDialogProfe extends JDialog {
 		upperBarPanel.setLayout(null);
 		
 		
-		JLabel nameFrame = new JLabel("Entrada de datos (Profesores)");
+		JLabel nameFrame = new JLabel("Modificar datos (Profesores)");
 		nameFrame.setBounds(10, 0, 205, 34);
 		upperBarPanel.add(nameFrame);
 		{

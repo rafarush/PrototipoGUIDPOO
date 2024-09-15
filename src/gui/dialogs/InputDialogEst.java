@@ -346,7 +346,7 @@ public class InputDialogEst extends JDialog {
 		upperBarPanel.setLayout(null);
 		
 		
-		JLabel nameFrame = new JLabel("Entrada de datos (Estudiante)");
+		JLabel nameFrame = new JLabel("Modificar datos (Estudiante)");
 		nameFrame.setBounds(10, 0, 233, 34);
 		upperBarPanel.add(nameFrame);
 		{
