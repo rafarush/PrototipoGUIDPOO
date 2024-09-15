@@ -43,6 +43,11 @@ public final class Fct {
         return instance;
 	}
 	
+	// ELIMINAR FCT
+	public static void eliminarInstance(){
+		instance=null;
+	} 
+	
 
 	// ELIMINAR PERSONA
 	public void eliminarPersona(String iD){
