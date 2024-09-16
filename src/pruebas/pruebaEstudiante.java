@@ -73,7 +73,7 @@ public class pruebaEstudiante {
 	
 	
 	@Test
-	public void test2() {
+	public void testVerificarNotas2() {
 		
 		Fct.getInstance().buscarUnEstudiante("03010345678").getNotas().get(0).setNota1(0);
 		
@@ -81,7 +81,22 @@ public class pruebaEstudiante {
 	}
 	
 	
+	@Test
+	public void testVerificarSuspenso1() {
+		Fct.getInstance().buscarUnEstudiante("03010345678").getNotas().get(0).setNota1(2);
+		Fct.getInstance().buscarUnEstudiante("03010345678").getNotas().get(1).setNota1(2);
+		
+		Fct.getInstance().buscarUnEstudiante("03010345678").getNotas().get(0).setNota2(2);
+		Fct.getInstance().buscarUnEstudiante("03010345678").getNotas().get(1).setNota2(2);
+		
+		assertTrue(Fct.getInstance().buscarUnEstudiante("03010345678").verificarSuspenso());
+	}
 	
+	
+	@Test
+	public void testVerificarSuspenso2() {
+		assertFalse(Fct.getInstance().buscarUnEstudiante("03010345678").verificarSuspenso());
+	}
 	
 	
 	
