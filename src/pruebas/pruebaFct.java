@@ -9,12 +9,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class pruebaFct {
-
-	
 	
 	
 	@Before
 	public void setUp() throws Exception {
+		Fct.getInstance().crearGrupo("Grupo 1", 1);
 		Fct.getInstance().crearPersona("84012345678", "Juan Carlos Pérez Gómez", "Doctor", "Titular", "Cujae", "MINED", "Calle 1 entre 2 y 4");
 	}
 
@@ -66,6 +65,29 @@ public class pruebaFct {
 		
 		assertTrue(Fct.getInstance().eliminarDelCD(Fct.getInstance().buscarUnProfesor("83023456789")));
 	}
+	
+	
+	
+	@Test
+	public void testCrearGrupo1() {
+		assertTrue(Fct.getInstance().crearGrupo("Grupo", 1));
+	}
+	
+	@Test
+	public void testCrearGrupo2() {
+		assertFalse(Fct.getInstance().crearGrupo("Grupo 1", 1));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
