@@ -6,7 +6,7 @@ public class Usuario {
 	private String password;
 	
 	//Contructor
-	public Usuario(String nombre, String password) {
+	protected Usuario(String nombre, String password) {
 		setNombre(nombre);
 		setPassword(password);
 	}

@@ -15,7 +15,7 @@ public class Profesor extends Trabajador{
 	
 
 	// CONSTRUCOTR para los profesores sin cargo en el consejo de direccion
-	public Profesor( String iD, String nombre, String categoriaCientifica, String categoriaDocente, String centroLaboral, String organismo, String Direccion) {
+	protected Profesor( String iD, String nombre, String categoriaCientifica, String categoriaDocente, String centroLaboral, String organismo, String Direccion) {
 		super(nombre, iD, Direccion);
 		// TODO Auto-generated constructor stub
 		setCategoriaCientifica(categoriaCientifica);

@@ -8,7 +8,7 @@ public class PersonalApoyo extends Trabajador{
 	
 
 	//el salario base del personal de apoyo es d $100
-	public PersonalApoyo(String iD, String nombre, String labor, String direccion) {
+	protected PersonalApoyo(String iD, String nombre, String labor, String direccion) {
 		super(nombre, iD, direccion);
 		// TODO Auto-generated constructor stub
 		

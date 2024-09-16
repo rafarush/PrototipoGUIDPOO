@@ -9,7 +9,7 @@ public class Asignatura {
 	
 	
 	// CONSTRUCTOR
-	public Asignatura(String nombre, int annoAcademico, int semestre, float horasClases) {
+	protected Asignatura(String nombre, int annoAcademico, int semestre, float horasClases) {
 		setNombre(nombre);
 		setAnnoAcademico(annoAcademico);
 		setSemestre(semestre);

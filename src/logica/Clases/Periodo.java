@@ -9,7 +9,7 @@ public class Periodo {
 	// ATRIBUTOS
 	private ArrayList<PlanificacionDocente> planificacionesDocentes;
 
-	public Periodo() {
+	protected Periodo() {
 		planificacionesDocentes = new ArrayList<>();
 	}
 	
