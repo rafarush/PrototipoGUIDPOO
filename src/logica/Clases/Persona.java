@@ -9,7 +9,7 @@ public abstract class Persona {
 	
 	
 	//constructor
-	public Persona( String nombre, String iD, String Direccion ){
+	protected Persona( String nombre, String iD, String Direccion ){
 		setNombre(nombre);
 		
 		setID(iD);

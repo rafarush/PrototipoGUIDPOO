@@ -8,7 +8,7 @@ public class GrupoEspecial extends Grupo{
 	
 	
 	
-	public GrupoEspecial(String nombreGrupo, int annoAcademico , Asignatura asignatura) {
+	protected GrupoEspecial(String nombreGrupo, int annoAcademico , Asignatura asignatura) {
 		super(nombreGrupo, annoAcademico);
 		// TODO Auto-generated constructor stub
 		setAsignatura(asignatura);

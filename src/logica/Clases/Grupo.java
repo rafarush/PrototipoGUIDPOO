@@ -9,7 +9,7 @@ public class Grupo {
 	private int annoAcademico;
 	private ArrayList<Estudiante> grupoEstudiantes;
 
-	public Grupo(String nombreGrupo , int annoAcademico) {
+	protected Grupo(String nombreGrupo , int annoAcademico) {
 		setNombreGrupo(nombreGrupo);
 		setAnnoAcademico(annoAcademico);
 		this.grupoEstudiantes = new ArrayList<>();

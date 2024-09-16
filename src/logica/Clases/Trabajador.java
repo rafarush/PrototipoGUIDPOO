@@ -4,7 +4,7 @@ public abstract class Trabajador extends Persona {
 
 	protected float salario;
 	
-	public Trabajador(String nombre, String iD, String Direccion) {
+	protected Trabajador(String nombre, String iD, String Direccion) {
 		super(nombre, iD, Direccion);
 		this.salario=100;
 		// TODO Auto-generated constructor stub

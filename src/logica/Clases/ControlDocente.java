@@ -9,7 +9,7 @@ public class ControlDocente {
 	private float nota2;
 	
 	// CONSTRUCTOR
-	public ControlDocente(Estudiante estudiante, Asignatura asignatura){
+	protected ControlDocente(Estudiante estudiante, Asignatura asignatura){
 		setiDEstudiante(estudiante.getID());
 		setAsignatura(asignatura);
 		nota1=0;

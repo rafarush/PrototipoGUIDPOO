@@ -6,7 +6,7 @@ public class PlanEstudio {
 	private ArrayList<Asignatura> asignaturas;
 
 	// CONSTRUCTOR
-	public PlanEstudio() {
+	protected PlanEstudio() {
 		asignaturas = new ArrayList<>();
 	}
 

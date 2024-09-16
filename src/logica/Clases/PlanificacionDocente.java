@@ -9,7 +9,7 @@ public class PlanificacionDocente {
 	
 	
 	// CONSTRUCTOR
-	public PlanificacionDocente(Profesor profesor, Asignatura asignatura,
+	protected PlanificacionDocente(Profesor profesor, Asignatura asignatura,
 			Grupo grupo) {
 		setProfesor(profesor);
 		setAsignatura(asignatura);
