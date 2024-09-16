@@ -67,6 +67,20 @@ public class pruebaEstudiante {
 	
 	
 	@Test
+	public void testCalcularPromedio3() {
+
+		Fct.getInstance().buscarUnEstudiante("03010345678").getNotas().get(0).setNota1(0);
+		Fct.getInstance().buscarUnEstudiante("03010345678").getNotas().get(0).setNota1(0);
+		Fct.getInstance().buscarUnEstudiante("03010345678").getNotas().get(1).setNota1(0);
+		Fct.getInstance().buscarUnEstudiante("03010345678").getNotas().get(1).setNota1(0);
+		Fct.getInstance().buscarUnEstudiante("03010345678").getNotas().get(2).setNota1(0);
+		Fct.getInstance().buscarUnEstudiante("03010345678").getNotas().get(2).setNota1(0);
+		
+		assertNotEquals("0.0", String.valueOf(Fct.getInstance().buscarUnEstudiante("03010345678").calcularPromedio()));
+		
+	}
+	
+	@Test
 	public void testVerificarNotas1() {
 		assertTrue(Fct.getInstance().buscarUnEstudiante("03010345678").verificarNotas());
 	}
