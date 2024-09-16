@@ -147,44 +147,6 @@ public class JDialogLoginUser extends JDialog {
 			passwordField = new JPasswordField();
 			passwordField.addKeyListener(new KeyAdapter() {
 				@Override
-				public void keyPressed(KeyEvent e) {
-					if (e.getKeyChar() == '\n') {
-						if (nombreTextField.getText().isEmpty() || passwordField.getPassword().toString().isEmpty()){
-							nombreTextField.setBorder(bordeRojo);
-							passwordField.setBorder(bordeRojo);
-							JOptionPane.showMessageDialog(null,"Existen campos vacíos");
-						} else {
-							if (!login(Fct.getInstance().getUsuario())) {
-								JOptionPane.showMessageDialog(null,"Credenciales Incorrectas");
-								nombreTextField.setBorder(bordeRojo);
-								passwordField.setBorder(bordeRojo);
-							} else {
-								JOptionPane.showMessageDialog(null,"Credenciales Correctas");
-								dispose();
-								// mainframe...
-								/**
-								 * Abrir la ventana principal
-								 */
-
-								EventQueue.invokeLater(new Runnable() {
-									public void run() {
-										try {
-											MainFrame frame = new MainFrame();
-											ImageIcon appIcono = new ImageIcon(
-													MainFrame.class.getResource("/gui/utils/appicon.png"));
-											frame.setIconImage(appIcono.getImage());
-											frame.setVisible(true);
-										} catch (Exception e1) {
-											e1.printStackTrace();
-										}
-									}
-								});
-							}
-						}
-					}
-				}
-
-				@Override
 				public void keyReleased(KeyEvent e) {
 					passwordField.setBorder(bordeNegro);
 				}

@@ -10,7 +10,7 @@ public class Validaciones {
 	 */
 	public static boolean todoLetra(String cadena){
 		boolean val = false;
-		String regex = "^[a-zA-Z]+$";
+		String regex = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$";
 		
 		if(cadena.matches(regex))
 			val = true;
