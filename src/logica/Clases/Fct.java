@@ -885,7 +885,7 @@ public final class Fct {
 		ArrayList<Estudiante> arrastres = new ArrayList<>();
 		
 		for(Estudiante e : buscarEstudiantes()){
-			if(e.verificarArrastre() || e.verificarArrastreEspecial())
+			if(e.verificarArrastre())
 				arrastres.add(e);
 		}
 		
@@ -1014,6 +1014,16 @@ public final class Fct {
 				e.getNotas().removeAll(borrar);
 				borrar.clear();
 			}
+			ArrayList<Grupo> borrargrupo = new ArrayList<>();
+			for(Grupo g : grupos){
+				if(g instanceof GrupoEspecial){
+					if(((GrupoEspecial) g).getAsignatura().equals(asignatura))
+						borrargrupo.add(g);
+				}
+			}
+			grupos.removeAll(borrargrupo);
+			
+			
 		}
 			
 		
